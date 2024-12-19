@@ -1,0 +1,90 @@
+// Copyright 2024 The Connect Authors
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+message Empty {}
+
+service Allowed {
+  rpc abstract(Empty) returns (Empty);
+  rpc as(Empty) returns (Empty);
+  rpc async(Empty) returns (Empty);
+  rpc await(Empty) returns (Empty);
+  rpc base(Empty) returns (Empty);
+  rpc covariant(Empty) returns (Empty);
+  rpc deferred(Empty) returns (Empty);
+  rpc dynamic(Empty) returns (Empty);
+  rpc export(Empty) returns (Empty);
+  rpc extension(Empty) returns (Empty);
+  rpc external(Empty) returns (Empty);
+  rpc factory(Empty) returns (Empty);
+  rpc get(Empty) returns (Empty);
+  rpc hide(Empty) returns (Empty);
+  rpc implements(Empty) returns (Empty);
+  rpc import(Empty) returns (Empty);
+  rpc interface(Empty) returns (Empty);
+  rpc late(Empty) returns (Empty);
+  rpc library(Empty) returns (Empty);
+  rpc mixin(Empty) returns (Empty);
+  rpc of(Empty) returns (Empty);
+  rpc on(Empty) returns (Empty);
+  rpc operator(Empty) returns (Empty);
+  rpc part(Empty) returns (Empty);
+  rpc required(Empty) returns (Empty);
+  rpc sealed(Empty) returns (Empty);
+  rpc set(Empty) returns (Empty);
+  rpc show(Empty) returns (Empty);
+  rpc static(Empty) returns (Empty);
+  rpc sync(Empty) returns (Empty);
+  rpc type(Empty) returns (Empty);
+  rpc typedef(Empty) returns (Empty);
+  rpc when(Empty) returns (Empty);
+  rpc yield(Empty) returns (Empty);
+}
+
+service NotAllowed {
+  rpc assert(Empty) returns (Empty);            
+  rpc break(Empty) returns (Empty);            
+  rpc case(Empty) returns (Empty);            
+  rpc catch(Empty) returns (Empty);            
+  rpc class(Empty) returns (Empty);            
+  rpc const(Empty) returns (Empty);            
+  rpc continue(Empty) returns (Empty);            
+  rpc default(Empty) returns (Empty);            
+  rpc do(Empty) returns (Empty);            
+  rpc else(Empty) returns (Empty);            
+  rpc enum(Empty) returns (Empty);            
+  rpc extends(Empty) returns (Empty);            
+  rpc false(Empty) returns (Empty);            
+  rpc final(Empty) returns (Empty);            
+  rpc finally(Empty) returns (Empty);            
+  rpc for(Empty) returns (Empty);            
+  rpc if(Empty) returns (Empty);            
+  rpc in(Empty) returns (Empty);            
+  rpc is(Empty) returns (Empty);            
+  rpc new(Empty) returns (Empty);            
+  rpc null(Empty) returns (Empty);            
+  rpc rethrow(Empty) returns (Empty);            
+  rpc return(Empty) returns (Empty);            
+  rpc super(Empty) returns (Empty);            
+  rpc switch(Empty) returns (Empty);            
+  rpc this(Empty) returns (Empty);            
+  rpc throw(Empty) returns (Empty);            
+  rpc true(Empty) returns (Empty);            
+  rpc try(Empty) returns (Empty);            
+  rpc var(Empty) returns (Empty);            
+  rpc void(Empty) returns (Empty);            
+  rpc with(Empty) returns (Empty);            
+  rpc while(Empty) returns (Empty);            
+}

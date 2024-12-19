@@ -1,0 +1,28 @@
+//
+//  Generated code. Do not modify.
+//  source: wkt.proto
+//
+
+import "package:connectrpc/connect.dart" as connect;
+import "google/protobuf/timestamp.pb.dart" as googleprotobuftimestamp;
+import "google/protobuf/any.pb.dart" as googleprotobufany;
+import "wkt.connect.spec.dart" as specs;
+
+extension type WktServiceClient (connect.Transport _transport) {
+  Future<googleprotobuftimestamp.Timestamp> unaryWkt(
+    googleprotobufany.Any input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.WktService.unaryWkt,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+}

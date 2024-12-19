@@ -1,0 +1,12 @@
+version: v2
+clean: true
+plugins:
+  - remote: buf.build/protocolbuffers/dart:v21.1.2
+    out: web/gen
+    include_wkt: true
+    include_imports: true
+  - local:
+      ["dart", "run", "../../packages/connect/bin/protoc-gen-connect-dart.dart"]
+    out: web/gen
+inputs:
+  - module: buf.build/connectrpc/eliza:233fca715f49425581ec0a1b660be886

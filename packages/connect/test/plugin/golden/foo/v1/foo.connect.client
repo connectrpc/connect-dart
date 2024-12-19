@@ -1,0 +1,78 @@
+//
+//  Generated code. Do not modify.
+//  source: foo/v1/foo.proto
+//
+
+import "package:connectrpc/connect.dart" as connect;
+import "foo.pb.dart" as foov1foo;
+import "foo.connect.spec.dart" as specs;
+
+extension type FooServiceClient (connect.Transport _transport) {
+  Future<foov1foo.Foo> unaryFoo(
+    foov1foo.Foo input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.FooService.unaryFoo,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  Stream<foov1foo.Foo> serverFoo(
+    foov1foo.Foo input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).server(
+      specs.FooService.serverFoo,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  Future<foov1foo.Foo> clientFoo(
+    Stream<foov1foo.Foo> input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).client(
+      specs.FooService.clientFoo,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  Stream<foov1foo.Foo> bidiFoo(
+    Stream<foov1foo.Foo> input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).bidi(
+      specs.FooService.bidiFoo,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+}

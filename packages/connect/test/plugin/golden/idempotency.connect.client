@@ -1,0 +1,44 @@
+//
+//  Generated code. Do not modify.
+//  source: idempotency.proto
+//
+
+import "package:connectrpc/connect.dart" as connect;
+import "idempotency.pb.dart" as idempotency;
+import "idempotency.connect.spec.dart" as specs;
+
+extension type ConnectServiceClient (connect.Transport _transport) {
+  Future<idempotency.Idempotent> getIdempotent(
+    idempotency.Idempotent input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.ConnectService.getIdempotent,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  Future<idempotency.Idempotent> updateIdempotent(
+    idempotency.Idempotent input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.ConnectService.updateIdempotent,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+}

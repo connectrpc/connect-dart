@@ -1,0 +1,19 @@
+features:
+  versions:
+    - HTTP_VERSION_1
+    - HTTP_VERSION_2
+  protocols:
+    - PROTOCOL_GRPC_WEB
+    - PROTOCOL_GRPC
+    - PROTOCOL_CONNECT
+  codecs:
+    - CODEC_PROTO
+    - CODEC_JSON
+  compressions:
+    - COMPRESSION_IDENTITY
+  supportsTls: true
+  supportsH2c: false
+  supportsTlsClientCerts: true
+  supportsConnectGet: true
+  supportsHalfDuplexBidiOverHttp1: true
+  supportsMessageReceiveLimit: false

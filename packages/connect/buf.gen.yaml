@@ -1,0 +1,9 @@
+version: v2
+clean: true
+plugins:
+  - remote: buf.build/protocolbuffers/dart:v21.1.2
+    out: lib/src/grpc/gen
+    include_wkt: true
+    include_imports: true
+inputs:
+  - directory: lib/src/grpc/proto

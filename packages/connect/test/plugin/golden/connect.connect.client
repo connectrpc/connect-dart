@@ -1,0 +1,27 @@
+//
+//  Generated code. Do not modify.
+//  source: connect.proto
+//
+
+import "package:connectrpc/connect.dart" as connect;
+import "connect.pb.dart" as connect$;
+import "connect.connect.spec.dart" as specs;
+
+extension type ConnectServiceClient (connect.Transport _transport) {
+  Future<connect$.Connect> getConnect(
+    connect$.Connect input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.ConnectService.getConnect,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+}

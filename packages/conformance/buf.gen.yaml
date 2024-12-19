@@ -1,0 +1,11 @@
+version: v2
+clean: true
+plugins:
+  - remote: buf.build/protocolbuffers/dart:v21.1.2
+    out: lib/src/gen
+    include_wkt: true
+    include_imports: true
+  - local: ["dart", "../connect/bin/protoc-gen-connect-dart.dart"]
+    out: lib/src/gen
+inputs:
+  - module: buf.build/connectrpc/conformance:v1.0.3

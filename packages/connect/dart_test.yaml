@@ -1,0 +1,9 @@
+override_platforms:
+  chrome:
+    settings:
+      # Uncomment next line and the devtools flag to debug using the network inspector.
+      # headless: false
+      arguments: --ignore-certificate-errors --disable-gpu # --auto-open-devtools-for-tabs
+platforms:
+  - chrome
+  - vm

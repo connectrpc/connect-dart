@@ -1,0 +1,28 @@
+//
+//  Generated code. Do not modify.
+//  source: bar/bar_service.proto
+//
+
+import "package:connectrpc/connect.dart" as connect;
+import "bar.pb.dart" as barbar;
+import "../foo/v1/foo.pb.dart" as foov1foo;
+import "bar_service.connect.spec.dart" as specs;
+
+extension type BarServiceClient (connect.Transport _transport) {
+  Future<barbar.Bar> unaryBarWithFoo(
+    foov1foo.Foo input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.BarService.unaryBarWithFoo,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+}

@@ -1,0 +1,23 @@
+name: connectrpc
+description: >-
+  Implementation of the Connect protocol for Dart
+
+version: 0.1.0
+homepage: https://connectrpc.com
+documentation: https://connectrpc.com/docs
+repository: https://github.com/connectrpc/connect-dart
+
+executables:
+  protoc-gen-connect-dart:
+
+environment:
+  sdk: ">=3.3.0 <4.0.0"
+dependencies:
+  protobuf: ^3.1.0
+  path: ^1.9.0
+  http2: ^2.3.0
+  fixnum: ^1.1.1
+dev_dependencies:
+  test: ^1.25.8
+  conformance:
+    path: ../conformance
