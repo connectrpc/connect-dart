@@ -12,7 +12,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import 'package:connectrpc/connect.dart';
+import '../codec.dart';
+import '../compression.dart';
+import '../headers.dart';
+import '../http.dart';
+import '../interceptor.dart';
+import '../spec.dart';
+import '../transport.dart';
 
 /// Protocol is common abstraction of an RPC protocol over HTTP.
 abstract interface class Protocol {
@@ -20,6 +26,8 @@ abstract interface class Protocol {
   Headers requestHeaders<I, O>(
     Spec<I, O> spec,
     Codec codec,
+    Compression? sendCompression,
+    List<Compression> acceptCompressions,
     CallOptions? options,
   );
 
@@ -29,6 +37,8 @@ abstract interface class Protocol {
     UnaryRequest<I, O> req,
     Codec codec,
     HttpClient client,
+    Compression? sendCompression,
+    List<Compression> acceptCompressions,
   );
 
   /// Performs a stream request using the given [client] according
@@ -37,5 +47,7 @@ abstract interface class Protocol {
     StreamRequest<I, O> req,
     Codec codec,
     HttpClient client,
+    Compression? sendCompression,
+    List<Compression> acceptCompressions,
   );
 }

@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import "../codec.dart";
+import "../compression.dart";
 import "../http.dart";
 import "../interceptor.dart";
 import "../protocol/transport.dart";
@@ -26,11 +27,15 @@ final class Transport extends ProtocolTransport {
     required HttpClient httpClient,
     List<Interceptor>? interceptors,
     bool useHttpGet = false,
+    Compression? sendCompression,
+    List<Compression>? acceptCompressions,
   }) : super(
           baseUrl,
           codec,
           Protocol(useHttpGet),
           httpClient,
           interceptors ?? [],
+          sendCompression,
+          acceptCompressions ?? [],
         );
 }

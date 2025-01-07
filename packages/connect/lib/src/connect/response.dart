@@ -14,9 +14,11 @@
 
 import '../code.dart';
 import '../codec.dart';
+import '../compression.dart';
 import '../exception.dart';
 import '../headers.dart';
 import '../http.dart';
+import '../protocol/compression.dart';
 import '../spec.dart';
 import 'header.dart';
 import 'http_status.dart';
@@ -28,10 +30,17 @@ extension ResponseValidation on HttpResponse {
   /// For unary RPCs with an HTTP error status, this returns an error
   /// derived from the HTTP status instead of throwing it, giving an
   /// implementation a chance to parse a Connect error from the wire.
-  ConnectException? validate(
+  ({ConnectException? unaryError, Compression? compression}) validate(
     StreamType streamType,
     Codec codec,
+    List<Compression> acceptCompressions,
   ) {
+    final compression = findCompression(
+      acceptCompressions,
+      streamType == StreamType.unary
+          ? headerUnaryEncoding
+          : headerStreamEncoding,
+    );
     final contentType = header[headerContentType] ?? '';
     if (status != 200) {
       final statusErr = ConnectException(
@@ -41,7 +50,7 @@ extension ResponseValidation on HttpResponse {
       if (streamType == StreamType.unary &&
           contentType.startsWith("application/json")) {
         // Unary JSON response
-        return statusErr;
+        return (unaryError: statusErr, compression: compression);
       }
       throw statusErr;
     }
@@ -58,6 +67,6 @@ extension ResponseValidation on HttpResponse {
         metadata: header,
       );
     }
-    return null;
+    return (unaryError: null, compression: compression);
   }
 }

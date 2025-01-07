@@ -12,5 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-export 'src/gzip.dart';
-export 'src/io.dart';
+import 'dart:convert';
+import 'dart:typed_data';
+
+/// Compression is specialized [Codec] for a certain compression algorithm.
+abstract interface class Compression implements Codec<Uint8List, Uint8List> {
+  /// Name of the compression algorithm.
+  abstract final String name;
+}

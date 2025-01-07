@@ -28,8 +28,10 @@ import 'sentinel.dart';
 HttpClient createHttpClient(io.HttpClient client) {
   return (creq) async {
     final req = await client.openUrl(creq.method, Uri.parse(creq.url));
-    // Remove default values.
-    req.headers.removeAll("accept-encoding");
+    // We don't want compression unless it came from upstream.
+    //
+    // Ref: https://api.dart.dev/dart-io/HttpClient-class.html
+    req.headers.removeAll(io.HttpHeaders.acceptEncodingHeader);
     for (final header in creq.header.entries) {
       req.headers.add(header.name, header.value);
     }
@@ -44,8 +46,19 @@ HttpClient createHttpClient(io.HttpClient client) {
       }
     }
     final res = await sentinel.race(req.close());
+    final compressed =
+        res.headers.value(io.HttpHeaders.contentEncodingHeader) == 'gzip';
     final headers = Headers();
     res.headers.forEach((key, values) {
+      // It automatically decompresses gzip responses, but keeps the
+      // original content-length and accept-encoding headers.
+      //
+      // Ref: https://api.dart.dev/dart-io/HttpClient-class.html
+      if (compressed &&
+          (key == io.HttpHeaders.contentLengthHeader ||
+              key == io.HttpHeaders.contentEncodingHeader)) {
+        return;
+      }
       for (final value in values) {
         headers.add(key, value);
       }

@@ -196,6 +196,8 @@ class DelegatingProtocol implements Protocol {
   Headers requestHeaders<I, O>(
     Spec<I, O> spec,
     Codec codec,
+    Compression? sendCompression,
+    List<Compression> acceptCompressions,
     CallOptions? options,
   ) {
     final onRequestHeaders = this.onRequestHeaders;
@@ -214,6 +216,8 @@ class DelegatingProtocol implements Protocol {
     UnaryRequest<I, O> req,
     Codec codec,
     HttpClient client,
+    Compression? sendCompression,
+    List<Compression> acceptCompressions,
   ) async {
     final onUnary = this.onUnary;
     if (onUnary != null) {
@@ -233,6 +237,8 @@ class DelegatingProtocol implements Protocol {
     StreamRequest<I, O> req,
     Codec codec,
     HttpClient client,
+    Compression? sendCompression,
+    List<Compression> acceptCompressions,
   ) async {
     final onStream = this.onStream;
     if (onStream != null) {
@@ -258,6 +264,8 @@ final class TestTransport extends ProtocolTransport {
           protocol,
           (req) => throw UnimplementedError(),
           interceptors ?? [],
+          null,
+          [],
         );
 }
 

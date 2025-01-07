@@ -14,6 +14,7 @@
 
 import '../abort.dart';
 import '../codec.dart';
+import '../compression.dart';
 import '../headers.dart';
 import 'headers.dart';
 
@@ -23,6 +24,8 @@ Headers requestHeader(
   Codec codec,
   Headers? userProvidedHeaders,
   AbortSignal? signal,
+  Compression? sendCompression,
+  List<Compression> acceptCompressions,
 ) {
   final header = userProvidedHeaders == null
       ? Headers()
@@ -36,5 +39,12 @@ Headers requestHeader(
   // don't support HTTP trailers.
   header["Te"] = "trailers";
   // TODO: User agent headers.
+  if (sendCompression != null) {
+    header[headerEncoding] = sendCompression.name;
+  }
+  if (acceptCompressions.isNotEmpty) {
+    header[headerAcceptEncoding] =
+        acceptCompressions.map((c) => c.name).join(",");
+  }
   return header;
 }

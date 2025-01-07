@@ -14,6 +14,7 @@
 
 import '../abort.dart';
 import '../codec.dart';
+import '../compression.dart';
 import '../http.dart';
 import '../interceptor.dart';
 import '../spec.dart';
@@ -28,6 +29,8 @@ abstract base class ProtocolTransport implements Transport {
   final Protocol _protocol;
   final HttpClient _httpClient;
   final List<Interceptor> _interceptors;
+  final Compression? sendCompression;
+  final List<Compression> acceptCompressions;
 
   ProtocolTransport(
     String baseUrl,
@@ -35,6 +38,8 @@ abstract base class ProtocolTransport implements Transport {
     this._protocol,
     this._httpClient,
     this._interceptors,
+    this.sendCompression,
+    this.acceptCompressions,
   ) : _baseUrl = baseUrl.replaceAll(RegExp(r'/?$'), "");
 
   @override
@@ -48,12 +53,24 @@ abstract base class ProtocolTransport implements Transport {
       final req = UnaryRequest(
         spec,
         _baseUrl + spec.procedure,
-        _protocol.requestHeaders(spec, _codec, options),
+        _protocol.requestHeaders(
+          spec,
+          _codec,
+          sendCompression,
+          acceptCompressions,
+          options,
+        ),
         input,
         signal,
       );
       if (_interceptors.isEmpty) {
-        return await _protocol.unary(req, _codec, _httpClient);
+        return await _protocol.unary(
+          req,
+          _codec,
+          _httpClient,
+          sendCompression,
+          acceptCompressions,
+        );
       }
       final first = _interceptors.apply<I, O>(
         (req) async {
@@ -61,6 +78,8 @@ abstract base class ProtocolTransport implements Transport {
             req as UnaryRequest<I, O>,
             _codec,
             _httpClient,
+            sendCompression,
+            acceptCompressions,
           );
         },
       );
@@ -82,13 +101,25 @@ abstract base class ProtocolTransport implements Transport {
       final req = StreamRequest(
         spec,
         _baseUrl + spec.procedure,
-        _protocol.requestHeaders(spec, _codec, options),
+        _protocol.requestHeaders(
+          spec,
+          _codec,
+          sendCompression,
+          acceptCompressions,
+          options,
+        ),
         input,
         signal,
       );
       late final StreamResponse<I, O> res;
       if (_interceptors.isEmpty) {
-        res = await _protocol.stream(req, _codec, _httpClient);
+        res = await _protocol.stream(
+          req,
+          _codec,
+          _httpClient,
+          sendCompression,
+          acceptCompressions,
+        );
       } else {
         final first = _interceptors.apply<I, O>(
           (req) async {
@@ -96,6 +127,8 @@ abstract base class ProtocolTransport implements Transport {
               req as StreamRequest<I, O>,
               _codec,
               _httpClient,
+              sendCompression,
+              acceptCompressions,
             );
           },
         );

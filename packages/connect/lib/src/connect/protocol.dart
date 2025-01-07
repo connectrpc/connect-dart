@@ -14,6 +14,7 @@
 
 import '../code.dart';
 import '../codec.dart';
+import '../compression.dart';
 import '../exception.dart';
 import '../headers.dart';
 import '../http.dart';
@@ -42,6 +43,8 @@ final class Protocol implements base.Protocol {
   Headers requestHeaders<I, O>(
     Spec<I, O> spec,
     Codec codec,
+    Compression? sendCompression,
+    List<Compression> acceptCompressions,
     CallOptions? options,
   ) {
     return requestHeader(
@@ -49,6 +52,8 @@ final class Protocol implements base.Protocol {
       spec.streamType,
       options?.headers,
       options?.signal,
+      sendCompression,
+      acceptCompressions,
     );
   }
 
@@ -57,6 +62,8 @@ final class Protocol implements base.Protocol {
     UnaryRequest<I, O> req,
     Codec codec,
     HttpClient httpClient,
+    Compression? sendCompression,
+    List<Compression> acceptCompressions,
   ) async {
     final HttpRequest hReq;
     if (useHttpGet &&
@@ -73,20 +80,28 @@ final class Protocol implements base.Protocol {
         req.signal,
       );
     } else {
+      final body = codec.encode(req.message);
       hReq = HttpRequest(
         req.url,
         "POST",
         req.headers,
-        Stream.fromIterable([codec.encode(req.message)]),
+        Stream.fromIterable([sendCompression?.encode(body) ?? body]),
         req.signal,
       );
     }
     final res = await httpClient(hReq);
-    final unaryError = res.validate(req.spec.streamType, codec);
+    final (:compression, :unaryError) = res.validate(
+      req.spec.streamType,
+      codec,
+      acceptCompressions,
+    );
     final (:headers, :trailers) = res.header.demux();
-    final body = await res.body.toBytes(
+    var body = await res.body.toBytes(
       int.tryParse(headers[headerContentLength] ?? ''),
     );
+    if (compression != null) {
+      body = compression.decode(body);
+    }
     if (unaryError != null) {
       throw errorFromJsonBytes(
         body,
@@ -107,6 +122,8 @@ final class Protocol implements base.Protocol {
     StreamRequest<I, O> req,
     Codec codec,
     HttpClient httpClient,
+    Compression? sendCompression,
+    List<Compression> acceptCompressions,
   ) async {
     final res = await httpClient(
       HttpRequest(
@@ -117,14 +134,15 @@ final class Protocol implements base.Protocol {
         req.signal,
       ),
     );
-    res.validate(req.spec.streamType, codec);
+    final (:compression, unaryError: _) =
+        res.validate(req.spec.streamType, codec, acceptCompressions);
     final trailer = Headers();
     return StreamResponse(
       req.spec,
       res.header,
       res.body
           .splitEnvelope()
-          .decompress()
+          .decompress(compression)
           .parse(
             codec,
             req.spec.outputFactory,

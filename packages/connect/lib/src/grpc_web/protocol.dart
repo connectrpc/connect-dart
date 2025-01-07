@@ -16,6 +16,7 @@ import 'dart:async';
 
 import '../code.dart';
 import '../codec.dart';
+import '../compression.dart';
 import '../exception.dart';
 import '../grpc/headers.dart';
 import '../grpc/status.dart';
@@ -42,9 +43,17 @@ final class Protocol implements base.Protocol {
   Headers requestHeaders<I, O>(
     Spec<I, O> spec,
     Codec codec,
+    Compression? sendCompression,
+    List<Compression> acceptCompressions,
     CallOptions? options,
   ) {
-    return requestHeader(codec, options?.headers, options?.signal);
+    return requestHeader(
+      codec,
+      options?.headers,
+      options?.signal,
+      sendCompression,
+      acceptCompressions,
+    );
   }
 
   @override
@@ -52,20 +61,28 @@ final class Protocol implements base.Protocol {
     UnaryRequest<I, O> req,
     Codec codec,
     HttpClient httpClient,
+    Compression? sendCompression,
+    List<Compression> acceptCompressions,
   ) async {
     final res = await httpClient(
       HttpRequest(
         req.url,
         "POST",
         req.headers,
-        Stream.fromIterable([encodeEnvelope(0, codec.encode(req.message))]),
+        Stream.fromIterable([req.message])
+            .serialize(codec)
+            .compress(sendCompression)
+            .joinEnvelope(),
         req.signal,
       ),
     );
-    final (:foundStatus, :headerError) = res.validate(statusParser);
+    final (:foundStatus, :headerError, :compression) = res.validate(
+      statusParser,
+      acceptCompressions,
+    );
     final (message, trailer) = await res.body
         .splitEnvelope()
-        .decompress()
+        .decompress(compression)
         .parse(
           codec,
           req.spec.outputFactory,
@@ -102,6 +119,8 @@ final class Protocol implements base.Protocol {
     StreamRequest<I, O> req,
     Codec codec,
     HttpClient httpClient,
+    Compression? sendCompression,
+    List<Compression> acceptCompressions,
   ) async {
     final res = await httpClient(
       HttpRequest(
@@ -112,7 +131,10 @@ final class Protocol implements base.Protocol {
         req.signal,
       ),
     );
-    final (:foundStatus, :headerError) = res.validate(statusParser);
+    final (:foundStatus, :headerError, :compression) = res.validate(
+      statusParser,
+      acceptCompressions,
+    );
     if (headerError != null) {
       throw headerError;
     }
@@ -122,7 +144,7 @@ final class Protocol implements base.Protocol {
       res.header,
       res.body
           .splitEnvelope()
-          .decompress()
+          .decompress(compression)
           .parse(
             codec,
             req.spec.outputFactory,

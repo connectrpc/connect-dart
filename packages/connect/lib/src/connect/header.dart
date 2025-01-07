@@ -14,6 +14,7 @@
 
 import '../abort.dart';
 import '../codec.dart';
+import '../compression.dart';
 import '../headers.dart';
 import '../spec.dart';
 import 'version.dart';
@@ -22,12 +23,18 @@ const headerContentType = "content-type";
 const headerContentLength = "content-length";
 const headerTimeout = "connect-timeout-ms";
 const headerProtocolVersion = "connect-protocol-version";
+const headerUnaryEncoding = "content-encoding";
+const headerStreamEncoding = "connect-content-encoding";
+const headerUnaryAcceptEncoding = "accept-encoding";
+const headerStreamAcceptEncoding = "connect-accept-encoding";
 
 Headers requestHeader(
   Codec codec,
   StreamType streamType,
   Headers? userProvidedHeaders,
   AbortSignal? signal,
+  Compression? sendCompression,
+  List<Compression> acceptCompressions,
 ) {
   final header = userProvidedHeaders == null
       ? Headers()
@@ -41,5 +48,16 @@ Headers requestHeader(
       ? 'application/${codec.name}'
       : 'application/connect+${codec.name}';
   // TODO: User agent headers.
+  if (sendCompression != null) {
+    header[streamType == StreamType.unary
+        ? headerUnaryEncoding
+        : headerStreamEncoding] = sendCompression.name;
+  }
+  if (acceptCompressions.isNotEmpty) {
+    header[streamType == StreamType.unary
+            ? headerUnaryAcceptEncoding
+            : headerStreamAcceptEncoding] =
+        acceptCompressions.map((c) => c.name).join(",");
+  }
   return header;
 }

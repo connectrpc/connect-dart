@@ -25,6 +25,7 @@ import 'package:connectrpc/protobuf.dart';
 import 'package:connectrpc/protocol/connect.dart' as connect;
 import 'package:connectrpc/protocol/grpc.dart' as grpc;
 import 'package:connectrpc/protocol/grpc_web.dart' as grpc_web;
+import 'package:connectrpc/src/gzip.dart';
 import 'package:protobuf/protobuf.dart';
 import 'package:test/test.dart';
 
@@ -69,24 +70,36 @@ void main() {
         HTTPVersion.HTTP_VERSION_2 => http2.createHttpClient(context: context),
         _ => throw 'Unsupported Http version',
       };
+      final compression = switch (req.compression) {
+        Compression.COMPRESSION_GZIP => GzipCompression(),
+        Compression.COMPRESSION_UNSPECIFIED => null,
+        Compression.COMPRESSION_IDENTITY => null,
+        _ => throw 'Unsupported compression ${req.compression.name}',
+      };
       return switch (req.protocol) {
         Protocol.PROTOCOL_CONNECT => connect.Transport(
             baseUrl: baseUrl,
             codec: codec,
             httpClient: httpClient,
             useHttpGet: req.useGetHttpMethod,
+            sendCompression: compression,
+            acceptCompressions: compression != null ? [compression] : [],
           ),
         Protocol.PROTOCOL_GRPC => grpc.Transport(
             baseUrl: baseUrl,
             codec: codec,
             httpClient: httpClient,
             statusParser: StatusParser(),
+            sendCompression: compression,
+            acceptCompressions: compression != null ? [compression] : [],
           ),
         Protocol.PROTOCOL_GRPC_WEB => grpc_web.Transport(
             baseUrl: baseUrl,
             codec: codec,
             httpClient: httpClient,
             statusParser: StatusParser(),
+            sendCompression: compression,
+            acceptCompressions: compression != null ? [compression] : [],
           ),
         _ => throw "Unknown protocol",
       };
