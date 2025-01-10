@@ -15,7 +15,10 @@
 import 'dart:async';
 
 import '../code.dart';
+import '../compression.dart';
 import '../exception.dart';
+import '../headers.dart';
+import '../http.dart';
 import 'envelope.dart';
 
 /// Indicates that the data in a EnvelopedMessage is
@@ -24,17 +27,63 @@ import 'envelope.dart';
 ///
 const compressedFlag = 1; // 0b00000001
 
-extension DecompressEnvelope on Stream<EnvelopedMessage> {
-  /// Noop for now. Just ensures everything is uncompressed.
-  Stream<EnvelopedMessage> decompress() async* {
+extension EnvelopeStreamCompression on Stream<EnvelopedMessage> {
+  /// Decompresses the enveloped message if the [compression] is not null and
+  /// the envelope is compressed.
+  Stream<EnvelopedMessage> decompress(
+    Compression? compression,
+  ) async* {
     await for (final env in this) {
-      if ((env.flags & compressedFlag) == compressedFlag) {
-        throw ConnectException(
-          Code.internal,
-          "received compressed envelope, but do not know how to decompress",
+      if (env.flags & compressedFlag == compressedFlag) {
+        if (compression == null) {
+          throw ConnectException(
+            Code.internal,
+            "received compressed envelope, but do not know how to decompress",
+          );
+        }
+        yield EnvelopedMessage(
+          env.flags ^ compressedFlag,
+          compression.decode(env.data),
+        );
+      } else {
+        yield env;
+      }
+    }
+  }
+
+  /// Compresses an uncompressed enveloped message using the given
+  /// [compression].
+  Stream<EnvelopedMessage> compress(
+    Compression? compression,
+  ) {
+    if (compression == null) {
+      return this;
+    }
+    return (() async* {
+      await for (final env in this) {
+        yield EnvelopedMessage(
+          env.flags | compressedFlag,
+          compression.encode(env.data),
         );
       }
-      yield env;
+    })();
+  }
+}
+
+extension FindCompression on HttpResponse {
+  Compression? findCompression(List<Compression> accept, String headerKey) {
+    final encoding = header[headerKey];
+    if (encoding != null && encoding.toLowerCase() != 'identity') {
+      final i = accept.indexWhere((c) => c.name == encoding);
+      if (i < 0) {
+        throw ConnectException(
+          Code.internal,
+          'unsupported response encoding "$encoding"',
+          metadata: header,
+        );
+      }
+      return accept[i];
     }
+    return null;
   }
 }

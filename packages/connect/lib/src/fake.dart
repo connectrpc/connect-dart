@@ -17,6 +17,7 @@ import 'dart:typed_data';
 
 import 'abort.dart';
 import 'codec.dart';
+import 'compression.dart';
 import 'headers.dart';
 import 'http.dart';
 import 'interceptor.dart';
@@ -155,6 +156,8 @@ final class _FakeTransport extends ProtocolTransport {
           _FakeProtocol(handlers),
           (req) => throw UnimplementedError(),
           interceptors ?? [],
+          null,
+          [],
         );
 }
 
@@ -167,6 +170,8 @@ final class _FakeProtocol implements Protocol {
   Headers requestHeaders<I, O>(
     Spec<I, O> spec,
     Codec codec,
+    Compression? sendCompression,
+    List<Compression> acceptCompressions,
     CallOptions? options,
   ) {
     final headers = Headers();
@@ -181,6 +186,8 @@ final class _FakeProtocol implements Protocol {
     UnaryRequest<I, O> req,
     Codec codec,
     HttpClient client,
+    Compression? sendCompression,
+    List<Compression> acceptCompressions,
   ) async {
     final handler = handlers[req.spec];
     if (handler == null) {
@@ -211,6 +218,8 @@ final class _FakeProtocol implements Protocol {
     StreamRequest<I, O> req,
     Codec codec,
     HttpClient client,
+    Compression? sendCompression,
+    List<Compression> acceptCompressions,
   ) async {
     final handler = handlers[req.spec];
     if (handler == null) {

@@ -11,6 +11,7 @@ features:
     - CODEC_JSON
   compressions:
     - COMPRESSION_IDENTITY
+    - COMPRESSION_GZIP
   supportsTls: true
   supportsH2c: false
   supportsTlsClientCerts: true

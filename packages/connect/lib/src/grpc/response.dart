@@ -12,15 +12,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import 'package:connectrpc/src/grpc/request_header.dart';
-
 import '../code.dart';
+import '../compression.dart';
 import '../exception.dart';
-import '../grpc/headers.dart';
-import '../grpc/status.dart';
-import '../grpc/trailer_error.dart';
 import '../headers.dart';
 import '../http.dart';
+import '../protocol/compression.dart';
+import './headers.dart';
+import './request_header.dart';
+import './status.dart';
+import './trailer_error.dart';
 import 'http_status.dart';
 
 extension ResponseValidation on HttpResponse {
@@ -32,21 +33,18 @@ extension ResponseValidation on HttpResponse {
   /// Returns an object that indicates whether a gRPC status was found
   /// in the response header. In this case, clients can not expect a
   /// trailer.
-  ({bool foundStatus, ConnectException? headerError}) validate(
+  ({
+    bool foundStatus,
+    ConnectException? headerError,
+    Compression? compression,
+  }) validate(
     StatusParser statusParser,
+    List<Compression> acceptCompressions,
   ) {
     if (status != 200) {
       throw ConnectException(
         codeFromHttpStatus(status),
         'HTTP $status',
-        metadata: header,
-      );
-    }
-    final encoding = header[headerEncoding];
-    if (encoding != null && header[headerEncoding] != "identity") {
-      throw ConnectException(
-        Code.internal,
-        'unsupported response encoding "$encoding"',
         metadata: header,
       );
     }
@@ -60,7 +58,8 @@ extension ResponseValidation on HttpResponse {
     }
     return (
       foundStatus: header.contains(headerGrpcStatus),
-      headerError: header.findError(statusParser)
+      headerError: header.findError(statusParser),
+      compression: findCompression(acceptCompressions, headerEncoding)
     );
   }
 }

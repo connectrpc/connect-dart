@@ -18,6 +18,7 @@ export 'src/abort.dart';
 export 'src/client.dart';
 export 'src/code.dart';
 export 'src/codec.dart';
+export 'src/compression.dart';
 export 'src/exception.dart';
 export 'src/headers.dart';
 export 'src/http.dart';
