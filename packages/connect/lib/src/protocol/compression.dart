@@ -28,7 +28,7 @@ import 'envelope.dart';
 const compressedFlag = 1; // 0b00000001
 
 extension EnvelopeStreamCompression on Stream<EnvelopedMessage> {
-  /// Decompressess the envoloped messaged if the [compression] is not null and
+  /// Decompresses the enveloped message if the [compression] is not null and
   /// the envelope is compressed.
   Stream<EnvelopedMessage> decompress(
     Compression? compression,
