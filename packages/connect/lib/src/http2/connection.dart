@@ -59,9 +59,13 @@ final class _Http2ClientTransportConnectionManager
     Uri uri,
   ) async {
     final socket = await _connectSocket(uri);
-    return Http2ClientTransportConnection(
-      http2.ClientTransportConnection.viaSocket(socket),
-    );
+    final connection = http2.ClientTransportConnection.viaSocket(socket);
+    connection.onActiveStateChanged = (active) {
+      if (!active) {
+        connection.finish().ignore();
+      }
+    };
+    return Http2ClientTransportConnection(connection);
   }
 
   Future<io.Socket> _connectSocket(Uri uri) async {
