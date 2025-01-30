@@ -2,7 +2,7 @@ name: conformance
 description: >-
   Conformance tests for connect
 
-version: 0.1.0
+version: 0.2.0
 homepage: https://connectrpc.com
 documentation: https://connectrpc.com/docs
 publish_to: none
