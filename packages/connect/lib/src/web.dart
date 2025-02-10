@@ -30,7 +30,8 @@ HttpClient createHttpClient() {
     final reqHeader = web.Headers();
     for (final header in creq.header.entries) {
       // Skip the default user-agent header.
-      if (header.name == 'user-agent' && header.value.startsWith('connect-dart/')) {
+      if (header.name == 'user-agent' &&
+          header.value.startsWith('connect-dart/')) {
         continue;
       }
       reqHeader.append(header.name, header.value);
