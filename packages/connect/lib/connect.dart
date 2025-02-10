@@ -12,7 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-library connect;
+/// Implementation of the Connect protocol for Dart.
+/// Simple, reliable, interoperable. Protobuf RPC that works
+library;
 
 export 'src/abort.dart';
 export 'src/client.dart';
