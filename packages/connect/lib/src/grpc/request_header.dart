@@ -16,6 +16,7 @@ import '../abort.dart';
 import '../codec.dart';
 import '../compression.dart';
 import '../headers.dart';
+import '../version.dart';
 import 'headers.dart';
 
 const contentTypePrefix = "application/grpc";
@@ -38,7 +39,9 @@ Headers requestHeader(
   // The gRPC-HTTP2 specification requires this - it flushes out proxies that
   // don't support HTTP trailers.
   header["Te"] = "trailers";
-  // TODO: User agent headers.
+  if (!header.contains(headerUserAgent)) {
+    header[headerUserAgent] = 'connect-dart/$version';
+  }
   if (sendCompression != null) {
     header[headerEncoding] = sendCompression.name;
   }
