@@ -17,6 +17,7 @@ import '../codec.dart';
 import '../compression.dart';
 import '../grpc/headers.dart';
 import '../headers.dart';
+import '../version.dart';
 
 const contentTypePrefix = "application/grpc-web";
 
@@ -45,7 +46,9 @@ Headers requestHeader(
     header[headerTimeout] =
         '${deadline.difference(DateTime.now()).inMilliseconds}m';
   }
-  // TODO: User agent headers.
+  if (!header.contains(headerUserAgent)) {
+    header[headerUserAgent] = 'connect-dart/$version';
+  }
   if (sendCompression != null) {
     header[headerEncoding] = sendCompression.name;
   }

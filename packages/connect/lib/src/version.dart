@@ -12,11 +12,5 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-const headerContentType = "content-type";
-const headerGrpcStatus = "grpc-status";
-const headerGrpcMessage = "grpc-message";
-const headerTimeout = "grpc-timeout";
-const headerEncoding = "grpc-encoding";
-const headerAcceptEncoding = "grpc-accept-encoding";
-const headerStatusDetailsBin = "grpc-status-details-bin";
-const headerUserAgent = "user-agent";
+/// Version of the connect package.
+const version = '0.2.1';

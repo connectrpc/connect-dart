@@ -17,6 +17,7 @@ import '../codec.dart';
 import '../compression.dart';
 import '../headers.dart';
 import '../spec.dart';
+import '../version.dart';
 import 'version.dart';
 
 const headerContentType = "content-type";
@@ -27,6 +28,7 @@ const headerUnaryEncoding = "content-encoding";
 const headerStreamEncoding = "connect-content-encoding";
 const headerUnaryAcceptEncoding = "accept-encoding";
 const headerStreamAcceptEncoding = "connect-accept-encoding";
+const headerUserAgent = "user-agent";
 
 Headers requestHeader(
   Codec codec,
@@ -47,7 +49,9 @@ Headers requestHeader(
   header[headerContentType] = streamType == StreamType.unary
       ? 'application/${codec.name}'
       : 'application/connect+${codec.name}';
-  // TODO: User agent headers.
+  if (!header.contains(headerUserAgent)) {
+    header[headerUserAgent] = 'connect-dart/$version';
+  }
   if (sendCompression != null) {
     header[streamType == StreamType.unary
         ? headerUnaryEncoding
