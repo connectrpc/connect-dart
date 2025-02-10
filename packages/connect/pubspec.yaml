@@ -20,6 +20,7 @@ dependencies:
   fixnum: ^1.1.1
 dev_dependencies:
   test: ^1.25.8
+  lints: ^4.0.0
   conformance:
     path: ../conformance
 
