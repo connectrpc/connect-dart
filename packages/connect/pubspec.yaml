@@ -1,6 +1,7 @@
 name: connectrpc
 description: >-
-  Implementation of the Connect protocol for Dart
+  Implementation of the Connect protocol for Dart. Simple, reliable, interoperable.
+  Protobuf RPC that works
 
 version: 0.2.1
 homepage: https://connectrpc.com
@@ -19,5 +20,14 @@ dependencies:
   fixnum: ^1.1.1
 dev_dependencies:
   test: ^1.25.8
+  lints: ^4.0.0
   conformance:
     path: ../conformance
+
+platforms:
+  android:
+  ios:
+  linux:
+  macos:
+  web:
+  windows:
