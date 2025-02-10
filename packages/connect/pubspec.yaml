@@ -22,3 +22,11 @@ dev_dependencies:
   test: ^1.25.8
   conformance:
     path: ../conformance
+
+platforms:
+  android:
+  ios:
+  linux:
+  macos:
+  web:
+  windows:
