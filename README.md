@@ -112,7 +112,7 @@ is available on the [connectrpc.com website][getting-started].
 
 ## Example Apps
 
-Example apps are available in [`/examples`](./examples). 
+Example apps are available in [`/example`](./example). 
 
 ## Contributing
 
