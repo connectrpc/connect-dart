@@ -12,63 +12,128 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import 'dart:async';
 import 'dart:io' as io;
 
 import 'package:http2/http2.dart' as http2;
 
-/// A wrapper around [http2.ClientTransportConnection] that only
-/// exposes [makeRequest].
-///
-/// This guarantees that no other methods are called on connections returned
-/// by [Http2ClientTransportConnectionManager]. This keeps connection state
-/// changes predictable and within the implementation
-/// of a [Http2ClientTransportConnectionManager]
-extension type Http2ClientTransportConnection(
-    http2.ClientTransportConnection _) {
-  /// Same as [http2.ClientTransportConnection]'s [makeRequest].
-  http2.ClientTransportStream makeRequest(
-    List<http2.Header> headers,
-  ) =>
-      _.makeRequest(headers);
-}
-
-/// A manager used to manage [http2.ClientTransportConnection]s.
-abstract interface class Http2ClientTransportConnectionManager {
-  factory Http2ClientTransportConnectionManager({io.SecurityContext? context}) =
-      _Http2ClientTransportConnectionManager;
-
-  /// Returns a [Http2ClientTransportConnection] connected to the
-  /// given authority of the url, optionally using a secure connection
-  /// if the url's scheme is 'https'.
+/// Transport for managing HTTP/2 connections.
+abstract interface class Http2ClientTransport {
+  /// The default implementation manages HTTP/2 connections and keeps them alive
+  /// with PING frames.
   ///
-  /// It may return the same connection on multiple calls.
-  Future<Http2ClientTransportConnection> connect(Uri uri);
+  /// The logic is based on "Basic Keepalive" described in
+  /// https://github.com/grpc/proposal/blob/0ba0c1905050525f9b0aee46f3f23c8e1e515489/A8-client-side-keepalive.md#basic-keepalive
+  /// as well as the client channel arguments described in
+  /// https://github.com/grpc/grpc/blob/8e137e524a1b1da7bbf4603662876d5719563b57/doc/keepalive.md
+  factory Http2ClientTransport({
+    io.SecurityContext context,
+    Duration idleConnectionTimeout,
+  }) = _Http2ClientTransport;
+
+  /// Similar to [http2.ClientTransportConnection.makeRequest], but
+  /// handles connectring to the server and issuing the request.
+  ///
+  /// Implementations can choose to manage the connections/streams
+  /// however they see fit.
+  ///
+  /// The [uri] is only used for establishing the socket connection
+  /// and any standard headers that can be derived from the [uri]
+  /// must be sent via [headers], similar to what would be send to
+  /// [http2.ClientTransportConnection.makeRequest].
+  Future<http2.ClientTransportStream> makeRequest(
+    Uri uri,
+    List<http2.Header> headers,
+  );
 }
 
-/// Default implementation, for now it create a new connection on each call
-/// to [connect]. In the future we should use it to pool connections and manage
-/// ping frames.
-final class _Http2ClientTransportConnectionManager
-    implements Http2ClientTransportConnectionManager {
+final class _Http2ClientTransport implements Http2ClientTransport {
+  /// The [io.SecurityContext] passed to [io.SecureSocket.connect].
   final io.SecurityContext? context;
 
-  _Http2ClientTransportConnectionManager({this.context});
+  /// Automatically close a connection if the time since the last request stream
+  /// exceeds this value.
+  ///
+  /// Defaults to 15 minutes.
+  ///
+  /// This option is equivalent to GRPC_ARG_CLIENT_IDLE_TIMEOUT_MS of gRPC core.
+  final Duration idleConnectionTimeout;
+
+  _Http2ClientTransport({
+    this.context,
+    this.idleConnectionTimeout = const Duration(minutes: 15),
+  });
+
+  final originTransports = <String, _SingleOriginHttp2ClientTransport>{};
 
   @override
-  Future<Http2ClientTransportConnection> connect(
+  Future<http2.ClientTransportStream> makeRequest(
     Uri uri,
+    List<http2.Header> headers,
+  ) {
+    final key = '${uri.scheme}://${uri.host}:${uri.port}';
+    var transport = originTransports[key];
+    if (transport == null) {
+      transport = _SingleOriginHttp2ClientTransport(
+        uri,
+        context,
+        idleConnectionTimeout,
+      );
+      originTransports[key] = transport;
+    }
+    return transport.makeRequest(headers);
+  }
+}
+
+final class _SingleOriginHttp2ClientTransport {
+  final Uri uri;
+  final io.SecurityContext? context;
+  final Duration idleConnectionTimeout;
+
+  Timer? idleTimer;
+  Future<void>? connecting;
+  http2.ClientTransportConnection? activeConnection;
+
+  _SingleOriginHttp2ClientTransport(
+    this.uri,
+    this.context,
+    this.idleConnectionTimeout,
+  );
+
+  Future<http2.ClientTransportStream> makeRequest(
+    List<http2.Header> headers,
   ) async {
-    final socket = await _connectSocket(uri);
-    final connection = http2.ClientTransportConnection.viaSocket(socket);
-    connection.onActiveStateChanged = (active) {
-      if (!active) {
-        connection.finish().ignore();
+    /// Dart cannot infer non-nullability if we don't use a local variable
+    var connection = activeConnection;
+    while (connection == null || !connection.isOpen) {
+      connecting ??= connect();
+      try {
+        await connecting;
+      } finally {
+        connecting = null;
       }
-    };
-    return Http2ClientTransportConnection(connection);
+      connection = activeConnection;
+    }
+    return connection.makeRequest(headers);
   }
 
-  Future<io.Socket> _connectSocket(Uri uri) async {
+  Future<void> connect() async {
+    final socket = await connectSocket();
+    final connection = http2.ClientTransportConnection.viaSocket(socket);
+    connection.onActiveStateChanged = (active) {
+      if (active) {
+        idleTimer?.cancel();
+        idleTimer = null;
+      } else {
+        idleTimer = Timer(idleConnectionTimeout, () {
+          connection.finish().ignore();
+        });
+      }
+    };
+    activeConnection = connection;
+  }
+
+  Future<io.Socket> connectSocket() async {
     var secure = uri.scheme == 'https';
     if (secure) {
       var secureSocket = await io.SecureSocket.connect(
