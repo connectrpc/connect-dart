@@ -26,8 +26,25 @@ abstract interface class Http2ClientTransport {
   /// https://github.com/grpc/proposal/blob/0ba0c1905050525f9b0aee46f3f23c8e1e515489/A8-client-side-keepalive.md#basic-keepalive
   /// as well as the client channel arguments described in
   /// https://github.com/grpc/grpc/blob/8e137e524a1b1da7bbf4603662876d5719563b57/doc/keepalive.md
+  ///
+  /// [idleConnectionTimeout] will close a connection if the time since the last request stream
+  /// exceeds this value. Defaults to 15 minutes.
+  ///
+  /// [pingInterval] is interval to send PING frames to keep a connection alive.
+  /// The interval is reset whenever a stream receives data. If a PING frame is not responded
+  /// to within [pingTimeout], the connection and all open streams close.
+  ///
+  /// By default, no PING frames are sent. If a value is provided, PING frames
+  /// are sent only for connections that have open streams, unless
+  /// [pingIdleConnections] is enabled.
+  ///
+  /// Sensible values for [pingInterval] can be between 10 seconds and 2 hours,
+  /// depending on your infrastructure.
   factory Http2ClientTransport({
     io.SecurityContext context,
+    Duration? pingInterval,
+    Duration pingTimeout,
+    bool pingIdleConnections,
     Duration idleConnectionTimeout,
   }) = _Http2ClientTransport;
 
@@ -48,19 +65,18 @@ abstract interface class Http2ClientTransport {
 }
 
 final class _Http2ClientTransport implements Http2ClientTransport {
-  /// The [io.SecurityContext] passed to [io.SecureSocket.connect].
   final io.SecurityContext? context;
 
-  /// Automatically close a connection if the time since the last request stream
-  /// exceeds this value.
-  ///
-  /// Defaults to 15 minutes.
-  ///
-  /// This option is equivalent to GRPC_ARG_CLIENT_IDLE_TIMEOUT_MS of gRPC core.
+  final Duration pingTimeout;
+  final Duration? pingInterval;
+  final bool pingIdleConnections;
   final Duration idleConnectionTimeout;
 
   _Http2ClientTransport({
     this.context,
+    this.pingInterval,
+    this.pingIdleConnections = false,
+    this.pingTimeout = const Duration(seconds: 15),
     this.idleConnectionTimeout = const Duration(minutes: 15),
   });
 
@@ -77,6 +93,9 @@ final class _Http2ClientTransport implements Http2ClientTransport {
       transport = _SingleOriginHttp2ClientTransport(
         uri,
         context,
+        pingTimeout,
+        pingInterval,
+        pingIdleConnections,
         idleConnectionTimeout,
       );
       originTransports[key] = transport;
@@ -88,15 +107,21 @@ final class _Http2ClientTransport implements Http2ClientTransport {
 final class _SingleOriginHttp2ClientTransport {
   final Uri uri;
   final io.SecurityContext? context;
+
+  final Duration pingTimeout;
+  final Duration? pingInterval;
+  final bool pingIdleConnections;
   final Duration idleConnectionTimeout;
 
-  Timer? idleTimer;
   Future<void>? connecting;
   http2.ClientTransportConnection? activeConnection;
 
   _SingleOriginHttp2ClientTransport(
     this.uri,
     this.context,
+    this.pingTimeout,
+    this.pingInterval,
+    this.pingIdleConnections,
     this.idleConnectionTimeout,
   );
 
@@ -120,11 +145,44 @@ final class _SingleOriginHttp2ClientTransport {
   Future<void> connect() async {
     final socket = await connectSocket();
     final connection = http2.ClientTransportConnection.viaSocket(socket);
+    Timer? pingTimer;
+    Timer? pingResponseTimer;
+    connection.onFrameReceived.listen(
+      cancelOnError: true,
+      (_) => pingResponseTimer?.cancel(),
+    );
+    resetPingTimer() {
+      pingResponseTimer?.cancel();
+      // If the timer is already active or interval is not set
+      // we can skip the setup.
+      if (pingInterval == null) return;
+      pingTimer?.cancel();
+      pingTimer = Timer.periodic(pingInterval!, (timer) async {
+        if (!connection.isOpen) {
+          timer.cancel();
+          return;
+        }
+        pingResponseTimer = Timer(pingTimeout, () {
+          connection.terminate(http2.ErrorCode.CANCEL).ignore();
+        });
+        await connection.ping().catchError((Object err) {
+          connection.finish().ignore();
+        });
+      });
+    }
+
+    resetPingTimer();
+    Timer? idleTimer;
     connection.onActiveStateChanged = (active) {
       if (active) {
+        resetPingTimer();
         idleTimer?.cancel();
         idleTimer = null;
       } else {
+        if (!pingIdleConnections) {
+          pingTimer?.cancel();
+          pingTimer = null;
+        }
         idleTimer = Timer(idleConnectionTimeout, () {
           connection.finish().ignore();
         });
