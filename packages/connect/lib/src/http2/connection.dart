@@ -31,8 +31,7 @@ abstract interface class Http2ClientTransport {
   /// exceeds this value. Defaults to 15 minutes.
   ///
   /// [pingInterval] is interval to send PING frames to keep a connection alive.
-  /// The interval is reset whenever a stream receives data. If a PING frame is not responded
-  /// to within [pingTimeout], the connection and all open streams close.
+  /// If a PING frame is not responded to within [pingTimeout], the connection and all open streams close.
   ///
   /// By default, no PING frames are sent. If a value is provided, PING frames
   /// are sent only for connections that have open streams, unless
@@ -41,12 +40,22 @@ abstract interface class Http2ClientTransport {
   /// Sensible values for [pingInterval] can be between 10 seconds and 2 hours,
   /// depending on your infrastructure.
   factory Http2ClientTransport({
-    io.SecurityContext context,
+    io.SecurityContext? context,
     Duration? pingInterval,
-    Duration pingTimeout,
-    bool pingIdleConnections,
-    Duration idleConnectionTimeout,
-  }) = _Http2ClientTransport;
+    Duration pingTimeout = const Duration(seconds: 15),
+    bool pingIdleConnections = false,
+    Duration idleConnectionTimeout = const Duration(minutes: 15),
+  }) {
+    return _Http2ClientTransport(
+      context,
+      _KeepAliveOptions(
+        pingTimeout: pingTimeout,
+        pingInterval: pingInterval,
+        pingIdleConnections: pingIdleConnections,
+        idleConnectionTimeout: idleConnectionTimeout,
+      ),
+    );
+  }
 
   /// Similar to [http2.ClientTransportConnection.makeRequest], but
   /// handles connectring to the server and issuing the request.
@@ -67,18 +76,9 @@ abstract interface class Http2ClientTransport {
 final class _Http2ClientTransport implements Http2ClientTransport {
   final io.SecurityContext? context;
 
-  final Duration pingTimeout;
-  final Duration? pingInterval;
-  final bool pingIdleConnections;
-  final Duration idleConnectionTimeout;
+  final _KeepAliveOptions options;
 
-  _Http2ClientTransport({
-    this.context,
-    this.pingInterval,
-    this.pingIdleConnections = false,
-    this.pingTimeout = const Duration(seconds: 15),
-    this.idleConnectionTimeout = const Duration(minutes: 15),
-  });
+  _Http2ClientTransport(this.context, this.options);
 
   final originTransports = <String, _SingleOriginHttp2ClientTransport>{};
 
@@ -93,10 +93,7 @@ final class _Http2ClientTransport implements Http2ClientTransport {
       transport = _SingleOriginHttp2ClientTransport(
         uri,
         context,
-        pingTimeout,
-        pingInterval,
-        pingIdleConnections,
-        idleConnectionTimeout,
+        options,
       );
       originTransports[key] = transport;
     }
@@ -108,21 +105,16 @@ final class _SingleOriginHttp2ClientTransport {
   final Uri uri;
   final io.SecurityContext? context;
 
-  final Duration pingTimeout;
-  final Duration? pingInterval;
-  final bool pingIdleConnections;
-  final Duration idleConnectionTimeout;
+  final _KeepAliveOptions options;
 
   Future<void>? connecting;
-  http2.ClientTransportConnection? activeConnection;
+  _KeepAliveConnection? activeConnection;
+  DateTime? lastAliveAt;
 
   _SingleOriginHttp2ClientTransport(
     this.uri,
     this.context,
-    this.pingTimeout,
-    this.pingInterval,
-    this.pingIdleConnections,
-    this.idleConnectionTimeout,
+    this.options,
   );
 
   Future<http2.ClientTransportStream> makeRequest(
@@ -130,7 +122,7 @@ final class _SingleOriginHttp2ClientTransport {
   ) async {
     /// Dart cannot infer non-nullability if we don't use a local variable
     var connection = activeConnection;
-    while (connection == null || !connection.isOpen) {
+    while (connection == null || !(await connection.verify())) {
       connecting ??= connect();
       try {
         await connecting;
@@ -145,50 +137,7 @@ final class _SingleOriginHttp2ClientTransport {
   Future<void> connect() async {
     final socket = await connectSocket();
     final connection = http2.ClientTransportConnection.viaSocket(socket);
-    Timer? pingTimer;
-    Timer? pingResponseTimer;
-    connection.onFrameReceived.listen(
-      cancelOnError: true,
-      (_) => pingResponseTimer?.cancel(),
-    );
-    resetPingTimer() {
-      pingResponseTimer?.cancel();
-      // If the timer is already active or interval is not set
-      // we can skip the setup.
-      if (pingInterval == null) return;
-      pingTimer?.cancel();
-      pingTimer = Timer.periodic(pingInterval!, (timer) async {
-        if (!connection.isOpen) {
-          timer.cancel();
-          return;
-        }
-        pingResponseTimer = Timer(pingTimeout, () {
-          connection.terminate(http2.ErrorCode.CANCEL).ignore();
-        });
-        await connection.ping().catchError((Object err) {
-          connection.finish().ignore();
-        });
-      });
-    }
-
-    resetPingTimer();
-    Timer? idleTimer;
-    connection.onActiveStateChanged = (active) {
-      if (active) {
-        resetPingTimer();
-        idleTimer?.cancel();
-        idleTimer = null;
-      } else {
-        if (!pingIdleConnections) {
-          pingTimer?.cancel();
-          pingTimer = null;
-        }
-        idleTimer = Timer(idleConnectionTimeout, () {
-          connection.finish().ignore();
-        });
-      }
-    };
-    activeConnection = connection;
+    activeConnection = _KeepAliveConnection(connection, options);
   }
 
   Future<io.Socket> connectSocket() async {
@@ -217,4 +166,113 @@ final class _SingleOriginHttp2ClientTransport {
       return await io.Socket.connect(uri.host, uri.port);
     }
   }
+}
+
+final class _KeepAliveConnection {
+  final http2.ClientTransportConnection connection;
+  final _KeepAliveOptions options;
+
+  bool idle = true;
+  Timer? pingTimer;
+  DateTime lastAliveAt = DateTime.now();
+  Future<bool>? verifying;
+  List<http2.ClientTransportStream> streams = [];
+
+  _KeepAliveConnection(
+    this.connection,
+    this.options,
+  ) {
+    resetPingTimer();
+    Timer? idleTimer;
+    connection.onActiveStateChanged = (active) {
+      idle = !active;
+      if (active) {
+        // We want to reset if it isn't already pinging
+        if (options.pingInterval != null && !options.pingIdleConnections) {
+          resetPingTimer();
+        }
+        idleTimer?.cancel();
+        idleTimer = null;
+      } else {
+        if (!options.pingIdleConnections) {
+          pingTimer?.cancel();
+        }
+        streams.clear();
+        idleTimer = Timer(options.idleConnectionTimeout, () {
+          connection.finish().ignore();
+        });
+      }
+    };
+  }
+
+  http2.ClientTransportStream makeRequest(
+    List<http2.Header> headers,
+  ) {
+    final stream = connection.makeRequest(headers);
+    streams.add(stream);
+    return stream;
+  }
+
+  void resetPingTimer() {
+    final pingInterval = options.pingInterval;
+    if (pingInterval == null) return;
+    pingTimer?.cancel();
+    pingTimer = Timer(pingInterval, () async {
+      await ping();
+      if (!idle || options.pingIdleConnections) {
+        resetPingTimer();
+      }
+    });
+  }
+
+  Future<bool> ping() async {
+    if (!connection.isOpen) {
+      return false;
+    }
+    final responseTimer = Timer(options.pingTimeout, () {
+      // Terminating the connection doesn't terminate the requests
+      //
+      // See: https://github.com/dart-lang/http/issues/1370
+      connection.terminate(http2.ErrorCode.CANCEL).ignore();
+    });
+    // Ping returns a future that waits for the server to respond
+    // for the PING.
+    try {
+      await connection.ping();
+      responseTimer.cancel();
+      lastAliveAt = DateTime.now();
+      return true;
+    } catch (_) {
+      // `ping()` only throws if the connection is terminated.
+      return false;
+    }
+  }
+
+  Future<bool> verify() {
+    final pingInterval = options.pingInterval;
+    final durationSinceLastPing = DateTime.now().difference(lastAliveAt);
+    final stale = pingInterval != null && durationSinceLastPing > pingInterval;
+    if (connection.isOpen && !stale) {
+      return Future.value(true);
+    }
+    try {
+      return verifying ??= ping();
+    } finally {
+      verifying = null;
+    }
+  }
+}
+
+final class _KeepAliveOptions {
+  final Duration pingTimeout;
+  final Duration? pingInterval;
+  final bool pingIdleConnections;
+  final Duration idleConnectionTimeout;
+
+  _KeepAliveOptions({
+    required this.pingTimeout,
+    required this.pingInterval,
+    required this.pingIdleConnections,
+    required this.idleConnectionTimeout,
+  });
 }

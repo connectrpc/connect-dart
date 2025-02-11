@@ -27,15 +27,16 @@ void main() {
   late Uri uri;
   List<http2.ServerTransportConnection> serverConns = [];
   List<http2.ServerTransportStream> serverStreams = [];
+  List<int> serverPings = [];
   setUp(() async {
     serverSocket = await ServerSocket.bind(
       InternetAddress.loopbackIPv4,
       0,
     );
-    serverConns.clear();
     serverSocket.listen(
       (socket) {
         final conn = http2.ServerTransportConnection.viaSocket(socket);
+        conn.onPingReceived.listen((id) => serverPings.add(id));
         serverConns.add(conn);
         conn.incomingStreams.listen((stream) {
           stream.outgoingMessages.close().ignore();
@@ -52,6 +53,9 @@ void main() {
   });
   tearDown(() async {
     await serverSocket.close();
+    serverConns.clear();
+    serverStreams.clear();
+    serverPings.clear();
   });
   test('reuse the same connection', () async {
     final transport = Http2ClientTransport();
@@ -75,6 +79,87 @@ void main() {
     await req.close();
     await serverSocket.close();
     expect(serverConns.length, equals(2));
+  });
+  test('verify stale connections', () async {
+    final transport = Http2ClientTransport(
+      pingInterval: Duration(milliseconds: 5),
+    );
+    // issue a request and close it, then wait for more than pingInterval to trigger a verification
+    final req1 = await transport.request(uri);
+    await req1.close();
+    await Future<void>.delayed(Duration(milliseconds: 10));
+    serverPings.clear();
+    final req2 = await transport.request(uri);
+    expect(serverPings.length, greaterThan(0));
+    await req2.close();
+    expect(serverConns.length, equals(1));
+  });
+  test('open a new connection if verification fails', () async {
+    final transport = Http2ClientTransport(
+      pingTimeout: Duration.zero, // Intentionally unsatisfiable
+      pingInterval: Duration(milliseconds: 5),
+    );
+    // issue a request and close it, then wait for more than pingInterval to trigger a verification
+    final req1 = await transport.request(uri);
+    await req1.close();
+    await Future<void>.delayed(Duration(milliseconds: 10));
+    serverPings.clear();
+    final req2 = await transport.request(uri);
+    await req2.close();
+    expect(serverConns.length, equals(2));
+  });
+  group('PING frames', () {
+    group('for open connections', () {
+      test('should be sent', () async {
+        final transport = Http2ClientTransport(
+          pingInterval: Duration(milliseconds: 5),
+        );
+        final req = await transport.request(uri);
+        await Future<void>.delayed(Duration(milliseconds: 25));
+        expect(serverPings.length, greaterThanOrEqualTo(3));
+        await req.close();
+      });
+      test(
+        'should destroy the connection if not answered in time',
+        () async {
+          final transport = Http2ClientTransport(
+            pingTimeout: Duration.zero,
+            pingInterval: Duration(milliseconds: 5),
+          );
+          final req = await transport.request(uri);
+          expect(
+            req.incomingMessages,
+            emitsError(anything),
+          );
+          req.terminate();
+        },
+      );
+    });
+    group('for idle connections', () {
+      test('should not be sent by default', () async {
+        final transport = Http2ClientTransport(
+          pingInterval: Duration(milliseconds: 5),
+        );
+        final req = await transport.request(uri);
+        await req.close();
+        await Future<void>.delayed(Duration(milliseconds: 10));
+        serverPings.clear();
+        await Future<void>.delayed(Duration(milliseconds: 30));
+        expect(serverPings.length, equals(0));
+      });
+      test('should be sent if pingIdleConnection is true', () async {
+        final transport = Http2ClientTransport(
+          pingInterval: Duration(milliseconds: 5),
+          pingIdleConnections: true,
+        );
+        final req = await transport.request(uri);
+        await req.close();
+        await Future<void>.delayed(Duration(milliseconds: 10));
+        serverPings.clear();
+        await Future<void>.delayed(Duration(milliseconds: 30));
+        expect(serverPings.length, greaterThanOrEqualTo(3));
+      });
+    });
   });
 }
 
