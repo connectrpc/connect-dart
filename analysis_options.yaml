@@ -1,7 +1,7 @@
 include: package:lints/recommended.yaml
 
 analyzer:
-  exclude: ["**/gen/**", "examples"]
+  exclude: ["**/gen/**", "example"]
   language:
     strict-casts: true
     strict-raw-types: true

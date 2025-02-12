@@ -18,7 +18,7 @@
 abstract interface class Headers {
   /// Creates an empty [Headers] instance.
   ///
-  /// The instance's [get] returns an efficient [ListIterable] with a view
+  /// The instance's [get] returns an efficient [Iterable] with a view
   /// of the values at the time it was called.
   factory Headers() = _Headers;
 

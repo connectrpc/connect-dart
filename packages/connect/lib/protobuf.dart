@@ -13,6 +13,6 @@
 // limitations under the License.
 
 /// Implements [Codec] and [StatusParser] using the protobuf package.
-library protobuf;
+library;
 
 export 'src/protobuf.dart';

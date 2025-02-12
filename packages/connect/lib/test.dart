@@ -13,6 +13,6 @@
 // limitations under the License.
 
 /// Testing utilities for working with connect clients.
-library test;
+library;
 
 export 'src/fake.dart';
