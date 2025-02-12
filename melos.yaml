@@ -2,7 +2,7 @@ name: connect
 repository: https://github.com/connectrpc/connect-dart
 packages:
   - packages/**
-  - examples/**
+  - example/**
 ide:
   intellij:
     enabled: false

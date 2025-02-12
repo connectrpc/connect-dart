@@ -16,10 +16,16 @@ import './gen/eliza.pb.dart';
 import './gen/eliza.connect.client.dart';
 
 import 'package:flutter/material.dart';
-import 'package:connectrpc/http2.dart';
 import 'package:connectrpc/connect.dart';
 import 'package:connectrpc/protobuf.dart';
 import 'package:connectrpc/protocol/connect.dart' as protocol;
+// Conditionally import `createHttpClient` function.
+//
+// This way each platform can configure the client as needed
+// in their respective files.
+import './http.dart'
+    if (dart.library.io) './http_io.dart'
+    if (dart.library.js_interop) './http_web.dart';
 
 final transport = protocol.Transport(
   baseUrl: "https://demo.connectrpc.com",
