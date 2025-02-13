@@ -12,4 +12,5 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+export 'src/http2/connection.dart' show Http2ClientTransport;
 export 'src/http2/http2.dart' show createHttpClient;

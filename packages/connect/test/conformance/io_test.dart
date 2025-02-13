@@ -67,7 +67,11 @@ void main() {
         HTTPVersion.HTTP_VERSION_1 => http1.createHttpClient(
             io.HttpClient(context: context),
           ),
-        HTTPVersion.HTTP_VERSION_2 => http2.createHttpClient(context: context),
+        HTTPVersion.HTTP_VERSION_2 => http2.createHttpClient(
+            transport: http2.Http2ClientTransport(
+              context: context,
+            ),
+          ),
         _ => throw 'Unsupported Http version',
       };
       final compression = switch (req.compression) {

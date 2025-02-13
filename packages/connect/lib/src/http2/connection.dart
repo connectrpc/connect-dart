@@ -12,63 +12,135 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import 'dart:async';
 import 'dart:io' as io;
 
 import 'package:http2/http2.dart' as http2;
 
-/// A wrapper around [http2.ClientTransportConnection] that only
-/// exposes [makeRequest].
-///
-/// This guarantees that no other methods are called on connections returned
-/// by [Http2ClientTransportConnectionManager]. This keeps connection state
-/// changes predictable and within the implementation
-/// of a [Http2ClientTransportConnectionManager]
-extension type Http2ClientTransportConnection(
-    http2.ClientTransportConnection _) {
-  /// Same as [http2.ClientTransportConnection]'s [makeRequest].
-  http2.ClientTransportStream makeRequest(
-    List<http2.Header> headers,
-  ) =>
-      _.makeRequest(headers);
-}
-
-/// A manager used to manage [http2.ClientTransportConnection]s.
-abstract interface class Http2ClientTransportConnectionManager {
-  factory Http2ClientTransportConnectionManager({io.SecurityContext? context}) =
-      _Http2ClientTransportConnectionManager;
-
-  /// Returns a [Http2ClientTransportConnection] connected to the
-  /// given authority of the url, optionally using a secure connection
-  /// if the url's scheme is 'https'.
+/// Transport for managing HTTP/2 connections.
+abstract interface class Http2ClientTransport {
+  /// The default implementation manages HTTP/2 connections and keeps them alive
+  /// with PING frames.
   ///
-  /// It may return the same connection on multiple calls.
-  Future<Http2ClientTransportConnection> connect(Uri uri);
-}
-
-/// Default implementation, for now it create a new connection on each call
-/// to [connect]. In the future we should use it to pool connections and manage
-/// ping frames.
-final class _Http2ClientTransportConnectionManager
-    implements Http2ClientTransportConnectionManager {
-  final io.SecurityContext? context;
-
-  _Http2ClientTransportConnectionManager({this.context});
-
-  @override
-  Future<Http2ClientTransportConnection> connect(
-    Uri uri,
-  ) async {
-    final socket = await _connectSocket(uri);
-    final connection = http2.ClientTransportConnection.viaSocket(socket);
-    connection.onActiveStateChanged = (active) {
-      if (!active) {
-        connection.finish().ignore();
-      }
-    };
-    return Http2ClientTransportConnection(connection);
+  /// The logic is based on "Basic Keepalive" described in
+  /// https://github.com/grpc/proposal/blob/0ba0c1905050525f9b0aee46f3f23c8e1e515489/A8-client-side-keepalive.md#basic-keepalive
+  /// as well as the client channel arguments described in
+  /// https://github.com/grpc/grpc/blob/8e137e524a1b1da7bbf4603662876d5719563b57/doc/keepalive.md
+  ///
+  /// [idleConnectionTimeout] will close a connection if the time since the last request stream
+  /// exceeds this value. Defaults to 15 minutes.
+  ///
+  /// [pingInterval] is interval to send PING frames to keep a connection alive.
+  /// If a PING frame is not responded to within [pingTimeout], the connection and all open streams close.
+  ///
+  /// By default, no PING frames are sent. If a value is provided, PING frames
+  /// are sent only for connections that have open streams, unless
+  /// [pingIdleConnections] is enabled.
+  ///
+  /// Sensible values for [pingInterval] can be between 10 seconds and 2 hours,
+  /// depending on your infrastructure.
+  factory Http2ClientTransport({
+    io.SecurityContext? context,
+    Duration? pingInterval,
+    Duration pingTimeout = const Duration(seconds: 15),
+    bool pingIdleConnections = false,
+    Duration idleConnectionTimeout = const Duration(minutes: 15),
+  }) {
+    return _Http2ClientTransport(
+      context,
+      _KeepAliveOptions(
+        pingTimeout: pingTimeout,
+        pingInterval: pingInterval,
+        pingIdleConnections: pingIdleConnections,
+        idleConnectionTimeout: idleConnectionTimeout,
+      ),
+    );
   }
 
-  Future<io.Socket> _connectSocket(Uri uri) async {
+  /// Similar to [http2.ClientTransportConnection.makeRequest], but
+  /// handles connectring to the server and issuing the request.
+  ///
+  /// Implementations can choose to manage the connections/streams
+  /// however they see fit.
+  ///
+  /// The [uri] is only used for establishing the socket connection
+  /// and any standard headers that can be derived from the [uri]
+  /// must be sent via [headers], similar to what would be send to
+  /// [http2.ClientTransportConnection.makeRequest].
+  Future<http2.ClientTransportStream> makeRequest(
+    Uri uri,
+    List<http2.Header> headers,
+  );
+}
+
+final class _Http2ClientTransport implements Http2ClientTransport {
+  final io.SecurityContext? context;
+
+  final _KeepAliveOptions options;
+
+  _Http2ClientTransport(this.context, this.options);
+
+  final originTransports = <String, _SingleOriginHttp2ClientTransport>{};
+
+  @override
+  Future<http2.ClientTransportStream> makeRequest(
+    Uri uri,
+    List<http2.Header> headers,
+  ) {
+    final key = '${uri.scheme}://${uri.host}:${uri.port}';
+    var transport = originTransports[key];
+    if (transport == null) {
+      transport = _SingleOriginHttp2ClientTransport(
+        uri,
+        context,
+        options,
+      );
+      originTransports[key] = transport;
+    }
+    return transport.makeRequest(headers);
+  }
+}
+
+final class _SingleOriginHttp2ClientTransport {
+  final Uri uri;
+  final io.SecurityContext? context;
+
+  final _KeepAliveOptions options;
+
+  Future<void>? connecting;
+  _KeepAliveConnection? activeConnection;
+  DateTime? lastAliveAt;
+
+  _SingleOriginHttp2ClientTransport(
+    this.uri,
+    this.context,
+    this.options,
+  );
+
+  Future<http2.ClientTransportStream> makeRequest(
+    List<http2.Header> headers,
+  ) async {
+    /// Dart cannot infer non-nullability if we don't use a local variable
+    var connection = activeConnection;
+    while (connection == null || !(await connection.verify())) {
+      connecting ??= connect();
+      try {
+        await connecting;
+      } finally {
+        connecting = null;
+      }
+      connection = activeConnection;
+    }
+    return connection.makeRequest(headers);
+  }
+
+  Future<void> connect() async {
+    final socket = await connectSocket();
+    final connection = http2.ClientTransportConnection.viaSocket(socket);
+    activeConnection = _KeepAliveConnection(connection, options);
+  }
+
+  Future<io.Socket> connectSocket() async {
     var secure = uri.scheme == 'https';
     if (secure) {
       var secureSocket = await io.SecureSocket.connect(
@@ -94,4 +166,113 @@ final class _Http2ClientTransportConnectionManager
       return await io.Socket.connect(uri.host, uri.port);
     }
   }
+}
+
+final class _KeepAliveConnection {
+  final http2.ClientTransportConnection connection;
+  final _KeepAliveOptions options;
+
+  bool idle = true;
+  Timer? pingTimer;
+  DateTime lastAliveAt = DateTime.now();
+  Future<bool>? verifying;
+  List<http2.ClientTransportStream> streams = [];
+
+  _KeepAliveConnection(
+    this.connection,
+    this.options,
+  ) {
+    resetPingTimer();
+    Timer? idleTimer;
+    connection.onActiveStateChanged = (active) {
+      idle = !active;
+      if (active) {
+        // We want to reset if it isn't already pinging
+        if (options.pingInterval != null && !options.pingIdleConnections) {
+          resetPingTimer();
+        }
+        idleTimer?.cancel();
+        idleTimer = null;
+      } else {
+        if (!options.pingIdleConnections) {
+          pingTimer?.cancel();
+        }
+        streams.clear();
+        idleTimer = Timer(options.idleConnectionTimeout, () {
+          connection.finish().ignore();
+        });
+      }
+    };
+  }
+
+  http2.ClientTransportStream makeRequest(
+    List<http2.Header> headers,
+  ) {
+    final stream = connection.makeRequest(headers);
+    streams.add(stream);
+    return stream;
+  }
+
+  void resetPingTimer() {
+    final pingInterval = options.pingInterval;
+    if (pingInterval == null) return;
+    pingTimer?.cancel();
+    pingTimer = Timer(pingInterval, () async {
+      await ping();
+      if (!idle || options.pingIdleConnections) {
+        resetPingTimer();
+      }
+    });
+  }
+
+  Future<bool> ping() async {
+    if (!connection.isOpen) {
+      return false;
+    }
+    final responseTimer = Timer(options.pingTimeout, () {
+      // Terminating the connection doesn't terminate the requests
+      //
+      // See: https://github.com/dart-lang/http/issues/1370
+      connection.terminate(http2.ErrorCode.CANCEL).ignore();
+    });
+    // Ping returns a future that waits for the server to respond
+    // for the PING.
+    try {
+      await connection.ping();
+      responseTimer.cancel();
+      lastAliveAt = DateTime.now();
+      return true;
+    } catch (_) {
+      // `ping()` only throws if the connection is terminated.
+      return false;
+    }
+  }
+
+  Future<bool> verify() {
+    final pingInterval = options.pingInterval;
+    final durationSinceLastPing = DateTime.now().difference(lastAliveAt);
+    final stale = pingInterval != null && durationSinceLastPing > pingInterval;
+    if (connection.isOpen && !stale) {
+      return Future.value(true);
+    }
+    try {
+      return verifying ??= ping();
+    } finally {
+      verifying = null;
+    }
+  }
+}
+
+final class _KeepAliveOptions {
+  final Duration pingTimeout;
+  final Duration? pingInterval;
+  final bool pingIdleConnections;
+  final Duration idleConnectionTimeout;
+
+  _KeepAliveOptions({
+    required this.pingTimeout,
+    required this.pingInterval,
+    required this.pingIdleConnections,
+    required this.idleConnectionTimeout,
+  });
 }

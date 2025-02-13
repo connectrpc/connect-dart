@@ -14,7 +14,6 @@
 
 import 'dart:async';
 import 'dart:convert';
-import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:http2/transport.dart' as http2;
@@ -30,13 +29,14 @@ import 'errors.dart';
 /// Creates a [HttpClient] based on `package:http2`
 ///
 /// This only supports HTTP/2.
-HttpClient createHttpClient({SecurityContext? context}) {
-  final manager = Http2ClientTransportConnectionManager(context: context);
+HttpClient createHttpClient({Http2ClientTransport? transport}) {
+  // Using a new variable will ensure it is inferred as
+  // a non nullable type.
+  final h2transport = transport ?? Http2ClientTransport();
   return (req) async {
     final uri = Uri.parse(req.url);
-    final transport = await manager.connect(uri);
     final sentinel = Sentinel.create();
-    final stream = transport.makeRequest([
+    final stream = await h2transport.makeRequest(uri, [
       http2.Header.ascii(':method', req.method),
       http2.Header.ascii(':scheme', uri.scheme),
       http2.Header.ascii(':authority', uri.host),
