@@ -16,7 +16,7 @@
 //  Generated code. Do not modify.
 //  source: eliza.proto
 //
-// @dart = 2.12
+// @dart = 3.3
 
 // ignore_for_file: annotate_overrides, camel_case_types, comment_references
 // ignore_for_file: constant_identifier_names, library_prefixes
@@ -27,6 +27,8 @@ import 'dart:async' as $async;
 import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
+
+export 'package:protobuf/protobuf.dart' show GeneratedMessageGenericExtensions;
 
 class SayRequest extends $pb.GeneratedMessage {
   factory SayRequest({
@@ -85,7 +87,7 @@ class SayRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $core.bool hasSentence() => $_has(0);
   @$pb.TagNumber(1)
-  void clearSentence() => clearField(1);
+  void clearSentence() => $_clearField(1);
 }
 
 class SayResponse extends $pb.GeneratedMessage {
@@ -146,7 +148,7 @@ class SayResponse extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $core.bool hasSentence() => $_has(0);
   @$pb.TagNumber(1)
-  void clearSentence() => clearField(1);
+  void clearSentence() => $_clearField(1);
 }
 
 class ElizaServiceApi {
