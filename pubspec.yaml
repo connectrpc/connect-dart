@@ -8,5 +8,3 @@ dev_dependencies:
 workspace:
   - packages/conformance
   - packages/connect
-  - example/eliza
-  - example/web
