@@ -36,8 +36,8 @@ const SayRequest$json = {
 };
 
 /// Descriptor for `SayRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List sayRequestDescriptor = $convert
-    .base64Decode('CgpTYXlSZXF1ZXN0EhoKCHNlbnRlbmNlGAEgASgJUghzZW50ZW5jZQ==');
+final $typed_data.Uint8List sayRequestDescriptor = $convert.base64Decode(
+    'CgpTYXlSZXF1ZXN0EhoKCHNlbnRlbmNlGAEgASgJUghzZW50ZW5jZQ==');
 
 @$core.Deprecated('Use sayResponseDescriptor instead')
 const SayResponse$json = {
@@ -48,8 +48,8 @@ const SayResponse$json = {
 };
 
 /// Descriptor for `SayResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List sayResponseDescriptor = $convert
-    .base64Decode('CgtTYXlSZXNwb25zZRIaCghzZW50ZW5jZRgBIAEoCVIIc2VudGVuY2U=');
+final $typed_data.Uint8List sayResponseDescriptor = $convert.base64Decode(
+    'CgtTYXlSZXNwb25zZRIaCghzZW50ZW5jZRgBIAEoCVIIc2VudGVuY2U=');
 
 @$core.Deprecated('Use converseRequestDescriptor instead')
 const ConverseRequest$json = {
@@ -84,8 +84,8 @@ const IntroduceRequest$json = {
 };
 
 /// Descriptor for `IntroduceRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List introduceRequestDescriptor = $convert
-    .base64Decode('ChBJbnRyb2R1Y2VSZXF1ZXN0EhIKBG5hbWUYASABKAlSBG5hbWU=');
+final $typed_data.Uint8List introduceRequestDescriptor = $convert.base64Decode(
+    'ChBJbnRyb2R1Y2VSZXF1ZXN0EhIKBG5hbWUYASABKAlSBG5hbWU=');
 
 @$core.Deprecated('Use introduceResponseDescriptor instead')
 const IntroduceResponse$json = {
@@ -108,27 +108,13 @@ const $core.Map<$core.String, $core.dynamic> ElizaServiceBase$json = {
       '3': '.connectrpc.eliza.v1.SayResponse',
       '4': {'34': 1},
     },
-    {
-      '1': 'Converse',
-      '2': '.connectrpc.eliza.v1.ConverseRequest',
-      '3': '.connectrpc.eliza.v1.ConverseResponse',
-      '4': {},
-      '5': true,
-      '6': true
-    },
-    {
-      '1': 'Introduce',
-      '2': '.connectrpc.eliza.v1.IntroduceRequest',
-      '3': '.connectrpc.eliza.v1.IntroduceResponse',
-      '4': {},
-      '6': true
-    },
+    {'1': 'Converse', '2': '.connectrpc.eliza.v1.ConverseRequest', '3': '.connectrpc.eliza.v1.ConverseResponse', '4': {}, '5': true, '6': true},
+    {'1': 'Introduce', '2': '.connectrpc.eliza.v1.IntroduceRequest', '3': '.connectrpc.eliza.v1.IntroduceResponse', '4': {}, '6': true},
   ],
 };
 
 @$core.Deprecated('Use elizaServiceDescriptor instead')
-const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>>
-    ElizaServiceBase$messageJson = {
+const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>> ElizaServiceBase$messageJson = {
   '.connectrpc.eliza.v1.SayRequest': SayRequest$json,
   '.connectrpc.eliza.v1.SayResponse': SayResponse$json,
   '.connectrpc.eliza.v1.ConverseRequest': ConverseRequest$json,
@@ -145,3 +131,4 @@ final $typed_data.Uint8List elizaServiceDescriptor = $convert.base64Decode(
     'NvbnZlcnNlUmVzcG9uc2UiACgBMAESXgoJSW50cm9kdWNlEiUuY29ubmVjdHJwYy5lbGl6YS52'
     'MS5JbnRyb2R1Y2VSZXF1ZXN0GiYuY29ubmVjdHJwYy5lbGl6YS52MS5JbnRyb2R1Y2VSZXNwb2'
     '5zZSIAMAE=');
+

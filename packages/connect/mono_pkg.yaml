@@ -1,0 +1,25 @@
+sdk:
+  - stable
+  - pubspec
+os:
+  - linux
+  - windows
+stages:
+  - lint:
+      - group:
+          - command: buf generate
+          - command: dart run ../../scripts/license_header.dart ../..
+          - command: dart format .
+          - analyze
+          - command: "[[ -z $(git status --porcelain | tee /dev/stderr) ]]"
+        os: linux
+      - group:
+          - command: buf generate
+          - command: dart run ../../scripts/license_header.dart ../..
+          - command: dart format .
+          - analyze
+          - command: "if (-not ([string]::IsNullOrEmpty((git status --porcelain)))) { git diff; exit 1 }"
+        os: windows
+  - test:
+      - test: -p chrome
+      - test: -p vm

@@ -11,9 +11,10 @@ executables:
   pipe:
 
 environment:
-  sdk: ">=3.3.0 <4.0.0"
+  sdk: ^3.6.0
+resolution: workspace
 dependencies:
-  protobuf: '>=3.1.0 <5.0.0'
+  protobuf: ">=3.1.0 <5.0.0"
   connectrpc:
     path: ../connect
   archive: ^3.6.1

@@ -1,0 +1,16 @@
+# See with https://github.com/google/mono_repo.dart for details on this file
+github:
+  on:
+    push:
+      branches: [main]
+      tags: ["v*"]
+    pull_request:
+      branches: [main]
+    workflow_dispatch: {}
+  dependabot: {}
+
+self_validate: lint
+
+merge_stages:
+  - lint
+  - test

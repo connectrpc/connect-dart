@@ -1,0 +1,11 @@
+sdk:
+  - stable
+  - pubspec
+stages:
+  - lint:
+      - group:
+          - command: buf generate          
+          - command: dart format .
+          - analyze
+  - test:
+      - test:

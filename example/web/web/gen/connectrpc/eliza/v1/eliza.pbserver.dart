@@ -35,41 +35,29 @@ import 'eliza.pbjson.dart';
 export 'eliza.pb.dart';
 
 abstract class ElizaServiceBase extends $pb.GeneratedService {
-  $async.Future<$0.SayResponse> say(
-      $pb.ServerContext ctx, $0.SayRequest request);
-  $async.Future<$0.ConverseResponse> converse(
-      $pb.ServerContext ctx, $0.ConverseRequest request);
-  $async.Future<$0.IntroduceResponse> introduce(
-      $pb.ServerContext ctx, $0.IntroduceRequest request);
+  $async.Future<$0.SayResponse> say($pb.ServerContext ctx, $0.SayRequest request);
+  $async.Future<$0.ConverseResponse> converse($pb.ServerContext ctx, $0.ConverseRequest request);
+  $async.Future<$0.IntroduceResponse> introduce($pb.ServerContext ctx, $0.IntroduceRequest request);
 
   $pb.GeneratedMessage createRequest($core.String methodName) {
     switch (methodName) {
-      case 'Say':
-        return $0.SayRequest();
-      case 'Converse':
-        return $0.ConverseRequest();
-      case 'Introduce':
-        return $0.IntroduceRequest();
-      default:
-        throw $core.ArgumentError('Unknown method: $methodName');
+      case 'Say': return $0.SayRequest();
+      case 'Converse': return $0.ConverseRequest();
+      case 'Introduce': return $0.IntroduceRequest();
+      default: throw $core.ArgumentError('Unknown method: $methodName');
     }
   }
 
-  $async.Future<$pb.GeneratedMessage> handleCall($pb.ServerContext ctx,
-      $core.String methodName, $pb.GeneratedMessage request) {
+  $async.Future<$pb.GeneratedMessage> handleCall($pb.ServerContext ctx, $core.String methodName, $pb.GeneratedMessage request) {
     switch (methodName) {
-      case 'Say':
-        return this.say(ctx, request as $0.SayRequest);
-      case 'Converse':
-        return this.converse(ctx, request as $0.ConverseRequest);
-      case 'Introduce':
-        return this.introduce(ctx, request as $0.IntroduceRequest);
-      default:
-        throw $core.ArgumentError('Unknown method: $methodName');
+      case 'Say': return this.say(ctx, request as $0.SayRequest);
+      case 'Converse': return this.converse(ctx, request as $0.ConverseRequest);
+      case 'Introduce': return this.introduce(ctx, request as $0.IntroduceRequest);
+      default: throw $core.ArgumentError('Unknown method: $methodName');
     }
   }
 
   $core.Map<$core.String, $core.dynamic> get $json => ElizaServiceBase$json;
-  $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>>
-      get $messageJson => ElizaServiceBase$messageJson;
+  $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>> get $messageJson => ElizaServiceBase$messageJson;
 }
+

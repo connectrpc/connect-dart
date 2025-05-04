@@ -12,7 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-library grpc_web;
+/// gRPC-Web protocol.
+library protocol_grpc_web;
 
-export '../src/grpc/status.dart';
+export '../src/grpc/status.dart' show Status, StatusParser;
 export '../src/grpc_web/transport.dart' show Transport;

@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-library connect;
+/// Connect protocol.
+library protocol_connect;
 
 export '../src/connect/transport.dart' show Transport;
