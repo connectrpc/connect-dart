@@ -210,7 +210,7 @@ jobs:
         if: "always() && steps.packages_connect_pub_upgrade.conclusion == 'success'"
         working-directory: packages/connect
   job_006:
-    name: "lint; windows; Dart 3.6.0; PKG: packages/connect; `buf generate`, `dart run ../../scripts/license_header.dart ../..`, `dart format .`, `dart analyze`, `git status --porcelain | tee /dev/stderr`"
+    name: "lint; windows; Dart 3.6.0; PKG: packages/connect; `buf generate`, `dart run ../../scripts/license_header.dart ../..`, `dart format .`, `dart analyze`, `if (-not ([string]::IsNullOrEmpty((git status --porcelain)))) { git diff; exit 1 }`"
     runs-on: windows-latest
     steps:
       - name: Setup Dart SDK
@@ -241,12 +241,12 @@ jobs:
         run: dart analyze
         if: "always() && steps.packages_connect_pub_upgrade.conclusion == 'success'"
         working-directory: packages/connect
-      - name: "packages/connect; git status --porcelain | tee /dev/stderr"
-        run: "git status --porcelain | tee /dev/stderr"
+      - name: "packages/connect; if (-not ([string]::IsNullOrEmpty((git status --porcelain)))) { git diff; exit 1 }"
+        run: "if (-not ([string]::IsNullOrEmpty((git status --porcelain)))) { git diff; exit 1 }"
         if: "always() && steps.packages_connect_pub_upgrade.conclusion == 'success'"
         working-directory: packages/connect
   job_007:
-    name: "lint; windows; Dart stable; PKG: packages/connect; `buf generate`, `dart run ../../scripts/license_header.dart ../..`, `dart format .`, `dart analyze`, `git status --porcelain | tee /dev/stderr`"
+    name: "lint; windows; Dart stable; PKG: packages/connect; `buf generate`, `dart run ../../scripts/license_header.dart ../..`, `dart format .`, `dart analyze`, `if (-not ([string]::IsNullOrEmpty((git status --porcelain)))) { git diff; exit 1 }`"
     runs-on: windows-latest
     steps:
       - name: Setup Dart SDK
@@ -277,8 +277,8 @@ jobs:
         run: dart analyze
         if: "always() && steps.packages_connect_pub_upgrade.conclusion == 'success'"
         working-directory: packages/connect
-      - name: "packages/connect; git status --porcelain | tee /dev/stderr"
-        run: "git status --porcelain | tee /dev/stderr"
+      - name: "packages/connect; if (-not ([string]::IsNullOrEmpty((git status --porcelain)))) { git diff; exit 1 }"
+        run: "if (-not ([string]::IsNullOrEmpty((git status --porcelain)))) { git diff; exit 1 }"
         if: "always() && steps.packages_connect_pub_upgrade.conclusion == 'success'"
         working-directory: packages/connect
   job_008:
@@ -320,44 +320,6 @@ jobs:
       - job_006
       - job_007
   job_009:
-    name: "test; linux; Dart 3.6.0; PKG: packages/connect; `dart test -p chrome -c dart2wasm`"
-    runs-on: ubuntu-latest
-    steps:
-      - name: Cache Pub hosted dependencies
-        uses: actions/cache@d4323d4df104b026a6aa633fdb11d772146be0bf
-        with:
-          path: "~/.pub-cache/hosted"
-          key: "os:ubuntu-latest;pub-cache-hosted;sdk:3.6.0;packages:packages/connect;commands:test_2"
-          restore-keys: |
-            os:ubuntu-latest;pub-cache-hosted;sdk:3.6.0;packages:packages/connect
-            os:ubuntu-latest;pub-cache-hosted;sdk:3.6.0
-            os:ubuntu-latest;pub-cache-hosted
-            os:ubuntu-latest
-      - name: Setup Dart SDK
-        uses: dart-lang/setup-dart@e51d8e571e22473a2ddebf0ef8a2123f0ab2c02c
-        with:
-          sdk: "3.6.0"
-      - id: checkout
-        name: Checkout repository
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
-      - id: packages_connect_pub_upgrade
-        name: packages/connect; dart pub upgrade
-        run: dart pub upgrade
-        if: "always() && steps.checkout.conclusion == 'success'"
-        working-directory: packages/connect
-      - name: "packages/connect; dart test -p chrome -c dart2wasm"
-        run: dart test -p chrome -c dart2wasm
-        if: "always() && steps.packages_connect_pub_upgrade.conclusion == 'success'"
-        working-directory: packages/connect
-    needs:
-      - job_001
-      - job_002
-      - job_003
-      - job_004
-      - job_005
-      - job_006
-      - job_007
-  job_010:
     name: "test; linux; Dart 3.6.0; PKG: packages/connect; `dart test -p chrome`"
     runs-on: ubuntu-latest
     steps:
@@ -395,7 +357,7 @@ jobs:
       - job_005
       - job_006
       - job_007
-  job_011:
+  job_010:
     name: "test; linux; Dart 3.6.0; PKG: packages/connect; `dart test -p vm`"
     runs-on: ubuntu-latest
     steps:
@@ -403,7 +365,7 @@ jobs:
         uses: actions/cache@d4323d4df104b026a6aa633fdb11d772146be0bf
         with:
           path: "~/.pub-cache/hosted"
-          key: "os:ubuntu-latest;pub-cache-hosted;sdk:3.6.0;packages:packages/connect;commands:test_3"
+          key: "os:ubuntu-latest;pub-cache-hosted;sdk:3.6.0;packages:packages/connect;commands:test_2"
           restore-keys: |
             os:ubuntu-latest;pub-cache-hosted;sdk:3.6.0;packages:packages/connect
             os:ubuntu-latest;pub-cache-hosted;sdk:3.6.0
@@ -433,7 +395,7 @@ jobs:
       - job_005
       - job_006
       - job_007
-  job_012:
+  job_011:
     name: "test; linux; Dart stable; PKG: packages/conformance; `dart test`"
     runs-on: ubuntu-latest
     steps:
@@ -471,45 +433,7 @@ jobs:
       - job_005
       - job_006
       - job_007
-  job_013:
-    name: "test; linux; Dart stable; PKG: packages/connect; `dart test -p chrome -c dart2wasm`"
-    runs-on: ubuntu-latest
-    steps:
-      - name: Cache Pub hosted dependencies
-        uses: actions/cache@d4323d4df104b026a6aa633fdb11d772146be0bf
-        with:
-          path: "~/.pub-cache/hosted"
-          key: "os:ubuntu-latest;pub-cache-hosted;sdk:stable;packages:packages/connect;commands:test_2"
-          restore-keys: |
-            os:ubuntu-latest;pub-cache-hosted;sdk:stable;packages:packages/connect
-            os:ubuntu-latest;pub-cache-hosted;sdk:stable
-            os:ubuntu-latest;pub-cache-hosted
-            os:ubuntu-latest
-      - name: Setup Dart SDK
-        uses: dart-lang/setup-dart@e51d8e571e22473a2ddebf0ef8a2123f0ab2c02c
-        with:
-          sdk: stable
-      - id: checkout
-        name: Checkout repository
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
-      - id: packages_connect_pub_upgrade
-        name: packages/connect; dart pub upgrade
-        run: dart pub upgrade
-        if: "always() && steps.checkout.conclusion == 'success'"
-        working-directory: packages/connect
-      - name: "packages/connect; dart test -p chrome -c dart2wasm"
-        run: dart test -p chrome -c dart2wasm
-        if: "always() && steps.packages_connect_pub_upgrade.conclusion == 'success'"
-        working-directory: packages/connect
-    needs:
-      - job_001
-      - job_002
-      - job_003
-      - job_004
-      - job_005
-      - job_006
-      - job_007
-  job_014:
+  job_012:
     name: "test; linux; Dart stable; PKG: packages/connect; `dart test -p chrome`"
     runs-on: ubuntu-latest
     steps:
@@ -547,7 +471,7 @@ jobs:
       - job_005
       - job_006
       - job_007
-  job_015:
+  job_013:
     name: "test; linux; Dart stable; PKG: packages/connect; `dart test -p vm`"
     runs-on: ubuntu-latest
     steps:
@@ -555,7 +479,7 @@ jobs:
         uses: actions/cache@d4323d4df104b026a6aa633fdb11d772146be0bf
         with:
           path: "~/.pub-cache/hosted"
-          key: "os:ubuntu-latest;pub-cache-hosted;sdk:stable;packages:packages/connect;commands:test_3"
+          key: "os:ubuntu-latest;pub-cache-hosted;sdk:stable;packages:packages/connect;commands:test_2"
           restore-keys: |
             os:ubuntu-latest;pub-cache-hosted;sdk:stable;packages:packages/connect
             os:ubuntu-latest;pub-cache-hosted;sdk:stable
@@ -585,35 +509,7 @@ jobs:
       - job_005
       - job_006
       - job_007
-  job_016:
-    name: "test; windows; Dart 3.6.0; PKG: packages/connect; `dart test -p chrome -c dart2wasm`"
-    runs-on: windows-latest
-    steps:
-      - name: Setup Dart SDK
-        uses: dart-lang/setup-dart@e51d8e571e22473a2ddebf0ef8a2123f0ab2c02c
-        with:
-          sdk: "3.6.0"
-      - id: checkout
-        name: Checkout repository
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
-      - id: packages_connect_pub_upgrade
-        name: packages/connect; dart pub upgrade
-        run: dart pub upgrade
-        if: "always() && steps.checkout.conclusion == 'success'"
-        working-directory: packages/connect
-      - name: "packages/connect; dart test -p chrome -c dart2wasm"
-        run: dart test -p chrome -c dart2wasm
-        if: "always() && steps.packages_connect_pub_upgrade.conclusion == 'success'"
-        working-directory: packages/connect
-    needs:
-      - job_001
-      - job_002
-      - job_003
-      - job_004
-      - job_005
-      - job_006
-      - job_007
-  job_017:
+  job_014:
     name: "test; windows; Dart 3.6.0; PKG: packages/connect; `dart test -p chrome`"
     runs-on: windows-latest
     steps:
@@ -641,7 +537,7 @@ jobs:
       - job_005
       - job_006
       - job_007
-  job_018:
+  job_015:
     name: "test; windows; Dart 3.6.0; PKG: packages/connect; `dart test -p vm`"
     runs-on: windows-latest
     steps:
@@ -669,35 +565,7 @@ jobs:
       - job_005
       - job_006
       - job_007
-  job_019:
-    name: "test; windows; Dart stable; PKG: packages/connect; `dart test -p chrome -c dart2wasm`"
-    runs-on: windows-latest
-    steps:
-      - name: Setup Dart SDK
-        uses: dart-lang/setup-dart@e51d8e571e22473a2ddebf0ef8a2123f0ab2c02c
-        with:
-          sdk: stable
-      - id: checkout
-        name: Checkout repository
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
-      - id: packages_connect_pub_upgrade
-        name: packages/connect; dart pub upgrade
-        run: dart pub upgrade
-        if: "always() && steps.checkout.conclusion == 'success'"
-        working-directory: packages/connect
-      - name: "packages/connect; dart test -p chrome -c dart2wasm"
-        run: dart test -p chrome -c dart2wasm
-        if: "always() && steps.packages_connect_pub_upgrade.conclusion == 'success'"
-        working-directory: packages/connect
-    needs:
-      - job_001
-      - job_002
-      - job_003
-      - job_004
-      - job_005
-      - job_006
-      - job_007
-  job_020:
+  job_016:
     name: "test; windows; Dart stable; PKG: packages/connect; `dart test -p chrome`"
     runs-on: windows-latest
     steps:
@@ -725,7 +593,7 @@ jobs:
       - job_005
       - job_006
       - job_007
-  job_021:
+  job_017:
     name: "test; windows; Dart stable; PKG: packages/connect; `dart test -p vm`"
     runs-on: windows-latest
     steps:

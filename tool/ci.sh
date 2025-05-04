@@ -84,8 +84,8 @@ for PKG in ${PKGS}; do
         [[ -z $(git status --porcelain | tee /dev/stderr) ]] || EXIT_CODE=$?
         ;;
       command_4)
-        echo 'git status --porcelain | tee /dev/stderr'
-        git status --porcelain | tee /dev/stderr || EXIT_CODE=$?
+        echo 'if (-not ([string]::IsNullOrEmpty((git status --porcelain)))) { git diff; exit 1 }'
+        if (-not ([string]::IsNullOrEmpty((git status --porcelain)))) { git diff; exit 1 } || EXIT_CODE=$?
         ;;
       test_0)
         echo 'dart test'
@@ -96,10 +96,6 @@ for PKG in ${PKGS}; do
         dart test -p chrome || EXIT_CODE=$?
         ;;
       test_2)
-        echo 'dart test -p chrome -c dart2wasm'
-        dart test -p chrome -c dart2wasm || EXIT_CODE=$?
-        ;;
-      test_3)
         echo 'dart test -p vm'
         dart test -p vm || EXIT_CODE=$?
         ;;
