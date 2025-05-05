@@ -100,11 +100,15 @@ void main() {
       pingInterval: Duration(milliseconds: 5),
     );
     // issue a request and close it, then wait for more than pingInterval to trigger a verification
+    print("Before first request");
     final req1 = await transport.request(uri);
     await req1.close();
+    print("After first request");
     await Future<void>.delayed(Duration(milliseconds: 50));
     serverPings.clear();
+    print("Before second request");
     final req2 = await transport.request(uri);
+    print("After second request");
     await req2.close();
     expect(serverConns.length, equals(2));
   });
