@@ -83,6 +83,10 @@ for PKG in ${PKGS}; do
         echo '[[ -z $(git status --porcelain | tee >(cat 1>&2)) ]]'
         [[ -z $(git status --porcelain | tee >(cat 1>&2)) ]] || EXIT_CODE=$?
         ;;
+      command_4)
+        echo 'git diff'
+        git diff || EXIT_CODE=$?
+        ;;
       test_0)
         echo 'dart test'
         dart test || EXIT_CODE=$?
