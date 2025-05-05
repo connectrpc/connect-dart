@@ -7,5 +7,6 @@ stages:
           - command: dart run ../../scripts/buf.dart generate
           - command: dart format .
           - analyze
+        os: 'linux'
   - test:
       - test:
