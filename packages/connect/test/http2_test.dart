@@ -97,16 +97,17 @@ void main() {
   test('open a new connection if verification fails', () async {
     final transport = Http2ClientTransport(
       pingTimeout: Duration.zero, // Intentionally unsatisfiable
-      pingInterval: Duration(milliseconds: 20),
+      pingInterval: Duration(milliseconds: 50),
     );
     // issue a request and close it, then wait for more than pingInterval to trigger a verification
     print("Before first request");
+    final sw = Stopwatch()..start();
     final req1 = await transport.request(uri);
-    print("After first request");
+    print("After first request ${sw.elapsedMilliseconds}",);
     await req1.close();
     print("After first close");
     while (serverPings.isEmpty) {
-      await Future<void>.delayed(Duration(milliseconds: 20));
+      await Future<void>.delayed(Duration(milliseconds: 50));
     }
     serverPings.clear();
     print("Before second request");
