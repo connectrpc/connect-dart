@@ -103,7 +103,9 @@ void main() {
     print("Before first request");
     final sw = Stopwatch()..start();
     final req1 = await transport.request(uri);
-    print("After first request ${sw.elapsedMilliseconds}",);
+    print(
+      "After first request ${sw.elapsedMilliseconds}",
+    );
     await req1.close();
     print("After first close");
     while (serverPings.isEmpty) {
