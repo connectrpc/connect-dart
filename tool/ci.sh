@@ -84,6 +84,10 @@ for PKG in ${PKGS}; do
         [[ -z $(git status --porcelain | tee >(cat 1>&2)) ]] || EXIT_CODE=$?
         ;;
       command_4)
+        echo 'git config core.autocrlf false'
+        git config core.autocrlf false || EXIT_CODE=$?
+        ;;
+      command_5)
         echo 'git diff'
         git diff || EXIT_CODE=$?
         ;;
