@@ -5,6 +5,7 @@ environment:
 dev_dependencies:
   lints: ^4.0.0
   melos: ^6.1.0
+  path: ^1.9.1
 workspace:
   - packages/conformance
   - packages/connect

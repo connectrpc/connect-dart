@@ -7,14 +7,14 @@ os:
 stages:
   - lint:
       - group:
-          - command: buf generate
+          - command: dart run ../../scripts/buf.dart generate
           - command: dart run ../../scripts/license_header.dart ../..
           - command: dart format .
           - analyze
           - command: "[[ -z $(git status --porcelain | tee /dev/stderr) ]]"
         os: linux
       - group:
-          - command: buf generate
+          - command: dart run ../../scripts/buf.dart generate
           - command: dart run ../../scripts/license_header.dart ../..
           - command: dart format .
           - analyze

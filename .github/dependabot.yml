@@ -4,20 +4,6 @@
   "updates": [
     {
       "package-ecosystem": "pub",
-      "directory": "example/eliza",
-      "schedule": {
-        "interval": "weekly"
-      }
-    },
-    {
-      "package-ecosystem": "pub",
-      "directory": "example/web",
-      "schedule": {
-        "interval": "weekly"
-      }
-    },
-    {
-      "package-ecosystem": "pub",
       "directory": "packages/conformance",
       "schedule": {
         "interval": "weekly"

@@ -4,7 +4,7 @@ sdk:
 stages:
   - lint:
       - group:
-          - command: buf generate          
+          - command: dart run ../../scripts/buf.dart generate
           - command: dart format .
           - analyze
   - test:

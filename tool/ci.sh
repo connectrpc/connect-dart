@@ -68,8 +68,8 @@ for PKG in ${PKGS}; do
         dart analyze || EXIT_CODE=$?
         ;;
       command_0)
-        echo 'buf generate'
-        buf generate || EXIT_CODE=$?
+        echo 'dart run ../../scripts/buf.dart generate'
+        dart run ../../scripts/buf.dart generate || EXIT_CODE=$?
         ;;
       command_1)
         echo 'dart format .'
