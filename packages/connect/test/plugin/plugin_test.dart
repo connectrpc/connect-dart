@@ -115,7 +115,7 @@ Future<FileDescriptorSet> buildTestImage() async {
     'dart',
     [
       'run',
-      'buf',
+      'tools:buf',
       'build',
       '--as-file-descriptor-set',
       'test/plugin/proto',

@@ -42,7 +42,7 @@ jobs:
       - name: mono_repo self validate
         run: dart pub global run mono_repo generate --validate
   job_002:
-    name: "lint; linux; Dart 3.6.0; PKG: packages/conformance; `dart run buf generate`, `dart format .`, `dart analyze`, `[[ -z $(git status --porcelain | tee >(cat 1>&2)) ]]`"
+    name: "lint; linux; Dart 3.6.0; PKG: packages/conformance; `dart run tools:buf generate`, `dart format .`, `dart analyze`, `[[ -z $(git status --porcelain | tee >(cat 1>&2)) ]]`"
     runs-on: ubuntu-latest
     steps:
       - name: Cache Pub hosted dependencies
@@ -67,8 +67,8 @@ jobs:
         run: dart pub upgrade
         if: "always() && steps.checkout.conclusion == 'success'"
         working-directory: packages/conformance
-      - name: packages/conformance; dart run buf generate
-        run: dart run buf generate
+      - name: "packages/conformance; dart run tools:buf generate"
+        run: "dart run tools:buf generate"
         if: "always() && steps.packages_conformance_pub_upgrade.conclusion == 'success'"
         working-directory: packages/conformance
       - name: packages/conformance; dart format .
@@ -84,7 +84,7 @@ jobs:
         if: "always() && steps.packages_conformance_pub_upgrade.conclusion == 'success'"
         working-directory: packages/conformance
   job_003:
-    name: "lint; linux; Dart 3.6.0; PKG: packages/connect; `dart run buf generate`, `dart run license_header ../..`, `dart format .`, `dart analyze`, `[[ -z $(git status --porcelain | tee >(cat 1>&2)) ]]`"
+    name: "lint; linux; Dart 3.6.0; PKG: packages/connect; `dart run tools:buf generate`, `dart run tools:license_header ../..`, `dart format .`, `dart analyze`, `[[ -z $(git status --porcelain | tee >(cat 1>&2)) ]]`"
     runs-on: ubuntu-latest
     steps:
       - name: Cache Pub hosted dependencies
@@ -109,12 +109,12 @@ jobs:
         run: dart pub upgrade
         if: "always() && steps.checkout.conclusion == 'success'"
         working-directory: packages/connect
-      - name: packages/connect; dart run buf generate
-        run: dart run buf generate
+      - name: "packages/connect; dart run tools:buf generate"
+        run: "dart run tools:buf generate"
         if: "always() && steps.packages_connect_pub_upgrade.conclusion == 'success'"
         working-directory: packages/connect
-      - name: packages/connect; dart run license_header ../..
-        run: dart run license_header ../..
+      - name: "packages/connect; dart run tools:license_header ../.."
+        run: "dart run tools:license_header ../.."
         if: "always() && steps.packages_connect_pub_upgrade.conclusion == 'success'"
         working-directory: packages/connect
       - name: packages/connect; dart format .
@@ -168,7 +168,7 @@ jobs:
         if: "always() && steps.packages_tools_pub_upgrade.conclusion == 'success'"
         working-directory: packages/tools
   job_005:
-    name: "lint; linux; Dart stable; PKG: packages/conformance; `dart run buf generate`, `dart format .`, `dart analyze`, `[[ -z $(git status --porcelain | tee >(cat 1>&2)) ]]`"
+    name: "lint; linux; Dart stable; PKG: packages/conformance; `dart run tools:buf generate`, `dart format .`, `dart analyze`, `[[ -z $(git status --porcelain | tee >(cat 1>&2)) ]]`"
     runs-on: ubuntu-latest
     steps:
       - name: Cache Pub hosted dependencies
@@ -193,8 +193,8 @@ jobs:
         run: dart pub upgrade
         if: "always() && steps.checkout.conclusion == 'success'"
         working-directory: packages/conformance
-      - name: packages/conformance; dart run buf generate
-        run: dart run buf generate
+      - name: "packages/conformance; dart run tools:buf generate"
+        run: "dart run tools:buf generate"
         if: "always() && steps.packages_conformance_pub_upgrade.conclusion == 'success'"
         working-directory: packages/conformance
       - name: packages/conformance; dart format .
@@ -210,7 +210,7 @@ jobs:
         if: "always() && steps.packages_conformance_pub_upgrade.conclusion == 'success'"
         working-directory: packages/conformance
   job_006:
-    name: "lint; linux; Dart stable; PKG: packages/connect; `dart run buf generate`, `dart run license_header ../..`, `dart format .`, `dart analyze`, `[[ -z $(git status --porcelain | tee >(cat 1>&2)) ]]`"
+    name: "lint; linux; Dart stable; PKG: packages/connect; `dart run tools:buf generate`, `dart run tools:license_header ../..`, `dart format .`, `dart analyze`, `[[ -z $(git status --porcelain | tee >(cat 1>&2)) ]]`"
     runs-on: ubuntu-latest
     steps:
       - name: Cache Pub hosted dependencies
@@ -235,12 +235,12 @@ jobs:
         run: dart pub upgrade
         if: "always() && steps.checkout.conclusion == 'success'"
         working-directory: packages/connect
-      - name: packages/connect; dart run buf generate
-        run: dart run buf generate
+      - name: "packages/connect; dart run tools:buf generate"
+        run: "dart run tools:buf generate"
         if: "always() && steps.packages_connect_pub_upgrade.conclusion == 'success'"
         working-directory: packages/connect
-      - name: packages/connect; dart run license_header ../..
-        run: dart run license_header ../..
+      - name: "packages/connect; dart run tools:license_header ../.."
+        run: "dart run tools:license_header ../.."
         if: "always() && steps.packages_connect_pub_upgrade.conclusion == 'success'"
         working-directory: packages/connect
       - name: packages/connect; dart format .
