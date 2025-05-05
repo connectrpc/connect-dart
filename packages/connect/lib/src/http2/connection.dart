@@ -123,6 +123,7 @@ final class _SingleOriginHttp2ClientTransport {
     /// Dart cannot infer non-nullability if we don't use a local variable
     var connection = activeConnection;
     while (connection == null || !(await connection.verify())) {
+      print('connecting');
       connecting ??= connect();
       try {
         await connecting;
@@ -229,6 +230,7 @@ final class _KeepAliveConnection {
     if (!connection.isOpen) {
       return false;
     }
+    print('pinging');
     final responseTimer = Timer(options.pingTimeout, () {
       // Terminating the connection doesn't terminate the requests
       //
