@@ -21,7 +21,7 @@ import "package:connectrpc/connect.dart" as connect;
 import "eliza.pb.dart" as eliza;
 import "eliza.connect.spec.dart" as specs;
 
-extension type ElizaServiceClient (connect.Transport _transport) {
+extension type ElizaServiceClient(connect.Transport _transport) {
   Future<eliza.SayResponse> say(
     eliza.SayRequest input, {
     connect.Headers? headers,

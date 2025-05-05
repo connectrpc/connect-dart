@@ -27,7 +27,7 @@ import "eliza.connect.spec.dart" as specs;
 /// superficiality of human-computer communication. DOCTOR simulates a
 /// psychotherapist, and is commonly found as an Easter egg in emacs
 /// distributions.
-extension type ElizaServiceClient (connect.Transport _transport) {
+extension type ElizaServiceClient(connect.Transport _transport) {
   /// Say is a unary RPC. Eliza responds to the prompt with a single sentence.
   Future<connectrpcelizav1eliza.SayResponse> say(
     connectrpcelizav1eliza.SayRequest input, {
