@@ -8,4 +8,3 @@ stages:
           - command: dart format .
           - analyze
           - command: "[[ -z $(git status --porcelain | tee >(cat 1>&2)) ]]"
-        os: "linux"
