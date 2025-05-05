@@ -72,18 +72,14 @@ for PKG in ${PKGS}; do
         dart run tools:buf generate || EXIT_CODE=$?
         ;;
       command_1)
-        echo 'dart run tools:license_header .'
-        dart run tools:license_header . || EXIT_CODE=$?
-        ;;
-      command_2)
         echo 'dart format .'
         dart format . || EXIT_CODE=$?
         ;;
-      command_3)
+      command_2)
         echo '[[ -z $(git status --porcelain | tee >(cat 1>&2)) ]]'
         [[ -z $(git status --porcelain | tee >(cat 1>&2)) ]] || EXIT_CODE=$?
         ;;
-      command_4)
+      command_3)
         echo 'dart run tools:license_header ../..'
         dart run tools:license_header ../.. || EXIT_CODE=$?
         ;;

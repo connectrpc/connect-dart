@@ -4,8 +4,7 @@ sdk:
 stages:
   - lint:
       - group:
-          - command: dart run tools:buf generate
-          - command: dart run tools:license_header .
+          - command: dart run tools:buf generate          
           - command: dart format .
           - analyze
           - command: "[[ -z $(git status --porcelain | tee >(cat 1>&2)) ]]"
