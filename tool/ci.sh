@@ -83,10 +83,6 @@ for PKG in ${PKGS}; do
         echo '[[ -z $(git status --porcelain | tee /dev/stderr) ]]'
         [[ -z $(git status --porcelain | tee /dev/stderr) ]] || EXIT_CODE=$?
         ;;
-      command_4)
-        echo 'if (-not ([string]::IsNullOrEmpty((git status --porcelain)))) { git diff; exit 1 }'
-        if (-not ([string]::IsNullOrEmpty((git status --porcelain)))) { git diff; exit 1 } || EXIT_CODE=$?
-        ;;
       test_0)
         echo 'dart test'
         dart test || EXIT_CODE=$?

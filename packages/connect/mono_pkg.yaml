@@ -18,7 +18,7 @@ stages:
           - command: dart run ../../scripts/license_header.dart ../..
           - command: dart format .
           - analyze
-          - command: "if (-not ([string]::IsNullOrEmpty((git status --porcelain)))) { git diff; exit 1 }"
+          - command: "[[ -z $(git status --porcelain | tee /dev/stderr) ]]"
         os: windows
   - test:
       - test: -p chrome

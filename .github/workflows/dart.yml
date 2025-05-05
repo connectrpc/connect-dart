@@ -210,7 +210,7 @@ jobs:
         if: "always() && steps.packages_connect_pub_upgrade.conclusion == 'success'"
         working-directory: packages/connect
   job_006:
-    name: "lint; windows; Dart 3.6.0; PKG: packages/connect; `dart run ../../scripts/buf.dart generate`, `dart run ../../scripts/license_header.dart ../..`, `dart format .`, `dart analyze`, `if (-not ([string]::IsNullOrEmpty((git status --porcelain)))) { git diff; exit 1 }`"
+    name: "lint; windows; Dart 3.6.0; PKG: packages/connect; `dart run ../../scripts/buf.dart generate`, `dart run ../../scripts/license_header.dart ../..`, `dart format .`, `dart analyze`, `[[ -z $(git status --porcelain | tee /dev/stderr) ]]`"
     runs-on: windows-latest
     steps:
       - name: Setup Dart SDK
@@ -241,12 +241,12 @@ jobs:
         run: dart analyze
         if: "always() && steps.packages_connect_pub_upgrade.conclusion == 'success'"
         working-directory: packages/connect
-      - name: "packages/connect; if (-not ([string]::IsNullOrEmpty((git status --porcelain)))) { git diff; exit 1 }"
-        run: "if (-not ([string]::IsNullOrEmpty((git status --porcelain)))) { git diff; exit 1 }"
+      - name: "packages/connect; [[ -z $(git status --porcelain | tee /dev/stderr) ]]"
+        run: "[[ -z $(git status --porcelain | tee /dev/stderr) ]]"
         if: "always() && steps.packages_connect_pub_upgrade.conclusion == 'success'"
         working-directory: packages/connect
   job_007:
-    name: "lint; windows; Dart stable; PKG: packages/connect; `dart run ../../scripts/buf.dart generate`, `dart run ../../scripts/license_header.dart ../..`, `dart format .`, `dart analyze`, `if (-not ([string]::IsNullOrEmpty((git status --porcelain)))) { git diff; exit 1 }`"
+    name: "lint; windows; Dart stable; PKG: packages/connect; `dart run ../../scripts/buf.dart generate`, `dart run ../../scripts/license_header.dart ../..`, `dart format .`, `dart analyze`, `[[ -z $(git status --porcelain | tee /dev/stderr) ]]`"
     runs-on: windows-latest
     steps:
       - name: Setup Dart SDK
@@ -277,8 +277,8 @@ jobs:
         run: dart analyze
         if: "always() && steps.packages_connect_pub_upgrade.conclusion == 'success'"
         working-directory: packages/connect
-      - name: "packages/connect; if (-not ([string]::IsNullOrEmpty((git status --porcelain)))) { git diff; exit 1 }"
-        run: "if (-not ([string]::IsNullOrEmpty((git status --porcelain)))) { git diff; exit 1 }"
+      - name: "packages/connect; [[ -z $(git status --porcelain | tee /dev/stderr) ]]"
+        run: "[[ -z $(git status --porcelain | tee /dev/stderr) ]]"
         if: "always() && steps.packages_connect_pub_upgrade.conclusion == 'success'"
         working-directory: packages/connect
   job_008:

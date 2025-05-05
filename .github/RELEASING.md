@@ -34,5 +34,5 @@
   top that explains it for users.
 - If the release includes a very long list of changes, consider breaking the
   changelist up with the sections "Enhancements", "Bugfixes", "Breaking changes".  
-- If the release includes changes specific to a npm package, group and explain
+- If the release includes changes specific to a dart library, group and explain
   the changelist in according separate sections.
