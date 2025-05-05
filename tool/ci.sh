@@ -88,8 +88,8 @@ for PKG in ${PKGS}; do
         git config core.autocrlf false || EXIT_CODE=$?
         ;;
       command_5)
-        echo 'git diff'
-        git diff || EXIT_CODE=$?
+        echo 'git add --renormalize . && git diff'
+        git add --renormalize . && git diff || EXIT_CODE=$?
         ;;
       test_0)
         echo 'dart test'
