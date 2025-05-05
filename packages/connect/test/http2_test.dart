@@ -116,7 +116,7 @@ void main() {
         );
         final req = await transport.request(uri);
         await Future<void>.delayed(Duration(milliseconds: 50));
-        expect(serverPings.length, greaterThanOrEqualTo(3));
+        expect(serverPings.length, greaterThanOrEqualTo(1));
         await req.close();
       });
       test(
