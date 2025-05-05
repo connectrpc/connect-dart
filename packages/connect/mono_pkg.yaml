@@ -18,7 +18,7 @@ stages:
           - command: dart run ../../scripts/license_header.dart ../..
           - command: dart format .
           - analyze
-          - command: "[[ -z $(git status --porcelain | tee >(cat 1>&2)) ]]"
+          - command: "git diff"
         os: windows
   - test:
       - test: -p chrome
