@@ -15,6 +15,13 @@
       "schedule": {
         "interval": "weekly"
       }
+    },
+    {
+      "package-ecosystem": "pub",
+      "directory": "packages/tools",
+      "schedule": {
+        "interval": "weekly"
+      }
     }
   ]
 }

@@ -68,20 +68,20 @@ for PKG in ${PKGS}; do
         dart analyze || EXIT_CODE=$?
         ;;
       command_0)
-        echo 'dart run ../../scripts/buf.dart generate'
-        dart run ../../scripts/buf.dart generate || EXIT_CODE=$?
+        echo 'dart run buf generate'
+        dart run buf generate || EXIT_CODE=$?
         ;;
       command_1)
         echo 'dart format .'
         dart format . || EXIT_CODE=$?
         ;;
       command_2)
-        echo 'dart run ../../scripts/license_header.dart ../..'
-        dart run ../../scripts/license_header.dart ../.. || EXIT_CODE=$?
-        ;;
-      command_3)
         echo '[[ -z $(git status --porcelain | tee >(cat 1>&2)) ]]'
         [[ -z $(git status --porcelain | tee >(cat 1>&2)) ]] || EXIT_CODE=$?
+        ;;
+      command_3)
+        echo 'dart run license_header ../..'
+        dart run license_header ../.. || EXIT_CODE=$?
         ;;
       test_0)
         echo 'dart test'

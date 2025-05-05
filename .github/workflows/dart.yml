@@ -42,14 +42,14 @@ jobs:
       - name: mono_repo self validate
         run: dart pub global run mono_repo generate --validate
   job_002:
-    name: "lint; linux; Dart 3.6.0; PKG: packages/conformance; `dart run ../../scripts/buf.dart generate`, `dart format .`, `dart analyze`"
+    name: "lint; linux; Dart 3.6.0; PKG: packages/conformance; `dart run buf generate`, `dart format .`, `dart analyze`, `[[ -z $(git status --porcelain | tee >(cat 1>&2)) ]]`"
     runs-on: ubuntu-latest
     steps:
       - name: Cache Pub hosted dependencies
         uses: actions/cache@d4323d4df104b026a6aa633fdb11d772146be0bf
         with:
           path: "~/.pub-cache/hosted"
-          key: "os:ubuntu-latest;pub-cache-hosted;sdk:3.6.0;packages:packages/conformance;commands:command_0-command_1-analyze"
+          key: "os:ubuntu-latest;pub-cache-hosted;sdk:3.6.0;packages:packages/conformance;commands:command_0-command_1-analyze-command_2"
           restore-keys: |
             os:ubuntu-latest;pub-cache-hosted;sdk:3.6.0;packages:packages/conformance
             os:ubuntu-latest;pub-cache-hosted;sdk:3.6.0
@@ -67,8 +67,8 @@ jobs:
         run: dart pub upgrade
         if: "always() && steps.checkout.conclusion == 'success'"
         working-directory: packages/conformance
-      - name: packages/conformance; dart run ../../scripts/buf.dart generate
-        run: dart run ../../scripts/buf.dart generate
+      - name: packages/conformance; dart run buf generate
+        run: dart run buf generate
         if: "always() && steps.packages_conformance_pub_upgrade.conclusion == 'success'"
         working-directory: packages/conformance
       - name: packages/conformance; dart format .
@@ -79,15 +79,19 @@ jobs:
         run: dart analyze
         if: "always() && steps.packages_conformance_pub_upgrade.conclusion == 'success'"
         working-directory: packages/conformance
+      - name: "packages/conformance; [[ -z $(git status --porcelain | tee >(cat 1>&2)) ]]"
+        run: "[[ -z $(git status --porcelain | tee >(cat 1>&2)) ]]"
+        if: "always() && steps.packages_conformance_pub_upgrade.conclusion == 'success'"
+        working-directory: packages/conformance
   job_003:
-    name: "lint; linux; Dart 3.6.0; PKG: packages/connect; `dart run ../../scripts/buf.dart generate`, `dart run ../../scripts/license_header.dart ../..`, `dart format .`, `dart analyze`, `[[ -z $(git status --porcelain | tee >(cat 1>&2)) ]]`"
+    name: "lint; linux; Dart 3.6.0; PKG: packages/connect; `dart run buf generate`, `dart run license_header ../..`, `dart format .`, `dart analyze`, `[[ -z $(git status --porcelain | tee >(cat 1>&2)) ]]`"
     runs-on: ubuntu-latest
     steps:
       - name: Cache Pub hosted dependencies
         uses: actions/cache@d4323d4df104b026a6aa633fdb11d772146be0bf
         with:
           path: "~/.pub-cache/hosted"
-          key: "os:ubuntu-latest;pub-cache-hosted;sdk:3.6.0;packages:packages/connect;commands:command_0-command_2-command_1-analyze-command_3"
+          key: "os:ubuntu-latest;pub-cache-hosted;sdk:3.6.0;packages:packages/connect;commands:command_0-command_3-command_1-analyze-command_2"
           restore-keys: |
             os:ubuntu-latest;pub-cache-hosted;sdk:3.6.0;packages:packages/connect
             os:ubuntu-latest;pub-cache-hosted;sdk:3.6.0
@@ -105,12 +109,12 @@ jobs:
         run: dart pub upgrade
         if: "always() && steps.checkout.conclusion == 'success'"
         working-directory: packages/connect
-      - name: packages/connect; dart run ../../scripts/buf.dart generate
-        run: dart run ../../scripts/buf.dart generate
+      - name: packages/connect; dart run buf generate
+        run: dart run buf generate
         if: "always() && steps.packages_connect_pub_upgrade.conclusion == 'success'"
         working-directory: packages/connect
-      - name: packages/connect; dart run ../../scripts/license_header.dart ../..
-        run: dart run ../../scripts/license_header.dart ../..
+      - name: packages/connect; dart run license_header ../..
+        run: dart run license_header ../..
         if: "always() && steps.packages_connect_pub_upgrade.conclusion == 'success'"
         working-directory: packages/connect
       - name: packages/connect; dart format .
@@ -126,14 +130,52 @@ jobs:
         if: "always() && steps.packages_connect_pub_upgrade.conclusion == 'success'"
         working-directory: packages/connect
   job_004:
-    name: "lint; linux; Dart stable; PKG: packages/conformance; `dart run ../../scripts/buf.dart generate`, `dart format .`, `dart analyze`"
+    name: "lint; linux; Dart 3.6.0; PKG: packages/tools; `dart format .`, `dart analyze`, `[[ -z $(git status --porcelain | tee >(cat 1>&2)) ]]`"
     runs-on: ubuntu-latest
     steps:
       - name: Cache Pub hosted dependencies
         uses: actions/cache@d4323d4df104b026a6aa633fdb11d772146be0bf
         with:
           path: "~/.pub-cache/hosted"
-          key: "os:ubuntu-latest;pub-cache-hosted;sdk:stable;packages:packages/conformance;commands:command_0-command_1-analyze"
+          key: "os:ubuntu-latest;pub-cache-hosted;sdk:3.6.0;packages:packages/tools;commands:command_1-analyze-command_2"
+          restore-keys: |
+            os:ubuntu-latest;pub-cache-hosted;sdk:3.6.0;packages:packages/tools
+            os:ubuntu-latest;pub-cache-hosted;sdk:3.6.0
+            os:ubuntu-latest;pub-cache-hosted
+            os:ubuntu-latest
+      - name: Setup Dart SDK
+        uses: dart-lang/setup-dart@e51d8e571e22473a2ddebf0ef8a2123f0ab2c02c
+        with:
+          sdk: "3.6.0"
+      - id: checkout
+        name: Checkout repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - id: packages_tools_pub_upgrade
+        name: packages/tools; dart pub upgrade
+        run: dart pub upgrade
+        if: "always() && steps.checkout.conclusion == 'success'"
+        working-directory: packages/tools
+      - name: packages/tools; dart format .
+        run: dart format .
+        if: "always() && steps.packages_tools_pub_upgrade.conclusion == 'success'"
+        working-directory: packages/tools
+      - name: packages/tools; dart analyze
+        run: dart analyze
+        if: "always() && steps.packages_tools_pub_upgrade.conclusion == 'success'"
+        working-directory: packages/tools
+      - name: "packages/tools; [[ -z $(git status --porcelain | tee >(cat 1>&2)) ]]"
+        run: "[[ -z $(git status --porcelain | tee >(cat 1>&2)) ]]"
+        if: "always() && steps.packages_tools_pub_upgrade.conclusion == 'success'"
+        working-directory: packages/tools
+  job_005:
+    name: "lint; linux; Dart stable; PKG: packages/conformance; `dart run buf generate`, `dart format .`, `dart analyze`, `[[ -z $(git status --porcelain | tee >(cat 1>&2)) ]]`"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cache Pub hosted dependencies
+        uses: actions/cache@d4323d4df104b026a6aa633fdb11d772146be0bf
+        with:
+          path: "~/.pub-cache/hosted"
+          key: "os:ubuntu-latest;pub-cache-hosted;sdk:stable;packages:packages/conformance;commands:command_0-command_1-analyze-command_2"
           restore-keys: |
             os:ubuntu-latest;pub-cache-hosted;sdk:stable;packages:packages/conformance
             os:ubuntu-latest;pub-cache-hosted;sdk:stable
@@ -151,8 +193,8 @@ jobs:
         run: dart pub upgrade
         if: "always() && steps.checkout.conclusion == 'success'"
         working-directory: packages/conformance
-      - name: packages/conformance; dart run ../../scripts/buf.dart generate
-        run: dart run ../../scripts/buf.dart generate
+      - name: packages/conformance; dart run buf generate
+        run: dart run buf generate
         if: "always() && steps.packages_conformance_pub_upgrade.conclusion == 'success'"
         working-directory: packages/conformance
       - name: packages/conformance; dart format .
@@ -163,15 +205,19 @@ jobs:
         run: dart analyze
         if: "always() && steps.packages_conformance_pub_upgrade.conclusion == 'success'"
         working-directory: packages/conformance
-  job_005:
-    name: "lint; linux; Dart stable; PKG: packages/connect; `dart run ../../scripts/buf.dart generate`, `dart run ../../scripts/license_header.dart ../..`, `dart format .`, `dart analyze`, `[[ -z $(git status --porcelain | tee >(cat 1>&2)) ]]`"
+      - name: "packages/conformance; [[ -z $(git status --porcelain | tee >(cat 1>&2)) ]]"
+        run: "[[ -z $(git status --porcelain | tee >(cat 1>&2)) ]]"
+        if: "always() && steps.packages_conformance_pub_upgrade.conclusion == 'success'"
+        working-directory: packages/conformance
+  job_006:
+    name: "lint; linux; Dart stable; PKG: packages/connect; `dart run buf generate`, `dart run license_header ../..`, `dart format .`, `dart analyze`, `[[ -z $(git status --porcelain | tee >(cat 1>&2)) ]]`"
     runs-on: ubuntu-latest
     steps:
       - name: Cache Pub hosted dependencies
         uses: actions/cache@d4323d4df104b026a6aa633fdb11d772146be0bf
         with:
           path: "~/.pub-cache/hosted"
-          key: "os:ubuntu-latest;pub-cache-hosted;sdk:stable;packages:packages/connect;commands:command_0-command_2-command_1-analyze-command_3"
+          key: "os:ubuntu-latest;pub-cache-hosted;sdk:stable;packages:packages/connect;commands:command_0-command_3-command_1-analyze-command_2"
           restore-keys: |
             os:ubuntu-latest;pub-cache-hosted;sdk:stable;packages:packages/connect
             os:ubuntu-latest;pub-cache-hosted;sdk:stable
@@ -189,12 +235,12 @@ jobs:
         run: dart pub upgrade
         if: "always() && steps.checkout.conclusion == 'success'"
         working-directory: packages/connect
-      - name: packages/connect; dart run ../../scripts/buf.dart generate
-        run: dart run ../../scripts/buf.dart generate
+      - name: packages/connect; dart run buf generate
+        run: dart run buf generate
         if: "always() && steps.packages_connect_pub_upgrade.conclusion == 'success'"
         working-directory: packages/connect
-      - name: packages/connect; dart run ../../scripts/license_header.dart ../..
-        run: dart run ../../scripts/license_header.dart ../..
+      - name: packages/connect; dart run license_header ../..
+        run: dart run license_header ../..
         if: "always() && steps.packages_connect_pub_upgrade.conclusion == 'success'"
         working-directory: packages/connect
       - name: packages/connect; dart format .
@@ -209,17 +255,55 @@ jobs:
         run: "[[ -z $(git status --porcelain | tee >(cat 1>&2)) ]]"
         if: "always() && steps.packages_connect_pub_upgrade.conclusion == 'success'"
         working-directory: packages/connect
-  job_006:
-    name: "test; linux; Dart 3.6.0; PKG: packages/conformance; `dart test`"
+  job_007:
+    name: "lint; linux; Dart stable; PKG: packages/tools; `dart format .`, `dart analyze`, `[[ -z $(git status --porcelain | tee >(cat 1>&2)) ]]`"
     runs-on: ubuntu-latest
     steps:
       - name: Cache Pub hosted dependencies
         uses: actions/cache@d4323d4df104b026a6aa633fdb11d772146be0bf
         with:
           path: "~/.pub-cache/hosted"
-          key: "os:ubuntu-latest;pub-cache-hosted;sdk:3.6.0;packages:packages/conformance;commands:test_0"
+          key: "os:ubuntu-latest;pub-cache-hosted;sdk:stable;packages:packages/tools;commands:command_1-analyze-command_2"
           restore-keys: |
-            os:ubuntu-latest;pub-cache-hosted;sdk:3.6.0;packages:packages/conformance
+            os:ubuntu-latest;pub-cache-hosted;sdk:stable;packages:packages/tools
+            os:ubuntu-latest;pub-cache-hosted;sdk:stable
+            os:ubuntu-latest;pub-cache-hosted
+            os:ubuntu-latest
+      - name: Setup Dart SDK
+        uses: dart-lang/setup-dart@e51d8e571e22473a2ddebf0ef8a2123f0ab2c02c
+        with:
+          sdk: stable
+      - id: checkout
+        name: Checkout repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - id: packages_tools_pub_upgrade
+        name: packages/tools; dart pub upgrade
+        run: dart pub upgrade
+        if: "always() && steps.checkout.conclusion == 'success'"
+        working-directory: packages/tools
+      - name: packages/tools; dart format .
+        run: dart format .
+        if: "always() && steps.packages_tools_pub_upgrade.conclusion == 'success'"
+        working-directory: packages/tools
+      - name: packages/tools; dart analyze
+        run: dart analyze
+        if: "always() && steps.packages_tools_pub_upgrade.conclusion == 'success'"
+        working-directory: packages/tools
+      - name: "packages/tools; [[ -z $(git status --porcelain | tee >(cat 1>&2)) ]]"
+        run: "[[ -z $(git status --porcelain | tee >(cat 1>&2)) ]]"
+        if: "always() && steps.packages_tools_pub_upgrade.conclusion == 'success'"
+        working-directory: packages/tools
+  job_008:
+    name: "test; linux; Dart 3.6.0; PKGS: packages/conformance, packages/tools; `dart test`"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cache Pub hosted dependencies
+        uses: actions/cache@d4323d4df104b026a6aa633fdb11d772146be0bf
+        with:
+          path: "~/.pub-cache/hosted"
+          key: "os:ubuntu-latest;pub-cache-hosted;sdk:3.6.0;packages:packages/conformance-packages/tools;commands:test_0"
+          restore-keys: |
+            os:ubuntu-latest;pub-cache-hosted;sdk:3.6.0;packages:packages/conformance-packages/tools
             os:ubuntu-latest;pub-cache-hosted;sdk:3.6.0
             os:ubuntu-latest;pub-cache-hosted
             os:ubuntu-latest
@@ -239,13 +323,24 @@ jobs:
         run: dart test
         if: "always() && steps.packages_conformance_pub_upgrade.conclusion == 'success'"
         working-directory: packages/conformance
+      - id: packages_tools_pub_upgrade
+        name: packages/tools; dart pub upgrade
+        run: dart pub upgrade
+        if: "always() && steps.checkout.conclusion == 'success'"
+        working-directory: packages/tools
+      - name: packages/tools; dart test
+        run: dart test
+        if: "always() && steps.packages_tools_pub_upgrade.conclusion == 'success'"
+        working-directory: packages/tools
     needs:
       - job_001
       - job_002
       - job_003
       - job_004
       - job_005
-  job_007:
+      - job_006
+      - job_007
+  job_009:
     name: "test; linux; Dart 3.6.0; PKG: packages/connect; `dart test -p chrome`"
     runs-on: ubuntu-latest
     steps:
@@ -281,7 +376,9 @@ jobs:
       - job_003
       - job_004
       - job_005
-  job_008:
+      - job_006
+      - job_007
+  job_010:
     name: "test; linux; Dart 3.6.0; PKG: packages/connect; `dart test -p vm`"
     runs-on: ubuntu-latest
     steps:
@@ -317,17 +414,19 @@ jobs:
       - job_003
       - job_004
       - job_005
-  job_009:
-    name: "test; linux; Dart stable; PKG: packages/conformance; `dart test`"
+      - job_006
+      - job_007
+  job_011:
+    name: "test; linux; Dart stable; PKGS: packages/conformance, packages/tools; `dart test`"
     runs-on: ubuntu-latest
     steps:
       - name: Cache Pub hosted dependencies
         uses: actions/cache@d4323d4df104b026a6aa633fdb11d772146be0bf
         with:
           path: "~/.pub-cache/hosted"
-          key: "os:ubuntu-latest;pub-cache-hosted;sdk:stable;packages:packages/conformance;commands:test_0"
+          key: "os:ubuntu-latest;pub-cache-hosted;sdk:stable;packages:packages/conformance-packages/tools;commands:test_0"
           restore-keys: |
-            os:ubuntu-latest;pub-cache-hosted;sdk:stable;packages:packages/conformance
+            os:ubuntu-latest;pub-cache-hosted;sdk:stable;packages:packages/conformance-packages/tools
             os:ubuntu-latest;pub-cache-hosted;sdk:stable
             os:ubuntu-latest;pub-cache-hosted
             os:ubuntu-latest
@@ -347,13 +446,24 @@ jobs:
         run: dart test
         if: "always() && steps.packages_conformance_pub_upgrade.conclusion == 'success'"
         working-directory: packages/conformance
+      - id: packages_tools_pub_upgrade
+        name: packages/tools; dart pub upgrade
+        run: dart pub upgrade
+        if: "always() && steps.checkout.conclusion == 'success'"
+        working-directory: packages/tools
+      - name: packages/tools; dart test
+        run: dart test
+        if: "always() && steps.packages_tools_pub_upgrade.conclusion == 'success'"
+        working-directory: packages/tools
     needs:
       - job_001
       - job_002
       - job_003
       - job_004
       - job_005
-  job_010:
+      - job_006
+      - job_007
+  job_012:
     name: "test; linux; Dart stable; PKG: packages/connect; `dart test -p chrome`"
     runs-on: ubuntu-latest
     steps:
@@ -389,7 +499,9 @@ jobs:
       - job_003
       - job_004
       - job_005
-  job_011:
+      - job_006
+      - job_007
+  job_013:
     name: "test; linux; Dart stable; PKG: packages/connect; `dart test -p vm`"
     runs-on: ubuntu-latest
     steps:
@@ -425,7 +537,9 @@ jobs:
       - job_003
       - job_004
       - job_005
-  job_012:
+      - job_006
+      - job_007
+  job_014:
     name: "test; windows; Dart 3.6.0; PKG: packages/connect; `dart test -p chrome`"
     runs-on: windows-latest
     steps:
@@ -451,7 +565,9 @@ jobs:
       - job_003
       - job_004
       - job_005
-  job_013:
+      - job_006
+      - job_007
+  job_015:
     name: "test; windows; Dart 3.6.0; PKG: packages/connect; `dart test -p vm`"
     runs-on: windows-latest
     steps:
@@ -477,7 +593,9 @@ jobs:
       - job_003
       - job_004
       - job_005
-  job_014:
+      - job_006
+      - job_007
+  job_016:
     name: "test; windows; Dart stable; PKG: packages/connect; `dart test -p chrome`"
     runs-on: windows-latest
     steps:
@@ -503,7 +621,9 @@ jobs:
       - job_003
       - job_004
       - job_005
-  job_015:
+      - job_006
+      - job_007
+  job_017:
     name: "test; windows; Dart stable; PKG: packages/connect; `dart test -p vm`"
     runs-on: windows-latest
     steps:
@@ -529,3 +649,5 @@ jobs:
       - job_003
       - job_004
       - job_005
+      - job_006
+      - job_007
