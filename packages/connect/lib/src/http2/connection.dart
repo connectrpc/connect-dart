@@ -232,6 +232,7 @@ final class _KeepAliveConnection {
     }
     print('pinging');
     final responseTimer = Timer(options.pingTimeout, () {
+      print('Before terminate');
       // Terminating the connection doesn't terminate the requests
       //
       // See: https://github.com/dart-lang/http/issues/1370
