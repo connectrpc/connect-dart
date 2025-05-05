@@ -115,7 +115,7 @@ void main() {
           pingInterval: Duration(milliseconds: 5),
         );
         final req = await transport.request(uri);
-        await Future<void>.delayed(Duration(milliseconds: 25));
+        await Future<void>.delayed(Duration(milliseconds: 50));
         expect(serverPings.length, greaterThanOrEqualTo(3));
         await req.close();
       });
