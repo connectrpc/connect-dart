@@ -97,7 +97,7 @@ void main() {
   test('open a new connection if verification fails', () async {
     final transport = Http2ClientTransport(
       pingTimeout: Duration.zero, // Intentionally unsatisfiable
-      pingInterval: Duration(milliseconds: 5),
+      pingInterval: Duration(milliseconds: 10),
     );
     // issue a request and close it, then wait for more than pingInterval to trigger a verification
     print("Before first request");
