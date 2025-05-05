@@ -80,10 +80,6 @@ for PKG in ${PKGS}; do
         dart run ../../scripts/license_header.dart ../.. || EXIT_CODE=$?
         ;;
       command_3)
-        echo '[[ -z $(git status --porcelain | tee /dev/stderr) ]]'
-        [[ -z $(git status --porcelain | tee /dev/stderr) ]] || EXIT_CODE=$?
-        ;;
-      command_4)
         echo '[[ -z $(git status --porcelain | tee >(cat 1>&2)) ]]'
         [[ -z $(git status --porcelain | tee >(cat 1>&2)) ]] || EXIT_CODE=$?
         ;;

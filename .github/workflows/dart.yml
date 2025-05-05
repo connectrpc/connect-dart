@@ -80,7 +80,7 @@ jobs:
         if: "always() && steps.packages_conformance_pub_upgrade.conclusion == 'success'"
         working-directory: packages/conformance
   job_003:
-    name: "lint; linux; Dart 3.6.0; PKG: packages/connect; `dart run ../../scripts/buf.dart generate`, `dart run ../../scripts/license_header.dart ../..`, `dart format .`, `dart analyze`, `[[ -z $(git status --porcelain | tee /dev/stderr) ]]`"
+    name: "lint; linux; Dart 3.6.0; PKG: packages/connect; `dart run ../../scripts/buf.dart generate`, `dart run ../../scripts/license_header.dart ../..`, `dart format .`, `dart analyze`, `[[ -z $(git status --porcelain | tee >(cat 1>&2)) ]]`"
     runs-on: ubuntu-latest
     steps:
       - name: Cache Pub hosted dependencies
@@ -121,8 +121,8 @@ jobs:
         run: dart analyze
         if: "always() && steps.packages_connect_pub_upgrade.conclusion == 'success'"
         working-directory: packages/connect
-      - name: "packages/connect; [[ -z $(git status --porcelain | tee /dev/stderr) ]]"
-        run: "[[ -z $(git status --porcelain | tee /dev/stderr) ]]"
+      - name: "packages/connect; [[ -z $(git status --porcelain | tee >(cat 1>&2)) ]]"
+        run: "[[ -z $(git status --porcelain | tee >(cat 1>&2)) ]]"
         if: "always() && steps.packages_connect_pub_upgrade.conclusion == 'success'"
         working-directory: packages/connect
   job_004:
@@ -164,7 +164,7 @@ jobs:
         if: "always() && steps.packages_conformance_pub_upgrade.conclusion == 'success'"
         working-directory: packages/conformance
   job_005:
-    name: "lint; linux; Dart stable; PKG: packages/connect; `dart run ../../scripts/buf.dart generate`, `dart run ../../scripts/license_header.dart ../..`, `dart format .`, `dart analyze`, `[[ -z $(git status --porcelain | tee /dev/stderr) ]]`"
+    name: "lint; linux; Dart stable; PKG: packages/connect; `dart run ../../scripts/buf.dart generate`, `dart run ../../scripts/license_header.dart ../..`, `dart format .`, `dart analyze`, `[[ -z $(git status --porcelain | tee >(cat 1>&2)) ]]`"
     runs-on: ubuntu-latest
     steps:
       - name: Cache Pub hosted dependencies
@@ -205,8 +205,8 @@ jobs:
         run: dart analyze
         if: "always() && steps.packages_connect_pub_upgrade.conclusion == 'success'"
         working-directory: packages/connect
-      - name: "packages/connect; [[ -z $(git status --porcelain | tee /dev/stderr) ]]"
-        run: "[[ -z $(git status --porcelain | tee /dev/stderr) ]]"
+      - name: "packages/connect; [[ -z $(git status --porcelain | tee >(cat 1>&2)) ]]"
+        run: "[[ -z $(git status --porcelain | tee >(cat 1>&2)) ]]"
         if: "always() && steps.packages_connect_pub_upgrade.conclusion == 'success'"
         working-directory: packages/connect
   job_006:
