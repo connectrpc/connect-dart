@@ -13,13 +13,6 @@ stages:
           - analyze
           - command: "[[ -z $(git status --porcelain | tee >(cat 1>&2)) ]]"
         os: linux
-      - group:          
-          - command: dart run ../../scripts/buf.dart generate
-          - command: dart run ../../scripts/license_header.dart ../..
-          - command: dart format .
-          - analyze
-          - command: "git diff"
-        os: windows
   - test:
       - test: -p chrome
       - test: -p vm

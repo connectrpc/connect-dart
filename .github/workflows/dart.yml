@@ -210,78 +210,6 @@ jobs:
         if: "always() && steps.packages_connect_pub_upgrade.conclusion == 'success'"
         working-directory: packages/connect
   job_006:
-    name: "lint; windows; Dart 3.6.0; PKG: packages/connect; `dart run ../../scripts/buf.dart generate`, `dart run ../../scripts/license_header.dart ../..`, `dart format .`, `dart analyze`, `git diff`"
-    runs-on: windows-latest
-    steps:
-      - name: Setup Dart SDK
-        uses: dart-lang/setup-dart@e51d8e571e22473a2ddebf0ef8a2123f0ab2c02c
-        with:
-          sdk: "3.6.0"
-      - id: checkout
-        name: Checkout repository
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
-      - id: packages_connect_pub_upgrade
-        name: packages/connect; dart pub upgrade
-        run: dart pub upgrade
-        if: "always() && steps.checkout.conclusion == 'success'"
-        working-directory: packages/connect
-      - name: packages/connect; dart run ../../scripts/buf.dart generate
-        run: dart run ../../scripts/buf.dart generate
-        if: "always() && steps.packages_connect_pub_upgrade.conclusion == 'success'"
-        working-directory: packages/connect
-      - name: packages/connect; dart run ../../scripts/license_header.dart ../..
-        run: dart run ../../scripts/license_header.dart ../..
-        if: "always() && steps.packages_connect_pub_upgrade.conclusion == 'success'"
-        working-directory: packages/connect
-      - name: packages/connect; dart format .
-        run: dart format .
-        if: "always() && steps.packages_connect_pub_upgrade.conclusion == 'success'"
-        working-directory: packages/connect
-      - name: packages/connect; dart analyze
-        run: dart analyze
-        if: "always() && steps.packages_connect_pub_upgrade.conclusion == 'success'"
-        working-directory: packages/connect
-      - name: packages/connect; git diff
-        run: git diff
-        if: "always() && steps.packages_connect_pub_upgrade.conclusion == 'success'"
-        working-directory: packages/connect
-  job_007:
-    name: "lint; windows; Dart stable; PKG: packages/connect; `dart run ../../scripts/buf.dart generate`, `dart run ../../scripts/license_header.dart ../..`, `dart format .`, `dart analyze`, `git diff`"
-    runs-on: windows-latest
-    steps:
-      - name: Setup Dart SDK
-        uses: dart-lang/setup-dart@e51d8e571e22473a2ddebf0ef8a2123f0ab2c02c
-        with:
-          sdk: stable
-      - id: checkout
-        name: Checkout repository
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
-      - id: packages_connect_pub_upgrade
-        name: packages/connect; dart pub upgrade
-        run: dart pub upgrade
-        if: "always() && steps.checkout.conclusion == 'success'"
-        working-directory: packages/connect
-      - name: packages/connect; dart run ../../scripts/buf.dart generate
-        run: dart run ../../scripts/buf.dart generate
-        if: "always() && steps.packages_connect_pub_upgrade.conclusion == 'success'"
-        working-directory: packages/connect
-      - name: packages/connect; dart run ../../scripts/license_header.dart ../..
-        run: dart run ../../scripts/license_header.dart ../..
-        if: "always() && steps.packages_connect_pub_upgrade.conclusion == 'success'"
-        working-directory: packages/connect
-      - name: packages/connect; dart format .
-        run: dart format .
-        if: "always() && steps.packages_connect_pub_upgrade.conclusion == 'success'"
-        working-directory: packages/connect
-      - name: packages/connect; dart analyze
-        run: dart analyze
-        if: "always() && steps.packages_connect_pub_upgrade.conclusion == 'success'"
-        working-directory: packages/connect
-      - name: packages/connect; git diff
-        run: git diff
-        if: "always() && steps.packages_connect_pub_upgrade.conclusion == 'success'"
-        working-directory: packages/connect
-  job_008:
     name: "test; linux; Dart 3.6.0; PKG: packages/conformance; `dart test`"
     runs-on: ubuntu-latest
     steps:
@@ -317,9 +245,7 @@ jobs:
       - job_003
       - job_004
       - job_005
-      - job_006
-      - job_007
-  job_009:
+  job_007:
     name: "test; linux; Dart 3.6.0; PKG: packages/connect; `dart test -p chrome`"
     runs-on: ubuntu-latest
     steps:
@@ -355,9 +281,7 @@ jobs:
       - job_003
       - job_004
       - job_005
-      - job_006
-      - job_007
-  job_010:
+  job_008:
     name: "test; linux; Dart 3.6.0; PKG: packages/connect; `dart test -p vm`"
     runs-on: ubuntu-latest
     steps:
@@ -393,9 +317,7 @@ jobs:
       - job_003
       - job_004
       - job_005
-      - job_006
-      - job_007
-  job_011:
+  job_009:
     name: "test; linux; Dart stable; PKG: packages/conformance; `dart test`"
     runs-on: ubuntu-latest
     steps:
@@ -431,9 +353,7 @@ jobs:
       - job_003
       - job_004
       - job_005
-      - job_006
-      - job_007
-  job_012:
+  job_010:
     name: "test; linux; Dart stable; PKG: packages/connect; `dart test -p chrome`"
     runs-on: ubuntu-latest
     steps:
@@ -469,9 +389,7 @@ jobs:
       - job_003
       - job_004
       - job_005
-      - job_006
-      - job_007
-  job_013:
+  job_011:
     name: "test; linux; Dart stable; PKG: packages/connect; `dart test -p vm`"
     runs-on: ubuntu-latest
     steps:
@@ -507,9 +425,7 @@ jobs:
       - job_003
       - job_004
       - job_005
-      - job_006
-      - job_007
-  job_014:
+  job_012:
     name: "test; windows; Dart 3.6.0; PKG: packages/connect; `dart test -p chrome`"
     runs-on: windows-latest
     steps:
@@ -535,9 +451,7 @@ jobs:
       - job_003
       - job_004
       - job_005
-      - job_006
-      - job_007
-  job_015:
+  job_013:
     name: "test; windows; Dart 3.6.0; PKG: packages/connect; `dart test -p vm`"
     runs-on: windows-latest
     steps:
@@ -563,9 +477,7 @@ jobs:
       - job_003
       - job_004
       - job_005
-      - job_006
-      - job_007
-  job_016:
+  job_014:
     name: "test; windows; Dart stable; PKG: packages/connect; `dart test -p chrome`"
     runs-on: windows-latest
     steps:
@@ -591,9 +503,7 @@ jobs:
       - job_003
       - job_004
       - job_005
-      - job_006
-      - job_007
-  job_017:
+  job_015:
     name: "test; windows; Dart stable; PKG: packages/connect; `dart test -p vm`"
     runs-on: windows-latest
     steps:
@@ -619,5 +529,3 @@ jobs:
       - job_003
       - job_004
       - job_005
-      - job_006
-      - job_007
