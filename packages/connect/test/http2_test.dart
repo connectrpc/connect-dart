@@ -102,7 +102,7 @@ void main() {
     // issue a request and close it, then wait for more than pingInterval to trigger a verification
     final req1 = await transport.request(uri);
     await req1.close();
-    await Future<void>.delayed(Duration(milliseconds: 10));
+    await Future<void>.delayed(Duration(milliseconds: 50));
     serverPings.clear();
     final req2 = await transport.request(uri);
     await req2.close();

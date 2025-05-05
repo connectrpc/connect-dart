@@ -1,9 +1,6 @@
 sdk:
   - stable
   - pubspec
-os:
-  - linux
-  - windows
 stages:
   - lint:
       - group:
@@ -12,7 +9,6 @@ stages:
           - command: dart format .
           - analyze
           - command: "[[ -z $(git status --porcelain | tee >(cat 1>&2)) ]]"
-        os: linux
   - test:
       - test: -p chrome
       - test: -p vm
