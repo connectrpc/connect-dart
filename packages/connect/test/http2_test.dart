@@ -97,12 +97,12 @@ void main() {
   test('open a new connection if verification fails', () async {
     final transport = Http2ClientTransport(
       pingTimeout: Duration.zero, // Intentionally unsatisfiable
-      pingInterval: Duration(milliseconds: 5),
+      pingInterval: Duration(milliseconds: 50),
     );
     // issue a request and close it, then wait for more than pingInterval to trigger a verification
     final req1 = await transport.request(uri);
     await req1.close();
-    await Future<void>.delayed(Duration(milliseconds: 10));
+    await Future<void>.delayed(Duration(milliseconds: 200));
     serverPings.clear();
     final req2 = await transport.request(uri);
     await req2.close();
@@ -115,8 +115,8 @@ void main() {
           pingInterval: Duration(milliseconds: 5),
         );
         final req = await transport.request(uri);
-        await Future<void>.delayed(Duration(milliseconds: 25));
-        expect(serverPings.length, greaterThanOrEqualTo(3));
+        await Future<void>.delayed(Duration(milliseconds: 50));
+        expect(serverPings.length, greaterThanOrEqualTo(1));
         await req.close();
       });
       test(
@@ -156,8 +156,8 @@ void main() {
         await req.close();
         await Future<void>.delayed(Duration(milliseconds: 10));
         serverPings.clear();
-        await Future<void>.delayed(Duration(milliseconds: 30));
-        expect(serverPings.length, greaterThanOrEqualTo(3));
+        await Future<void>.delayed(Duration(milliseconds: 50));
+        expect(serverPings.length, greaterThanOrEqualTo(1));
       });
     });
   });

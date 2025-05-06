@@ -1,0 +1,10 @@
+sdk:
+  - stable
+  - pubspec
+stages:
+  - lint:
+      - group:
+          - command: dart format .
+          - command: dart run tools:license_header .
+          - analyze
+          - command: "[[ -z $(git status --porcelain | tee >(cat 1>&2)) ]]"

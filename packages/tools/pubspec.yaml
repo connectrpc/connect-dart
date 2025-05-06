@@ -1,0 +1,16 @@
+name: tools
+description: >-
+  Tools used during development.
+
+version: 0.1.0
+publish_to: none
+
+executables:
+  buf:
+  license_header:
+
+environment:
+  sdk: ^3.6.0
+resolution: workspace
+dependencies:
+  path: ^1.9.1

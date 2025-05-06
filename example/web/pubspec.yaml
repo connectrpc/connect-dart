@@ -4,7 +4,7 @@ version: 1.0.0
 # repository: https://github.com/my_org/my_repo
 
 environment:
-  sdk: ^3.4.4
+  sdk: ^3.6.0
 publish_to: none
 
 # Add regular dependencies here.

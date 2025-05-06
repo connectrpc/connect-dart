@@ -1,0 +1,27 @@
+# Created with package:mono_repo v6.6.3
+{
+  "version": 2,
+  "updates": [
+    {
+      "package-ecosystem": "pub",
+      "directory": "packages/conformance",
+      "schedule": {
+        "interval": "weekly"
+      }
+    },
+    {
+      "package-ecosystem": "pub",
+      "directory": "packages/connect",
+      "schedule": {
+        "interval": "weekly"
+      }
+    },
+    {
+      "package-ecosystem": "pub",
+      "directory": "packages/tools",
+      "schedule": {
+        "interval": "weekly"
+      }
+    }
+  ]
+}

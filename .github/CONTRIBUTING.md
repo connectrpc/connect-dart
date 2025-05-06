@@ -28,8 +28,8 @@ latest stable dart release installed):
 
 ```
 dart pub get # download deps
-dart pub global activate melos # one time action to setup melos cli
-melos run all
+dart pub global activate mono_repo # one time action to setup mono_repo cli
+mono_repo presubmit
 ```
 
 ## Making Changes
@@ -43,7 +43,7 @@ git rebase upstream/main
 git checkout -b cool_new_feature
 ```
 
-Make your changes, then ensure that `melos run all` still passes. When you're satisfied with your changes,
+Make your changes, then ensure that `mono_repo presubmit` still passes. When you're satisfied with your changes,
 push them to your fork.
 
 Ensure to update [CHANGELOG.md](/packages/connect/CHANGELOG.md). Only changes that impact users should be listed. 

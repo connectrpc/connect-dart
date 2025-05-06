@@ -112,8 +112,10 @@ Future<CodeGeneratorResponse> runPlugin(
 
 Future<FileDescriptorSet> buildTestImage() async {
   final result = Process.runSync(
-    'buf',
+    'dart',
     [
+      'run',
+      'tools:buf',
       'build',
       '--as-file-descriptor-set',
       'test/plugin/proto',
