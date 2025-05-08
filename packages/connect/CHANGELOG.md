@@ -1,3 +1,7 @@
+## 0.4.0
+
+- Update protobuf version constraint to include version `4.0.0`
+
 ## 0.3.0
 
 - Add `Http2ClientTransport` to manage HTTP/2 connections using PING frames for keep alive. This resulted
