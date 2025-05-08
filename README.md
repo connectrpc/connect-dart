@@ -1,6 +1,6 @@
 # Connect-Dart
 
-[![Build](https://github.com/connectrpc/connect-dart/actions/workflows/ci.yaml/badge.svg?branch=main)](https://github.com/connectrpc/connect-dart/actions/workflows/ci.yaml)
+[![Build](https://github.com/connectrpc/connect-dart/actions/workflows/dart.yml/badge.svg?branch=main)](https://github.com/connectrpc/connect-dart/actions/workflows/dart.yml)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 Connect-Dart is a slim library for using generated, type-safe, and idiomatic Dart clients to communicate with your app's servers using [Protocol Buffers (Protobuf)][protobuf]. It works with the [Connect][connect-protocol], [gRPC][grpc-protocol], and [gRPC-Web][grpc-web-protocol] protocol.
