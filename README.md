@@ -112,7 +112,7 @@ is available on the [connectrpc.com website][getting-started].
 
 ## Example Apps
 
-Example apps are available in [`/example`](./example). 
+Example apps are available in [`/example`](/example). 
 
 ## Contributing
 
@@ -120,7 +120,7 @@ We'd love your help making Connect better!
 
 Extensive instructions for building the library and generator plugins locally,
 running tests, and contributing to the repository are available in our
-[`CONTRIBUTING.md` guide](./.github/CONTRIBUTING.md). Please check it out
+[`CONTRIBUTING.md` guide](/.github/CONTRIBUTING.md). Please check it out
 for details.
 
 ## Ecosystem
