@@ -69,12 +69,14 @@ HttpClient createHttpClient() {
       }
       // Browsers and other fetch environments decompress the response,
       // but retain the original content-encoding and content-length headers.
+      // This causes issues when we validate the response body length against
+      // the content-length header.
+      // We remove it here, and instead rely on parsing the response body to
+      // determine issues with with the response.
       //
       // https://github.com/wintercg/fetch/issues/23
-      if (resHeader.contains('content-encoding')) {
-        resHeader.remove('content-encoding');
-        resHeader.remove('content-length');
-      }
+      resHeader.remove('content-encoding');
+      resHeader.remove('content-length');
       return HttpResponse(
         res.status,
         resHeader,
