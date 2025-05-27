@@ -16,15 +16,24 @@ import 'dart:typed_data';
 
 import 'package:connectrpc/connect.dart';
 
+// True when compiled for the web (e.g. browsers).
+const bool _isWeb = bool.fromEnvironment('dart.library.js_interop');
+
 extension Read on Stream<Uint8List> {
   /// Combines all the chunks into a single [Uint8List].
+  ///
+  /// Some HTTP clients (for example browsers) transparently decompress
+  /// responses, resulting in more bytes than indicated by the
+  /// `Content-Length` header. To avoid false protocol errors in those
+  /// environments, the over-length check is skipped when running on the web.
+  /// This method still throws if fewer bytes than `expLength` are received.
   Future<Uint8List> toBytes(int? expLength) async {
     final chunks = <Uint8List>[];
     var actLength = 0;
     await for (final chunk in this) {
       chunks.add(chunk);
       actLength += chunk.length;
-      if (expLength != null && actLength > expLength) {
+      if (!_isWeb && expLength != null && actLength > expLength) {
         throw ConnectException(
           Code.invalidArgument,
           'protocol error: promised $expLength bytes, received $actLength',
