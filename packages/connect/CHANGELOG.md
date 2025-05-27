@@ -1,3 +1,7 @@
+## 0.5.0
+
+- Skip over-length check on web to avoid false errors from clients that decompress responses. Still throws if fewer bytes than `expLength` are received.
+
 ## 0.4.0
 
 - Update protobuf version constraint to include version `4.0.0`
