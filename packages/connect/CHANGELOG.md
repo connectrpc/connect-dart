@@ -1,3 +1,7 @@
+## 0.4.1
+
+- Relax the content length requirement for the fetch transport.
+
 ## 0.4.0
 
 - Update protobuf version constraint to include version `4.0.0`
