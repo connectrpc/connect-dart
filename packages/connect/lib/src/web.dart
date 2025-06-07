@@ -25,7 +25,7 @@ import 'http.dart';
 /// Creates a [HttpClient] based on the fetch APIs.
 ///
 /// This doesn't support client/bidi streaming.
-HttpClient createHttpClient() {
+HttpClient createHttpClient({String credentials = "same-origin"}) {
   return (creq) async {
     final reqHeader = web.Headers();
     for (final header in creq.header.entries) {
@@ -57,7 +57,7 @@ HttpClient createHttpClient() {
           method: creq.method,
           headers: reqHeader,
           mode: "cors",
-          credentials: "same-origin",
+          credentials: credentials,
           redirect: "error",
           signal: abortCtrl.signal,
           body: body?.toJS,
