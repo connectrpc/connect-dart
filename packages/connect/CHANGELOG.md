@@ -1,3 +1,8 @@
+## 0.5.0
+
+- Promote to stable.
+- Add an option to configure `credentials` in the web http client.
+
 ## 0.4.1
 
 - Relax the content length requirement for the fetch transport.

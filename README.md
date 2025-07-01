@@ -7,27 +7,26 @@ Connect-Dart is a slim library for using generated, type-safe, and idiomatic Dar
 
 Given a simple Protobuf schema, Connect-Dart generates idiomatic dart:
 
-<details><summary>Click to expand <code>eliza.connect.dart</code></summary>
+<details><summary>Click to expand <code>eliza.connect.client.dart</code></summary>
 
 ```dart
+import "package:connectrpc/connect.dart" as connect;
+import "eliza.pb.dart" as connectrpcelizav1eliza;
+import "eliza.connect.spec.dart" as specs;
+
 extension type ElizaServiceClient(connect.Transport _transport) {
   Future<connectrpcelizav1eliza.SayResponse> say(
     connectrpcelizav1eliza.SayRequest input, {
-    connect.Header? header,
+    connect.Headers? headers,
     connect.AbortSignal? signal,
-    Function(connect.Header)? onHeader,
-    Function(connect.Header)? onTrailer,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
   }) {
     return connect.Client(_transport).unary(
-      const connect.Spec(
-        '/$name/Say',
-        connect.StreamType.unary,
-        connectrpcelizav1eliza.SayRequest.new,
-        connectrpcelizav1eliza.SayResponse.new,
-      ),
+      specs.ElizaService.say,
       input,
       signal: signal,
-      header: header,
+      headers: headers,
       onHeader: onHeader,
       onTrailer: onTrailer,
     );
@@ -35,21 +34,16 @@ extension type ElizaServiceClient(connect.Transport _transport) {
 
   Stream<connectrpcelizav1eliza.ConverseResponse> converse(
     Stream<connectrpcelizav1eliza.ConverseRequest> input, {
-    connect.Header? header,
+    connect.Headers? headers,
     connect.AbortSignal? signal,
-    Function(connect.Header)? onHeader,
-    Function(connect.Header)? onTrailer,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
   }) {
     return connect.Client(_transport).bidi(
-      const connect.Spec(
-        '/$name/Converse',
-        connect.StreamType.bidi,
-        connectrpcelizav1eliza.ConverseRequest.new,
-        connectrpcelizav1eliza.ConverseResponse.new,
-      ),
+      specs.ElizaService.converse,
       input,
       signal: signal,
-      header: header,
+      headers: headers,
       onHeader: onHeader,
       onTrailer: onTrailer,
     );
@@ -57,21 +51,16 @@ extension type ElizaServiceClient(connect.Transport _transport) {
 
   Stream<connectrpcelizav1eliza.IntroduceResponse> introduce(
     connectrpcelizav1eliza.IntroduceRequest input, {
-    connect.Header? header,
+    connect.Headers? headers,
     connect.AbortSignal? signal,
-    Function(connect.Header)? onHeader,
-    Function(connect.Header)? onTrailer,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
   }) {
     return connect.Client(_transport).server(
-      const connect.Spec(
-        '/$name/Introduce',
-        connect.StreamType.server,
-        connectrpcelizav1eliza.IntroduceRequest.new,
-        connectrpcelizav1eliza.IntroduceResponse.new,
-      ),
+      specs.ElizaService.introduce,
       input,
       signal: signal,
-      header: header,
+      headers: headers,
       onHeader: onHeader,
       onTrailer: onTrailer,
     );
@@ -133,8 +122,7 @@ for details.
 
 ## Status
 
-This project is in alpha, and we will make a few changes as we gather feedback
-from early adopters.
+This project is stable and follows semantic versioning, which means any breaking changes will result in a major version increase. Our goal is to not make breaking changes unless absolutely necessary.
 
 ## Legal
 
