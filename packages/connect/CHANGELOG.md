@@ -1,3 +1,7 @@
+## 1.0.0
+
+- First stable release of onnect for Dart!
+
 ## 0.5.0
 
 - Promote to stable.
