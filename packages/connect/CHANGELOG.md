@@ -1,6 +1,6 @@
 ## 1.0.0
 
-- First stable release of onnect for Dart!
+- First stable release of Connect for Dart!
 
 ## 0.5.0
 
