@@ -56,62 +56,68 @@ extension SplitEnvelope on Stream<Uint8List> {
   /// - if the stream ended before an enveloped message fully arrived,
   /// - or if the stream ended with extraneous data.
   Stream<EnvelopedMessage> splitEnvelope() async* {
-    var buffer = Uint8List(0);
-    await for (final chunk in this) {
-      buffer = _append(buffer, chunk);
-      while (true) {
-        final header = _peekHeader(buffer);
-        if (header == null) {
-          break;
-        }
-        EnvelopedMessage? env;
-        (env, buffer) = _shiftEnvelope(buffer, header);
+    final header = Uint8List(5);
+    final headerByteData = ByteData.sublistView(header);
+    var headerLen = 0;
+    var dataLen = 0;
+    EnvelopedMessage? env;
+    await for (var chunk in this) {
+      while (chunk.isNotEmpty) {
+        // We are waiting for the next heeader
         if (env == null) {
+          final needLen = 5 - headerLen;
+          // If we have to read more to get the header.
+          if (chunk.length < needLen) {
+            header.setAll(headerLen, chunk);
+            headerLen += chunk.length;
+            break;
+          }
+          header.setAll(
+            headerLen,
+            Uint8List.sublistView(chunk, 0, needLen),
+          );
+          headerLen = 5;
+          final (:flags, :length) = _readHeader(headerByteData);
+          env = EnvelopedMessage(
+            flags,
+            Uint8List(length),
+          );
+          // Reset data length and update chunk to reflect remaining data.
+          dataLen = 0;
+          chunk = Uint8List.sublistView(chunk, needLen);
+        }
+        // We are reading the envelope.
+        final needLen = env.data.length - dataLen;
+        // If we have to read more to complete the envelope.
+        if (chunk.length < needLen) {
+          env.data.setAll(dataLen, chunk);
+          dataLen += chunk.length;
           break;
         }
+        // We can complete the envelope.
+        env.data.setAll(
+          dataLen,
+          Uint8List.sublistView(chunk, 0, needLen),
+        );
         yield env;
+        // Reset the header and chunk and continue processing.
+        env = null;
+        headerLen = 0;
+        chunk = Uint8List.sublistView(chunk, needLen);
       }
     }
-    if (buffer.lengthInBytes > 0) {
-      final header = _peekHeader(buffer);
+    if (headerLen > 0) {
       var message = "protocol error: incomplete envelope";
-      if (header != null) {
+      if (headerLen == 5) {
+        final (flags: _, :length) = _readHeader(headerByteData);
         message =
-            'protocol error: promised ${header.length} bytes in enveloped message, got ${buffer.lengthInBytes - 5} bytes';
+            'protocol error: promised $length bytes in enveloped message, got $dataLen bytes';
       }
       throw ConnectException(Code.invalidArgument, message);
     }
   }
 
-  static Uint8List _append(Uint8List buffer, Uint8List other) {
-    final result = Uint8List(buffer.length + other.length);
-    result.setAll(0, buffer);
-    result.setAll(buffer.length, other);
-    return result;
-  }
-
-  static ({int length, int flags})? _peekHeader(Uint8List buffer) {
-    if (buffer.lengthInBytes < 5) {
-      return null;
-    }
-    final data = ByteData.sublistView(buffer);
+  static ({int length, int flags}) _readHeader(ByteData data) {
     return (length: data.getUint32(1), flags: data.getUint8(0));
-  }
-
-  /// Returns the enveloped message if complete and the remaining buffer
-  static (EnvelopedMessage?, Uint8List) _shiftEnvelope(
-    Uint8List buffer,
-    ({int length, int flags}) header,
-  ) {
-    if (buffer.lengthInBytes < 5 + header.length) {
-      return (null, buffer);
-    }
-    return (
-      EnvelopedMessage(
-        header.flags,
-        Uint8List.sublistView(buffer, 5, 5 + header.length),
-      ),
-      Uint8List.sublistView(buffer, 5 + header.length)
-    );
   }
 }
