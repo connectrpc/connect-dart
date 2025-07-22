@@ -57,6 +57,7 @@ extension SplitEnvelope on Stream<Uint8List> {
   /// - or if the stream ended with extraneous data.
   Stream<EnvelopedMessage> splitEnvelope() async* {
     final header = Uint8List(5);
+    final headerByteData = ByteData.sublistView(header);
     var headerLen = 0;
     var dataLen = 0;
     EnvelopedMessage? env;
@@ -76,7 +77,7 @@ extension SplitEnvelope on Stream<Uint8List> {
             Uint8List.sublistView(chunk, 0, needLen),
           );
           headerLen = 5;
-          final (:flags, :length) = _readHeader(header);
+          final (:flags, :length) = _readHeader(headerByteData);
           env = EnvelopedMessage(
             flags,
             Uint8List(length),
@@ -108,7 +109,7 @@ extension SplitEnvelope on Stream<Uint8List> {
     if (headerLen > 0) {
       var message = "protocol error: incomplete envelope";
       if (headerLen == 5) {
-        final (flags: _, :length) = _readHeader(header);
+        final (flags: _, :length) = _readHeader(headerByteData);
         message =
             'protocol error: promised $length bytes in enveloped message, got $dataLen bytes';
       }
@@ -116,8 +117,7 @@ extension SplitEnvelope on Stream<Uint8List> {
     }
   }
 
-  static ({int length, int flags}) _readHeader(Uint8List buffer) {
-    final data = ByteData.sublistView(buffer);
+  static ({int length, int flags}) _readHeader(ByteData data) {
     return (length: data.getUint32(1), flags: data.getUint8(0));
   }
 }
