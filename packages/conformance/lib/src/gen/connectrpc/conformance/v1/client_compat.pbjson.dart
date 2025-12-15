@@ -32,131 +32,25 @@ const ClientCompatRequest$json = {
   '1': 'ClientCompatRequest',
   '2': [
     {'1': 'test_name', '3': 1, '4': 1, '5': 9, '10': 'testName'},
-    {
-      '1': 'http_version',
-      '3': 2,
-      '4': 1,
-      '5': 14,
-      '6': '.connectrpc.conformance.v1.HTTPVersion',
-      '10': 'httpVersion'
-    },
-    {
-      '1': 'protocol',
-      '3': 3,
-      '4': 1,
-      '5': 14,
-      '6': '.connectrpc.conformance.v1.Protocol',
-      '10': 'protocol'
-    },
-    {
-      '1': 'codec',
-      '3': 4,
-      '4': 1,
-      '5': 14,
-      '6': '.connectrpc.conformance.v1.Codec',
-      '10': 'codec'
-    },
-    {
-      '1': 'compression',
-      '3': 5,
-      '4': 1,
-      '5': 14,
-      '6': '.connectrpc.conformance.v1.Compression',
-      '10': 'compression'
-    },
+    {'1': 'http_version', '3': 2, '4': 1, '5': 14, '6': '.connectrpc.conformance.v1.HTTPVersion', '10': 'httpVersion'},
+    {'1': 'protocol', '3': 3, '4': 1, '5': 14, '6': '.connectrpc.conformance.v1.Protocol', '10': 'protocol'},
+    {'1': 'codec', '3': 4, '4': 1, '5': 14, '6': '.connectrpc.conformance.v1.Codec', '10': 'codec'},
+    {'1': 'compression', '3': 5, '4': 1, '5': 14, '6': '.connectrpc.conformance.v1.Compression', '10': 'compression'},
     {'1': 'host', '3': 6, '4': 1, '5': 9, '10': 'host'},
     {'1': 'port', '3': 7, '4': 1, '5': 13, '10': 'port'},
     {'1': 'server_tls_cert', '3': 8, '4': 1, '5': 12, '10': 'serverTlsCert'},
-    {
-      '1': 'client_tls_creds',
-      '3': 9,
-      '4': 1,
-      '5': 11,
-      '6': '.connectrpc.conformance.v1.TLSCreds',
-      '10': 'clientTlsCreds'
-    },
-    {
-      '1': 'message_receive_limit',
-      '3': 10,
-      '4': 1,
-      '5': 13,
-      '10': 'messageReceiveLimit'
-    },
-    {
-      '1': 'service',
-      '3': 11,
-      '4': 1,
-      '5': 9,
-      '9': 0,
-      '10': 'service',
-      '17': true
-    },
-    {
-      '1': 'method',
-      '3': 12,
-      '4': 1,
-      '5': 9,
-      '9': 1,
-      '10': 'method',
-      '17': true
-    },
-    {
-      '1': 'stream_type',
-      '3': 13,
-      '4': 1,
-      '5': 14,
-      '6': '.connectrpc.conformance.v1.StreamType',
-      '10': 'streamType'
-    },
-    {
-      '1': 'use_get_http_method',
-      '3': 14,
-      '4': 1,
-      '5': 8,
-      '10': 'useGetHttpMethod'
-    },
-    {
-      '1': 'request_headers',
-      '3': 15,
-      '4': 3,
-      '5': 11,
-      '6': '.connectrpc.conformance.v1.Header',
-      '10': 'requestHeaders'
-    },
-    {
-      '1': 'request_messages',
-      '3': 16,
-      '4': 3,
-      '5': 11,
-      '6': '.google.protobuf.Any',
-      '10': 'requestMessages'
-    },
-    {
-      '1': 'timeout_ms',
-      '3': 17,
-      '4': 1,
-      '5': 13,
-      '9': 2,
-      '10': 'timeoutMs',
-      '17': true
-    },
+    {'1': 'client_tls_creds', '3': 9, '4': 1, '5': 11, '6': '.connectrpc.conformance.v1.TLSCreds', '10': 'clientTlsCreds'},
+    {'1': 'message_receive_limit', '3': 10, '4': 1, '5': 13, '10': 'messageReceiveLimit'},
+    {'1': 'service', '3': 11, '4': 1, '5': 9, '9': 0, '10': 'service', '17': true},
+    {'1': 'method', '3': 12, '4': 1, '5': 9, '9': 1, '10': 'method', '17': true},
+    {'1': 'stream_type', '3': 13, '4': 1, '5': 14, '6': '.connectrpc.conformance.v1.StreamType', '10': 'streamType'},
+    {'1': 'use_get_http_method', '3': 14, '4': 1, '5': 8, '10': 'useGetHttpMethod'},
+    {'1': 'request_headers', '3': 15, '4': 3, '5': 11, '6': '.connectrpc.conformance.v1.Header', '10': 'requestHeaders'},
+    {'1': 'request_messages', '3': 16, '4': 3, '5': 11, '6': '.google.protobuf.Any', '10': 'requestMessages'},
+    {'1': 'timeout_ms', '3': 17, '4': 1, '5': 13, '9': 2, '10': 'timeoutMs', '17': true},
     {'1': 'request_delay_ms', '3': 18, '4': 1, '5': 13, '10': 'requestDelayMs'},
-    {
-      '1': 'cancel',
-      '3': 19,
-      '4': 1,
-      '5': 11,
-      '6': '.connectrpc.conformance.v1.ClientCompatRequest.Cancel',
-      '10': 'cancel'
-    },
-    {
-      '1': 'raw_request',
-      '3': 20,
-      '4': 1,
-      '5': 11,
-      '6': '.connectrpc.conformance.v1.RawHTTPRequest',
-      '10': 'rawRequest'
-    },
+    {'1': 'cancel', '3': 19, '4': 1, '5': 11, '6': '.connectrpc.conformance.v1.ClientCompatRequest.Cancel', '10': 'cancel'},
+    {'1': 'raw_request', '3': 20, '4': 1, '5': 11, '6': '.connectrpc.conformance.v1.RawHTTPRequest', '10': 'rawRequest'},
   ],
   '3': [ClientCompatRequest_Cancel$json],
   '8': [
@@ -170,31 +64,9 @@ const ClientCompatRequest$json = {
 const ClientCompatRequest_Cancel$json = {
   '1': 'Cancel',
   '2': [
-    {
-      '1': 'before_close_send',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.google.protobuf.Empty',
-      '9': 0,
-      '10': 'beforeCloseSend'
-    },
-    {
-      '1': 'after_close_send_ms',
-      '3': 2,
-      '4': 1,
-      '5': 13,
-      '9': 0,
-      '10': 'afterCloseSendMs'
-    },
-    {
-      '1': 'after_num_responses',
-      '3': 3,
-      '4': 1,
-      '5': 13,
-      '9': 0,
-      '10': 'afterNumResponses'
-    },
+    {'1': 'before_close_send', '3': 1, '4': 1, '5': 11, '6': '.google.protobuf.Empty', '9': 0, '10': 'beforeCloseSend'},
+    {'1': 'after_close_send_ms', '3': 2, '4': 1, '5': 13, '9': 0, '10': 'afterCloseSendMs'},
+    {'1': 'after_num_responses', '3': 3, '4': 1, '5': 13, '9': 0, '10': 'afterNumResponses'},
   ],
   '8': [
     {'1': 'cancel_timing'},
@@ -233,24 +105,8 @@ const ClientCompatResponse$json = {
   '1': 'ClientCompatResponse',
   '2': [
     {'1': 'test_name', '3': 1, '4': 1, '5': 9, '10': 'testName'},
-    {
-      '1': 'response',
-      '3': 2,
-      '4': 1,
-      '5': 11,
-      '6': '.connectrpc.conformance.v1.ClientResponseResult',
-      '9': 0,
-      '10': 'response'
-    },
-    {
-      '1': 'error',
-      '3': 3,
-      '4': 1,
-      '5': 11,
-      '6': '.connectrpc.conformance.v1.ClientErrorResult',
-      '9': 0,
-      '10': 'error'
-    },
+    {'1': 'response', '3': 2, '4': 1, '5': 11, '6': '.connectrpc.conformance.v1.ClientResponseResult', '9': 0, '10': 'response'},
+    {'1': 'error', '3': 3, '4': 1, '5': 11, '6': '.connectrpc.conformance.v1.ClientErrorResult', '9': 0, '10': 'error'},
   ],
   '8': [
     {'1': 'result'},
@@ -268,54 +124,12 @@ final $typed_data.Uint8List clientCompatResponseDescriptor = $convert.base64Deco
 const ClientResponseResult$json = {
   '1': 'ClientResponseResult',
   '2': [
-    {
-      '1': 'response_headers',
-      '3': 1,
-      '4': 3,
-      '5': 11,
-      '6': '.connectrpc.conformance.v1.Header',
-      '10': 'responseHeaders'
-    },
-    {
-      '1': 'payloads',
-      '3': 2,
-      '4': 3,
-      '5': 11,
-      '6': '.connectrpc.conformance.v1.ConformancePayload',
-      '10': 'payloads'
-    },
-    {
-      '1': 'error',
-      '3': 3,
-      '4': 1,
-      '5': 11,
-      '6': '.connectrpc.conformance.v1.Error',
-      '10': 'error'
-    },
-    {
-      '1': 'response_trailers',
-      '3': 4,
-      '4': 3,
-      '5': 11,
-      '6': '.connectrpc.conformance.v1.Header',
-      '10': 'responseTrailers'
-    },
-    {
-      '1': 'num_unsent_requests',
-      '3': 5,
-      '4': 1,
-      '5': 5,
-      '10': 'numUnsentRequests'
-    },
-    {
-      '1': 'http_status_code',
-      '3': 6,
-      '4': 1,
-      '5': 5,
-      '9': 0,
-      '10': 'httpStatusCode',
-      '17': true
-    },
+    {'1': 'response_headers', '3': 1, '4': 3, '5': 11, '6': '.connectrpc.conformance.v1.Header', '10': 'responseHeaders'},
+    {'1': 'payloads', '3': 2, '4': 3, '5': 11, '6': '.connectrpc.conformance.v1.ConformancePayload', '10': 'payloads'},
+    {'1': 'error', '3': 3, '4': 1, '5': 11, '6': '.connectrpc.conformance.v1.Error', '10': 'error'},
+    {'1': 'response_trailers', '3': 4, '4': 3, '5': 11, '6': '.connectrpc.conformance.v1.Header', '10': 'responseTrailers'},
+    {'1': 'num_unsent_requests', '3': 5, '4': 1, '5': 5, '10': 'numUnsentRequests'},
+    {'1': 'http_status_code', '3': 6, '4': 1, '5': 5, '9': 0, '10': 'httpStatusCode', '17': true},
     {'1': 'feedback', '3': 7, '4': 3, '5': 9, '10': 'feedback'},
   ],
   '8': [
@@ -351,38 +165,10 @@ final $typed_data.Uint8List clientErrorResultDescriptor = $convert.base64Decode(
 const WireDetails$json = {
   '1': 'WireDetails',
   '2': [
-    {
-      '1': 'actual_status_code',
-      '3': 1,
-      '4': 1,
-      '5': 5,
-      '10': 'actualStatusCode'
-    },
-    {
-      '1': 'connect_error_raw',
-      '3': 2,
-      '4': 1,
-      '5': 11,
-      '6': '.google.protobuf.Struct',
-      '10': 'connectErrorRaw'
-    },
-    {
-      '1': 'actual_http_trailers',
-      '3': 3,
-      '4': 3,
-      '5': 11,
-      '6': '.connectrpc.conformance.v1.Header',
-      '10': 'actualHttpTrailers'
-    },
-    {
-      '1': 'actual_grpcweb_trailers',
-      '3': 4,
-      '4': 1,
-      '5': 9,
-      '9': 0,
-      '10': 'actualGrpcwebTrailers',
-      '17': true
-    },
+    {'1': 'actual_status_code', '3': 1, '4': 1, '5': 5, '10': 'actualStatusCode'},
+    {'1': 'connect_error_raw', '3': 2, '4': 1, '5': 11, '6': '.google.protobuf.Struct', '10': 'connectErrorRaw'},
+    {'1': 'actual_http_trailers', '3': 3, '4': 3, '5': 11, '6': '.connectrpc.conformance.v1.Header', '10': 'actualHttpTrailers'},
+    {'1': 'actual_grpcweb_trailers', '3': 4, '4': 1, '5': 9, '9': 0, '10': 'actualGrpcwebTrailers', '17': true},
   ],
   '8': [
     {'1': '_actual_grpcweb_trailers'},
@@ -397,3 +183,4 @@ final $typed_data.Uint8List wireDetailsDescriptor = $convert.base64Decode(
     'N0cnBjLmNvbmZvcm1hbmNlLnYxLkhlYWRlclISYWN0dWFsSHR0cFRyYWlsZXJzEjsKF2FjdHVh'
     'bF9ncnBjd2ViX3RyYWlsZXJzGAQgASgJSABSFWFjdHVhbEdycGN3ZWJUcmFpbGVyc4gBAUIaCh'
     'hfYWN0dWFsX2dycGN3ZWJfdHJhaWxlcnM=');
+

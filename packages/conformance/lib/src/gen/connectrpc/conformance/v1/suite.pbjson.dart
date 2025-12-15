@@ -32,84 +32,17 @@ const TestSuite$json = {
   '1': 'TestSuite',
   '2': [
     {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
-    {
-      '1': 'mode',
-      '3': 2,
-      '4': 1,
-      '5': 14,
-      '6': '.connectrpc.conformance.v1.TestSuite.TestMode',
-      '10': 'mode'
-    },
-    {
-      '1': 'test_cases',
-      '3': 3,
-      '4': 3,
-      '5': 11,
-      '6': '.connectrpc.conformance.v1.TestCase',
-      '10': 'testCases'
-    },
-    {
-      '1': 'relevant_protocols',
-      '3': 4,
-      '4': 3,
-      '5': 14,
-      '6': '.connectrpc.conformance.v1.Protocol',
-      '10': 'relevantProtocols'
-    },
-    {
-      '1': 'relevant_http_versions',
-      '3': 5,
-      '4': 3,
-      '5': 14,
-      '6': '.connectrpc.conformance.v1.HTTPVersion',
-      '10': 'relevantHttpVersions'
-    },
-    {
-      '1': 'relevant_codecs',
-      '3': 6,
-      '4': 3,
-      '5': 14,
-      '6': '.connectrpc.conformance.v1.Codec',
-      '10': 'relevantCodecs'
-    },
-    {
-      '1': 'relevant_compressions',
-      '3': 7,
-      '4': 3,
-      '5': 14,
-      '6': '.connectrpc.conformance.v1.Compression',
-      '10': 'relevantCompressions'
-    },
-    {
-      '1': 'connect_version_mode',
-      '3': 8,
-      '4': 1,
-      '5': 14,
-      '6': '.connectrpc.conformance.v1.TestSuite.ConnectVersionMode',
-      '10': 'connectVersionMode'
-    },
+    {'1': 'mode', '3': 2, '4': 1, '5': 14, '6': '.connectrpc.conformance.v1.TestSuite.TestMode', '10': 'mode'},
+    {'1': 'test_cases', '3': 3, '4': 3, '5': 11, '6': '.connectrpc.conformance.v1.TestCase', '10': 'testCases'},
+    {'1': 'relevant_protocols', '3': 4, '4': 3, '5': 14, '6': '.connectrpc.conformance.v1.Protocol', '10': 'relevantProtocols'},
+    {'1': 'relevant_http_versions', '3': 5, '4': 3, '5': 14, '6': '.connectrpc.conformance.v1.HTTPVersion', '10': 'relevantHttpVersions'},
+    {'1': 'relevant_codecs', '3': 6, '4': 3, '5': 14, '6': '.connectrpc.conformance.v1.Codec', '10': 'relevantCodecs'},
+    {'1': 'relevant_compressions', '3': 7, '4': 3, '5': 14, '6': '.connectrpc.conformance.v1.Compression', '10': 'relevantCompressions'},
+    {'1': 'connect_version_mode', '3': 8, '4': 1, '5': 14, '6': '.connectrpc.conformance.v1.TestSuite.ConnectVersionMode', '10': 'connectVersionMode'},
     {'1': 'relies_on_tls', '3': 9, '4': 1, '5': 8, '10': 'reliesOnTls'},
-    {
-      '1': 'relies_on_tls_client_certs',
-      '3': 10,
-      '4': 1,
-      '5': 8,
-      '10': 'reliesOnTlsClientCerts'
-    },
-    {
-      '1': 'relies_on_connect_get',
-      '3': 11,
-      '4': 1,
-      '5': 8,
-      '10': 'reliesOnConnectGet'
-    },
-    {
-      '1': 'relies_on_message_receive_limit',
-      '3': 12,
-      '4': 1,
-      '5': 8,
-      '10': 'reliesOnMessageReceiveLimit'
-    },
+    {'1': 'relies_on_tls_client_certs', '3': 10, '4': 1, '5': 8, '10': 'reliesOnTlsClientCerts'},
+    {'1': 'relies_on_connect_get', '3': 11, '4': 1, '5': 8, '10': 'reliesOnConnectGet'},
+    {'1': 'relies_on_message_receive_limit', '3': 12, '4': 1, '5': 8, '10': 'reliesOnMessageReceiveLimit'},
   ],
   '4': [TestSuite_TestMode$json, TestSuite_ConnectVersionMode$json],
 };
@@ -160,38 +93,10 @@ final $typed_data.Uint8List testSuiteDescriptor = $convert.base64Decode(
 const TestCase$json = {
   '1': 'TestCase',
   '2': [
-    {
-      '1': 'request',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.connectrpc.conformance.v1.ClientCompatRequest',
-      '10': 'request'
-    },
-    {
-      '1': 'expand_requests',
-      '3': 2,
-      '4': 3,
-      '5': 11,
-      '6': '.connectrpc.conformance.v1.TestCase.ExpandedSize',
-      '10': 'expandRequests'
-    },
-    {
-      '1': 'expected_response',
-      '3': 3,
-      '4': 1,
-      '5': 11,
-      '6': '.connectrpc.conformance.v1.ClientResponseResult',
-      '10': 'expectedResponse'
-    },
-    {
-      '1': 'other_allowed_error_codes',
-      '3': 4,
-      '4': 3,
-      '5': 14,
-      '6': '.connectrpc.conformance.v1.Code',
-      '10': 'otherAllowedErrorCodes'
-    },
+    {'1': 'request', '3': 1, '4': 1, '5': 11, '6': '.connectrpc.conformance.v1.ClientCompatRequest', '10': 'request'},
+    {'1': 'expand_requests', '3': 2, '4': 3, '5': 11, '6': '.connectrpc.conformance.v1.TestCase.ExpandedSize', '10': 'expandRequests'},
+    {'1': 'expected_response', '3': 3, '4': 1, '5': 11, '6': '.connectrpc.conformance.v1.ClientResponseResult', '10': 'expectedResponse'},
+    {'1': 'other_allowed_error_codes', '3': 4, '4': 3, '5': 14, '6': '.connectrpc.conformance.v1.Code', '10': 'otherAllowedErrorCodes'},
   ],
   '3': [TestCase_ExpandedSize$json],
 };
@@ -200,15 +105,7 @@ const TestCase$json = {
 const TestCase_ExpandedSize$json = {
   '1': 'ExpandedSize',
   '2': [
-    {
-      '1': 'size_relative_to_limit',
-      '3': 1,
-      '4': 1,
-      '5': 5,
-      '9': 0,
-      '10': 'sizeRelativeToLimit',
-      '17': true
-    },
+    {'1': 'size_relative_to_limit', '3': 1, '4': 1, '5': 5, '9': 0, '10': 'sizeRelativeToLimit', '17': true},
   ],
   '8': [
     {'1': '_size_relative_to_limit'},
@@ -226,3 +123,4 @@ final $typed_data.Uint8List testCaseDescriptor = $convert.base64Decode(
     'Q29kZVIWb3RoZXJBbGxvd2VkRXJyb3JDb2RlcxpjCgxFeHBhbmRlZFNpemUSOAoWc2l6ZV9yZW'
     'xhdGl2ZV90b19saW1pdBgBIAEoBUgAUhNzaXplUmVsYXRpdmVUb0xpbWl0iAEBQhkKF19zaXpl'
     'X3JlbGF0aXZlX3RvX2xpbWl0');
+

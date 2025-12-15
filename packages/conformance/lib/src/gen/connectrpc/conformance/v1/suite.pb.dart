@@ -93,67 +93,35 @@ class TestSuite extends $pb.GeneratedMessage {
     return $result;
   }
   TestSuite._() : super();
-  factory TestSuite.fromBuffer($core.List<$core.int> i,
-          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
-  factory TestSuite.fromJson($core.String i,
-          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromJson(i, r);
+  factory TestSuite.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory TestSuite.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'TestSuite',
-      package: const $pb.PackageName(
-          _omitMessageNames ? '' : 'connectrpc.conformance.v1'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'TestSuite', package: const $pb.PackageName(_omitMessageNames ? '' : 'connectrpc.conformance.v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'name')
-    ..e<TestSuite_TestMode>(
-        2, _omitFieldNames ? '' : 'mode', $pb.PbFieldType.OE,
-        defaultOrMaker: TestSuite_TestMode.TEST_MODE_UNSPECIFIED,
-        valueOf: TestSuite_TestMode.valueOf,
-        enumValues: TestSuite_TestMode.values)
-    ..pc<TestCase>(3, _omitFieldNames ? '' : 'testCases', $pb.PbFieldType.PM,
-        subBuilder: TestCase.create)
-    ..pc<$1.Protocol>(
-        4, _omitFieldNames ? '' : 'relevantProtocols', $pb.PbFieldType.KE,
-        valueOf: $1.Protocol.valueOf,
-        enumValues: $1.Protocol.values,
-        defaultEnumValue: $1.Protocol.PROTOCOL_UNSPECIFIED)
-    ..pc<$1.HTTPVersion>(
-        5, _omitFieldNames ? '' : 'relevantHttpVersions', $pb.PbFieldType.KE,
-        valueOf: $1.HTTPVersion.valueOf,
-        enumValues: $1.HTTPVersion.values,
-        defaultEnumValue: $1.HTTPVersion.HTTP_VERSION_UNSPECIFIED)
-    ..pc<$1.Codec>(
-        6, _omitFieldNames ? '' : 'relevantCodecs', $pb.PbFieldType.KE,
-        valueOf: $1.Codec.valueOf,
-        enumValues: $1.Codec.values,
-        defaultEnumValue: $1.Codec.CODEC_UNSPECIFIED)
-    ..pc<$1.Compression>(
-        7, _omitFieldNames ? '' : 'relevantCompressions', $pb.PbFieldType.KE,
-        valueOf: $1.Compression.valueOf,
-        enumValues: $1.Compression.values,
-        defaultEnumValue: $1.Compression.COMPRESSION_UNSPECIFIED)
-    ..e<TestSuite_ConnectVersionMode>(
-        8, _omitFieldNames ? '' : 'connectVersionMode', $pb.PbFieldType.OE,
-        defaultOrMaker:
-            TestSuite_ConnectVersionMode.CONNECT_VERSION_MODE_UNSPECIFIED,
-        valueOf: TestSuite_ConnectVersionMode.valueOf,
-        enumValues: TestSuite_ConnectVersionMode.values)
+    ..e<TestSuite_TestMode>(2, _omitFieldNames ? '' : 'mode', $pb.PbFieldType.OE, defaultOrMaker: TestSuite_TestMode.TEST_MODE_UNSPECIFIED, valueOf: TestSuite_TestMode.valueOf, enumValues: TestSuite_TestMode.values)
+    ..pc<TestCase>(3, _omitFieldNames ? '' : 'testCases', $pb.PbFieldType.PM, subBuilder: TestCase.create)
+    ..pc<$1.Protocol>(4, _omitFieldNames ? '' : 'relevantProtocols', $pb.PbFieldType.KE, valueOf: $1.Protocol.valueOf, enumValues: $1.Protocol.values, defaultEnumValue: $1.Protocol.PROTOCOL_UNSPECIFIED)
+    ..pc<$1.HTTPVersion>(5, _omitFieldNames ? '' : 'relevantHttpVersions', $pb.PbFieldType.KE, valueOf: $1.HTTPVersion.valueOf, enumValues: $1.HTTPVersion.values, defaultEnumValue: $1.HTTPVersion.HTTP_VERSION_UNSPECIFIED)
+    ..pc<$1.Codec>(6, _omitFieldNames ? '' : 'relevantCodecs', $pb.PbFieldType.KE, valueOf: $1.Codec.valueOf, enumValues: $1.Codec.values, defaultEnumValue: $1.Codec.CODEC_UNSPECIFIED)
+    ..pc<$1.Compression>(7, _omitFieldNames ? '' : 'relevantCompressions', $pb.PbFieldType.KE, valueOf: $1.Compression.valueOf, enumValues: $1.Compression.values, defaultEnumValue: $1.Compression.COMPRESSION_UNSPECIFIED)
+    ..e<TestSuite_ConnectVersionMode>(8, _omitFieldNames ? '' : 'connectVersionMode', $pb.PbFieldType.OE, defaultOrMaker: TestSuite_ConnectVersionMode.CONNECT_VERSION_MODE_UNSPECIFIED, valueOf: TestSuite_ConnectVersionMode.valueOf, enumValues: TestSuite_ConnectVersionMode.values)
     ..aOB(9, _omitFieldNames ? '' : 'reliesOnTls')
     ..aOB(10, _omitFieldNames ? '' : 'reliesOnTlsClientCerts')
     ..aOB(11, _omitFieldNames ? '' : 'reliesOnConnectGet')
     ..aOB(12, _omitFieldNames ? '' : 'reliesOnMessageReceiveLimit')
-    ..hasRequiredFields = false;
+    ..hasRequiredFields = false
+  ;
 
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   TestSuite clone() => TestSuite()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
-  TestSuite copyWith(void Function(TestSuite) updates) =>
-      super.copyWith((message) => updates(message as TestSuite)) as TestSuite;
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  TestSuite copyWith(void Function(TestSuite) updates) => super.copyWith((message) => updates(message as TestSuite)) as TestSuite;
 
   $pb.BuilderInfo get info_ => _i;
 
@@ -162,18 +130,14 @@ class TestSuite extends $pb.GeneratedMessage {
   TestSuite createEmptyInstance() => create();
   static $pb.PbList<TestSuite> createRepeated() => $pb.PbList<TestSuite>();
   @$core.pragma('dart2js:noInline')
-  static TestSuite getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<TestSuite>(create);
+  static TestSuite getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<TestSuite>(create);
   static TestSuite? _defaultInstance;
 
   /// Test suite name. When writing test suites, this is a required field.
   @$pb.TagNumber(1)
   $core.String get name => $_getSZ(0);
   @$pb.TagNumber(1)
-  set name($core.String v) {
-    $_setString(0, v);
-  }
-
+  set name($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasName() => $_has(0);
   @$pb.TagNumber(1)
@@ -187,10 +151,7 @@ class TestSuite extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   TestSuite_TestMode get mode => $_getN(1);
   @$pb.TagNumber(2)
-  set mode(TestSuite_TestMode v) {
-    setField(2, v);
-  }
-
+  set mode(TestSuite_TestMode v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasMode() => $_has(1);
   @$pb.TagNumber(2)
@@ -225,10 +186,7 @@ class TestSuite extends $pb.GeneratedMessage {
   @$pb.TagNumber(8)
   TestSuite_ConnectVersionMode get connectVersionMode => $_getN(7);
   @$pb.TagNumber(8)
-  set connectVersionMode(TestSuite_ConnectVersionMode v) {
-    setField(8, v);
-  }
-
+  set connectVersionMode(TestSuite_ConnectVersionMode v) { setField(8, v); }
   @$pb.TagNumber(8)
   $core.bool hasConnectVersionMode() => $_has(7);
   @$pb.TagNumber(8)
@@ -239,10 +197,7 @@ class TestSuite extends $pb.GeneratedMessage {
   @$pb.TagNumber(9)
   $core.bool get reliesOnTls => $_getBF(8);
   @$pb.TagNumber(9)
-  set reliesOnTls($core.bool v) {
-    $_setBool(8, v);
-  }
-
+  set reliesOnTls($core.bool v) { $_setBool(8, v); }
   @$pb.TagNumber(9)
   $core.bool hasReliesOnTls() => $_has(8);
   @$pb.TagNumber(9)
@@ -254,10 +209,7 @@ class TestSuite extends $pb.GeneratedMessage {
   @$pb.TagNumber(10)
   $core.bool get reliesOnTlsClientCerts => $_getBF(9);
   @$pb.TagNumber(10)
-  set reliesOnTlsClientCerts($core.bool v) {
-    $_setBool(9, v);
-  }
-
+  set reliesOnTlsClientCerts($core.bool v) { $_setBool(9, v); }
   @$pb.TagNumber(10)
   $core.bool hasReliesOnTlsClientCerts() => $_has(9);
   @$pb.TagNumber(10)
@@ -267,10 +219,7 @@ class TestSuite extends $pb.GeneratedMessage {
   @$pb.TagNumber(11)
   $core.bool get reliesOnConnectGet => $_getBF(10);
   @$pb.TagNumber(11)
-  set reliesOnConnectGet($core.bool v) {
-    $_setBool(10, v);
-  }
-
+  set reliesOnConnectGet($core.bool v) { $_setBool(10, v); }
   @$pb.TagNumber(11)
   $core.bool hasReliesOnConnectGet() => $_has(10);
   @$pb.TagNumber(11)
@@ -282,10 +231,7 @@ class TestSuite extends $pb.GeneratedMessage {
   @$pb.TagNumber(12)
   $core.bool get reliesOnMessageReceiveLimit => $_getBF(11);
   @$pb.TagNumber(12)
-  set reliesOnMessageReceiveLimit($core.bool v) {
-    $_setBool(11, v);
-  }
-
+  set reliesOnMessageReceiveLimit($core.bool v) { $_setBool(11, v); }
   @$pb.TagNumber(12)
   $core.bool hasReliesOnMessageReceiveLimit() => $_has(11);
   @$pb.TagNumber(12)
@@ -303,45 +249,33 @@ class TestCase_ExpandedSize extends $pb.GeneratedMessage {
     return $result;
   }
   TestCase_ExpandedSize._() : super();
-  factory TestCase_ExpandedSize.fromBuffer($core.List<$core.int> i,
-          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
-  factory TestCase_ExpandedSize.fromJson($core.String i,
-          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromJson(i, r);
+  factory TestCase_ExpandedSize.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory TestCase_ExpandedSize.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'TestCase.ExpandedSize',
-      package: const $pb.PackageName(
-          _omitMessageNames ? '' : 'connectrpc.conformance.v1'),
-      createEmptyInstance: create)
-    ..a<$core.int>(
-        1, _omitFieldNames ? '' : 'sizeRelativeToLimit', $pb.PbFieldType.O3)
-    ..hasRequiredFields = false;
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'TestCase.ExpandedSize', package: const $pb.PackageName(_omitMessageNames ? '' : 'connectrpc.conformance.v1'), createEmptyInstance: create)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'sizeRelativeToLimit', $pb.PbFieldType.O3)
+    ..hasRequiredFields = false
+  ;
 
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
-  TestCase_ExpandedSize clone() =>
-      TestCase_ExpandedSize()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
-  TestCase_ExpandedSize copyWith(
-          void Function(TestCase_ExpandedSize) updates) =>
-      super.copyWith((message) => updates(message as TestCase_ExpandedSize))
-          as TestCase_ExpandedSize;
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  TestCase_ExpandedSize clone() => TestCase_ExpandedSize()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  TestCase_ExpandedSize copyWith(void Function(TestCase_ExpandedSize) updates) => super.copyWith((message) => updates(message as TestCase_ExpandedSize)) as TestCase_ExpandedSize;
 
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
   static TestCase_ExpandedSize create() => TestCase_ExpandedSize._();
   TestCase_ExpandedSize createEmptyInstance() => create();
-  static $pb.PbList<TestCase_ExpandedSize> createRepeated() =>
-      $pb.PbList<TestCase_ExpandedSize>();
+  static $pb.PbList<TestCase_ExpandedSize> createRepeated() => $pb.PbList<TestCase_ExpandedSize>();
   @$core.pragma('dart2js:noInline')
-  static TestCase_ExpandedSize getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<TestCase_ExpandedSize>(create);
+  static TestCase_ExpandedSize getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<TestCase_ExpandedSize>(create);
   static TestCase_ExpandedSize? _defaultInstance;
 
   /// The size, in bytes, relative to the limit. For example, to expand to a
@@ -351,10 +285,7 @@ class TestCase_ExpandedSize extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $core.int get sizeRelativeToLimit => $_getIZ(0);
   @$pb.TagNumber(1)
-  set sizeRelativeToLimit($core.int v) {
-    $_setSignedInt32(0, v);
-  }
-
+  set sizeRelativeToLimit($core.int v) { $_setSignedInt32(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasSizeRelativeToLimit() => $_has(0);
   @$pb.TagNumber(1)
@@ -384,41 +315,27 @@ class TestCase extends $pb.GeneratedMessage {
     return $result;
   }
   TestCase._() : super();
-  factory TestCase.fromBuffer($core.List<$core.int> i,
-          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
-  factory TestCase.fromJson($core.String i,
-          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromJson(i, r);
+  factory TestCase.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory TestCase.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'TestCase',
-      package: const $pb.PackageName(
-          _omitMessageNames ? '' : 'connectrpc.conformance.v1'),
-      createEmptyInstance: create)
-    ..aOM<$5.ClientCompatRequest>(1, _omitFieldNames ? '' : 'request',
-        subBuilder: $5.ClientCompatRequest.create)
-    ..pc<TestCase_ExpandedSize>(
-        2, _omitFieldNames ? '' : 'expandRequests', $pb.PbFieldType.PM,
-        subBuilder: TestCase_ExpandedSize.create)
-    ..aOM<$5.ClientResponseResult>(3, _omitFieldNames ? '' : 'expectedResponse',
-        subBuilder: $5.ClientResponseResult.create)
-    ..pc<$1.Code>(
-        4, _omitFieldNames ? '' : 'otherAllowedErrorCodes', $pb.PbFieldType.KE,
-        valueOf: $1.Code.valueOf,
-        enumValues: $1.Code.values,
-        defaultEnumValue: $1.Code.CODE_UNSPECIFIED)
-    ..hasRequiredFields = false;
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'TestCase', package: const $pb.PackageName(_omitMessageNames ? '' : 'connectrpc.conformance.v1'), createEmptyInstance: create)
+    ..aOM<$5.ClientCompatRequest>(1, _omitFieldNames ? '' : 'request', subBuilder: $5.ClientCompatRequest.create)
+    ..pc<TestCase_ExpandedSize>(2, _omitFieldNames ? '' : 'expandRequests', $pb.PbFieldType.PM, subBuilder: TestCase_ExpandedSize.create)
+    ..aOM<$5.ClientResponseResult>(3, _omitFieldNames ? '' : 'expectedResponse', subBuilder: $5.ClientResponseResult.create)
+    ..pc<$1.Code>(4, _omitFieldNames ? '' : 'otherAllowedErrorCodes', $pb.PbFieldType.KE, valueOf: $1.Code.valueOf, enumValues: $1.Code.values, defaultEnumValue: $1.Code.CODE_UNSPECIFIED)
+    ..hasRequiredFields = false
+  ;
 
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   TestCase clone() => TestCase()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
-  TestCase copyWith(void Function(TestCase) updates) =>
-      super.copyWith((message) => updates(message as TestCase)) as TestCase;
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  TestCase copyWith(void Function(TestCase) updates) => super.copyWith((message) => updates(message as TestCase)) as TestCase;
 
   $pb.BuilderInfo get info_ => _i;
 
@@ -427,8 +344,7 @@ class TestCase extends $pb.GeneratedMessage {
   TestCase createEmptyInstance() => create();
   static $pb.PbList<TestCase> createRepeated() => $pb.PbList<TestCase>();
   @$core.pragma('dart2js:noInline')
-  static TestCase getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<TestCase>(create);
+  static TestCase getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<TestCase>(create);
   static TestCase? _defaultInstance;
 
   /// Defines the RPC that the client should invoke. The first eight fields
@@ -442,10 +358,7 @@ class TestCase extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $5.ClientCompatRequest get request => $_getN(0);
   @$pb.TagNumber(1)
-  set request($5.ClientCompatRequest v) {
-    setField(1, v);
-  }
-
+  set request($5.ClientCompatRequest v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasRequest() => $_has(0);
   @$pb.TagNumber(1)
@@ -489,10 +402,7 @@ class TestCase extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   $5.ClientResponseResult get expectedResponse => $_getN(2);
   @$pb.TagNumber(3)
-  set expectedResponse($5.ClientResponseResult v) {
-    setField(3, v);
-  }
-
+  set expectedResponse($5.ClientResponseResult v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasExpectedResponse() => $_has(2);
   @$pb.TagNumber(3)
@@ -509,6 +419,6 @@ class TestCase extends $pb.GeneratedMessage {
   $core.List<$1.Code> get otherAllowedErrorCodes => $_getList(3);
 }
 
+
 const _omitFieldNames = $core.bool.fromEnvironment('protobuf.omit_field_names');
-const _omitMessageNames =
-    $core.bool.fromEnvironment('protobuf.omit_message_names');
+const _omitMessageNames = $core.bool.fromEnvironment('protobuf.omit_message_names');

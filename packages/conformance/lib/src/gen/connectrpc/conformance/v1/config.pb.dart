@@ -52,37 +52,26 @@ class Config extends $pb.GeneratedMessage {
     return $result;
   }
   Config._() : super();
-  factory Config.fromBuffer($core.List<$core.int> i,
-          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
-  factory Config.fromJson($core.String i,
-          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromJson(i, r);
+  factory Config.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory Config.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'Config',
-      package: const $pb.PackageName(
-          _omitMessageNames ? '' : 'connectrpc.conformance.v1'),
-      createEmptyInstance: create)
-    ..aOM<Features>(1, _omitFieldNames ? '' : 'features',
-        subBuilder: Features.create)
-    ..pc<ConfigCase>(
-        2, _omitFieldNames ? '' : 'includeCases', $pb.PbFieldType.PM,
-        subBuilder: ConfigCase.create)
-    ..pc<ConfigCase>(
-        3, _omitFieldNames ? '' : 'excludeCases', $pb.PbFieldType.PM,
-        subBuilder: ConfigCase.create)
-    ..hasRequiredFields = false;
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Config', package: const $pb.PackageName(_omitMessageNames ? '' : 'connectrpc.conformance.v1'), createEmptyInstance: create)
+    ..aOM<Features>(1, _omitFieldNames ? '' : 'features', subBuilder: Features.create)
+    ..pc<ConfigCase>(2, _omitFieldNames ? '' : 'includeCases', $pb.PbFieldType.PM, subBuilder: ConfigCase.create)
+    ..pc<ConfigCase>(3, _omitFieldNames ? '' : 'excludeCases', $pb.PbFieldType.PM, subBuilder: ConfigCase.create)
+    ..hasRequiredFields = false
+  ;
 
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   Config clone() => Config()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
-  Config copyWith(void Function(Config) updates) =>
-      super.copyWith((message) => updates(message as Config)) as Config;
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  Config copyWith(void Function(Config) updates) => super.copyWith((message) => updates(message as Config)) as Config;
 
   $pb.BuilderInfo get info_ => _i;
 
@@ -91,8 +80,7 @@ class Config extends $pb.GeneratedMessage {
   Config createEmptyInstance() => create();
   static $pb.PbList<Config> createRepeated() => $pb.PbList<Config>();
   @$core.pragma('dart2js:noInline')
-  static Config getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Config>(create);
+  static Config getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Config>(create);
   static Config? _defaultInstance;
 
   /// The features supported by the client or server under test.
@@ -102,10 +90,7 @@ class Config extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   Features get features => $_getN(0);
   @$pb.TagNumber(1)
-  set features(Features v) {
-    setField(1, v);
-  }
-
+  set features(Features v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasFeatures() => $_has(0);
   @$pb.TagNumber(1)
@@ -183,40 +168,15 @@ class Features extends $pb.GeneratedMessage {
     return $result;
   }
   Features._() : super();
-  factory Features.fromBuffer($core.List<$core.int> i,
-          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
-  factory Features.fromJson($core.String i,
-          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromJson(i, r);
+  factory Features.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory Features.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'Features',
-      package: const $pb.PackageName(
-          _omitMessageNames ? '' : 'connectrpc.conformance.v1'),
-      createEmptyInstance: create)
-    ..pc<HTTPVersion>(1, _omitFieldNames ? '' : 'versions', $pb.PbFieldType.KE,
-        valueOf: HTTPVersion.valueOf,
-        enumValues: HTTPVersion.values,
-        defaultEnumValue: HTTPVersion.HTTP_VERSION_UNSPECIFIED)
-    ..pc<Protocol>(2, _omitFieldNames ? '' : 'protocols', $pb.PbFieldType.KE,
-        valueOf: Protocol.valueOf,
-        enumValues: Protocol.values,
-        defaultEnumValue: Protocol.PROTOCOL_UNSPECIFIED)
-    ..pc<Codec>(3, _omitFieldNames ? '' : 'codecs', $pb.PbFieldType.KE,
-        valueOf: Codec.valueOf,
-        enumValues: Codec.values,
-        defaultEnumValue: Codec.CODEC_UNSPECIFIED)
-    ..pc<Compression>(
-        4, _omitFieldNames ? '' : 'compressions', $pb.PbFieldType.KE,
-        valueOf: Compression.valueOf,
-        enumValues: Compression.values,
-        defaultEnumValue: Compression.COMPRESSION_UNSPECIFIED)
-    ..pc<StreamType>(
-        5, _omitFieldNames ? '' : 'streamTypes', $pb.PbFieldType.KE,
-        valueOf: StreamType.valueOf,
-        enumValues: StreamType.values,
-        defaultEnumValue: StreamType.STREAM_TYPE_UNSPECIFIED)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Features', package: const $pb.PackageName(_omitMessageNames ? '' : 'connectrpc.conformance.v1'), createEmptyInstance: create)
+    ..pc<HTTPVersion>(1, _omitFieldNames ? '' : 'versions', $pb.PbFieldType.KE, valueOf: HTTPVersion.valueOf, enumValues: HTTPVersion.values, defaultEnumValue: HTTPVersion.HTTP_VERSION_UNSPECIFIED)
+    ..pc<Protocol>(2, _omitFieldNames ? '' : 'protocols', $pb.PbFieldType.KE, valueOf: Protocol.valueOf, enumValues: Protocol.values, defaultEnumValue: Protocol.PROTOCOL_UNSPECIFIED)
+    ..pc<Codec>(3, _omitFieldNames ? '' : 'codecs', $pb.PbFieldType.KE, valueOf: Codec.valueOf, enumValues: Codec.values, defaultEnumValue: Codec.CODEC_UNSPECIFIED)
+    ..pc<Compression>(4, _omitFieldNames ? '' : 'compressions', $pb.PbFieldType.KE, valueOf: Compression.valueOf, enumValues: Compression.values, defaultEnumValue: Compression.COMPRESSION_UNSPECIFIED)
+    ..pc<StreamType>(5, _omitFieldNames ? '' : 'streamTypes', $pb.PbFieldType.KE, valueOf: StreamType.valueOf, enumValues: StreamType.values, defaultEnumValue: StreamType.STREAM_TYPE_UNSPECIFIED)
     ..aOB(6, _omitFieldNames ? '' : 'supportsH2c')
     ..aOB(7, _omitFieldNames ? '' : 'supportsTls')
     ..aOB(8, _omitFieldNames ? '' : 'supportsTlsClientCerts')
@@ -224,17 +184,19 @@ class Features extends $pb.GeneratedMessage {
     ..aOB(10, _omitFieldNames ? '' : 'supportsHalfDuplexBidiOverHttp1')
     ..aOB(11, _omitFieldNames ? '' : 'supportsConnectGet')
     ..aOB(12, _omitFieldNames ? '' : 'supportsMessageReceiveLimit')
-    ..hasRequiredFields = false;
+    ..hasRequiredFields = false
+  ;
 
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   Features clone() => Features()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
-  Features copyWith(void Function(Features) updates) =>
-      super.copyWith((message) => updates(message as Features)) as Features;
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  Features copyWith(void Function(Features) updates) => super.copyWith((message) => updates(message as Features)) as Features;
 
   $pb.BuilderInfo get info_ => _i;
 
@@ -243,8 +205,7 @@ class Features extends $pb.GeneratedMessage {
   Features createEmptyInstance() => create();
   static $pb.PbList<Features> createRepeated() => $pb.PbList<Features>();
   @$core.pragma('dart2js:noInline')
-  static Features getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Features>(create);
+  static Features getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Features>(create);
   static Features? _defaultInstance;
 
   /// Supported HTTP versions.
@@ -280,10 +241,7 @@ class Features extends $pb.GeneratedMessage {
   @$pb.TagNumber(6)
   $core.bool get supportsH2c => $_getBF(5);
   @$pb.TagNumber(6)
-  set supportsH2c($core.bool v) {
-    $_setBool(5, v);
-  }
-
+  set supportsH2c($core.bool v) { $_setBool(5, v); }
   @$pb.TagNumber(6)
   $core.bool hasSupportsH2c() => $_has(5);
   @$pb.TagNumber(6)
@@ -294,10 +252,7 @@ class Features extends $pb.GeneratedMessage {
   @$pb.TagNumber(7)
   $core.bool get supportsTls => $_getBF(6);
   @$pb.TagNumber(7)
-  set supportsTls($core.bool v) {
-    $_setBool(6, v);
-  }
-
+  set supportsTls($core.bool v) { $_setBool(6, v); }
   @$pb.TagNumber(7)
   $core.bool hasSupportsTls() => $_has(6);
   @$pb.TagNumber(7)
@@ -309,10 +264,7 @@ class Features extends $pb.GeneratedMessage {
   @$pb.TagNumber(8)
   $core.bool get supportsTlsClientCerts => $_getBF(7);
   @$pb.TagNumber(8)
-  set supportsTlsClientCerts($core.bool v) {
-    $_setBool(7, v);
-  }
-
+  set supportsTlsClientCerts($core.bool v) { $_setBool(7, v); }
   @$pb.TagNumber(8)
   $core.bool hasSupportsTlsClientCerts() => $_has(7);
   @$pb.TagNumber(8)
@@ -323,10 +275,7 @@ class Features extends $pb.GeneratedMessage {
   @$pb.TagNumber(9)
   $core.bool get supportsTrailers => $_getBF(8);
   @$pb.TagNumber(9)
-  set supportsTrailers($core.bool v) {
-    $_setBool(8, v);
-  }
-
+  set supportsTrailers($core.bool v) { $_setBool(8, v); }
   @$pb.TagNumber(9)
   $core.bool hasSupportsTrailers() => $_has(8);
   @$pb.TagNumber(9)
@@ -337,10 +286,7 @@ class Features extends $pb.GeneratedMessage {
   @$pb.TagNumber(10)
   $core.bool get supportsHalfDuplexBidiOverHttp1 => $_getBF(9);
   @$pb.TagNumber(10)
-  set supportsHalfDuplexBidiOverHttp1($core.bool v) {
-    $_setBool(9, v);
-  }
-
+  set supportsHalfDuplexBidiOverHttp1($core.bool v) { $_setBool(9, v); }
   @$pb.TagNumber(10)
   $core.bool hasSupportsHalfDuplexBidiOverHttp1() => $_has(9);
   @$pb.TagNumber(10)
@@ -351,10 +297,7 @@ class Features extends $pb.GeneratedMessage {
   @$pb.TagNumber(11)
   $core.bool get supportsConnectGet => $_getBF(10);
   @$pb.TagNumber(11)
-  set supportsConnectGet($core.bool v) {
-    $_setBool(10, v);
-  }
-
+  set supportsConnectGet($core.bool v) { $_setBool(10, v); }
   @$pb.TagNumber(11)
   $core.bool hasSupportsConnectGet() => $_has(10);
   @$pb.TagNumber(11)
@@ -365,10 +308,7 @@ class Features extends $pb.GeneratedMessage {
   @$pb.TagNumber(12)
   $core.bool get supportsMessageReceiveLimit => $_getBF(11);
   @$pb.TagNumber(12)
-  set supportsMessageReceiveLimit($core.bool v) {
-    $_setBool(11, v);
-  }
-
+  set supportsMessageReceiveLimit($core.bool v) { $_setBool(11, v); }
   @$pb.TagNumber(12)
   $core.bool hasSupportsMessageReceiveLimit() => $_has(11);
   @$pb.TagNumber(12)
@@ -418,53 +358,31 @@ class ConfigCase extends $pb.GeneratedMessage {
     return $result;
   }
   ConfigCase._() : super();
-  factory ConfigCase.fromBuffer($core.List<$core.int> i,
-          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
-  factory ConfigCase.fromJson($core.String i,
-          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromJson(i, r);
+  factory ConfigCase.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ConfigCase.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'ConfigCase',
-      package: const $pb.PackageName(
-          _omitMessageNames ? '' : 'connectrpc.conformance.v1'),
-      createEmptyInstance: create)
-    ..e<HTTPVersion>(1, _omitFieldNames ? '' : 'version', $pb.PbFieldType.OE,
-        defaultOrMaker: HTTPVersion.HTTP_VERSION_UNSPECIFIED,
-        valueOf: HTTPVersion.valueOf,
-        enumValues: HTTPVersion.values)
-    ..e<Protocol>(2, _omitFieldNames ? '' : 'protocol', $pb.PbFieldType.OE,
-        defaultOrMaker: Protocol.PROTOCOL_UNSPECIFIED,
-        valueOf: Protocol.valueOf,
-        enumValues: Protocol.values)
-    ..e<Codec>(3, _omitFieldNames ? '' : 'codec', $pb.PbFieldType.OE,
-        defaultOrMaker: Codec.CODEC_UNSPECIFIED,
-        valueOf: Codec.valueOf,
-        enumValues: Codec.values)
-    ..e<Compression>(
-        4, _omitFieldNames ? '' : 'compression', $pb.PbFieldType.OE,
-        defaultOrMaker: Compression.COMPRESSION_UNSPECIFIED,
-        valueOf: Compression.valueOf,
-        enumValues: Compression.values)
-    ..e<StreamType>(5, _omitFieldNames ? '' : 'streamType', $pb.PbFieldType.OE,
-        defaultOrMaker: StreamType.STREAM_TYPE_UNSPECIFIED,
-        valueOf: StreamType.valueOf,
-        enumValues: StreamType.values)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ConfigCase', package: const $pb.PackageName(_omitMessageNames ? '' : 'connectrpc.conformance.v1'), createEmptyInstance: create)
+    ..e<HTTPVersion>(1, _omitFieldNames ? '' : 'version', $pb.PbFieldType.OE, defaultOrMaker: HTTPVersion.HTTP_VERSION_UNSPECIFIED, valueOf: HTTPVersion.valueOf, enumValues: HTTPVersion.values)
+    ..e<Protocol>(2, _omitFieldNames ? '' : 'protocol', $pb.PbFieldType.OE, defaultOrMaker: Protocol.PROTOCOL_UNSPECIFIED, valueOf: Protocol.valueOf, enumValues: Protocol.values)
+    ..e<Codec>(3, _omitFieldNames ? '' : 'codec', $pb.PbFieldType.OE, defaultOrMaker: Codec.CODEC_UNSPECIFIED, valueOf: Codec.valueOf, enumValues: Codec.values)
+    ..e<Compression>(4, _omitFieldNames ? '' : 'compression', $pb.PbFieldType.OE, defaultOrMaker: Compression.COMPRESSION_UNSPECIFIED, valueOf: Compression.valueOf, enumValues: Compression.values)
+    ..e<StreamType>(5, _omitFieldNames ? '' : 'streamType', $pb.PbFieldType.OE, defaultOrMaker: StreamType.STREAM_TYPE_UNSPECIFIED, valueOf: StreamType.valueOf, enumValues: StreamType.values)
     ..aOB(6, _omitFieldNames ? '' : 'useTls')
     ..aOB(7, _omitFieldNames ? '' : 'useTlsClientCerts')
     ..aOB(8, _omitFieldNames ? '' : 'useMessageReceiveLimit')
-    ..hasRequiredFields = false;
+    ..hasRequiredFields = false
+  ;
 
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   ConfigCase clone() => ConfigCase()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
-  ConfigCase copyWith(void Function(ConfigCase) updates) =>
-      super.copyWith((message) => updates(message as ConfigCase)) as ConfigCase;
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ConfigCase copyWith(void Function(ConfigCase) updates) => super.copyWith((message) => updates(message as ConfigCase)) as ConfigCase;
 
   $pb.BuilderInfo get info_ => _i;
 
@@ -473,18 +391,14 @@ class ConfigCase extends $pb.GeneratedMessage {
   ConfigCase createEmptyInstance() => create();
   static $pb.PbList<ConfigCase> createRepeated() => $pb.PbList<ConfigCase>();
   @$core.pragma('dart2js:noInline')
-  static ConfigCase getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<ConfigCase>(create);
+  static ConfigCase getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ConfigCase>(create);
   static ConfigCase? _defaultInstance;
 
   /// If unspecified, indicates cases for all versions.
   @$pb.TagNumber(1)
   HTTPVersion get version => $_getN(0);
   @$pb.TagNumber(1)
-  set version(HTTPVersion v) {
-    setField(1, v);
-  }
-
+  set version(HTTPVersion v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasVersion() => $_has(0);
   @$pb.TagNumber(1)
@@ -494,10 +408,7 @@ class ConfigCase extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   Protocol get protocol => $_getN(1);
   @$pb.TagNumber(2)
-  set protocol(Protocol v) {
-    setField(2, v);
-  }
-
+  set protocol(Protocol v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasProtocol() => $_has(1);
   @$pb.TagNumber(2)
@@ -507,10 +418,7 @@ class ConfigCase extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   Codec get codec => $_getN(2);
   @$pb.TagNumber(3)
-  set codec(Codec v) {
-    setField(3, v);
-  }
-
+  set codec(Codec v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasCodec() => $_has(2);
   @$pb.TagNumber(3)
@@ -520,10 +428,7 @@ class ConfigCase extends $pb.GeneratedMessage {
   @$pb.TagNumber(4)
   Compression get compression => $_getN(3);
   @$pb.TagNumber(4)
-  set compression(Compression v) {
-    setField(4, v);
-  }
-
+  set compression(Compression v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasCompression() => $_has(3);
   @$pb.TagNumber(4)
@@ -533,10 +438,7 @@ class ConfigCase extends $pb.GeneratedMessage {
   @$pb.TagNumber(5)
   StreamType get streamType => $_getN(4);
   @$pb.TagNumber(5)
-  set streamType(StreamType v) {
-    setField(5, v);
-  }
-
+  set streamType(StreamType v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasStreamType() => $_has(4);
   @$pb.TagNumber(5)
@@ -547,10 +449,7 @@ class ConfigCase extends $pb.GeneratedMessage {
   @$pb.TagNumber(6)
   $core.bool get useTls => $_getBF(5);
   @$pb.TagNumber(6)
-  set useTls($core.bool v) {
-    $_setBool(5, v);
-  }
-
+  set useTls($core.bool v) { $_setBool(5, v); }
   @$pb.TagNumber(6)
   $core.bool hasUseTls() => $_has(5);
   @$pb.TagNumber(6)
@@ -561,10 +460,7 @@ class ConfigCase extends $pb.GeneratedMessage {
   @$pb.TagNumber(7)
   $core.bool get useTlsClientCerts => $_getBF(6);
   @$pb.TagNumber(7)
-  set useTlsClientCerts($core.bool v) {
-    $_setBool(6, v);
-  }
-
+  set useTlsClientCerts($core.bool v) { $_setBool(6, v); }
   @$pb.TagNumber(7)
   $core.bool hasUseTlsClientCerts() => $_has(6);
   @$pb.TagNumber(7)
@@ -576,10 +472,7 @@ class ConfigCase extends $pb.GeneratedMessage {
   @$pb.TagNumber(8)
   $core.bool get useMessageReceiveLimit => $_getBF(7);
   @$pb.TagNumber(8)
-  set useMessageReceiveLimit($core.bool v) {
-    $_setBool(7, v);
-  }
-
+  set useMessageReceiveLimit($core.bool v) { $_setBool(7, v); }
   @$pb.TagNumber(8)
   $core.bool hasUseMessageReceiveLimit() => $_has(7);
   @$pb.TagNumber(8)
@@ -604,33 +497,25 @@ class TLSCreds extends $pb.GeneratedMessage {
     return $result;
   }
   TLSCreds._() : super();
-  factory TLSCreds.fromBuffer($core.List<$core.int> i,
-          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
-  factory TLSCreds.fromJson($core.String i,
-          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromJson(i, r);
+  factory TLSCreds.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory TLSCreds.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'TLSCreds',
-      package: const $pb.PackageName(
-          _omitMessageNames ? '' : 'connectrpc.conformance.v1'),
-      createEmptyInstance: create)
-    ..a<$core.List<$core.int>>(
-        1, _omitFieldNames ? '' : 'cert', $pb.PbFieldType.OY)
-    ..a<$core.List<$core.int>>(
-        2, _omitFieldNames ? '' : 'key', $pb.PbFieldType.OY)
-    ..hasRequiredFields = false;
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'TLSCreds', package: const $pb.PackageName(_omitMessageNames ? '' : 'connectrpc.conformance.v1'), createEmptyInstance: create)
+    ..a<$core.List<$core.int>>(1, _omitFieldNames ? '' : 'cert', $pb.PbFieldType.OY)
+    ..a<$core.List<$core.int>>(2, _omitFieldNames ? '' : 'key', $pb.PbFieldType.OY)
+    ..hasRequiredFields = false
+  ;
 
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   TLSCreds clone() => TLSCreds()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
-  TLSCreds copyWith(void Function(TLSCreds) updates) =>
-      super.copyWith((message) => updates(message as TLSCreds)) as TLSCreds;
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  TLSCreds copyWith(void Function(TLSCreds) updates) => super.copyWith((message) => updates(message as TLSCreds)) as TLSCreds;
 
   $pb.BuilderInfo get info_ => _i;
 
@@ -639,17 +524,13 @@ class TLSCreds extends $pb.GeneratedMessage {
   TLSCreds createEmptyInstance() => create();
   static $pb.PbList<TLSCreds> createRepeated() => $pb.PbList<TLSCreds>();
   @$core.pragma('dart2js:noInline')
-  static TLSCreds getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<TLSCreds>(create);
+  static TLSCreds getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<TLSCreds>(create);
   static TLSCreds? _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.List<$core.int> get cert => $_getN(0);
   @$pb.TagNumber(1)
-  set cert($core.List<$core.int> v) {
-    $_setBytes(0, v);
-  }
-
+  set cert($core.List<$core.int> v) { $_setBytes(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasCert() => $_has(0);
   @$pb.TagNumber(1)
@@ -658,16 +539,13 @@ class TLSCreds extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   $core.List<$core.int> get key => $_getN(1);
   @$pb.TagNumber(2)
-  set key($core.List<$core.int> v) {
-    $_setBytes(1, v);
-  }
-
+  set key($core.List<$core.int> v) { $_setBytes(1, v); }
   @$pb.TagNumber(2)
   $core.bool hasKey() => $_has(1);
   @$pb.TagNumber(2)
   void clearKey() => clearField(2);
 }
 
+
 const _omitFieldNames = $core.bool.fromEnvironment('protobuf.omit_field_names');
-const _omitMessageNames =
-    $core.bool.fromEnvironment('protobuf.omit_message_names');
+const _omitMessageNames = $core.bool.fromEnvironment('protobuf.omit_message_names');

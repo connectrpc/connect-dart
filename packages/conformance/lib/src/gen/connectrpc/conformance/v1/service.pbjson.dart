@@ -33,54 +33,12 @@ import '../../../google/protobuf/any.pbjson.dart' as $0;
 const UnaryResponseDefinition$json = {
   '1': 'UnaryResponseDefinition',
   '2': [
-    {
-      '1': 'response_headers',
-      '3': 1,
-      '4': 3,
-      '5': 11,
-      '6': '.connectrpc.conformance.v1.Header',
-      '10': 'responseHeaders'
-    },
-    {
-      '1': 'response_data',
-      '3': 2,
-      '4': 1,
-      '5': 12,
-      '9': 0,
-      '10': 'responseData'
-    },
-    {
-      '1': 'error',
-      '3': 3,
-      '4': 1,
-      '5': 11,
-      '6': '.connectrpc.conformance.v1.Error',
-      '9': 0,
-      '10': 'error'
-    },
-    {
-      '1': 'response_trailers',
-      '3': 4,
-      '4': 3,
-      '5': 11,
-      '6': '.connectrpc.conformance.v1.Header',
-      '10': 'responseTrailers'
-    },
-    {
-      '1': 'response_delay_ms',
-      '3': 6,
-      '4': 1,
-      '5': 13,
-      '10': 'responseDelayMs'
-    },
-    {
-      '1': 'raw_response',
-      '3': 5,
-      '4': 1,
-      '5': 11,
-      '6': '.connectrpc.conformance.v1.RawHTTPResponse',
-      '10': 'rawResponse'
-    },
+    {'1': 'response_headers', '3': 1, '4': 3, '5': 11, '6': '.connectrpc.conformance.v1.Header', '10': 'responseHeaders'},
+    {'1': 'response_data', '3': 2, '4': 1, '5': 12, '9': 0, '10': 'responseData'},
+    {'1': 'error', '3': 3, '4': 1, '5': 11, '6': '.connectrpc.conformance.v1.Error', '9': 0, '10': 'error'},
+    {'1': 'response_trailers', '3': 4, '4': 3, '5': 11, '6': '.connectrpc.conformance.v1.Header', '10': 'responseTrailers'},
+    {'1': 'response_delay_ms', '3': 6, '4': 1, '5': 13, '10': 'responseDelayMs'},
+    {'1': 'raw_response', '3': 5, '4': 1, '5': 11, '6': '.connectrpc.conformance.v1.RawHTTPResponse', '10': 'rawResponse'},
   ],
   '8': [
     {'1': 'response'},
@@ -102,46 +60,12 @@ final $typed_data.Uint8List unaryResponseDefinitionDescriptor = $convert.base64D
 const StreamResponseDefinition$json = {
   '1': 'StreamResponseDefinition',
   '2': [
-    {
-      '1': 'response_headers',
-      '3': 1,
-      '4': 3,
-      '5': 11,
-      '6': '.connectrpc.conformance.v1.Header',
-      '10': 'responseHeaders'
-    },
+    {'1': 'response_headers', '3': 1, '4': 3, '5': 11, '6': '.connectrpc.conformance.v1.Header', '10': 'responseHeaders'},
     {'1': 'response_data', '3': 2, '4': 3, '5': 12, '10': 'responseData'},
-    {
-      '1': 'response_delay_ms',
-      '3': 3,
-      '4': 1,
-      '5': 13,
-      '10': 'responseDelayMs'
-    },
-    {
-      '1': 'error',
-      '3': 4,
-      '4': 1,
-      '5': 11,
-      '6': '.connectrpc.conformance.v1.Error',
-      '10': 'error'
-    },
-    {
-      '1': 'response_trailers',
-      '3': 5,
-      '4': 3,
-      '5': 11,
-      '6': '.connectrpc.conformance.v1.Header',
-      '10': 'responseTrailers'
-    },
-    {
-      '1': 'raw_response',
-      '3': 6,
-      '4': 1,
-      '5': 11,
-      '6': '.connectrpc.conformance.v1.RawHTTPResponse',
-      '10': 'rawResponse'
-    },
+    {'1': 'response_delay_ms', '3': 3, '4': 1, '5': 13, '10': 'responseDelayMs'},
+    {'1': 'error', '3': 4, '4': 1, '5': 11, '6': '.connectrpc.conformance.v1.Error', '10': 'error'},
+    {'1': 'response_trailers', '3': 5, '4': 3, '5': 11, '6': '.connectrpc.conformance.v1.Header', '10': 'responseTrailers'},
+    {'1': 'raw_response', '3': 6, '4': 1, '5': 11, '6': '.connectrpc.conformance.v1.RawHTTPResponse', '10': 'rawResponse'},
   ],
 };
 
@@ -160,14 +84,7 @@ final $typed_data.Uint8List streamResponseDefinitionDescriptor = $convert.base64
 const UnaryRequest$json = {
   '1': 'UnaryRequest',
   '2': [
-    {
-      '1': 'response_definition',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.connectrpc.conformance.v1.UnaryResponseDefinition',
-      '10': 'responseDefinition'
-    },
+    {'1': 'response_definition', '3': 1, '4': 1, '5': 11, '6': '.connectrpc.conformance.v1.UnaryResponseDefinition', '10': 'responseDefinition'},
     {'1': 'request_data', '3': 2, '4': 1, '5': 12, '10': 'requestData'},
   ],
 };
@@ -182,14 +99,7 @@ final $typed_data.Uint8List unaryRequestDescriptor = $convert.base64Decode(
 const UnaryResponse$json = {
   '1': 'UnaryResponse',
   '2': [
-    {
-      '1': 'payload',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.connectrpc.conformance.v1.ConformancePayload',
-      '10': 'payload'
-    },
+    {'1': 'payload', '3': 1, '4': 1, '5': 11, '6': '.connectrpc.conformance.v1.ConformancePayload', '10': 'payload'},
   ],
 };
 
@@ -202,14 +112,7 @@ final $typed_data.Uint8List unaryResponseDescriptor = $convert.base64Decode(
 const IdempotentUnaryRequest$json = {
   '1': 'IdempotentUnaryRequest',
   '2': [
-    {
-      '1': 'response_definition',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.connectrpc.conformance.v1.UnaryResponseDefinition',
-      '10': 'responseDefinition'
-    },
+    {'1': 'response_definition', '3': 1, '4': 1, '5': 11, '6': '.connectrpc.conformance.v1.UnaryResponseDefinition', '10': 'responseDefinition'},
     {'1': 'request_data', '3': 2, '4': 1, '5': 12, '10': 'requestData'},
   ],
 };
@@ -224,35 +127,20 @@ final $typed_data.Uint8List idempotentUnaryRequestDescriptor = $convert.base64De
 const IdempotentUnaryResponse$json = {
   '1': 'IdempotentUnaryResponse',
   '2': [
-    {
-      '1': 'payload',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.connectrpc.conformance.v1.ConformancePayload',
-      '10': 'payload'
-    },
+    {'1': 'payload', '3': 1, '4': 1, '5': 11, '6': '.connectrpc.conformance.v1.ConformancePayload', '10': 'payload'},
   ],
 };
 
 /// Descriptor for `IdempotentUnaryResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List idempotentUnaryResponseDescriptor =
-    $convert.base64Decode(
-        'ChdJZGVtcG90ZW50VW5hcnlSZXNwb25zZRJHCgdwYXlsb2FkGAEgASgLMi0uY29ubmVjdHJwYy'
-        '5jb25mb3JtYW5jZS52MS5Db25mb3JtYW5jZVBheWxvYWRSB3BheWxvYWQ=');
+final $typed_data.Uint8List idempotentUnaryResponseDescriptor = $convert.base64Decode(
+    'ChdJZGVtcG90ZW50VW5hcnlSZXNwb25zZRJHCgdwYXlsb2FkGAEgASgLMi0uY29ubmVjdHJwYy'
+    '5jb25mb3JtYW5jZS52MS5Db25mb3JtYW5jZVBheWxvYWRSB3BheWxvYWQ=');
 
 @$core.Deprecated('Use serverStreamRequestDescriptor instead')
 const ServerStreamRequest$json = {
   '1': 'ServerStreamRequest',
   '2': [
-    {
-      '1': 'response_definition',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.connectrpc.conformance.v1.StreamResponseDefinition',
-      '10': 'responseDefinition'
-    },
+    {'1': 'response_definition', '3': 1, '4': 1, '5': 11, '6': '.connectrpc.conformance.v1.StreamResponseDefinition', '10': 'responseDefinition'},
     {'1': 'request_data', '3': 2, '4': 1, '5': 12, '10': 'requestData'},
   ],
 };
@@ -267,14 +155,7 @@ final $typed_data.Uint8List serverStreamRequestDescriptor = $convert.base64Decod
 const ServerStreamResponse$json = {
   '1': 'ServerStreamResponse',
   '2': [
-    {
-      '1': 'payload',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.connectrpc.conformance.v1.ConformancePayload',
-      '10': 'payload'
-    },
+    {'1': 'payload', '3': 1, '4': 1, '5': 11, '6': '.connectrpc.conformance.v1.ConformancePayload', '10': 'payload'},
   ],
 };
 
@@ -287,14 +168,7 @@ final $typed_data.Uint8List serverStreamResponseDescriptor = $convert.base64Deco
 const ClientStreamRequest$json = {
   '1': 'ClientStreamRequest',
   '2': [
-    {
-      '1': 'response_definition',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.connectrpc.conformance.v1.UnaryResponseDefinition',
-      '10': 'responseDefinition'
-    },
+    {'1': 'response_definition', '3': 1, '4': 1, '5': 11, '6': '.connectrpc.conformance.v1.UnaryResponseDefinition', '10': 'responseDefinition'},
     {'1': 'request_data', '3': 2, '4': 1, '5': 12, '10': 'requestData'},
   ],
 };
@@ -309,14 +183,7 @@ final $typed_data.Uint8List clientStreamRequestDescriptor = $convert.base64Decod
 const ClientStreamResponse$json = {
   '1': 'ClientStreamResponse',
   '2': [
-    {
-      '1': 'payload',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.connectrpc.conformance.v1.ConformancePayload',
-      '10': 'payload'
-    },
+    {'1': 'payload', '3': 1, '4': 1, '5': 11, '6': '.connectrpc.conformance.v1.ConformancePayload', '10': 'payload'},
   ],
 };
 
@@ -329,14 +196,7 @@ final $typed_data.Uint8List clientStreamResponseDescriptor = $convert.base64Deco
 const BidiStreamRequest$json = {
   '1': 'BidiStreamRequest',
   '2': [
-    {
-      '1': 'response_definition',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.connectrpc.conformance.v1.StreamResponseDefinition',
-      '10': 'responseDefinition'
-    },
+    {'1': 'response_definition', '3': 1, '4': 1, '5': 11, '6': '.connectrpc.conformance.v1.StreamResponseDefinition', '10': 'responseDefinition'},
     {'1': 'full_duplex', '3': 2, '4': 1, '5': 8, '10': 'fullDuplex'},
     {'1': 'request_data', '3': 3, '4': 1, '5': 12, '10': 'requestData'},
   ],
@@ -353,14 +213,7 @@ final $typed_data.Uint8List bidiStreamRequestDescriptor = $convert.base64Decode(
 const BidiStreamResponse$json = {
   '1': 'BidiStreamResponse',
   '2': [
-    {
-      '1': 'payload',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.connectrpc.conformance.v1.ConformancePayload',
-      '10': 'payload'
-    },
+    {'1': 'payload', '3': 1, '4': 1, '5': 11, '6': '.connectrpc.conformance.v1.ConformancePayload', '10': 'payload'},
   ],
 };
 
@@ -375,8 +228,8 @@ const UnimplementedRequest$json = {
 };
 
 /// Descriptor for `UnimplementedRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List unimplementedRequestDescriptor =
-    $convert.base64Decode('ChRVbmltcGxlbWVudGVkUmVxdWVzdA==');
+final $typed_data.Uint8List unimplementedRequestDescriptor = $convert.base64Decode(
+    'ChRVbmltcGxlbWVudGVkUmVxdWVzdA==');
 
 @$core.Deprecated('Use unimplementedResponseDescriptor instead')
 const UnimplementedResponse$json = {
@@ -384,66 +237,27 @@ const UnimplementedResponse$json = {
 };
 
 /// Descriptor for `UnimplementedResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List unimplementedResponseDescriptor =
-    $convert.base64Decode('ChVVbmltcGxlbWVudGVkUmVzcG9uc2U=');
+final $typed_data.Uint8List unimplementedResponseDescriptor = $convert.base64Decode(
+    'ChVVbmltcGxlbWVudGVkUmVzcG9uc2U=');
 
 @$core.Deprecated('Use conformancePayloadDescriptor instead')
 const ConformancePayload$json = {
   '1': 'ConformancePayload',
   '2': [
     {'1': 'data', '3': 1, '4': 1, '5': 12, '10': 'data'},
-    {
-      '1': 'request_info',
-      '3': 2,
-      '4': 1,
-      '5': 11,
-      '6': '.connectrpc.conformance.v1.ConformancePayload.RequestInfo',
-      '10': 'requestInfo'
-    },
+    {'1': 'request_info', '3': 2, '4': 1, '5': 11, '6': '.connectrpc.conformance.v1.ConformancePayload.RequestInfo', '10': 'requestInfo'},
   ],
-  '3': [
-    ConformancePayload_RequestInfo$json,
-    ConformancePayload_ConnectGetInfo$json
-  ],
+  '3': [ConformancePayload_RequestInfo$json, ConformancePayload_ConnectGetInfo$json],
 };
 
 @$core.Deprecated('Use conformancePayloadDescriptor instead')
 const ConformancePayload_RequestInfo$json = {
   '1': 'RequestInfo',
   '2': [
-    {
-      '1': 'request_headers',
-      '3': 1,
-      '4': 3,
-      '5': 11,
-      '6': '.connectrpc.conformance.v1.Header',
-      '10': 'requestHeaders'
-    },
-    {
-      '1': 'timeout_ms',
-      '3': 2,
-      '4': 1,
-      '5': 3,
-      '9': 0,
-      '10': 'timeoutMs',
-      '17': true
-    },
-    {
-      '1': 'requests',
-      '3': 3,
-      '4': 3,
-      '5': 11,
-      '6': '.google.protobuf.Any',
-      '10': 'requests'
-    },
-    {
-      '1': 'connect_get_info',
-      '3': 4,
-      '4': 1,
-      '5': 11,
-      '6': '.connectrpc.conformance.v1.ConformancePayload.ConnectGetInfo',
-      '10': 'connectGetInfo'
-    },
+    {'1': 'request_headers', '3': 1, '4': 3, '5': 11, '6': '.connectrpc.conformance.v1.Header', '10': 'requestHeaders'},
+    {'1': 'timeout_ms', '3': 2, '4': 1, '5': 3, '9': 0, '10': 'timeoutMs', '17': true},
+    {'1': 'requests', '3': 3, '4': 3, '5': 11, '6': '.google.protobuf.Any', '10': 'requests'},
+    {'1': 'connect_get_info', '3': 4, '4': 1, '5': 11, '6': '.connectrpc.conformance.v1.ConformancePayload.ConnectGetInfo', '10': 'connectGetInfo'},
   ],
   '8': [
     {'1': '_timeout_ms'},
@@ -454,14 +268,7 @@ const ConformancePayload_RequestInfo$json = {
 const ConformancePayload_ConnectGetInfo$json = {
   '1': 'ConnectGetInfo',
   '2': [
-    {
-      '1': 'query_params',
-      '3': 1,
-      '4': 3,
-      '5': 11,
-      '6': '.connectrpc.conformance.v1.Header',
-      '10': 'queryParams'
-    },
+    {'1': 'query_params', '3': 1, '4': 3, '5': 11, '6': '.connectrpc.conformance.v1.Header', '10': 'queryParams'},
   ],
 };
 
@@ -482,31 +289,9 @@ final $typed_data.Uint8List conformancePayloadDescriptor = $convert.base64Decode
 const Error$json = {
   '1': 'Error',
   '2': [
-    {
-      '1': 'code',
-      '3': 1,
-      '4': 1,
-      '5': 14,
-      '6': '.connectrpc.conformance.v1.Code',
-      '10': 'code'
-    },
-    {
-      '1': 'message',
-      '3': 2,
-      '4': 1,
-      '5': 9,
-      '9': 0,
-      '10': 'message',
-      '17': true
-    },
-    {
-      '1': 'details',
-      '3': 3,
-      '4': 3,
-      '5': 11,
-      '6': '.google.protobuf.Any',
-      '10': 'details'
-    },
+    {'1': 'code', '3': 1, '4': 1, '5': 14, '6': '.connectrpc.conformance.v1.Code', '10': 'code'},
+    {'1': 'message', '3': 2, '4': 1, '5': 9, '9': 0, '10': 'message', '17': true},
+    {'1': 'details', '3': 3, '4': 3, '5': 11, '6': '.google.protobuf.Any', '10': 'details'},
   ],
   '8': [
     {'1': '_message'},
@@ -538,48 +323,11 @@ const RawHTTPRequest$json = {
   '2': [
     {'1': 'verb', '3': 1, '4': 1, '5': 9, '10': 'verb'},
     {'1': 'uri', '3': 2, '4': 1, '5': 9, '10': 'uri'},
-    {
-      '1': 'headers',
-      '3': 3,
-      '4': 3,
-      '5': 11,
-      '6': '.connectrpc.conformance.v1.Header',
-      '10': 'headers'
-    },
-    {
-      '1': 'raw_query_params',
-      '3': 4,
-      '4': 3,
-      '5': 11,
-      '6': '.connectrpc.conformance.v1.Header',
-      '10': 'rawQueryParams'
-    },
-    {
-      '1': 'encoded_query_params',
-      '3': 5,
-      '4': 3,
-      '5': 11,
-      '6': '.connectrpc.conformance.v1.RawHTTPRequest.EncodedQueryParam',
-      '10': 'encodedQueryParams'
-    },
-    {
-      '1': 'unary',
-      '3': 6,
-      '4': 1,
-      '5': 11,
-      '6': '.connectrpc.conformance.v1.MessageContents',
-      '9': 0,
-      '10': 'unary'
-    },
-    {
-      '1': 'stream',
-      '3': 7,
-      '4': 1,
-      '5': 11,
-      '6': '.connectrpc.conformance.v1.StreamContents',
-      '9': 0,
-      '10': 'stream'
-    },
+    {'1': 'headers', '3': 3, '4': 3, '5': 11, '6': '.connectrpc.conformance.v1.Header', '10': 'headers'},
+    {'1': 'raw_query_params', '3': 4, '4': 3, '5': 11, '6': '.connectrpc.conformance.v1.Header', '10': 'rawQueryParams'},
+    {'1': 'encoded_query_params', '3': 5, '4': 3, '5': 11, '6': '.connectrpc.conformance.v1.RawHTTPRequest.EncodedQueryParam', '10': 'encodedQueryParams'},
+    {'1': 'unary', '3': 6, '4': 1, '5': 11, '6': '.connectrpc.conformance.v1.MessageContents', '9': 0, '10': 'unary'},
+    {'1': 'stream', '3': 7, '4': 1, '5': 11, '6': '.connectrpc.conformance.v1.StreamContents', '9': 0, '10': 'stream'},
   ],
   '3': [RawHTTPRequest_EncodedQueryParam$json],
   '8': [
@@ -592,14 +340,7 @@ const RawHTTPRequest_EncodedQueryParam$json = {
   '1': 'EncodedQueryParam',
   '2': [
     {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
-    {
-      '1': 'value',
-      '3': 2,
-      '4': 1,
-      '5': 11,
-      '6': '.connectrpc.conformance.v1.MessageContents',
-      '10': 'value'
-    },
+    {'1': 'value', '3': 2, '4': 1, '5': 11, '6': '.connectrpc.conformance.v1.MessageContents', '10': 'value'},
     {'1': 'base64_encode', '3': 3, '4': 1, '5': 8, '10': 'base64Encode'},
   ],
 };
@@ -624,23 +365,8 @@ const MessageContents$json = {
   '2': [
     {'1': 'binary', '3': 1, '4': 1, '5': 12, '9': 0, '10': 'binary'},
     {'1': 'text', '3': 2, '4': 1, '5': 9, '9': 0, '10': 'text'},
-    {
-      '1': 'binary_message',
-      '3': 3,
-      '4': 1,
-      '5': 11,
-      '6': '.google.protobuf.Any',
-      '9': 0,
-      '10': 'binaryMessage'
-    },
-    {
-      '1': 'compression',
-      '3': 4,
-      '4': 1,
-      '5': 14,
-      '6': '.connectrpc.conformance.v1.Compression',
-      '10': 'compression'
-    },
+    {'1': 'binary_message', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Any', '9': 0, '10': 'binaryMessage'},
+    {'1': 'compression', '3': 4, '4': 1, '5': 14, '6': '.connectrpc.conformance.v1.Compression', '10': 'compression'},
   ],
   '8': [
     {'1': 'data'},
@@ -658,14 +384,7 @@ final $typed_data.Uint8List messageContentsDescriptor = $convert.base64Decode(
 const StreamContents$json = {
   '1': 'StreamContents',
   '2': [
-    {
-      '1': 'items',
-      '3': 1,
-      '4': 3,
-      '5': 11,
-      '6': '.connectrpc.conformance.v1.StreamContents.StreamItem',
-      '10': 'items'
-    },
+    {'1': 'items', '3': 1, '4': 3, '5': 11, '6': '.connectrpc.conformance.v1.StreamContents.StreamItem', '10': 'items'},
   ],
   '3': [StreamContents_StreamItem$json],
 };
@@ -675,23 +394,8 @@ const StreamContents_StreamItem$json = {
   '1': 'StreamItem',
   '2': [
     {'1': 'flags', '3': 1, '4': 1, '5': 13, '10': 'flags'},
-    {
-      '1': 'length',
-      '3': 2,
-      '4': 1,
-      '5': 13,
-      '9': 0,
-      '10': 'length',
-      '17': true
-    },
-    {
-      '1': 'payload',
-      '3': 3,
-      '4': 1,
-      '5': 11,
-      '6': '.connectrpc.conformance.v1.MessageContents',
-      '10': 'payload'
-    },
+    {'1': 'length', '3': 2, '4': 1, '5': 13, '9': 0, '10': 'length', '17': true},
+    {'1': 'payload', '3': 3, '4': 1, '5': 11, '6': '.connectrpc.conformance.v1.MessageContents', '10': 'payload'},
   ],
   '8': [
     {'1': '_length'},
@@ -711,40 +415,10 @@ const RawHTTPResponse$json = {
   '1': 'RawHTTPResponse',
   '2': [
     {'1': 'status_code', '3': 1, '4': 1, '5': 13, '10': 'statusCode'},
-    {
-      '1': 'headers',
-      '3': 2,
-      '4': 3,
-      '5': 11,
-      '6': '.connectrpc.conformance.v1.Header',
-      '10': 'headers'
-    },
-    {
-      '1': 'unary',
-      '3': 3,
-      '4': 1,
-      '5': 11,
-      '6': '.connectrpc.conformance.v1.MessageContents',
-      '9': 0,
-      '10': 'unary'
-    },
-    {
-      '1': 'stream',
-      '3': 4,
-      '4': 1,
-      '5': 11,
-      '6': '.connectrpc.conformance.v1.StreamContents',
-      '9': 0,
-      '10': 'stream'
-    },
-    {
-      '1': 'trailers',
-      '3': 5,
-      '4': 3,
-      '5': 11,
-      '6': '.connectrpc.conformance.v1.Header',
-      '10': 'trailers'
-    },
+    {'1': 'headers', '3': 2, '4': 3, '5': 11, '6': '.connectrpc.conformance.v1.Header', '10': 'headers'},
+    {'1': 'unary', '3': 3, '4': 1, '5': 11, '6': '.connectrpc.conformance.v1.MessageContents', '9': 0, '10': 'unary'},
+    {'1': 'stream', '3': 4, '4': 1, '5': 11, '6': '.connectrpc.conformance.v1.StreamContents', '9': 0, '10': 'stream'},
+    {'1': 'trailers', '3': 5, '4': 3, '5': 11, '6': '.connectrpc.conformance.v1.Header', '10': 'trailers'},
   ],
   '8': [
     {'1': 'body'},
@@ -763,35 +437,11 @@ final $typed_data.Uint8List rawHTTPResponseDescriptor = $convert.base64Decode(
 const $core.Map<$core.String, $core.dynamic> ConformanceServiceBase$json = {
   '1': 'ConformanceService',
   '2': [
-    {
-      '1': 'Unary',
-      '2': '.connectrpc.conformance.v1.UnaryRequest',
-      '3': '.connectrpc.conformance.v1.UnaryResponse'
-    },
-    {
-      '1': 'ServerStream',
-      '2': '.connectrpc.conformance.v1.ServerStreamRequest',
-      '3': '.connectrpc.conformance.v1.ServerStreamResponse',
-      '6': true
-    },
-    {
-      '1': 'ClientStream',
-      '2': '.connectrpc.conformance.v1.ClientStreamRequest',
-      '3': '.connectrpc.conformance.v1.ClientStreamResponse',
-      '5': true
-    },
-    {
-      '1': 'BidiStream',
-      '2': '.connectrpc.conformance.v1.BidiStreamRequest',
-      '3': '.connectrpc.conformance.v1.BidiStreamResponse',
-      '5': true,
-      '6': true
-    },
-    {
-      '1': 'Unimplemented',
-      '2': '.connectrpc.conformance.v1.UnimplementedRequest',
-      '3': '.connectrpc.conformance.v1.UnimplementedResponse'
-    },
+    {'1': 'Unary', '2': '.connectrpc.conformance.v1.UnaryRequest', '3': '.connectrpc.conformance.v1.UnaryResponse'},
+    {'1': 'ServerStream', '2': '.connectrpc.conformance.v1.ServerStreamRequest', '3': '.connectrpc.conformance.v1.ServerStreamResponse', '6': true},
+    {'1': 'ClientStream', '2': '.connectrpc.conformance.v1.ClientStreamRequest', '3': '.connectrpc.conformance.v1.ClientStreamResponse', '5': true},
+    {'1': 'BidiStream', '2': '.connectrpc.conformance.v1.BidiStreamRequest', '3': '.connectrpc.conformance.v1.BidiStreamResponse', '5': true, '6': true},
+    {'1': 'Unimplemented', '2': '.connectrpc.conformance.v1.UnimplementedRequest', '3': '.connectrpc.conformance.v1.UnimplementedResponse'},
     {
       '1': 'IdempotentUnary',
       '2': '.connectrpc.conformance.v1.IdempotentUnaryRequest',
@@ -802,40 +452,31 @@ const $core.Map<$core.String, $core.dynamic> ConformanceServiceBase$json = {
 };
 
 @$core.Deprecated('Use conformanceServiceDescriptor instead')
-const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>>
-    ConformanceServiceBase$messageJson = {
+const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>> ConformanceServiceBase$messageJson = {
   '.connectrpc.conformance.v1.UnaryRequest': UnaryRequest$json,
-  '.connectrpc.conformance.v1.UnaryResponseDefinition':
-      UnaryResponseDefinition$json,
+  '.connectrpc.conformance.v1.UnaryResponseDefinition': UnaryResponseDefinition$json,
   '.connectrpc.conformance.v1.Header': Header$json,
   '.connectrpc.conformance.v1.Error': Error$json,
   '.google.protobuf.Any': $0.Any$json,
   '.connectrpc.conformance.v1.RawHTTPResponse': RawHTTPResponse$json,
   '.connectrpc.conformance.v1.MessageContents': MessageContents$json,
   '.connectrpc.conformance.v1.StreamContents': StreamContents$json,
-  '.connectrpc.conformance.v1.StreamContents.StreamItem':
-      StreamContents_StreamItem$json,
+  '.connectrpc.conformance.v1.StreamContents.StreamItem': StreamContents_StreamItem$json,
   '.connectrpc.conformance.v1.UnaryResponse': UnaryResponse$json,
   '.connectrpc.conformance.v1.ConformancePayload': ConformancePayload$json,
-  '.connectrpc.conformance.v1.ConformancePayload.RequestInfo':
-      ConformancePayload_RequestInfo$json,
-  '.connectrpc.conformance.v1.ConformancePayload.ConnectGetInfo':
-      ConformancePayload_ConnectGetInfo$json,
+  '.connectrpc.conformance.v1.ConformancePayload.RequestInfo': ConformancePayload_RequestInfo$json,
+  '.connectrpc.conformance.v1.ConformancePayload.ConnectGetInfo': ConformancePayload_ConnectGetInfo$json,
   '.connectrpc.conformance.v1.ServerStreamRequest': ServerStreamRequest$json,
-  '.connectrpc.conformance.v1.StreamResponseDefinition':
-      StreamResponseDefinition$json,
+  '.connectrpc.conformance.v1.StreamResponseDefinition': StreamResponseDefinition$json,
   '.connectrpc.conformance.v1.ServerStreamResponse': ServerStreamResponse$json,
   '.connectrpc.conformance.v1.ClientStreamRequest': ClientStreamRequest$json,
   '.connectrpc.conformance.v1.ClientStreamResponse': ClientStreamResponse$json,
   '.connectrpc.conformance.v1.BidiStreamRequest': BidiStreamRequest$json,
   '.connectrpc.conformance.v1.BidiStreamResponse': BidiStreamResponse$json,
   '.connectrpc.conformance.v1.UnimplementedRequest': UnimplementedRequest$json,
-  '.connectrpc.conformance.v1.UnimplementedResponse':
-      UnimplementedResponse$json,
-  '.connectrpc.conformance.v1.IdempotentUnaryRequest':
-      IdempotentUnaryRequest$json,
-  '.connectrpc.conformance.v1.IdempotentUnaryResponse':
-      IdempotentUnaryResponse$json,
+  '.connectrpc.conformance.v1.UnimplementedResponse': UnimplementedResponse$json,
+  '.connectrpc.conformance.v1.IdempotentUnaryRequest': IdempotentUnaryRequest$json,
+  '.connectrpc.conformance.v1.IdempotentUnaryResponse': IdempotentUnaryResponse$json,
 };
 
 /// Descriptor for `ConformanceService`. Decode as a `google.protobuf.ServiceDescriptorProto`.
@@ -853,3 +494,4 @@ final $typed_data.Uint8List conformanceServiceDescriptor = $convert.base64Decode
     'bWVudGVkUmVzcG9uc2USfQoPSWRlbXBvdGVudFVuYXJ5EjEuY29ubmVjdHJwYy5jb25mb3JtYW'
     '5jZS52MS5JZGVtcG90ZW50VW5hcnlSZXF1ZXN0GjIuY29ubmVjdHJwYy5jb25mb3JtYW5jZS52'
     'MS5JZGVtcG90ZW50VW5hcnlSZXNwb25zZSIDkAIB');
+
