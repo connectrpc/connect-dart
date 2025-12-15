@@ -35,9 +35,9 @@ import 'config.pbenum.dart' as $1;
 import 'service.pb.dart' as $2;
 
 enum ClientCompatRequest_Cancel_CancelTiming {
-  beforeCloseSend,
-  afterCloseSendMs,
-  afterNumResponses,
+  beforeCloseSend, 
+  afterCloseSendMs, 
+  afterNumResponses, 
   notSet
 }
 
@@ -60,62 +60,45 @@ class ClientCompatRequest_Cancel extends $pb.GeneratedMessage {
     return $result;
   }
   ClientCompatRequest_Cancel._() : super();
-  factory ClientCompatRequest_Cancel.fromBuffer($core.List<$core.int> i,
-          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
-  factory ClientCompatRequest_Cancel.fromJson($core.String i,
-          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromJson(i, r);
+  factory ClientCompatRequest_Cancel.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ClientCompatRequest_Cancel.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static const $core.Map<$core.int, ClientCompatRequest_Cancel_CancelTiming>
-      _ClientCompatRequest_Cancel_CancelTimingByTag = {
-    1: ClientCompatRequest_Cancel_CancelTiming.beforeCloseSend,
-    2: ClientCompatRequest_Cancel_CancelTiming.afterCloseSendMs,
-    3: ClientCompatRequest_Cancel_CancelTiming.afterNumResponses,
-    0: ClientCompatRequest_Cancel_CancelTiming.notSet
+  static const $core.Map<$core.int, ClientCompatRequest_Cancel_CancelTiming> _ClientCompatRequest_Cancel_CancelTimingByTag = {
+    1 : ClientCompatRequest_Cancel_CancelTiming.beforeCloseSend,
+    2 : ClientCompatRequest_Cancel_CancelTiming.afterCloseSendMs,
+    3 : ClientCompatRequest_Cancel_CancelTiming.afterNumResponses,
+    0 : ClientCompatRequest_Cancel_CancelTiming.notSet
   };
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'ClientCompatRequest.Cancel',
-      package: const $pb.PackageName(
-          _omitMessageNames ? '' : 'connectrpc.conformance.v1'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ClientCompatRequest.Cancel', package: const $pb.PackageName(_omitMessageNames ? '' : 'connectrpc.conformance.v1'), createEmptyInstance: create)
     ..oo(0, [1, 2, 3])
-    ..aOM<$3.Empty>(1, _omitFieldNames ? '' : 'beforeCloseSend',
-        subBuilder: $3.Empty.create)
-    ..a<$core.int>(
-        2, _omitFieldNames ? '' : 'afterCloseSendMs', $pb.PbFieldType.OU3)
-    ..a<$core.int>(
-        3, _omitFieldNames ? '' : 'afterNumResponses', $pb.PbFieldType.OU3)
-    ..hasRequiredFields = false;
+    ..aOM<$3.Empty>(1, _omitFieldNames ? '' : 'beforeCloseSend', subBuilder: $3.Empty.create)
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'afterCloseSendMs', $pb.PbFieldType.OU3)
+    ..a<$core.int>(3, _omitFieldNames ? '' : 'afterNumResponses', $pb.PbFieldType.OU3)
+    ..hasRequiredFields = false
+  ;
 
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
-  ClientCompatRequest_Cancel clone() =>
-      ClientCompatRequest_Cancel()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
-  ClientCompatRequest_Cancel copyWith(
-          void Function(ClientCompatRequest_Cancel) updates) =>
-      super.copyWith(
-              (message) => updates(message as ClientCompatRequest_Cancel))
-          as ClientCompatRequest_Cancel;
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ClientCompatRequest_Cancel clone() => ClientCompatRequest_Cancel()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ClientCompatRequest_Cancel copyWith(void Function(ClientCompatRequest_Cancel) updates) => super.copyWith((message) => updates(message as ClientCompatRequest_Cancel)) as ClientCompatRequest_Cancel;
 
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
   static ClientCompatRequest_Cancel create() => ClientCompatRequest_Cancel._();
   ClientCompatRequest_Cancel createEmptyInstance() => create();
-  static $pb.PbList<ClientCompatRequest_Cancel> createRepeated() =>
-      $pb.PbList<ClientCompatRequest_Cancel>();
+  static $pb.PbList<ClientCompatRequest_Cancel> createRepeated() => $pb.PbList<ClientCompatRequest_Cancel>();
   @$core.pragma('dart2js:noInline')
-  static ClientCompatRequest_Cancel getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<ClientCompatRequest_Cancel>(create);
+  static ClientCompatRequest_Cancel getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ClientCompatRequest_Cancel>(create);
   static ClientCompatRequest_Cancel? _defaultInstance;
 
-  ClientCompatRequest_Cancel_CancelTiming whichCancelTiming() =>
-      _ClientCompatRequest_Cancel_CancelTimingByTag[$_whichOneof(0)]!;
+  ClientCompatRequest_Cancel_CancelTiming whichCancelTiming() => _ClientCompatRequest_Cancel_CancelTimingByTag[$_whichOneof(0)]!;
   void clearCancelTiming() => clearField($_whichOneof(0));
 
   ///  When present, the client should cancel *instead of*
@@ -126,10 +109,7 @@ class ClientCompatRequest_Cancel extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $3.Empty get beforeCloseSend => $_getN(0);
   @$pb.TagNumber(1)
-  set beforeCloseSend($3.Empty v) {
-    setField(1, v);
-  }
-
+  set beforeCloseSend($3.Empty v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasBeforeCloseSend() => $_has(0);
   @$pb.TagNumber(1)
@@ -157,10 +137,7 @@ class ClientCompatRequest_Cancel extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   $core.int get afterCloseSendMs => $_getIZ(1);
   @$pb.TagNumber(2)
-  set afterCloseSendMs($core.int v) {
-    $_setUnsignedInt32(1, v);
-  }
-
+  set afterCloseSendMs($core.int v) { $_setUnsignedInt32(1, v); }
   @$pb.TagNumber(2)
   $core.bool hasAfterCloseSendMs() => $_has(1);
   @$pb.TagNumber(2)
@@ -174,10 +151,7 @@ class ClientCompatRequest_Cancel extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   $core.int get afterNumResponses => $_getIZ(2);
   @$pb.TagNumber(3)
-  set afterNumResponses($core.int v) {
-    $_setUnsignedInt32(2, v);
-  }
-
+  set afterNumResponses($core.int v) { $_setUnsignedInt32(2, v); }
   @$pb.TagNumber(3)
   $core.bool hasAfterNumResponses() => $_has(2);
   @$pb.TagNumber(3)
@@ -275,89 +249,52 @@ class ClientCompatRequest extends $pb.GeneratedMessage {
     return $result;
   }
   ClientCompatRequest._() : super();
-  factory ClientCompatRequest.fromBuffer($core.List<$core.int> i,
-          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
-  factory ClientCompatRequest.fromJson($core.String i,
-          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromJson(i, r);
+  factory ClientCompatRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ClientCompatRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'ClientCompatRequest',
-      package: const $pb.PackageName(
-          _omitMessageNames ? '' : 'connectrpc.conformance.v1'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ClientCompatRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'connectrpc.conformance.v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'testName')
-    ..e<$1.HTTPVersion>(
-        2, _omitFieldNames ? '' : 'httpVersion', $pb.PbFieldType.OE,
-        defaultOrMaker: $1.HTTPVersion.HTTP_VERSION_UNSPECIFIED,
-        valueOf: $1.HTTPVersion.valueOf,
-        enumValues: $1.HTTPVersion.values)
-    ..e<$1.Protocol>(3, _omitFieldNames ? '' : 'protocol', $pb.PbFieldType.OE,
-        defaultOrMaker: $1.Protocol.PROTOCOL_UNSPECIFIED,
-        valueOf: $1.Protocol.valueOf,
-        enumValues: $1.Protocol.values)
-    ..e<$1.Codec>(4, _omitFieldNames ? '' : 'codec', $pb.PbFieldType.OE,
-        defaultOrMaker: $1.Codec.CODEC_UNSPECIFIED,
-        valueOf: $1.Codec.valueOf,
-        enumValues: $1.Codec.values)
-    ..e<$1.Compression>(
-        5, _omitFieldNames ? '' : 'compression', $pb.PbFieldType.OE,
-        defaultOrMaker: $1.Compression.COMPRESSION_UNSPECIFIED,
-        valueOf: $1.Compression.valueOf,
-        enumValues: $1.Compression.values)
+    ..e<$1.HTTPVersion>(2, _omitFieldNames ? '' : 'httpVersion', $pb.PbFieldType.OE, defaultOrMaker: $1.HTTPVersion.HTTP_VERSION_UNSPECIFIED, valueOf: $1.HTTPVersion.valueOf, enumValues: $1.HTTPVersion.values)
+    ..e<$1.Protocol>(3, _omitFieldNames ? '' : 'protocol', $pb.PbFieldType.OE, defaultOrMaker: $1.Protocol.PROTOCOL_UNSPECIFIED, valueOf: $1.Protocol.valueOf, enumValues: $1.Protocol.values)
+    ..e<$1.Codec>(4, _omitFieldNames ? '' : 'codec', $pb.PbFieldType.OE, defaultOrMaker: $1.Codec.CODEC_UNSPECIFIED, valueOf: $1.Codec.valueOf, enumValues: $1.Codec.values)
+    ..e<$1.Compression>(5, _omitFieldNames ? '' : 'compression', $pb.PbFieldType.OE, defaultOrMaker: $1.Compression.COMPRESSION_UNSPECIFIED, valueOf: $1.Compression.valueOf, enumValues: $1.Compression.values)
     ..aOS(6, _omitFieldNames ? '' : 'host')
     ..a<$core.int>(7, _omitFieldNames ? '' : 'port', $pb.PbFieldType.OU3)
-    ..a<$core.List<$core.int>>(
-        8, _omitFieldNames ? '' : 'serverTlsCert', $pb.PbFieldType.OY)
-    ..aOM<$1.TLSCreds>(9, _omitFieldNames ? '' : 'clientTlsCreds',
-        subBuilder: $1.TLSCreds.create)
-    ..a<$core.int>(
-        10, _omitFieldNames ? '' : 'messageReceiveLimit', $pb.PbFieldType.OU3)
+    ..a<$core.List<$core.int>>(8, _omitFieldNames ? '' : 'serverTlsCert', $pb.PbFieldType.OY)
+    ..aOM<$1.TLSCreds>(9, _omitFieldNames ? '' : 'clientTlsCreds', subBuilder: $1.TLSCreds.create)
+    ..a<$core.int>(10, _omitFieldNames ? '' : 'messageReceiveLimit', $pb.PbFieldType.OU3)
     ..aOS(11, _omitFieldNames ? '' : 'service')
     ..aOS(12, _omitFieldNames ? '' : 'method')
-    ..e<$1.StreamType>(
-        13, _omitFieldNames ? '' : 'streamType', $pb.PbFieldType.OE,
-        defaultOrMaker: $1.StreamType.STREAM_TYPE_UNSPECIFIED,
-        valueOf: $1.StreamType.valueOf,
-        enumValues: $1.StreamType.values)
+    ..e<$1.StreamType>(13, _omitFieldNames ? '' : 'streamType', $pb.PbFieldType.OE, defaultOrMaker: $1.StreamType.STREAM_TYPE_UNSPECIFIED, valueOf: $1.StreamType.valueOf, enumValues: $1.StreamType.values)
     ..aOB(14, _omitFieldNames ? '' : 'useGetHttpMethod')
-    ..pc<$2.Header>(
-        15, _omitFieldNames ? '' : 'requestHeaders', $pb.PbFieldType.PM,
-        subBuilder: $2.Header.create)
-    ..pc<$0.Any>(
-        16, _omitFieldNames ? '' : 'requestMessages', $pb.PbFieldType.PM,
-        subBuilder: $0.Any.create)
+    ..pc<$2.Header>(15, _omitFieldNames ? '' : 'requestHeaders', $pb.PbFieldType.PM, subBuilder: $2.Header.create)
+    ..pc<$0.Any>(16, _omitFieldNames ? '' : 'requestMessages', $pb.PbFieldType.PM, subBuilder: $0.Any.create)
     ..a<$core.int>(17, _omitFieldNames ? '' : 'timeoutMs', $pb.PbFieldType.OU3)
-    ..a<$core.int>(
-        18, _omitFieldNames ? '' : 'requestDelayMs', $pb.PbFieldType.OU3)
-    ..aOM<ClientCompatRequest_Cancel>(19, _omitFieldNames ? '' : 'cancel',
-        subBuilder: ClientCompatRequest_Cancel.create)
-    ..aOM<$2.RawHTTPRequest>(20, _omitFieldNames ? '' : 'rawRequest',
-        subBuilder: $2.RawHTTPRequest.create)
-    ..hasRequiredFields = false;
+    ..a<$core.int>(18, _omitFieldNames ? '' : 'requestDelayMs', $pb.PbFieldType.OU3)
+    ..aOM<ClientCompatRequest_Cancel>(19, _omitFieldNames ? '' : 'cancel', subBuilder: ClientCompatRequest_Cancel.create)
+    ..aOM<$2.RawHTTPRequest>(20, _omitFieldNames ? '' : 'rawRequest', subBuilder: $2.RawHTTPRequest.create)
+    ..hasRequiredFields = false
+  ;
 
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   ClientCompatRequest clone() => ClientCompatRequest()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
-  ClientCompatRequest copyWith(void Function(ClientCompatRequest) updates) =>
-      super.copyWith((message) => updates(message as ClientCompatRequest))
-          as ClientCompatRequest;
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ClientCompatRequest copyWith(void Function(ClientCompatRequest) updates) => super.copyWith((message) => updates(message as ClientCompatRequest)) as ClientCompatRequest;
 
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
   static ClientCompatRequest create() => ClientCompatRequest._();
   ClientCompatRequest createEmptyInstance() => create();
-  static $pb.PbList<ClientCompatRequest> createRepeated() =>
-      $pb.PbList<ClientCompatRequest>();
+  static $pb.PbList<ClientCompatRequest> createRepeated() => $pb.PbList<ClientCompatRequest>();
   @$core.pragma('dart2js:noInline')
-  static ClientCompatRequest getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<ClientCompatRequest>(create);
+  static ClientCompatRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ClientCompatRequest>(create);
   static ClientCompatRequest? _defaultInstance;
 
   /// The name of the test that this request is performing.
@@ -365,10 +302,7 @@ class ClientCompatRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $core.String get testName => $_getSZ(0);
   @$pb.TagNumber(1)
-  set testName($core.String v) {
-    $_setString(0, v);
-  }
-
+  set testName($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasTestName() => $_has(0);
   @$pb.TagNumber(1)
@@ -384,10 +318,7 @@ class ClientCompatRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   $1.HTTPVersion get httpVersion => $_getN(1);
   @$pb.TagNumber(2)
-  set httpVersion($1.HTTPVersion v) {
-    setField(2, v);
-  }
-
+  set httpVersion($1.HTTPVersion v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasHttpVersion() => $_has(1);
   @$pb.TagNumber(2)
@@ -397,10 +328,7 @@ class ClientCompatRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   $1.Protocol get protocol => $_getN(2);
   @$pb.TagNumber(3)
-  set protocol($1.Protocol v) {
-    setField(3, v);
-  }
-
+  set protocol($1.Protocol v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasProtocol() => $_has(2);
   @$pb.TagNumber(3)
@@ -410,10 +338,7 @@ class ClientCompatRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(4)
   $1.Codec get codec => $_getN(3);
   @$pb.TagNumber(4)
-  set codec($1.Codec v) {
-    setField(4, v);
-  }
-
+  set codec($1.Codec v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasCodec() => $_has(3);
   @$pb.TagNumber(4)
@@ -423,10 +348,7 @@ class ClientCompatRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(5)
   $1.Compression get compression => $_getN(4);
   @$pb.TagNumber(5)
-  set compression($1.Compression v) {
-    setField(5, v);
-  }
-
+  set compression($1.Compression v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasCompression() => $_has(4);
   @$pb.TagNumber(5)
@@ -436,10 +358,7 @@ class ClientCompatRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(6)
   $core.String get host => $_getSZ(5);
   @$pb.TagNumber(6)
-  set host($core.String v) {
-    $_setString(5, v);
-  }
-
+  set host($core.String v) { $_setString(5, v); }
   @$pb.TagNumber(6)
   $core.bool hasHost() => $_has(5);
   @$pb.TagNumber(6)
@@ -449,10 +368,7 @@ class ClientCompatRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(7)
   $core.int get port => $_getIZ(6);
   @$pb.TagNumber(7)
-  set port($core.int v) {
-    $_setUnsignedInt32(6, v);
-  }
-
+  set port($core.int v) { $_setUnsignedInt32(6, v); }
   @$pb.TagNumber(7)
   $core.bool hasPort() => $_has(6);
   @$pb.TagNumber(7)
@@ -464,10 +380,7 @@ class ClientCompatRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(8)
   $core.List<$core.int> get serverTlsCert => $_getN(7);
   @$pb.TagNumber(8)
-  set serverTlsCert($core.List<$core.int> v) {
-    $_setBytes(7, v);
-  }
-
+  set serverTlsCert($core.List<$core.int> v) { $_setBytes(7, v); }
   @$pb.TagNumber(8)
   $core.bool hasServerTlsCert() => $_has(7);
   @$pb.TagNumber(8)
@@ -479,10 +392,7 @@ class ClientCompatRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(9)
   $1.TLSCreds get clientTlsCreds => $_getN(8);
   @$pb.TagNumber(9)
-  set clientTlsCreds($1.TLSCreds v) {
-    setField(9, v);
-  }
-
+  set clientTlsCreds($1.TLSCreds v) { setField(9, v); }
   @$pb.TagNumber(9)
   $core.bool hasClientTlsCreds() => $_has(8);
   @$pb.TagNumber(9)
@@ -495,10 +405,7 @@ class ClientCompatRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(10)
   $core.int get messageReceiveLimit => $_getIZ(9);
   @$pb.TagNumber(10)
-  set messageReceiveLimit($core.int v) {
-    $_setUnsignedInt32(9, v);
-  }
-
+  set messageReceiveLimit($core.int v) { $_setUnsignedInt32(9, v); }
   @$pb.TagNumber(10)
   $core.bool hasMessageReceiveLimit() => $_has(9);
   @$pb.TagNumber(10)
@@ -510,10 +417,7 @@ class ClientCompatRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(11)
   $core.String get service => $_getSZ(10);
   @$pb.TagNumber(11)
-  set service($core.String v) {
-    $_setString(10, v);
-  }
-
+  set service($core.String v) { $_setString(10, v); }
   @$pb.TagNumber(11)
   $core.bool hasService() => $_has(10);
   @$pb.TagNumber(11)
@@ -525,10 +429,7 @@ class ClientCompatRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(12)
   $core.String get method => $_getSZ(11);
   @$pb.TagNumber(12)
-  set method($core.String v) {
-    $_setString(11, v);
-  }
-
+  set method($core.String v) { $_setString(11, v); }
   @$pb.TagNumber(12)
   $core.bool hasMethod() => $_has(11);
   @$pb.TagNumber(12)
@@ -540,10 +441,7 @@ class ClientCompatRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(13)
   $1.StreamType get streamType => $_getN(12);
   @$pb.TagNumber(13)
-  set streamType($1.StreamType v) {
-    setField(13, v);
-  }
-
+  set streamType($1.StreamType v) { setField(13, v); }
   @$pb.TagNumber(13)
   $core.bool hasStreamType() => $_has(12);
   @$pb.TagNumber(13)
@@ -555,10 +453,7 @@ class ClientCompatRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(14)
   $core.bool get useGetHttpMethod => $_getBF(13);
   @$pb.TagNumber(14)
-  set useGetHttpMethod($core.bool v) {
-    $_setBool(13, v);
-  }
-
+  set useGetHttpMethod($core.bool v) { $_setBool(13, v); }
   @$pb.TagNumber(14)
   $core.bool hasUseGetHttpMethod() => $_has(13);
   @$pb.TagNumber(14)
@@ -586,10 +481,7 @@ class ClientCompatRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(17)
   $core.int get timeoutMs => $_getIZ(16);
   @$pb.TagNumber(17)
-  set timeoutMs($core.int v) {
-    $_setUnsignedInt32(16, v);
-  }
-
+  set timeoutMs($core.int v) { $_setUnsignedInt32(16, v); }
   @$pb.TagNumber(17)
   $core.bool hasTimeoutMs() => $_has(16);
   @$pb.TagNumber(17)
@@ -601,10 +493,7 @@ class ClientCompatRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(18)
   $core.int get requestDelayMs => $_getIZ(17);
   @$pb.TagNumber(18)
-  set requestDelayMs($core.int v) {
-    $_setUnsignedInt32(17, v);
-  }
-
+  set requestDelayMs($core.int v) { $_setUnsignedInt32(17, v); }
   @$pb.TagNumber(18)
   $core.bool hasRequestDelayMs() => $_has(17);
   @$pb.TagNumber(18)
@@ -615,10 +504,7 @@ class ClientCompatRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(19)
   ClientCompatRequest_Cancel get cancel => $_getN(18);
   @$pb.TagNumber(19)
-  set cancel(ClientCompatRequest_Cancel v) {
-    setField(19, v);
-  }
-
+  set cancel(ClientCompatRequest_Cancel v) { setField(19, v); }
   @$pb.TagNumber(19)
   $core.bool hasCancel() => $_has(18);
   @$pb.TagNumber(19)
@@ -638,10 +524,7 @@ class ClientCompatRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(20)
   $2.RawHTTPRequest get rawRequest => $_getN(19);
   @$pb.TagNumber(20)
-  set rawRequest($2.RawHTTPRequest v) {
-    setField(20, v);
-  }
-
+  set rawRequest($2.RawHTTPRequest v) { setField(20, v); }
   @$pb.TagNumber(20)
   $core.bool hasRawRequest() => $_has(19);
   @$pb.TagNumber(20)
@@ -650,7 +533,11 @@ class ClientCompatRequest extends $pb.GeneratedMessage {
   $2.RawHTTPRequest ensureRawRequest() => $_ensure(19);
 }
 
-enum ClientCompatResponse_Result { response, error, notSet }
+enum ClientCompatResponse_Result {
+  response, 
+  error, 
+  notSet
+}
 
 /// The outcome of one ClientCompatRequest.
 class ClientCompatResponse extends $pb.GeneratedMessage {
@@ -672,68 +559,51 @@ class ClientCompatResponse extends $pb.GeneratedMessage {
     return $result;
   }
   ClientCompatResponse._() : super();
-  factory ClientCompatResponse.fromBuffer($core.List<$core.int> i,
-          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
-  factory ClientCompatResponse.fromJson($core.String i,
-          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromJson(i, r);
+  factory ClientCompatResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ClientCompatResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static const $core.Map<$core.int, ClientCompatResponse_Result>
-      _ClientCompatResponse_ResultByTag = {
-    2: ClientCompatResponse_Result.response,
-    3: ClientCompatResponse_Result.error,
-    0: ClientCompatResponse_Result.notSet
+  static const $core.Map<$core.int, ClientCompatResponse_Result> _ClientCompatResponse_ResultByTag = {
+    2 : ClientCompatResponse_Result.response,
+    3 : ClientCompatResponse_Result.error,
+    0 : ClientCompatResponse_Result.notSet
   };
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'ClientCompatResponse',
-      package: const $pb.PackageName(
-          _omitMessageNames ? '' : 'connectrpc.conformance.v1'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ClientCompatResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'connectrpc.conformance.v1'), createEmptyInstance: create)
     ..oo(0, [2, 3])
     ..aOS(1, _omitFieldNames ? '' : 'testName')
-    ..aOM<ClientResponseResult>(2, _omitFieldNames ? '' : 'response',
-        subBuilder: ClientResponseResult.create)
-    ..aOM<ClientErrorResult>(3, _omitFieldNames ? '' : 'error',
-        subBuilder: ClientErrorResult.create)
-    ..hasRequiredFields = false;
+    ..aOM<ClientResponseResult>(2, _omitFieldNames ? '' : 'response', subBuilder: ClientResponseResult.create)
+    ..aOM<ClientErrorResult>(3, _omitFieldNames ? '' : 'error', subBuilder: ClientErrorResult.create)
+    ..hasRequiredFields = false
+  ;
 
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
-  ClientCompatResponse clone() =>
-      ClientCompatResponse()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
-  ClientCompatResponse copyWith(void Function(ClientCompatResponse) updates) =>
-      super.copyWith((message) => updates(message as ClientCompatResponse))
-          as ClientCompatResponse;
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ClientCompatResponse clone() => ClientCompatResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ClientCompatResponse copyWith(void Function(ClientCompatResponse) updates) => super.copyWith((message) => updates(message as ClientCompatResponse)) as ClientCompatResponse;
 
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
   static ClientCompatResponse create() => ClientCompatResponse._();
   ClientCompatResponse createEmptyInstance() => create();
-  static $pb.PbList<ClientCompatResponse> createRepeated() =>
-      $pb.PbList<ClientCompatResponse>();
+  static $pb.PbList<ClientCompatResponse> createRepeated() => $pb.PbList<ClientCompatResponse>();
   @$core.pragma('dart2js:noInline')
-  static ClientCompatResponse getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<ClientCompatResponse>(create);
+  static ClientCompatResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ClientCompatResponse>(create);
   static ClientCompatResponse? _defaultInstance;
 
-  ClientCompatResponse_Result whichResult() =>
-      _ClientCompatResponse_ResultByTag[$_whichOneof(0)]!;
+  ClientCompatResponse_Result whichResult() => _ClientCompatResponse_ResultByTag[$_whichOneof(0)]!;
   void clearResult() => clearField($_whichOneof(0));
 
   /// The test name that this response applies to.
   @$pb.TagNumber(1)
   $core.String get testName => $_getSZ(0);
   @$pb.TagNumber(1)
-  set testName($core.String v) {
-    $_setString(0, v);
-  }
-
+  set testName($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasTestName() => $_has(0);
   @$pb.TagNumber(1)
@@ -742,10 +612,7 @@ class ClientCompatResponse extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   ClientResponseResult get response => $_getN(1);
   @$pb.TagNumber(2)
-  set response(ClientResponseResult v) {
-    setField(2, v);
-  }
-
+  set response(ClientResponseResult v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasResponse() => $_has(1);
   @$pb.TagNumber(2)
@@ -756,10 +623,7 @@ class ClientCompatResponse extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   ClientErrorResult get error => $_getN(2);
   @$pb.TagNumber(3)
-  set error(ClientErrorResult v) {
-    setField(3, v);
-  }
-
+  set error(ClientErrorResult v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasError() => $_has(2);
   @$pb.TagNumber(3)
@@ -805,58 +669,39 @@ class ClientResponseResult extends $pb.GeneratedMessage {
     return $result;
   }
   ClientResponseResult._() : super();
-  factory ClientResponseResult.fromBuffer($core.List<$core.int> i,
-          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
-  factory ClientResponseResult.fromJson($core.String i,
-          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromJson(i, r);
+  factory ClientResponseResult.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ClientResponseResult.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'ClientResponseResult',
-      package: const $pb.PackageName(
-          _omitMessageNames ? '' : 'connectrpc.conformance.v1'),
-      createEmptyInstance: create)
-    ..pc<$2.Header>(
-        1, _omitFieldNames ? '' : 'responseHeaders', $pb.PbFieldType.PM,
-        subBuilder: $2.Header.create)
-    ..pc<$2.ConformancePayload>(
-        2, _omitFieldNames ? '' : 'payloads', $pb.PbFieldType.PM,
-        subBuilder: $2.ConformancePayload.create)
-    ..aOM<$2.Error>(3, _omitFieldNames ? '' : 'error',
-        subBuilder: $2.Error.create)
-    ..pc<$2.Header>(
-        4, _omitFieldNames ? '' : 'responseTrailers', $pb.PbFieldType.PM,
-        subBuilder: $2.Header.create)
-    ..a<$core.int>(
-        5, _omitFieldNames ? '' : 'numUnsentRequests', $pb.PbFieldType.O3)
-    ..a<$core.int>(
-        6, _omitFieldNames ? '' : 'httpStatusCode', $pb.PbFieldType.O3)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ClientResponseResult', package: const $pb.PackageName(_omitMessageNames ? '' : 'connectrpc.conformance.v1'), createEmptyInstance: create)
+    ..pc<$2.Header>(1, _omitFieldNames ? '' : 'responseHeaders', $pb.PbFieldType.PM, subBuilder: $2.Header.create)
+    ..pc<$2.ConformancePayload>(2, _omitFieldNames ? '' : 'payloads', $pb.PbFieldType.PM, subBuilder: $2.ConformancePayload.create)
+    ..aOM<$2.Error>(3, _omitFieldNames ? '' : 'error', subBuilder: $2.Error.create)
+    ..pc<$2.Header>(4, _omitFieldNames ? '' : 'responseTrailers', $pb.PbFieldType.PM, subBuilder: $2.Header.create)
+    ..a<$core.int>(5, _omitFieldNames ? '' : 'numUnsentRequests', $pb.PbFieldType.O3)
+    ..a<$core.int>(6, _omitFieldNames ? '' : 'httpStatusCode', $pb.PbFieldType.O3)
     ..pPS(7, _omitFieldNames ? '' : 'feedback')
-    ..hasRequiredFields = false;
+    ..hasRequiredFields = false
+  ;
 
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
-  ClientResponseResult clone() =>
-      ClientResponseResult()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
-  ClientResponseResult copyWith(void Function(ClientResponseResult) updates) =>
-      super.copyWith((message) => updates(message as ClientResponseResult))
-          as ClientResponseResult;
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ClientResponseResult clone() => ClientResponseResult()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ClientResponseResult copyWith(void Function(ClientResponseResult) updates) => super.copyWith((message) => updates(message as ClientResponseResult)) as ClientResponseResult;
 
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
   static ClientResponseResult create() => ClientResponseResult._();
   ClientResponseResult createEmptyInstance() => create();
-  static $pb.PbList<ClientResponseResult> createRepeated() =>
-      $pb.PbList<ClientResponseResult>();
+  static $pb.PbList<ClientResponseResult> createRepeated() => $pb.PbList<ClientResponseResult>();
   @$core.pragma('dart2js:noInline')
-  static ClientResponseResult getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<ClientResponseResult>(create);
+  static ClientResponseResult getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ClientResponseResult>(create);
   static ClientResponseResult? _defaultInstance;
 
   /// All response headers read from the response.
@@ -876,10 +721,7 @@ class ClientResponseResult extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   $2.Error get error => $_getN(2);
   @$pb.TagNumber(3)
-  set error($2.Error v) {
-    setField(3, v);
-  }
-
+  set error($2.Error v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasError() => $_has(2);
   @$pb.TagNumber(3)
@@ -896,10 +738,7 @@ class ClientResponseResult extends $pb.GeneratedMessage {
   @$pb.TagNumber(5)
   $core.int get numUnsentRequests => $_getIZ(4);
   @$pb.TagNumber(5)
-  set numUnsentRequests($core.int v) {
-    $_setSignedInt32(4, v);
-  }
-
+  set numUnsentRequests($core.int v) { $_setSignedInt32(4, v); }
   @$pb.TagNumber(5)
   $core.bool hasNumUnsentRequests() => $_has(4);
   @$pb.TagNumber(5)
@@ -912,10 +751,7 @@ class ClientResponseResult extends $pb.GeneratedMessage {
   @$pb.TagNumber(6)
   $core.int get httpStatusCode => $_getIZ(5);
   @$pb.TagNumber(6)
-  set httpStatusCode($core.int v) {
-    $_setSignedInt32(5, v);
-  }
-
+  set httpStatusCode($core.int v) { $_setSignedInt32(5, v); }
   @$pb.TagNumber(6)
   $core.bool hasHttpStatusCode() => $_has(5);
   @$pb.TagNumber(6)
@@ -945,42 +781,33 @@ class ClientErrorResult extends $pb.GeneratedMessage {
     return $result;
   }
   ClientErrorResult._() : super();
-  factory ClientErrorResult.fromBuffer($core.List<$core.int> i,
-          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
-  factory ClientErrorResult.fromJson($core.String i,
-          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromJson(i, r);
+  factory ClientErrorResult.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ClientErrorResult.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'ClientErrorResult',
-      package: const $pb.PackageName(
-          _omitMessageNames ? '' : 'connectrpc.conformance.v1'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ClientErrorResult', package: const $pb.PackageName(_omitMessageNames ? '' : 'connectrpc.conformance.v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'message')
-    ..hasRequiredFields = false;
+    ..hasRequiredFields = false
+  ;
 
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   ClientErrorResult clone() => ClientErrorResult()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
-  ClientErrorResult copyWith(void Function(ClientErrorResult) updates) =>
-      super.copyWith((message) => updates(message as ClientErrorResult))
-          as ClientErrorResult;
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ClientErrorResult copyWith(void Function(ClientErrorResult) updates) => super.copyWith((message) => updates(message as ClientErrorResult)) as ClientErrorResult;
 
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
   static ClientErrorResult create() => ClientErrorResult._();
   ClientErrorResult createEmptyInstance() => create();
-  static $pb.PbList<ClientErrorResult> createRepeated() =>
-      $pb.PbList<ClientErrorResult>();
+  static $pb.PbList<ClientErrorResult> createRepeated() => $pb.PbList<ClientErrorResult>();
   @$core.pragma('dart2js:noInline')
-  static ClientErrorResult getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<ClientErrorResult>(create);
+  static ClientErrorResult getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ClientErrorResult>(create);
   static ClientErrorResult? _defaultInstance;
 
   /// A message describing the error that occurred. This string will be shown to
@@ -989,10 +816,7 @@ class ClientErrorResult extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $core.String get message => $_getSZ(0);
   @$pb.TagNumber(1)
-  set message($core.String v) {
-    $_setString(0, v);
-  }
-
+  set message($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasMessage() => $_has(0);
   @$pb.TagNumber(1)
@@ -1025,38 +849,27 @@ class WireDetails extends $pb.GeneratedMessage {
     return $result;
   }
   WireDetails._() : super();
-  factory WireDetails.fromBuffer($core.List<$core.int> i,
-          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
-  factory WireDetails.fromJson($core.String i,
-          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromJson(i, r);
+  factory WireDetails.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory WireDetails.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'WireDetails',
-      package: const $pb.PackageName(
-          _omitMessageNames ? '' : 'connectrpc.conformance.v1'),
-      createEmptyInstance: create)
-    ..a<$core.int>(
-        1, _omitFieldNames ? '' : 'actualStatusCode', $pb.PbFieldType.O3)
-    ..aOM<$4.Struct>(2, _omitFieldNames ? '' : 'connectErrorRaw',
-        subBuilder: $4.Struct.create)
-    ..pc<$2.Header>(
-        3, _omitFieldNames ? '' : 'actualHttpTrailers', $pb.PbFieldType.PM,
-        subBuilder: $2.Header.create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'WireDetails', package: const $pb.PackageName(_omitMessageNames ? '' : 'connectrpc.conformance.v1'), createEmptyInstance: create)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'actualStatusCode', $pb.PbFieldType.O3)
+    ..aOM<$4.Struct>(2, _omitFieldNames ? '' : 'connectErrorRaw', subBuilder: $4.Struct.create)
+    ..pc<$2.Header>(3, _omitFieldNames ? '' : 'actualHttpTrailers', $pb.PbFieldType.PM, subBuilder: $2.Header.create)
     ..aOS(4, _omitFieldNames ? '' : 'actualGrpcwebTrailers')
-    ..hasRequiredFields = false;
+    ..hasRequiredFields = false
+  ;
 
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   WireDetails clone() => WireDetails()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
-  WireDetails copyWith(void Function(WireDetails) updates) =>
-      super.copyWith((message) => updates(message as WireDetails))
-          as WireDetails;
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  WireDetails copyWith(void Function(WireDetails) updates) => super.copyWith((message) => updates(message as WireDetails)) as WireDetails;
 
   $pb.BuilderInfo get info_ => _i;
 
@@ -1065,18 +878,14 @@ class WireDetails extends $pb.GeneratedMessage {
   WireDetails createEmptyInstance() => create();
   static $pb.PbList<WireDetails> createRepeated() => $pb.PbList<WireDetails>();
   @$core.pragma('dart2js:noInline')
-  static WireDetails getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<WireDetails>(create);
+  static WireDetails getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<WireDetails>(create);
   static WireDetails? _defaultInstance;
 
   /// The HTTP status code of the response.
   @$pb.TagNumber(1)
   $core.int get actualStatusCode => $_getIZ(0);
   @$pb.TagNumber(1)
-  set actualStatusCode($core.int v) {
-    $_setSignedInt32(0, v);
-  }
-
+  set actualStatusCode($core.int v) { $_setSignedInt32(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasActualStatusCode() => $_has(0);
   @$pb.TagNumber(1)
@@ -1087,10 +896,7 @@ class WireDetails extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   $4.Struct get connectErrorRaw => $_getN(1);
   @$pb.TagNumber(2)
-  set connectErrorRaw($4.Struct v) {
-    setField(2, v);
-  }
-
+  set connectErrorRaw($4.Struct v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasConnectErrorRaw() => $_has(1);
   @$pb.TagNumber(2)
@@ -1114,16 +920,13 @@ class WireDetails extends $pb.GeneratedMessage {
   @$pb.TagNumber(4)
   $core.String get actualGrpcwebTrailers => $_getSZ(3);
   @$pb.TagNumber(4)
-  set actualGrpcwebTrailers($core.String v) {
-    $_setString(3, v);
-  }
-
+  set actualGrpcwebTrailers($core.String v) { $_setString(3, v); }
   @$pb.TagNumber(4)
   $core.bool hasActualGrpcwebTrailers() => $_has(3);
   @$pb.TagNumber(4)
   void clearActualGrpcwebTrailers() => clearField(4);
 }
 
+
 const _omitFieldNames = $core.bool.fromEnvironment('protobuf.omit_field_names');
-const _omitMessageNames =
-    $core.bool.fromEnvironment('protobuf.omit_message_names');
+const _omitMessageNames = $core.bool.fromEnvironment('protobuf.omit_message_names');

@@ -75,57 +75,38 @@ class ServerCompatRequest extends $pb.GeneratedMessage {
     return $result;
   }
   ServerCompatRequest._() : super();
-  factory ServerCompatRequest.fromBuffer($core.List<$core.int> i,
-          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
-  factory ServerCompatRequest.fromJson($core.String i,
-          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromJson(i, r);
+  factory ServerCompatRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ServerCompatRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'ServerCompatRequest',
-      package: const $pb.PackageName(
-          _omitMessageNames ? '' : 'connectrpc.conformance.v1'),
-      createEmptyInstance: create)
-    ..e<$1.Protocol>(1, _omitFieldNames ? '' : 'protocol', $pb.PbFieldType.OE,
-        defaultOrMaker: $1.Protocol.PROTOCOL_UNSPECIFIED,
-        valueOf: $1.Protocol.valueOf,
-        enumValues: $1.Protocol.values)
-    ..e<$1.HTTPVersion>(
-        2, _omitFieldNames ? '' : 'httpVersion', $pb.PbFieldType.OE,
-        defaultOrMaker: $1.HTTPVersion.HTTP_VERSION_UNSPECIFIED,
-        valueOf: $1.HTTPVersion.valueOf,
-        enumValues: $1.HTTPVersion.values)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ServerCompatRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'connectrpc.conformance.v1'), createEmptyInstance: create)
+    ..e<$1.Protocol>(1, _omitFieldNames ? '' : 'protocol', $pb.PbFieldType.OE, defaultOrMaker: $1.Protocol.PROTOCOL_UNSPECIFIED, valueOf: $1.Protocol.valueOf, enumValues: $1.Protocol.values)
+    ..e<$1.HTTPVersion>(2, _omitFieldNames ? '' : 'httpVersion', $pb.PbFieldType.OE, defaultOrMaker: $1.HTTPVersion.HTTP_VERSION_UNSPECIFIED, valueOf: $1.HTTPVersion.valueOf, enumValues: $1.HTTPVersion.values)
     ..aOB(4, _omitFieldNames ? '' : 'useTls')
-    ..a<$core.List<$core.int>>(
-        5, _omitFieldNames ? '' : 'clientTlsCert', $pb.PbFieldType.OY)
-    ..a<$core.int>(
-        6, _omitFieldNames ? '' : 'messageReceiveLimit', $pb.PbFieldType.OU3)
-    ..aOM<$1.TLSCreds>(7, _omitFieldNames ? '' : 'serverCreds',
-        subBuilder: $1.TLSCreds.create)
-    ..hasRequiredFields = false;
+    ..a<$core.List<$core.int>>(5, _omitFieldNames ? '' : 'clientTlsCert', $pb.PbFieldType.OY)
+    ..a<$core.int>(6, _omitFieldNames ? '' : 'messageReceiveLimit', $pb.PbFieldType.OU3)
+    ..aOM<$1.TLSCreds>(7, _omitFieldNames ? '' : 'serverCreds', subBuilder: $1.TLSCreds.create)
+    ..hasRequiredFields = false
+  ;
 
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   ServerCompatRequest clone() => ServerCompatRequest()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
-  ServerCompatRequest copyWith(void Function(ServerCompatRequest) updates) =>
-      super.copyWith((message) => updates(message as ServerCompatRequest))
-          as ServerCompatRequest;
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ServerCompatRequest copyWith(void Function(ServerCompatRequest) updates) => super.copyWith((message) => updates(message as ServerCompatRequest)) as ServerCompatRequest;
 
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
   static ServerCompatRequest create() => ServerCompatRequest._();
   ServerCompatRequest createEmptyInstance() => create();
-  static $pb.PbList<ServerCompatRequest> createRepeated() =>
-      $pb.PbList<ServerCompatRequest>();
+  static $pb.PbList<ServerCompatRequest> createRepeated() => $pb.PbList<ServerCompatRequest>();
   @$core.pragma('dart2js:noInline')
-  static ServerCompatRequest getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<ServerCompatRequest>(create);
+  static ServerCompatRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ServerCompatRequest>(create);
   static ServerCompatRequest? _defaultInstance;
 
   /// Signals to the server that it must support at least this protocol. Note
@@ -135,10 +116,7 @@ class ServerCompatRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $1.Protocol get protocol => $_getN(0);
   @$pb.TagNumber(1)
-  set protocol($1.Protocol v) {
-    setField(1, v);
-  }
-
+  set protocol($1.Protocol v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasProtocol() => $_has(0);
   @$pb.TagNumber(1)
@@ -151,10 +129,7 @@ class ServerCompatRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   $1.HTTPVersion get httpVersion => $_getN(1);
   @$pb.TagNumber(2)
-  set httpVersion($1.HTTPVersion v) {
-    setField(2, v);
-  }
-
+  set httpVersion($1.HTTPVersion v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasHttpVersion() => $_has(1);
   @$pb.TagNumber(2)
@@ -170,10 +145,7 @@ class ServerCompatRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(4)
   $core.bool get useTls => $_getBF(2);
   @$pb.TagNumber(4)
-  set useTls($core.bool v) {
-    $_setBool(2, v);
-  }
-
+  set useTls($core.bool v) { $_setBool(2, v); }
   @$pb.TagNumber(4)
   $core.bool hasUseTls() => $_has(2);
   @$pb.TagNumber(4)
@@ -189,10 +161,7 @@ class ServerCompatRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(5)
   $core.List<$core.int> get clientTlsCert => $_getN(3);
   @$pb.TagNumber(5)
-  set clientTlsCert($core.List<$core.int> v) {
-    $_setBytes(3, v);
-  }
-
+  set clientTlsCert($core.List<$core.int> v) { $_setBytes(3, v); }
   @$pb.TagNumber(5)
   $core.bool hasClientTlsCert() => $_has(3);
   @$pb.TagNumber(5)
@@ -203,10 +172,7 @@ class ServerCompatRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(6)
   $core.int get messageReceiveLimit => $_getIZ(4);
   @$pb.TagNumber(6)
-  set messageReceiveLimit($core.int v) {
-    $_setUnsignedInt32(4, v);
-  }
-
+  set messageReceiveLimit($core.int v) { $_setUnsignedInt32(4, v); }
   @$pb.TagNumber(6)
   $core.bool hasMessageReceiveLimit() => $_has(4);
   @$pb.TagNumber(6)
@@ -231,10 +197,7 @@ class ServerCompatRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(7)
   $1.TLSCreds get serverCreds => $_getN(5);
   @$pb.TagNumber(7)
-  set serverCreds($1.TLSCreds v) {
-    setField(7, v);
-  }
-
+  set serverCreds($1.TLSCreds v) { setField(7, v); }
   @$pb.TagNumber(7)
   $core.bool hasServerCreds() => $_has(5);
   @$pb.TagNumber(7)
@@ -263,46 +226,35 @@ class ServerCompatResponse extends $pb.GeneratedMessage {
     return $result;
   }
   ServerCompatResponse._() : super();
-  factory ServerCompatResponse.fromBuffer($core.List<$core.int> i,
-          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
-  factory ServerCompatResponse.fromJson($core.String i,
-          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromJson(i, r);
+  factory ServerCompatResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ServerCompatResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'ServerCompatResponse',
-      package: const $pb.PackageName(
-          _omitMessageNames ? '' : 'connectrpc.conformance.v1'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ServerCompatResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'connectrpc.conformance.v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'host')
     ..a<$core.int>(2, _omitFieldNames ? '' : 'port', $pb.PbFieldType.OU3)
-    ..a<$core.List<$core.int>>(
-        3, _omitFieldNames ? '' : 'pemCert', $pb.PbFieldType.OY)
-    ..hasRequiredFields = false;
+    ..a<$core.List<$core.int>>(3, _omitFieldNames ? '' : 'pemCert', $pb.PbFieldType.OY)
+    ..hasRequiredFields = false
+  ;
 
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
-  ServerCompatResponse clone() =>
-      ServerCompatResponse()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
-  ServerCompatResponse copyWith(void Function(ServerCompatResponse) updates) =>
-      super.copyWith((message) => updates(message as ServerCompatResponse))
-          as ServerCompatResponse;
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ServerCompatResponse clone() => ServerCompatResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ServerCompatResponse copyWith(void Function(ServerCompatResponse) updates) => super.copyWith((message) => updates(message as ServerCompatResponse)) as ServerCompatResponse;
 
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
   static ServerCompatResponse create() => ServerCompatResponse._();
   ServerCompatResponse createEmptyInstance() => create();
-  static $pb.PbList<ServerCompatResponse> createRepeated() =>
-      $pb.PbList<ServerCompatResponse>();
+  static $pb.PbList<ServerCompatResponse> createRepeated() => $pb.PbList<ServerCompatResponse>();
   @$core.pragma('dart2js:noInline')
-  static ServerCompatResponse getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<ServerCompatResponse>(create);
+  static ServerCompatResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ServerCompatResponse>(create);
   static ServerCompatResponse? _defaultInstance;
 
   /// The host where the server is running. This should usually be `127.0.0.1`,
@@ -311,10 +263,7 @@ class ServerCompatResponse extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $core.String get host => $_getSZ(0);
   @$pb.TagNumber(1)
-  set host($core.String v) {
-    $_setString(0, v);
-  }
-
+  set host($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasHost() => $_has(0);
   @$pb.TagNumber(1)
@@ -324,10 +273,7 @@ class ServerCompatResponse extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   $core.int get port => $_getIZ(1);
   @$pb.TagNumber(2)
-  set port($core.int v) {
-    $_setUnsignedInt32(1, v);
-  }
-
+  set port($core.int v) { $_setUnsignedInt32(1, v); }
   @$pb.TagNumber(2)
   $core.bool hasPort() => $_has(1);
   @$pb.TagNumber(2)
@@ -339,16 +285,13 @@ class ServerCompatResponse extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   $core.List<$core.int> get pemCert => $_getN(2);
   @$pb.TagNumber(3)
-  set pemCert($core.List<$core.int> v) {
-    $_setBytes(2, v);
-  }
-
+  set pemCert($core.List<$core.int> v) { $_setBytes(2, v); }
   @$pb.TagNumber(3)
   $core.bool hasPemCert() => $_has(2);
   @$pb.TagNumber(3)
   void clearPemCert() => clearField(3);
 }
 
+
 const _omitFieldNames = $core.bool.fromEnvironment('protobuf.omit_field_names');
-const _omitMessageNames =
-    $core.bool.fromEnvironment('protobuf.omit_message_names');
+const _omitMessageNames = $core.bool.fromEnvironment('protobuf.omit_message_names');

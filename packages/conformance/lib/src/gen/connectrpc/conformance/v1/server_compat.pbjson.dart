@@ -31,39 +31,12 @@ import 'dart:typed_data' as $typed_data;
 const ServerCompatRequest$json = {
   '1': 'ServerCompatRequest',
   '2': [
-    {
-      '1': 'protocol',
-      '3': 1,
-      '4': 1,
-      '5': 14,
-      '6': '.connectrpc.conformance.v1.Protocol',
-      '10': 'protocol'
-    },
-    {
-      '1': 'http_version',
-      '3': 2,
-      '4': 1,
-      '5': 14,
-      '6': '.connectrpc.conformance.v1.HTTPVersion',
-      '10': 'httpVersion'
-    },
+    {'1': 'protocol', '3': 1, '4': 1, '5': 14, '6': '.connectrpc.conformance.v1.Protocol', '10': 'protocol'},
+    {'1': 'http_version', '3': 2, '4': 1, '5': 14, '6': '.connectrpc.conformance.v1.HTTPVersion', '10': 'httpVersion'},
     {'1': 'use_tls', '3': 4, '4': 1, '5': 8, '10': 'useTls'},
     {'1': 'client_tls_cert', '3': 5, '4': 1, '5': 12, '10': 'clientTlsCert'},
-    {
-      '1': 'message_receive_limit',
-      '3': 6,
-      '4': 1,
-      '5': 13,
-      '10': 'messageReceiveLimit'
-    },
-    {
-      '1': 'server_creds',
-      '3': 7,
-      '4': 1,
-      '5': 11,
-      '6': '.connectrpc.conformance.v1.TLSCreds',
-      '10': 'serverCreds'
-    },
+    {'1': 'message_receive_limit', '3': 6, '4': 1, '5': 13, '10': 'messageReceiveLimit'},
+    {'1': 'server_creds', '3': 7, '4': 1, '5': 11, '6': '.connectrpc.conformance.v1.TLSCreds', '10': 'serverCreds'},
   ],
 };
 
@@ -91,3 +64,4 @@ const ServerCompatResponse$json = {
 final $typed_data.Uint8List serverCompatResponseDescriptor = $convert.base64Decode(
     'ChRTZXJ2ZXJDb21wYXRSZXNwb25zZRISCgRob3N0GAEgASgJUgRob3N0EhIKBHBvcnQYAiABKA'
     '1SBHBvcnQSGQoIcGVtX2NlcnQYAyABKAxSB3BlbUNlcnQ=');
+

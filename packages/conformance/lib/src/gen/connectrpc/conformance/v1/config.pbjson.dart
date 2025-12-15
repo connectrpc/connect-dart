@@ -159,30 +159,9 @@ final $typed_data.Uint8List codeDescriptor = $convert.base64Decode(
 const Config$json = {
   '1': 'Config',
   '2': [
-    {
-      '1': 'features',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.connectrpc.conformance.v1.Features',
-      '10': 'features'
-    },
-    {
-      '1': 'include_cases',
-      '3': 2,
-      '4': 3,
-      '5': 11,
-      '6': '.connectrpc.conformance.v1.ConfigCase',
-      '10': 'includeCases'
-    },
-    {
-      '1': 'exclude_cases',
-      '3': 3,
-      '4': 3,
-      '5': 11,
-      '6': '.connectrpc.conformance.v1.ConfigCase',
-      '10': 'excludeCases'
-    },
+    {'1': 'features', '3': 1, '4': 1, '5': 11, '6': '.connectrpc.conformance.v1.Features', '10': 'features'},
+    {'1': 'include_cases', '3': 2, '4': 3, '5': 11, '6': '.connectrpc.conformance.v1.ConfigCase', '10': 'includeCases'},
+    {'1': 'exclude_cases', '3': 3, '4': 3, '5': 11, '6': '.connectrpc.conformance.v1.ConfigCase', '10': 'excludeCases'},
   ],
 };
 
@@ -198,109 +177,18 @@ final $typed_data.Uint8List configDescriptor = $convert.base64Decode(
 const Features$json = {
   '1': 'Features',
   '2': [
-    {
-      '1': 'versions',
-      '3': 1,
-      '4': 3,
-      '5': 14,
-      '6': '.connectrpc.conformance.v1.HTTPVersion',
-      '10': 'versions'
-    },
-    {
-      '1': 'protocols',
-      '3': 2,
-      '4': 3,
-      '5': 14,
-      '6': '.connectrpc.conformance.v1.Protocol',
-      '10': 'protocols'
-    },
-    {
-      '1': 'codecs',
-      '3': 3,
-      '4': 3,
-      '5': 14,
-      '6': '.connectrpc.conformance.v1.Codec',
-      '10': 'codecs'
-    },
-    {
-      '1': 'compressions',
-      '3': 4,
-      '4': 3,
-      '5': 14,
-      '6': '.connectrpc.conformance.v1.Compression',
-      '10': 'compressions'
-    },
-    {
-      '1': 'stream_types',
-      '3': 5,
-      '4': 3,
-      '5': 14,
-      '6': '.connectrpc.conformance.v1.StreamType',
-      '10': 'streamTypes'
-    },
-    {
-      '1': 'supports_h2c',
-      '3': 6,
-      '4': 1,
-      '5': 8,
-      '9': 0,
-      '10': 'supportsH2c',
-      '17': true
-    },
-    {
-      '1': 'supports_tls',
-      '3': 7,
-      '4': 1,
-      '5': 8,
-      '9': 1,
-      '10': 'supportsTls',
-      '17': true
-    },
-    {
-      '1': 'supports_tls_client_certs',
-      '3': 8,
-      '4': 1,
-      '5': 8,
-      '9': 2,
-      '10': 'supportsTlsClientCerts',
-      '17': true
-    },
-    {
-      '1': 'supports_trailers',
-      '3': 9,
-      '4': 1,
-      '5': 8,
-      '9': 3,
-      '10': 'supportsTrailers',
-      '17': true
-    },
-    {
-      '1': 'supports_half_duplex_bidi_over_http1',
-      '3': 10,
-      '4': 1,
-      '5': 8,
-      '9': 4,
-      '10': 'supportsHalfDuplexBidiOverHttp1',
-      '17': true
-    },
-    {
-      '1': 'supports_connect_get',
-      '3': 11,
-      '4': 1,
-      '5': 8,
-      '9': 5,
-      '10': 'supportsConnectGet',
-      '17': true
-    },
-    {
-      '1': 'supports_message_receive_limit',
-      '3': 12,
-      '4': 1,
-      '5': 8,
-      '9': 6,
-      '10': 'supportsMessageReceiveLimit',
-      '17': true
-    },
+    {'1': 'versions', '3': 1, '4': 3, '5': 14, '6': '.connectrpc.conformance.v1.HTTPVersion', '10': 'versions'},
+    {'1': 'protocols', '3': 2, '4': 3, '5': 14, '6': '.connectrpc.conformance.v1.Protocol', '10': 'protocols'},
+    {'1': 'codecs', '3': 3, '4': 3, '5': 14, '6': '.connectrpc.conformance.v1.Codec', '10': 'codecs'},
+    {'1': 'compressions', '3': 4, '4': 3, '5': 14, '6': '.connectrpc.conformance.v1.Compression', '10': 'compressions'},
+    {'1': 'stream_types', '3': 5, '4': 3, '5': 14, '6': '.connectrpc.conformance.v1.StreamType', '10': 'streamTypes'},
+    {'1': 'supports_h2c', '3': 6, '4': 1, '5': 8, '9': 0, '10': 'supportsH2c', '17': true},
+    {'1': 'supports_tls', '3': 7, '4': 1, '5': 8, '9': 1, '10': 'supportsTls', '17': true},
+    {'1': 'supports_tls_client_certs', '3': 8, '4': 1, '5': 8, '9': 2, '10': 'supportsTlsClientCerts', '17': true},
+    {'1': 'supports_trailers', '3': 9, '4': 1, '5': 8, '9': 3, '10': 'supportsTrailers', '17': true},
+    {'1': 'supports_half_duplex_bidi_over_http1', '3': 10, '4': 1, '5': 8, '9': 4, '10': 'supportsHalfDuplexBidiOverHttp1', '17': true},
+    {'1': 'supports_connect_get', '3': 11, '4': 1, '5': 8, '9': 5, '10': 'supportsConnectGet', '17': true},
+    {'1': 'supports_message_receive_limit', '3': 12, '4': 1, '5': 8, '9': 6, '10': 'supportsMessageReceiveLimit', '17': true},
   ],
   '8': [
     {'1': '_supports_h2c'},
@@ -338,73 +226,14 @@ final $typed_data.Uint8List featuresDescriptor = $convert.base64Decode(
 const ConfigCase$json = {
   '1': 'ConfigCase',
   '2': [
-    {
-      '1': 'version',
-      '3': 1,
-      '4': 1,
-      '5': 14,
-      '6': '.connectrpc.conformance.v1.HTTPVersion',
-      '10': 'version'
-    },
-    {
-      '1': 'protocol',
-      '3': 2,
-      '4': 1,
-      '5': 14,
-      '6': '.connectrpc.conformance.v1.Protocol',
-      '10': 'protocol'
-    },
-    {
-      '1': 'codec',
-      '3': 3,
-      '4': 1,
-      '5': 14,
-      '6': '.connectrpc.conformance.v1.Codec',
-      '10': 'codec'
-    },
-    {
-      '1': 'compression',
-      '3': 4,
-      '4': 1,
-      '5': 14,
-      '6': '.connectrpc.conformance.v1.Compression',
-      '10': 'compression'
-    },
-    {
-      '1': 'stream_type',
-      '3': 5,
-      '4': 1,
-      '5': 14,
-      '6': '.connectrpc.conformance.v1.StreamType',
-      '10': 'streamType'
-    },
-    {
-      '1': 'use_tls',
-      '3': 6,
-      '4': 1,
-      '5': 8,
-      '9': 0,
-      '10': 'useTls',
-      '17': true
-    },
-    {
-      '1': 'use_tls_client_certs',
-      '3': 7,
-      '4': 1,
-      '5': 8,
-      '9': 1,
-      '10': 'useTlsClientCerts',
-      '17': true
-    },
-    {
-      '1': 'use_message_receive_limit',
-      '3': 8,
-      '4': 1,
-      '5': 8,
-      '9': 2,
-      '10': 'useMessageReceiveLimit',
-      '17': true
-    },
+    {'1': 'version', '3': 1, '4': 1, '5': 14, '6': '.connectrpc.conformance.v1.HTTPVersion', '10': 'version'},
+    {'1': 'protocol', '3': 2, '4': 1, '5': 14, '6': '.connectrpc.conformance.v1.Protocol', '10': 'protocol'},
+    {'1': 'codec', '3': 3, '4': 1, '5': 14, '6': '.connectrpc.conformance.v1.Codec', '10': 'codec'},
+    {'1': 'compression', '3': 4, '4': 1, '5': 14, '6': '.connectrpc.conformance.v1.Compression', '10': 'compression'},
+    {'1': 'stream_type', '3': 5, '4': 1, '5': 14, '6': '.connectrpc.conformance.v1.StreamType', '10': 'streamType'},
+    {'1': 'use_tls', '3': 6, '4': 1, '5': 8, '9': 0, '10': 'useTls', '17': true},
+    {'1': 'use_tls_client_certs', '3': 7, '4': 1, '5': 8, '9': 1, '10': 'useTlsClientCerts', '17': true},
+    {'1': 'use_message_receive_limit', '3': 8, '4': 1, '5': 8, '9': 2, '10': 'useMessageReceiveLimit', '17': true},
   ],
   '8': [
     {'1': '_use_tls'},
@@ -439,3 +268,4 @@ const TLSCreds$json = {
 /// Descriptor for `TLSCreds`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List tLSCredsDescriptor = $convert.base64Decode(
     'CghUTFNDcmVkcxISCgRjZXJ0GAEgASgMUgRjZXJ0EhAKA2tleRgCIAEoDFIDa2V5');
+

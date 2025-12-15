@@ -35,60 +35,38 @@ import 'service.pbjson.dart';
 export 'service.pb.dart';
 
 abstract class ConformanceServiceBase extends $pb.GeneratedService {
-  $async.Future<$2.UnaryResponse> unary(
-      $pb.ServerContext ctx, $2.UnaryRequest request);
-  $async.Future<$2.ServerStreamResponse> serverStream(
-      $pb.ServerContext ctx, $2.ServerStreamRequest request);
-  $async.Future<$2.ClientStreamResponse> clientStream(
-      $pb.ServerContext ctx, $2.ClientStreamRequest request);
-  $async.Future<$2.BidiStreamResponse> bidiStream(
-      $pb.ServerContext ctx, $2.BidiStreamRequest request);
-  $async.Future<$2.UnimplementedResponse> unimplemented(
-      $pb.ServerContext ctx, $2.UnimplementedRequest request);
-  $async.Future<$2.IdempotentUnaryResponse> idempotentUnary(
-      $pb.ServerContext ctx, $2.IdempotentUnaryRequest request);
+  $async.Future<$2.UnaryResponse> unary($pb.ServerContext ctx, $2.UnaryRequest request);
+  $async.Future<$2.ServerStreamResponse> serverStream($pb.ServerContext ctx, $2.ServerStreamRequest request);
+  $async.Future<$2.ClientStreamResponse> clientStream($pb.ServerContext ctx, $2.ClientStreamRequest request);
+  $async.Future<$2.BidiStreamResponse> bidiStream($pb.ServerContext ctx, $2.BidiStreamRequest request);
+  $async.Future<$2.UnimplementedResponse> unimplemented($pb.ServerContext ctx, $2.UnimplementedRequest request);
+  $async.Future<$2.IdempotentUnaryResponse> idempotentUnary($pb.ServerContext ctx, $2.IdempotentUnaryRequest request);
 
   $pb.GeneratedMessage createRequest($core.String methodName) {
     switch (methodName) {
-      case 'Unary':
-        return $2.UnaryRequest();
-      case 'ServerStream':
-        return $2.ServerStreamRequest();
-      case 'ClientStream':
-        return $2.ClientStreamRequest();
-      case 'BidiStream':
-        return $2.BidiStreamRequest();
-      case 'Unimplemented':
-        return $2.UnimplementedRequest();
-      case 'IdempotentUnary':
-        return $2.IdempotentUnaryRequest();
-      default:
-        throw $core.ArgumentError('Unknown method: $methodName');
+      case 'Unary': return $2.UnaryRequest();
+      case 'ServerStream': return $2.ServerStreamRequest();
+      case 'ClientStream': return $2.ClientStreamRequest();
+      case 'BidiStream': return $2.BidiStreamRequest();
+      case 'Unimplemented': return $2.UnimplementedRequest();
+      case 'IdempotentUnary': return $2.IdempotentUnaryRequest();
+      default: throw $core.ArgumentError('Unknown method: $methodName');
     }
   }
 
-  $async.Future<$pb.GeneratedMessage> handleCall($pb.ServerContext ctx,
-      $core.String methodName, $pb.GeneratedMessage request) {
+  $async.Future<$pb.GeneratedMessage> handleCall($pb.ServerContext ctx, $core.String methodName, $pb.GeneratedMessage request) {
     switch (methodName) {
-      case 'Unary':
-        return this.unary(ctx, request as $2.UnaryRequest);
-      case 'ServerStream':
-        return this.serverStream(ctx, request as $2.ServerStreamRequest);
-      case 'ClientStream':
-        return this.clientStream(ctx, request as $2.ClientStreamRequest);
-      case 'BidiStream':
-        return this.bidiStream(ctx, request as $2.BidiStreamRequest);
-      case 'Unimplemented':
-        return this.unimplemented(ctx, request as $2.UnimplementedRequest);
-      case 'IdempotentUnary':
-        return this.idempotentUnary(ctx, request as $2.IdempotentUnaryRequest);
-      default:
-        throw $core.ArgumentError('Unknown method: $methodName');
+      case 'Unary': return this.unary(ctx, request as $2.UnaryRequest);
+      case 'ServerStream': return this.serverStream(ctx, request as $2.ServerStreamRequest);
+      case 'ClientStream': return this.clientStream(ctx, request as $2.ClientStreamRequest);
+      case 'BidiStream': return this.bidiStream(ctx, request as $2.BidiStreamRequest);
+      case 'Unimplemented': return this.unimplemented(ctx, request as $2.UnimplementedRequest);
+      case 'IdempotentUnary': return this.idempotentUnary(ctx, request as $2.IdempotentUnaryRequest);
+      default: throw $core.ArgumentError('Unknown method: $methodName');
     }
   }
 
-  $core.Map<$core.String, $core.dynamic> get $json =>
-      ConformanceServiceBase$json;
-  $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>>
-      get $messageJson => ConformanceServiceBase$messageJson;
+  $core.Map<$core.String, $core.dynamic> get $json => ConformanceServiceBase$json;
+  $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>> get $messageJson => ConformanceServiceBase$messageJson;
 }
+

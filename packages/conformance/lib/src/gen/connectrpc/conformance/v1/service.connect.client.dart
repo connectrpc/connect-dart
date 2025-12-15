@@ -25,7 +25,7 @@ import "service.connect.spec.dart" as specs;
 /// the reference servers, used to test clients, and is expected to be implemented
 /// by test servers, since this is the service used by reference clients.
 /// Test servers must implement the service as described.
-extension type ConformanceServiceClient(connect.Transport _transport) {
+extension type ConformanceServiceClient (connect.Transport _transport) {
   /// A unary operation. The request indicates the response headers and trailers
   /// and also indicates either a response message or an error to send back.
   /// Response message data is specified as bytes. The service should echo back
@@ -194,8 +194,7 @@ extension type ConformanceServiceClient(connect.Transport _transport) {
   /// A unary endpoint denoted as having no side effects (i.e. idempotent).
   /// Implementations should use an HTTP GET when invoking this endpoint and
   /// leverage query parameters to send data.
-  Future<connectrpcconformancev1service.IdempotentUnaryResponse>
-      idempotentUnary(
+  Future<connectrpcconformancev1service.IdempotentUnaryResponse> idempotentUnary(
     connectrpcconformancev1service.IdempotentUnaryRequest input, {
     connect.Headers? headers,
     connect.AbortSignal? signal,

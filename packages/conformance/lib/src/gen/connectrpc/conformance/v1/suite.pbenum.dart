@@ -28,51 +28,38 @@ import 'dart:core' as $core;
 import 'package:protobuf/protobuf.dart' as $pb;
 
 class TestSuite_TestMode extends $pb.ProtobufEnum {
-  static const TestSuite_TestMode TEST_MODE_UNSPECIFIED =
-      TestSuite_TestMode._(0, _omitEnumNames ? '' : 'TEST_MODE_UNSPECIFIED');
-  static const TestSuite_TestMode TEST_MODE_CLIENT =
-      TestSuite_TestMode._(1, _omitEnumNames ? '' : 'TEST_MODE_CLIENT');
-  static const TestSuite_TestMode TEST_MODE_SERVER =
-      TestSuite_TestMode._(2, _omitEnumNames ? '' : 'TEST_MODE_SERVER');
+  static const TestSuite_TestMode TEST_MODE_UNSPECIFIED = TestSuite_TestMode._(0, _omitEnumNames ? '' : 'TEST_MODE_UNSPECIFIED');
+  static const TestSuite_TestMode TEST_MODE_CLIENT = TestSuite_TestMode._(1, _omitEnumNames ? '' : 'TEST_MODE_CLIENT');
+  static const TestSuite_TestMode TEST_MODE_SERVER = TestSuite_TestMode._(2, _omitEnumNames ? '' : 'TEST_MODE_SERVER');
 
-  static const $core.List<TestSuite_TestMode> values = <TestSuite_TestMode>[
+  static const $core.List<TestSuite_TestMode> values = <TestSuite_TestMode> [
     TEST_MODE_UNSPECIFIED,
     TEST_MODE_CLIENT,
     TEST_MODE_SERVER,
   ];
 
-  static final $core.Map<$core.int, TestSuite_TestMode> _byValue =
-      $pb.ProtobufEnum.initByValue(values);
+  static final $core.Map<$core.int, TestSuite_TestMode> _byValue = $pb.ProtobufEnum.initByValue(values);
   static TestSuite_TestMode? valueOf($core.int value) => _byValue[value];
 
   const TestSuite_TestMode._($core.int v, $core.String n) : super(v, n);
 }
 
 class TestSuite_ConnectVersionMode extends $pb.ProtobufEnum {
-  static const TestSuite_ConnectVersionMode CONNECT_VERSION_MODE_UNSPECIFIED =
-      TestSuite_ConnectVersionMode._(
-          0, _omitEnumNames ? '' : 'CONNECT_VERSION_MODE_UNSPECIFIED');
-  static const TestSuite_ConnectVersionMode CONNECT_VERSION_MODE_REQUIRE =
-      TestSuite_ConnectVersionMode._(
-          1, _omitEnumNames ? '' : 'CONNECT_VERSION_MODE_REQUIRE');
-  static const TestSuite_ConnectVersionMode CONNECT_VERSION_MODE_IGNORE =
-      TestSuite_ConnectVersionMode._(
-          2, _omitEnumNames ? '' : 'CONNECT_VERSION_MODE_IGNORE');
+  static const TestSuite_ConnectVersionMode CONNECT_VERSION_MODE_UNSPECIFIED = TestSuite_ConnectVersionMode._(0, _omitEnumNames ? '' : 'CONNECT_VERSION_MODE_UNSPECIFIED');
+  static const TestSuite_ConnectVersionMode CONNECT_VERSION_MODE_REQUIRE = TestSuite_ConnectVersionMode._(1, _omitEnumNames ? '' : 'CONNECT_VERSION_MODE_REQUIRE');
+  static const TestSuite_ConnectVersionMode CONNECT_VERSION_MODE_IGNORE = TestSuite_ConnectVersionMode._(2, _omitEnumNames ? '' : 'CONNECT_VERSION_MODE_IGNORE');
 
-  static const $core.List<TestSuite_ConnectVersionMode> values =
-      <TestSuite_ConnectVersionMode>[
+  static const $core.List<TestSuite_ConnectVersionMode> values = <TestSuite_ConnectVersionMode> [
     CONNECT_VERSION_MODE_UNSPECIFIED,
     CONNECT_VERSION_MODE_REQUIRE,
     CONNECT_VERSION_MODE_IGNORE,
   ];
 
-  static final $core.Map<$core.int, TestSuite_ConnectVersionMode> _byValue =
-      $pb.ProtobufEnum.initByValue(values);
-  static TestSuite_ConnectVersionMode? valueOf($core.int value) =>
-      _byValue[value];
+  static final $core.Map<$core.int, TestSuite_ConnectVersionMode> _byValue = $pb.ProtobufEnum.initByValue(values);
+  static TestSuite_ConnectVersionMode? valueOf($core.int value) => _byValue[value];
 
-  const TestSuite_ConnectVersionMode._($core.int v, $core.String n)
-      : super(v, n);
+  const TestSuite_ConnectVersionMode._($core.int v, $core.String n) : super(v, n);
 }
+
 
 const _omitEnumNames = $core.bool.fromEnvironment('protobuf.omit_enum_names');
