@@ -1,0 +1,27 @@
+//
+//  Generated code. Do not modify.
+//  source: edition/edition.proto
+//
+
+import "package:connectrpc/connect.dart" as connect;
+import "edition.pb.dart" as editionedition;
+import "edition.connect.spec.dart" as specs;
+
+extension type EditionServiceClient (connect.Transport _transport) {
+  Future<editionedition.Msg> unary(
+    editionedition.Msg input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.EditionService.unary,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+}

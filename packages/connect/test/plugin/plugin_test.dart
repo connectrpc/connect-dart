@@ -88,6 +88,14 @@ void main() async {
       ),
     );
   });
+  test('generates edition 2024 file', () async {
+    expect(
+      await runPlugin(image, "edition/edition.proto"),
+      matchGenerated(
+        ['edition/edition.connect.client', 'edition/edition.connect.spec'],
+      ),
+    );
+  });
 }
 
 Future<CodeGeneratorResponse> runPlugin(

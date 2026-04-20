@@ -17,7 +17,7 @@ import 'dart:io';
 
 import 'package:path/path.dart' as p;
 
-const version = "1.53.0";
+const version = "1.68.2";
 const cacheDir = ".tmp/bin";
 
 Future<int> main(List<String> args) async {
