@@ -89,12 +89,21 @@ void main() async {
     );
   });
   test('generates edition 2024 file', () async {
+    final response = await runPlugin(image, "edition/edition.proto");
     expect(
-      await runPlugin(image, "edition/edition.proto"),
+      response,
       matchGenerated(
         ['edition/edition.connect.client', 'edition/edition.connect.spec'],
       ),
     );
+    expect(
+      response.supportedFeatures &
+          CodeGeneratorResponse_Feature.FEATURE_SUPPORTS_EDITIONS.value,
+      isNot(0),
+      reason: 'plugin must advertise FEATURE_SUPPORTS_EDITIONS',
+    );
+    expect(response.minimumEdition, Edition.EDITION_PROTO2.value);
+    expect(response.maximumEdition, Edition.EDITION_2024.value);
   });
 }
 
