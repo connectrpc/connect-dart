@@ -100,7 +100,6 @@ void main() async {
       response.supportedFeatures &
           CodeGeneratorResponse_Feature.FEATURE_SUPPORTS_EDITIONS.value,
       isNot(0),
-      reason: 'plugin must advertise FEATURE_SUPPORTS_EDITIONS',
     );
     expect(response.minimumEdition, Edition.EDITION_PROTO2.value);
     expect(response.maximumEdition, Edition.EDITION_2024.value);
