@@ -29,15 +29,15 @@ import 'envelope.dart';
 sealed class ParsedEnvelopedMessage<M extends Object, E extends Object> {}
 
 /// Parsed message.
-final class ParsedMessage<M extends Object, _ extends Object>
-    implements ParsedEnvelopedMessage<M, _> {
+final class ParsedMessage<M extends Object, E extends Object>
+    implements ParsedEnvelopedMessage<M, E> {
   final M value;
   const ParsedMessage(this.value);
 }
 
 // End of stream message.
-final class EndStreamMessage<_ extends Object, E extends Object>
-    implements ParsedEnvelopedMessage<_, E> {
+final class EndStreamMessage<M extends Object, E extends Object>
+    implements ParsedEnvelopedMessage<M, E> {
   final E value;
   const EndStreamMessage(this.value);
 }
