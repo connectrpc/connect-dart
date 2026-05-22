@@ -47,10 +47,9 @@ final class CancelableSignal with _AbortSignal {
 
   CancelableSignal({AbortSignal? parent}) {
     _deadline = parent?.deadline;
-    _future =
-        parent == null
-            ? _completer.future
-            : Future.any([parent.future, _completer.future]);
+    _future = parent == null
+        ? _completer.future
+        : Future.any([parent.future, _completer.future]);
   }
 }
 

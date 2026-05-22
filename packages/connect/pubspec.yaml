@@ -12,7 +12,7 @@ executables:
   protoc-gen-connect-dart:
 
 environment:
-  sdk: ^3.7.0
+  sdk: ^3.6.0
 resolution: workspace
 dependencies:
   protobuf: ^6.0.0

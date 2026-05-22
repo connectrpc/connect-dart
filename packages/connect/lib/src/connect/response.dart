@@ -54,10 +54,9 @@ extension ResponseValidation on HttpResponse {
       }
       throw statusErr;
     }
-    final validPrefix =
-        streamType == StreamType.unary
-            ? "application/${codec.name}"
-            : "application/connect+${codec.name}";
+    final validPrefix = streamType == StreamType.unary
+        ? "application/${codec.name}"
+        : "application/connect+${codec.name}";
     if (!contentType.startsWith(validPrefix)) {
       /// The error code makes a distinction between a
       /// possible content type like application/json where a application/proto

@@ -46,7 +46,7 @@ extension ParseEnvelope on Stream<EnvelopedMessage> {
   /// Parses envelopes into messages or custom end serialization.
   /// The end serialization will differ by protocol.
   Stream<ParsedEnvelopedMessage<M, E>>
-  parse<M extends Object, E extends Object>(
+      parse<M extends Object, E extends Object>(
     Codec codec,
     M Function() factory,
     int? endStreamFlag,

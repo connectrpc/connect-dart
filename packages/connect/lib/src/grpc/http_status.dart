@@ -19,21 +19,21 @@ import '../../connect.dart';
 Code codeFromHttpStatus(int httpStatus) {
   return switch (httpStatus) {
     400 => // Bad Request
-    Code.internal,
+      Code.internal,
     401 => // Unauthorized
-    Code.unauthenticated,
+      Code.unauthenticated,
     403 => // Forbidden
-    Code.permissionDenied,
+      Code.permissionDenied,
     404 => // Not Found
-    Code.unimplemented,
+      Code.unimplemented,
     429 => // Too Many Requests
-    Code.unavailable,
+      Code.unavailable,
     502 => // Bad Gateway
-    Code.unavailable,
+      Code.unavailable,
     503 => // Service Unavailable
-    Code.unavailable,
+      Code.unavailable,
     504 => // Gateway Timeout
-    Code.unavailable,
+      Code.unavailable,
     _ =>
       // 200 is UNKNOWN because there should be a grpc-status in case of truly OK response.
       Code.unknown,

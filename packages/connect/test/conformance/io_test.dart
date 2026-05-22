@@ -45,14 +45,14 @@ void main() {
       final codec = switch (req.codec) {
         Codec.CODEC_PROTO => ProtoCodec(),
         Codec.CODEC_JSON => JsonCodec(
-          typeRegistry: TypeRegistry([
-            UnaryRequest(),
-            ServerStreamRequest(),
-            ClientStreamRequest(),
-            BidiStreamRequest(),
-            IdempotentUnaryRequest(),
-          ]),
-        ),
+            typeRegistry: TypeRegistry([
+              UnaryRequest(),
+              ServerStreamRequest(),
+              ClientStreamRequest(),
+              BidiStreamRequest(),
+              IdempotentUnaryRequest(),
+            ]),
+          ),
         _ => throw "Unknown codec",
       };
       final context = io.SecurityContext(withTrustedRoots: false);
@@ -65,11 +65,11 @@ void main() {
       }
       final httpClient = switch (req.httpVersion) {
         HTTPVersion.HTTP_VERSION_1 => http1.createHttpClient(
-          io.HttpClient(context: context),
-        ),
+            io.HttpClient(context: context),
+          ),
         HTTPVersion.HTTP_VERSION_2 => http2.createHttpClient(
-          transport: http2.Http2ClientTransport(context: context),
-        ),
+            transport: http2.Http2ClientTransport(context: context),
+          ),
         _ => throw 'Unsupported Http version',
       };
       final compression = switch (req.compression) {
@@ -80,29 +80,29 @@ void main() {
       };
       return switch (req.protocol) {
         Protocol.PROTOCOL_CONNECT => connect.Transport(
-          baseUrl: baseUrl,
-          codec: codec,
-          httpClient: httpClient,
-          useHttpGet: req.useGetHttpMethod,
-          sendCompression: compression,
-          acceptCompressions: compression != null ? [compression] : [],
-        ),
+            baseUrl: baseUrl,
+            codec: codec,
+            httpClient: httpClient,
+            useHttpGet: req.useGetHttpMethod,
+            sendCompression: compression,
+            acceptCompressions: compression != null ? [compression] : [],
+          ),
         Protocol.PROTOCOL_GRPC => grpc.Transport(
-          baseUrl: baseUrl,
-          codec: codec,
-          httpClient: httpClient,
-          statusParser: StatusParser(),
-          sendCompression: compression,
-          acceptCompressions: compression != null ? [compression] : [],
-        ),
+            baseUrl: baseUrl,
+            codec: codec,
+            httpClient: httpClient,
+            statusParser: StatusParser(),
+            sendCompression: compression,
+            acceptCompressions: compression != null ? [compression] : [],
+          ),
         Protocol.PROTOCOL_GRPC_WEB => grpc_web.Transport(
-          baseUrl: baseUrl,
-          codec: codec,
-          httpClient: httpClient,
-          statusParser: StatusParser(),
-          sendCompression: compression,
-          acceptCompressions: compression != null ? [compression] : [],
-        ),
+            baseUrl: baseUrl,
+            codec: codec,
+            httpClient: httpClient,
+            statusParser: StatusParser(),
+            sendCompression: compression,
+            acceptCompressions: compression != null ? [compression] : [],
+          ),
         _ => throw "Unknown protocol",
       };
     },

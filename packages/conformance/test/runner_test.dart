@@ -26,12 +26,11 @@ void main() {
         (requests) =>
             requests.map((req) => ClientCompatResponse(testName: req.testName)),
       ),
-      args:
-          ConformanceArgs(
-            run: [
-              "Basic/HTTPVersion:1/Protocol:PROTOCOL_CONNECT/Codec:CODEC_PROTO/Compression:COMPRESSION_IDENTITY/TLS:true/unary/empty-definition",
-            ],
-          ).toList(),
+      args: ConformanceArgs(
+        run: [
+          "Basic/HTTPVersion:1/Protocol:PROTOCOL_CONNECT/Codec:CODEC_PROTO/Compression:COMPRESSION_IDENTITY/TLS:true/unary/empty-definition",
+        ],
+      ).toList(),
     );
     expect(result, isNot(0)); // We expect this to fail.
   });

@@ -77,12 +77,11 @@ final class Protocol implements base.Protocol {
       statusParser,
       acceptCompressions,
     );
-    final message =
-        await res.body
-            .splitEnvelope()
-            .decompress(compression)
-            .parse(codec, req.spec.outputFactory)
-            .tryReadingSingleMessage();
+    final message = await res.body
+        .splitEnvelope()
+        .decompress(compression)
+        .parse(codec, req.spec.outputFactory)
+        .tryReadingSingleMessage();
     res.trailer.validateTrailer(res.header, statusParser);
     if (message == null) {
       if (headerError != null) {
@@ -139,10 +138,10 @@ final class Protocol implements base.Protocol {
           .decompress(compression)
           .parse(codec, req.spec.outputFactory)
           .onDone(() {
-            if (!foundStatus) {
-              res.trailer.validateTrailer(res.header, statusParser);
-            }
-          }),
+        if (!foundStatus) {
+          res.trailer.validateTrailer(res.header, statusParser);
+        }
+      }),
       res.trailer,
     );
   }

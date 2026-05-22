@@ -130,7 +130,7 @@ void main() {
 
 class HasFlags extends CustomMatcher {
   HasFlags(EnvelopedMessage env)
-    : super("EnvelopeMessage with flags that is", "flags", equals(env.flags));
+      : super("EnvelopeMessage with flags that is", "flags", equals(env.flags));
 
   @override
   Object? featureValueOf(actual) {
@@ -140,7 +140,7 @@ class HasFlags extends CustomMatcher {
 
 class HasData extends CustomMatcher {
   HasData(EnvelopedMessage env)
-    : super("EnvelopeMessage with data that is", "data", equals(env.data));
+      : super("EnvelopeMessage with data that is", "data", equals(env.data));
 
   @override
   Object? featureValueOf(actual) {
