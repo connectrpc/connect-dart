@@ -25,8 +25,8 @@ String connectGetUrl(String url, StableCodec codec, Object message) {
   buf.writeAll(
     [
       'connect=v$protocolVersion',
-      'encoding=${codec.name}',
       if (codec.isBinary) 'base64=1',
+      'encoding=${codec.name}',
       if (codec.isBinary)
         'message=${base64Url.encode(messageBytes)}'
       else
