@@ -90,11 +90,7 @@ final class _Http2ClientTransport implements Http2ClientTransport {
     final key = '${uri.scheme}://${uri.host}:${uri.port}';
     var transport = originTransports[key];
     if (transport == null) {
-      transport = _SingleOriginHttp2ClientTransport(
-        uri,
-        context,
-        options,
-      );
+      transport = _SingleOriginHttp2ClientTransport(uri, context, options);
       originTransports[key] = transport;
     }
     return transport.makeRequest(headers);
@@ -111,11 +107,7 @@ final class _SingleOriginHttp2ClientTransport {
   _KeepAliveConnection? activeConnection;
   DateTime? lastAliveAt;
 
-  _SingleOriginHttp2ClientTransport(
-    this.uri,
-    this.context,
-    this.options,
-  );
+  _SingleOriginHttp2ClientTransport(this.uri, this.context, this.options);
 
   Future<http2.ClientTransportStream> makeRequest(
     List<http2.Header> headers,
@@ -178,10 +170,7 @@ final class _KeepAliveConnection {
   Future<bool>? verifying;
   List<http2.ClientTransportStream> streams = [];
 
-  _KeepAliveConnection(
-    this.connection,
-    this.options,
-  ) {
+  _KeepAliveConnection(this.connection, this.options) {
     resetPingTimer();
     Timer? idleTimer;
     connection.onActiveStateChanged = (active) {
@@ -205,9 +194,7 @@ final class _KeepAliveConnection {
     };
   }
 
-  http2.ClientTransportStream makeRequest(
-    List<http2.Header> headers,
-  ) {
+  http2.ClientTransportStream makeRequest(List<http2.Header> headers) {
     final stream = connection.makeRequest(headers);
     streams.add(stream);
     return stream;

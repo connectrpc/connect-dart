@@ -52,5 +52,5 @@ enum Idempotency {
   noSideEffects,
 
   /// Idempotent, but may have side effects.
-  idempotent
+  idempotent,
 }

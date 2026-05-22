@@ -71,9 +71,7 @@ extension on GeneratedFile {
     pServiceDoc(service);
     p(["abstract final class ", service.name, " {"]);
     p(["  /// Fully-qualified name of the ", service.name, " service."]);
-    p(
-      ["  static const name = '", proto.package, ".", service.name, "';"],
-    );
+    p(["  static const name = '", proto.package, ".", service.name, "';"]);
     for (final method in service.method) {
       p([]);
       pMethodDoc(service, method);
@@ -89,7 +87,7 @@ extension on GeneratedFile {
       service.name,
       "Client (",
       connect.import('Transport'),
-      " _transport) {"
+      " _transport) {",
     ]);
     var first = true;
     for (final method in service.method) {
@@ -109,10 +107,7 @@ extension on GeneratedFile {
     ]);
   }
 
-  void pMethod(
-    ServiceDescriptorProto service,
-    MethodDescriptorProto method,
-  ) {
+  void pMethod(ServiceDescriptorProto service, MethodDescriptorProto method) {
     final specsLib = DartLibrary(
       "${path.basenameWithoutExtension(proto.name)}.connect.spec.dart",
       "specs",
@@ -125,11 +120,12 @@ extension on GeneratedFile {
       method.serverStreaming ? "Stream" : "Future",
       "<",
       importMsg(method.outputType),
-      ">"
+      ">",
     ];
-    final inputType = method.clientStreaming
-        ? ["Stream", "<", importMsg(method.inputType), ">"]
-        : [importMsg(method.inputType)];
+    final inputType =
+        method.clientStreaming
+            ? ["Stream", "<", importMsg(method.inputType), ">"]
+            : [importMsg(method.inputType)];
     p(["  ", ...returnType, " ", method.localName, "("]);
     p(["    ", ...inputType, " input, {"]);
     pMethodOptions();
@@ -139,7 +135,7 @@ extension on GeneratedFile {
       connect.import("Client"),
       "(_transport).",
       method.streamType,
-      "("
+      "(",
     ]);
     p(["      ", specsLib.import(service.name), ".", method.localName, ","]);
     p(["      input,"]);
@@ -155,15 +151,12 @@ extension on GeneratedFile {
     ServiceDescriptorProto service,
     MethodDescriptorProto method,
   ) {
-    pDartDoc(
-      [
-        FileDescriptorProto().info_.byName["service"]!.tagNumber,
-        proto.service.indexOf(service),
-        ServiceDescriptorProto().info_.byName["method"]!.tagNumber,
-        service.method.indexOf(method),
-      ],
-      "  ",
-    );
+    pDartDoc([
+      FileDescriptorProto().info_.byName["service"]!.tagNumber,
+      proto.service.indexOf(service),
+      ServiceDescriptorProto().info_.byName["method"]!.tagNumber,
+      service.method.indexOf(method),
+    ], "  ");
   }
 
   void pMethodOptions() {
@@ -179,7 +172,7 @@ extension on GeneratedFile {
       method.localName,
       " = ",
       connect.import("Spec"),
-      "("
+      "(",
     ]);
     p(["    '/\$name/", method.name, "',"]);
     p(["    ", connect.import("StreamType"), ".", method.streamType, ","]);
@@ -206,11 +199,10 @@ extension on GeneratedFile {
       )) {
         continue;
       }
-      final libraryPath = _wellKnownTypeProtoPaths.contains(file.name)
-          ? "package:protobuf/well_known_types/${path.withoutExtension(file.name)}.pb.dart"
-          : "${path.withoutExtension(
-              path.relative(file.name, from: path.dirname(proto.name)),
-            )}.pb.dart";
+      final libraryPath =
+          _wellKnownTypeProtoPaths.contains(file.name)
+              ? "package:protobuf/well_known_types/${path.withoutExtension(file.name)}.pb.dart"
+              : "${path.withoutExtension(path.relative(file.name, from: path.dirname(proto.name)))}.pb.dart";
       return DartLibrary(
         libraryPath,
         path.withoutExtension(file.name).replaceAll("/", ""),
@@ -268,17 +260,13 @@ extension on List<DescriptorProto> {
     }
     if (!typeName.contains(".")) {
       // Can only be at this level
-      return any(
-        (msg) => msg.name == typeName,
-      );
+      return any((msg) => msg.name == typeName);
     }
     // Can only be a sub message.
     final outerType = typeName.split(".").first;
     for (final msg in this) {
       if (msg.name == outerType) {
-        return msg.nestedType.hasMessage(
-          typeName.substring(outerType.length),
-        );
+        return msg.nestedType.hasMessage(typeName.substring(outerType.length));
       }
     }
     return false;

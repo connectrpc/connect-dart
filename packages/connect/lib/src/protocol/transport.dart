@@ -72,17 +72,15 @@ abstract base class ProtocolTransport implements Transport {
           acceptCompressions,
         );
       }
-      final first = _interceptors.apply<I, O>(
-        (req) async {
-          return await _protocol.unary(
-            req as UnaryRequest<I, O>,
-            _codec,
-            _httpClient,
-            sendCompression,
-            acceptCompressions,
-          );
-        },
-      );
+      final first = _interceptors.apply<I, O>((req) async {
+        return await _protocol.unary(
+          req as UnaryRequest<I, O>,
+          _codec,
+          _httpClient,
+          sendCompression,
+          acceptCompressions,
+        );
+      });
       return await first(req) as UnaryResponse<I, O>;
     } finally {
       // Cleanup
@@ -121,17 +119,15 @@ abstract base class ProtocolTransport implements Transport {
           acceptCompressions,
         );
       } else {
-        final first = _interceptors.apply<I, O>(
-          (req) async {
-            return await _protocol.stream(
-              req as StreamRequest<I, O>,
-              _codec,
-              _httpClient,
-              sendCompression,
-              acceptCompressions,
-            );
-          },
-        );
+        final first = _interceptors.apply<I, O>((req) async {
+          return await _protocol.stream(
+            req as StreamRequest<I, O>,
+            _codec,
+            _httpClient,
+            sendCompression,
+            acceptCompressions,
+          );
+        });
         res = await first(req) as StreamResponse<I, O>;
       }
       // We don't want to cancel the signal when this function returns
@@ -143,10 +139,7 @@ abstract base class ProtocolTransport implements Transport {
       return StreamResponse(
         res.spec,
         res.headers,
-        res.message.withHooks(
-          onError: signal.cancel,
-          onDone: signal.cancel,
-        ),
+        res.message.withHooks(onError: signal.cancel, onDone: signal.cancel),
         res.trailers,
       );
     } catch (err) {

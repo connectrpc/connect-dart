@@ -52,29 +52,28 @@ void main() {
       var interceptor = false;
       var onHeader = false;
       var onTrailer = false;
-      final transport = FakeTransportBuilder().unary(
-        TestService.unary,
-        (req, context) {
-          expect(req.value, equals("foo"));
-          expect(context.requestHeaders['foo'], equals('bar'));
-          context.responseHeaders.add('bar', 'foo');
-          context.responseTrailers.add('baz', 'foo');
-          return StringValue(value: "bar");
-        },
-      ).build(
-        interceptors: [
-          <I extends Object, O extends Object>(next) {
-            return (req) async {
-              interceptor = true;
-              expect(req.headers['foo'], equals('bar'));
-              final res = await next(req);
-              expect(res.headers['bar'], 'foo');
-              expect(res.trailers['baz'], 'foo');
-              return res;
-            };
-          }
-        ],
-      );
+      final transport = FakeTransportBuilder()
+          .unary(TestService.unary, (req, context) {
+            expect(req.value, equals("foo"));
+            expect(context.requestHeaders['foo'], equals('bar'));
+            context.responseHeaders.add('bar', 'foo');
+            context.responseTrailers.add('baz', 'foo');
+            return StringValue(value: "bar");
+          })
+          .build(
+            interceptors: [
+              <I extends Object, O extends Object>(next) {
+                return (req) async {
+                  interceptor = true;
+                  expect(req.headers['foo'], equals('bar'));
+                  final res = await next(req);
+                  expect(res.headers['bar'], 'foo');
+                  expect(res.trailers['baz'], 'foo');
+                  return res;
+                };
+              },
+            ],
+          );
       final res = await Client(transport).unary(
         TestService.unary,
         StringValue(value: "foo"),
@@ -97,45 +96,42 @@ void main() {
       var interceptor = false;
       var onHeader = false;
       var onTrailer = false;
-      final transport = FakeTransportBuilder().client(
-        TestService.clientStream,
-        (req, context) async {
-          await for (final next in req) {
-            expect(next.value, equals("foo"));
-          }
-          expect(context.requestHeaders['foo'], equals('bar'));
-          context.responseHeaders.add('bar', 'foo');
-          context.responseTrailers.add('baz', 'foo');
-          return StringValue(value: "bar");
-        },
-      ).build(
-        interceptors: [
-          <I extends Object, O extends Object>(next) {
-            return (req) async {
-              interceptor = true;
-              expect(req.headers['foo'], equals('bar'));
-              final res = await next(req);
-              expect(res.headers['bar'], 'foo');
-              // Trailers are only visible after the last received message
-              expect(res.trailers['baz'], null);
-              expect(res, isA<StreamResponse<I, O>>());
-              return StreamResponse(
-                res.spec,
-                res.headers,
-                (res as StreamResponse<I, O>).message.transform(
-                  StreamTransformer.fromBind(
-                    (stream) async* {
-                      yield* stream;
-                      expect(res.trailers['baz'], 'foo');
-                    },
-                  ),
-                ),
-                res.trailers,
-              );
-            };
-          }
-        ],
-      );
+      final transport = FakeTransportBuilder()
+          .client(TestService.clientStream, (req, context) async {
+            await for (final next in req) {
+              expect(next.value, equals("foo"));
+            }
+            expect(context.requestHeaders['foo'], equals('bar'));
+            context.responseHeaders.add('bar', 'foo');
+            context.responseTrailers.add('baz', 'foo');
+            return StringValue(value: "bar");
+          })
+          .build(
+            interceptors: [
+              <I extends Object, O extends Object>(next) {
+                return (req) async {
+                  interceptor = true;
+                  expect(req.headers['foo'], equals('bar'));
+                  final res = await next(req);
+                  expect(res.headers['bar'], 'foo');
+                  // Trailers are only visible after the last received message
+                  expect(res.trailers['baz'], null);
+                  expect(res, isA<StreamResponse<I, O>>());
+                  return StreamResponse(
+                    res.spec,
+                    res.headers,
+                    (res as StreamResponse<I, O>).message.transform(
+                      StreamTransformer.fromBind((stream) async* {
+                        yield* stream;
+                        expect(res.trailers['baz'], 'foo');
+                      }),
+                    ),
+                    res.trailers,
+                  );
+                };
+              },
+            ],
+          );
       final res = await Client(transport).client(
         TestService.clientStream,
         Stream.fromIterable([StringValue(value: "foo")]),
@@ -158,43 +154,40 @@ void main() {
       var interceptor = false;
       var onHeader = false;
       var onTrailer = false;
-      final transport = FakeTransportBuilder().server(
-        TestService.serverStream,
-        (req, context) async* {
-          expect(req.value, equals("foo"));
-          expect(context.requestHeaders['foo'], equals('bar'));
-          context.responseHeaders.add('bar', 'foo');
-          context.responseTrailers.add('baz', 'foo');
-          yield StringValue(value: "bar");
-        },
-      ).build(
-        interceptors: [
-          <I extends Object, O extends Object>(next) {
-            return (req) async {
-              interceptor = true;
-              expect(req.headers['foo'], equals('bar'));
-              final res = await next(req);
-              expect(res.headers['bar'], 'foo');
-              // Trailers are only visible after the last received message
-              expect(res.trailers['baz'], null);
-              expect(res, isA<StreamResponse<I, O>>());
-              return StreamResponse(
-                res.spec,
-                res.headers,
-                (res as StreamResponse<I, O>).message.transform(
-                  StreamTransformer.fromBind(
-                    (stream) async* {
-                      yield* stream;
-                      expect(res.trailers['baz'], 'foo');
-                    },
-                  ),
-                ),
-                res.trailers,
-              );
-            };
-          }
-        ],
-      );
+      final transport = FakeTransportBuilder()
+          .server(TestService.serverStream, (req, context) async* {
+            expect(req.value, equals("foo"));
+            expect(context.requestHeaders['foo'], equals('bar'));
+            context.responseHeaders.add('bar', 'foo');
+            context.responseTrailers.add('baz', 'foo');
+            yield StringValue(value: "bar");
+          })
+          .build(
+            interceptors: [
+              <I extends Object, O extends Object>(next) {
+                return (req) async {
+                  interceptor = true;
+                  expect(req.headers['foo'], equals('bar'));
+                  final res = await next(req);
+                  expect(res.headers['bar'], 'foo');
+                  // Trailers are only visible after the last received message
+                  expect(res.trailers['baz'], null);
+                  expect(res, isA<StreamResponse<I, O>>());
+                  return StreamResponse(
+                    res.spec,
+                    res.headers,
+                    (res as StreamResponse<I, O>).message.transform(
+                      StreamTransformer.fromBind((stream) async* {
+                        yield* stream;
+                        expect(res.trailers['baz'], 'foo');
+                      }),
+                    ),
+                    res.trailers,
+                  );
+                };
+              },
+            ],
+          );
       final res = Client(transport).server(
         TestService.serverStream,
         StringValue(value: "foo"),
@@ -219,45 +212,42 @@ void main() {
       var interceptor = false;
       var onHeader = false;
       var onTrailer = false;
-      final transport = FakeTransportBuilder().bidi(
-        TestService.bidiStream,
-        (req, context) async* {
-          await for (final next in req) {
-            expect(next.value, equals('foo'));
-          }
-          expect(context.requestHeaders['foo'], equals('bar'));
-          context.responseHeaders.add('bar', 'foo');
-          context.responseTrailers.add('baz', 'foo');
-          yield StringValue(value: "bar");
-        },
-      ).build(
-        interceptors: [
-          <I extends Object, O extends Object>(next) {
-            return (req) async {
-              interceptor = true;
-              expect(req.headers['foo'], equals('bar'));
-              final res = await next(req);
-              expect(res.headers['bar'], 'foo');
-              // Trailers are only visible after the last received message
-              expect(res.trailers['baz'], null);
-              expect(res, isA<StreamResponse<I, O>>());
-              return StreamResponse(
-                res.spec,
-                res.headers,
-                (res as StreamResponse<I, O>).message.transform(
-                  StreamTransformer.fromBind(
-                    (stream) async* {
-                      yield* stream;
-                      expect(res.trailers['baz'], 'foo');
-                    },
-                  ),
-                ),
-                res.trailers,
-              );
-            };
-          }
-        ],
-      );
+      final transport = FakeTransportBuilder()
+          .bidi(TestService.bidiStream, (req, context) async* {
+            await for (final next in req) {
+              expect(next.value, equals('foo'));
+            }
+            expect(context.requestHeaders['foo'], equals('bar'));
+            context.responseHeaders.add('bar', 'foo');
+            context.responseTrailers.add('baz', 'foo');
+            yield StringValue(value: "bar");
+          })
+          .build(
+            interceptors: [
+              <I extends Object, O extends Object>(next) {
+                return (req) async {
+                  interceptor = true;
+                  expect(req.headers['foo'], equals('bar'));
+                  final res = await next(req);
+                  expect(res.headers['bar'], 'foo');
+                  // Trailers are only visible after the last received message
+                  expect(res.trailers['baz'], null);
+                  expect(res, isA<StreamResponse<I, O>>());
+                  return StreamResponse(
+                    res.spec,
+                    res.headers,
+                    (res as StreamResponse<I, O>).message.transform(
+                      StreamTransformer.fromBind((stream) async* {
+                        yield* stream;
+                        expect(res.trailers['baz'], 'foo');
+                      }),
+                    ),
+                    res.trailers,
+                  );
+                };
+              },
+            ],
+          );
       final res = Client(transport).bidi(
         TestService.bidiStream,
         Stream.fromIterable([StringValue(value: "foo")]),

@@ -69,10 +69,9 @@ final class Protocol implements base.Protocol {
         req.url,
         "POST",
         req.headers,
-        Stream.fromIterable([req.message])
-            .serialize(codec)
-            .compress(sendCompression)
-            .joinEnvelope(),
+        Stream.fromIterable([
+          req.message,
+        ]).serialize(codec).compress(sendCompression).joinEnvelope(),
         req.signal,
       ),
     );
@@ -80,16 +79,12 @@ final class Protocol implements base.Protocol {
       statusParser,
       acceptCompressions,
     );
-    final (message, trailer) = await res.body
-        .splitEnvelope()
-        .decompress(compression)
-        .parse(
-          codec,
-          req.spec.outputFactory,
-          trailerFlag,
-          parseTrailer,
-        )
-        .tryReadSingleMessage();
+    final (message, trailer) =
+        await res.body
+            .splitEnvelope()
+            .decompress(compression)
+            .parse(codec, req.spec.outputFactory, trailerFlag, parseTrailer)
+            .tryReadSingleMessage();
     if (trailer == null) {
       if (headerError != null) {
         throw headerError;
@@ -106,12 +101,7 @@ final class Protocol implements base.Protocol {
         "protocol error: missing output message for unary method",
       );
     }
-    return UnaryResponse(
-      req.spec,
-      res.header,
-      message,
-      trailer,
-    );
+    return UnaryResponse(req.spec, res.header, message, trailer);
   }
 
   @override
@@ -145,20 +135,12 @@ final class Protocol implements base.Protocol {
       res.body
           .splitEnvelope()
           .decompress(compression)
-          .parse(
-            codec,
-            req.spec.outputFactory,
-            trailerFlag,
-            parseTrailer,
-          )
-          .skipTrailer(
-        foundStatus,
-        (recvTrailers) {
-          trailer.addAll(
-            recvTrailers..validateTrailer(req.headers, statusParser),
-          );
-        },
-      ),
+          .parse(codec, req.spec.outputFactory, trailerFlag, parseTrailer)
+          .skipTrailer(foundStatus, (recvTrailers) {
+            trailer.addAll(
+              recvTrailers..validateTrailer(req.headers, statusParser),
+            );
+          }),
       trailer,
     );
   }
@@ -199,10 +181,7 @@ extension<O extends Object> on Stream<ParsedEnvelopedMessage<O, Headers>> {
       }
     }
     if (!trailerReceived) {
-      throw ConnectException(
-        Code.internal,
-        "protocol error: missing trailer",
-      );
+      throw ConnectException(Code.internal, "protocol error: missing trailer");
     }
   }
 

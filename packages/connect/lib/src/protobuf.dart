@@ -29,9 +29,7 @@ final ArgumentError _invalidTypeError = ArgumentError(
 final class ProtoCodec implements StableCodec {
   final ExtensionRegistry extensionRegistry;
 
-  const ProtoCodec({
-    this.extensionRegistry = ExtensionRegistry.EMPTY,
-  });
+  const ProtoCodec({this.extensionRegistry = ExtensionRegistry.EMPTY});
 
   @override
   String get name => "proto";
@@ -85,11 +83,7 @@ final class JsonCodec implements StableCodec {
       throw _invalidTypeError;
     }
     return Utf8Encoder().convert(
-      jsonEncode(
-        message.toProto3Json(
-          typeRegistry: typeRegistry,
-        ),
-      ),
+      jsonEncode(message.toProto3Json(typeRegistry: typeRegistry)),
     );
   }
 

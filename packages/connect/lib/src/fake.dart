@@ -39,10 +39,7 @@ final class FakeTransportBuilder {
   /// Register a unary handler.
   FakeTransportBuilder unary<I extends Object, O extends Object>(
     Spec<I, O> spec,
-    FutureOr<O> Function(
-      I request,
-      FakeHandlerContext context,
-    ) handler,
+    FutureOr<O> Function(I request, FakeHandlerContext context) handler,
   ) {
     _assertSpecStream(spec, StreamType.unary);
     _handlers[spec] = handler;
@@ -52,10 +49,7 @@ final class FakeTransportBuilder {
   /// Register a client streaming handler.
   FakeTransportBuilder client<I extends Object, O extends Object>(
     Spec<I, O> spec,
-    FutureOr<O> Function(
-      Stream<I> request,
-      FakeHandlerContext context,
-    ) handler,
+    FutureOr<O> Function(Stream<I> request, FakeHandlerContext context) handler,
   ) {
     _assertSpecStream(spec, StreamType.client);
     _handlers[spec] = _clientToStream(handler);
@@ -65,10 +59,7 @@ final class FakeTransportBuilder {
   /// Register a server streaming handler.
   FakeTransportBuilder server<I extends Object, O extends Object>(
     Spec<I, O> spec,
-    Stream<O> Function(
-      I request,
-      FakeHandlerContext context,
-    ) handler,
+    Stream<O> Function(I request, FakeHandlerContext context) handler,
   ) {
     _assertSpecStream(spec, StreamType.server);
     _handlers[spec] = _serverToStream(handler);
@@ -78,10 +69,7 @@ final class FakeTransportBuilder {
   /// Register a bidi streaming handler.
   FakeTransportBuilder bidi<I extends Object, O extends Object>(
     Spec<I, O> spec,
-    Stream<O> Function(
-      Stream<I> request,
-      FakeHandlerContext context,
-    ) handler,
+    Stream<O> Function(Stream<I> request, FakeHandlerContext context) handler,
   ) {
     _assertSpecStream(spec, StreamType.bidi);
     _handlers[spec] = handler;
@@ -89,26 +77,17 @@ final class FakeTransportBuilder {
   }
 
   /// Build the transport.
-  Transport build({
-    List<Interceptor>? interceptors,
-  }) {
-    return _FakeTransport(
-      Map.from(_handlers),
-      interceptors,
-    );
+  Transport build({List<Interceptor>? interceptors}) {
+    return _FakeTransport(Map.from(_handlers), interceptors);
   }
 
-  _StreamHandler<I, O> _clientToStream<I, O>(
-    _ClientHandler<I, O> client,
-  ) {
+  _StreamHandler<I, O> _clientToStream<I, O>(_ClientHandler<I, O> client) {
     return (req, context) async* {
       yield await client(req, context);
     };
   }
 
-  _StreamHandler<I, O> _serverToStream<I, O>(
-    _ServerHandler<I, O> server,
-  ) {
+  _StreamHandler<I, O> _serverToStream<I, O>(_ServerHandler<I, O> server) {
     return (req, context) async* {
       yield* server(await req.first, context);
     };
@@ -151,14 +130,14 @@ final class _FakeTransport extends ProtocolTransport {
     Map<Spec<Object, Object>, Function> handlers,
     List<Interceptor>? interceptors,
   ) : super(
-          "test://test",
-          _FakeCodec(),
-          _FakeProtocol(handlers),
-          (req) => throw UnimplementedError(),
-          interceptors ?? [],
-          null,
-          [],
-        );
+        "test://test",
+        _FakeCodec(),
+        _FakeProtocol(handlers),
+        (req) => throw UnimplementedError(),
+        interceptors ?? [],
+        null,
+        [],
+      );
 }
 
 final class _FakeProtocol implements Protocol {
@@ -202,12 +181,7 @@ final class _FakeProtocol implements Protocol {
       headers,
       await (handler as _UnaryHandler<I, O>)(
         req.message,
-        FakeHandlerContext._(
-          req.signal,
-          req.headers,
-          headers,
-          trailers,
-        ),
+        FakeHandlerContext._(req.signal, req.headers, headers, trailers),
       ),
       trailers,
     );
@@ -235,16 +209,17 @@ final class _FakeProtocol implements Protocol {
     );
     final trailers = Headers();
     final messages = await (handler as _StreamHandler<I, O>)(
-      req.message,
-      context,
-      // If we do not wait for the first value headers will not be visible
-    ).untilFirst(
-      // Similarly we also wait for the last message to replicate the server
-      // behaviour of only sending trailers at the end.
-      () {
-        trailers.addAll(context.responseTrailers);
-      },
-    );
+          req.message,
+          context,
+          // If we do not wait for the first value headers will not be visible
+        )
+        .untilFirst(
+          // Similarly we also wait for the last message to replicate the server
+          // behaviour of only sending trailers at the end.
+          () {
+            trailers.addAll(context.responseTrailers);
+          },
+        );
     return StreamResponse(
       req.spec,
       // Cloning will replicate actual server behaviour of only headers before the first response being visible.
@@ -255,25 +230,17 @@ final class _FakeProtocol implements Protocol {
   }
 }
 
-typedef _UnaryHandler<I, O> = FutureOr<O> Function(
-  I request,
-  FakeHandlerContext context,
-);
+typedef _UnaryHandler<I, O> =
+    FutureOr<O> Function(I request, FakeHandlerContext context);
 
-typedef _StreamHandler<I, O> = Stream<O> Function(
-  Stream<I> request,
-  FakeHandlerContext context,
-);
+typedef _StreamHandler<I, O> =
+    Stream<O> Function(Stream<I> request, FakeHandlerContext context);
 
-typedef _ClientHandler<I, O> = FutureOr<O> Function(
-  Stream<I> request,
-  FakeHandlerContext context,
-);
+typedef _ClientHandler<I, O> =
+    FutureOr<O> Function(Stream<I> request, FakeHandlerContext context);
 
-typedef _ServerHandler<I, O> = Stream<O> Function(
-  I request,
-  FakeHandlerContext context,
-);
+typedef _ServerHandler<I, O> =
+    Stream<O> Function(I request, FakeHandlerContext context);
 
 final class _FakeCodec implements Codec {
   @override

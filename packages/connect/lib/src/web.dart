@@ -44,12 +44,10 @@ HttpClient createHttpClient({String credentials = "same-origin"}) {
     }
     final abortCtrl = web.AbortController();
     ConnectException? abortErr;
-    creq.signal?.future.then(
-      (err) {
-        abortErr = err;
-        abortCtrl.abort();
-      },
-    );
+    creq.signal?.future.then((err) {
+      abortErr = err;
+      abortCtrl.abort();
+    });
     try {
       final res = await web.fetch(
         creq.url,
@@ -95,11 +93,9 @@ HttpClient createHttpClient({String credentials = "same-origin"}) {
 extension on web.ReadableStream {
   Stream<Uint8List> toStream(AbortSignal? signal) async* {
     ConnectException? abortErr;
-    signal?.future.then(
-      (err) {
-        abortErr = err;
-      },
-    );
+    signal?.future.then((err) {
+      abortErr = err;
+    });
     final reader = getReader();
     try {
       while (true) {
