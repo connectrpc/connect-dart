@@ -1,3 +1,7 @@
+## Unreleased
+
+- Update unary-get query parameters to match spec order: `version`, `base64`, `encoding` and `message.
+
 ## 1.0.0
 
 - First stable release of Connect for Dart!
