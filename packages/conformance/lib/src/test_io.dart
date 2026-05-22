@@ -24,33 +24,27 @@ void testClient(
   ConformanceArgs args,
   Transport Function(ClientCompatRequest req) transportFactory,
 ) {
-  test(
-    description,
-    timeout: Timeout.none,
-    () async {
-      final runner = ConformanceRunner();
-      final result = await runner.runClient(
-        args: args.toList(),
-        StreamTransformer.fromBind(
-          (requests) async* {
-            await for (final req in requests) {
-              final res = ClientCompatResponse(testName: req.testName);
-              try {
-                final result = await invoke(transportFactory(req), req);
-                res.response = result;
-              } catch (err) {
-                res.error = ClientErrorResult(message: '$err');
-              }
-              yield res;
-            }
-          },
-        ),
-      );
-      expect(
-        result,
-        equals(0),
-        reason: 'connectconformance exited with a non-zero code',
-      );
-    },
-  );
+  test(description, timeout: Timeout.none, () async {
+    final runner = ConformanceRunner();
+    final result = await runner.runClient(
+      args: args.toList(),
+      StreamTransformer.fromBind((requests) async* {
+        await for (final req in requests) {
+          final res = ClientCompatResponse(testName: req.testName);
+          try {
+            final result = await invoke(transportFactory(req), req);
+            res.response = result;
+          } catch (err) {
+            res.error = ClientErrorResult(message: '$err');
+          }
+          yield res;
+        }
+      }),
+    );
+    expect(
+      result,
+      equals(0),
+      reason: 'connectconformance exited with a non-zero code',
+    );
+  });
 }
