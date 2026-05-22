@@ -1,9 +1,9 @@
 version: v2
+clean: true
 plugins:
   - local:
       ["dart", "run", "../../packages/connect/bin/protoc-gen-connect-dart.dart"]
     out: lib/gen
-  - remote: buf.build/protocolbuffers/dart
+  - remote: buf.build/protocolbuffers/dart:v25.0.0
     out: lib/gen
-    include_wkt: true
     include_imports: true

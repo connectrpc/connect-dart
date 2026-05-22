@@ -4,8 +4,8 @@
 //
 
 import "package:connectrpc/connect.dart" as connect;
-import "google/protobuf/any.pb.dart" as googleprotobufany;
-import "google/protobuf/timestamp.pb.dart" as googleprotobuftimestamp;
+import "package:protobuf/well_known_types/google/protobuf/any.pb.dart" as googleprotobufany;
+import "package:protobuf/well_known_types/google/protobuf/timestamp.pb.dart" as googleprotobuftimestamp;
 
 abstract final class WktService {
   /// Fully-qualified name of the WktService service.

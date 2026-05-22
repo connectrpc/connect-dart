@@ -51,6 +51,22 @@ extension on GeneratedFile {
   );
   static final path = Context(style: Style.posix);
 
+  /// Proto files whose generated Dart is shipped by the protobuf runtime under
+  /// `package:protobuf/well_known_types/`. Mirrors protoc-gen-dart v25's curated set in:
+  /// https://github.com/google/protobuf.dart/blob/protoc_plugin-v25.0.0/protoc_plugin/lib/src/output_config.dart#L58.
+  static const _wellKnownTypeProtoPaths = <String>{
+    'google/protobuf/any.proto',
+    'google/protobuf/api.proto',
+    'google/protobuf/duration.proto',
+    'google/protobuf/empty.proto',
+    'google/protobuf/field_mask.proto',
+    'google/protobuf/source_context.proto',
+    'google/protobuf/struct.proto',
+    'google/protobuf/timestamp.proto',
+    'google/protobuf/type.proto',
+    'google/protobuf/wrappers.proto',
+  };
+
   void printSpecs(ServiceDescriptorProto service) {
     pServiceDoc(service);
     p(["abstract final class ", service.name, " {"]);
@@ -190,10 +206,13 @@ extension on GeneratedFile {
       )) {
         continue;
       }
+      final libraryPath = _wellKnownTypeProtoPaths.contains(file.name)
+          ? "package:protobuf/well_known_types/${path.withoutExtension(file.name)}.pb.dart"
+          : "${path.withoutExtension(
+              path.relative(file.name, from: path.dirname(proto.name)),
+            )}.pb.dart";
       return DartLibrary(
-        "${path.withoutExtension(
-          path.relative(file.name, from: path.dirname(proto.name)),
-        )}.pb.dart",
+        libraryPath,
         path.withoutExtension(file.name).replaceAll("/", ""),
       ).import(typeName.split(".").last);
     }

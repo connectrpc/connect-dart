@@ -12,40 +12,43 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+// This is a generated file - do not edit.
 //
-//  Generated code. Do not modify.
-//  source: connectrpc/eliza/v1/eliza.proto
-//
-// @dart = 2.12
+// Generated from connectrpc/eliza/v1/eliza.proto.
+
+// @dart = 3.3
 
 // ignore_for_file: annotate_overrides, camel_case_types, comment_references
-// ignore_for_file: constant_identifier_names, library_prefixes
-// ignore_for_file: non_constant_identifier_names, prefer_final_fields
-// ignore_for_file: unnecessary_import, unnecessary_this, unused_import
+// ignore_for_file: constant_identifier_names
+// ignore_for_file: curly_braces_in_flow_control_structures
+// ignore_for_file: deprecated_member_use_from_same_package, library_prefixes
+// ignore_for_file: non_constant_identifier_names, prefer_relative_imports
 
 import 'dart:async' as $async;
 import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
+export 'package:protobuf/protobuf.dart' show GeneratedMessageGenericExtensions;
+
 /// SayRequest is a single-sentence request.
 class SayRequest extends $pb.GeneratedMessage {
   factory SayRequest({
     $core.String? sentence,
   }) {
-    final $result = create();
-    if (sentence != null) {
-      $result.sentence = sentence;
-    }
-    return $result;
+    final result = create();
+    if (sentence != null) result.sentence = sentence;
+    return result;
   }
-  SayRequest._() : super();
-  factory SayRequest.fromBuffer($core.List<$core.int> i,
-          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
-  factory SayRequest.fromJson($core.String i,
-          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromJson(i, r);
+
+  SayRequest._();
+
+  factory SayRequest.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory SayRequest.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'SayRequest',
@@ -55,22 +58,19 @@ class SayRequest extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'sentence')
     ..hasRequiredFields = false;
 
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
-  SayRequest clone() => SayRequest()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  SayRequest clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SayRequest copyWith(void Function(SayRequest) updates) =>
       super.copyWith((message) => updates(message as SayRequest)) as SayRequest;
 
+  @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
   static SayRequest create() => SayRequest._();
+  @$core.override
   SayRequest createEmptyInstance() => create();
-  static $pb.PbList<SayRequest> createRepeated() => $pb.PbList<SayRequest>();
   @$core.pragma('dart2js:noInline')
   static SayRequest getDefault() => _defaultInstance ??=
       $pb.GeneratedMessage.$_defaultFor<SayRequest>(create);
@@ -79,14 +79,11 @@ class SayRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $core.String get sentence => $_getSZ(0);
   @$pb.TagNumber(1)
-  set sentence($core.String v) {
-    $_setString(0, v);
-  }
-
+  set sentence($core.String value) => $_setString(0, value);
   @$pb.TagNumber(1)
   $core.bool hasSentence() => $_has(0);
   @$pb.TagNumber(1)
-  void clearSentence() => clearField(1);
+  void clearSentence() => $_clearField(1);
 }
 
 /// SayResponse is a single-sentence response.
@@ -94,19 +91,19 @@ class SayResponse extends $pb.GeneratedMessage {
   factory SayResponse({
     $core.String? sentence,
   }) {
-    final $result = create();
-    if (sentence != null) {
-      $result.sentence = sentence;
-    }
-    return $result;
+    final result = create();
+    if (sentence != null) result.sentence = sentence;
+    return result;
   }
-  SayResponse._() : super();
-  factory SayResponse.fromBuffer($core.List<$core.int> i,
-          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
-  factory SayResponse.fromJson($core.String i,
-          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromJson(i, r);
+
+  SayResponse._();
+
+  factory SayResponse.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory SayResponse.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'SayResponse',
@@ -116,23 +113,20 @@ class SayResponse extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'sentence')
     ..hasRequiredFields = false;
 
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
-  SayResponse clone() => SayResponse()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  SayResponse clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SayResponse copyWith(void Function(SayResponse) updates) =>
       super.copyWith((message) => updates(message as SayResponse))
           as SayResponse;
 
+  @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
   static SayResponse create() => SayResponse._();
+  @$core.override
   SayResponse createEmptyInstance() => create();
-  static $pb.PbList<SayResponse> createRepeated() => $pb.PbList<SayResponse>();
   @$core.pragma('dart2js:noInline')
   static SayResponse getDefault() => _defaultInstance ??=
       $pb.GeneratedMessage.$_defaultFor<SayResponse>(create);
@@ -141,14 +135,11 @@ class SayResponse extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $core.String get sentence => $_getSZ(0);
   @$pb.TagNumber(1)
-  set sentence($core.String v) {
-    $_setString(0, v);
-  }
-
+  set sentence($core.String value) => $_setString(0, value);
   @$pb.TagNumber(1)
   $core.bool hasSentence() => $_has(0);
   @$pb.TagNumber(1)
-  void clearSentence() => clearField(1);
+  void clearSentence() => $_clearField(1);
 }
 
 /// ConverseRequest is a single sentence request sent as part of a
@@ -157,19 +148,19 @@ class ConverseRequest extends $pb.GeneratedMessage {
   factory ConverseRequest({
     $core.String? sentence,
   }) {
-    final $result = create();
-    if (sentence != null) {
-      $result.sentence = sentence;
-    }
-    return $result;
+    final result = create();
+    if (sentence != null) result.sentence = sentence;
+    return result;
   }
-  ConverseRequest._() : super();
-  factory ConverseRequest.fromBuffer($core.List<$core.int> i,
-          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
-  factory ConverseRequest.fromJson($core.String i,
-          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromJson(i, r);
+
+  ConverseRequest._();
+
+  factory ConverseRequest.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory ConverseRequest.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'ConverseRequest',
@@ -179,24 +170,20 @@ class ConverseRequest extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'sentence')
     ..hasRequiredFields = false;
 
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
-  ConverseRequest clone() => ConverseRequest()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ConverseRequest clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   ConverseRequest copyWith(void Function(ConverseRequest) updates) =>
       super.copyWith((message) => updates(message as ConverseRequest))
           as ConverseRequest;
 
+  @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
   static ConverseRequest create() => ConverseRequest._();
+  @$core.override
   ConverseRequest createEmptyInstance() => create();
-  static $pb.PbList<ConverseRequest> createRepeated() =>
-      $pb.PbList<ConverseRequest>();
   @$core.pragma('dart2js:noInline')
   static ConverseRequest getDefault() => _defaultInstance ??=
       $pb.GeneratedMessage.$_defaultFor<ConverseRequest>(create);
@@ -205,14 +192,11 @@ class ConverseRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $core.String get sentence => $_getSZ(0);
   @$pb.TagNumber(1)
-  set sentence($core.String v) {
-    $_setString(0, v);
-  }
-
+  set sentence($core.String value) => $_setString(0, value);
   @$pb.TagNumber(1)
   $core.bool hasSentence() => $_has(0);
   @$pb.TagNumber(1)
-  void clearSentence() => clearField(1);
+  void clearSentence() => $_clearField(1);
 }
 
 /// ConverseResponse is a single sentence response sent in answer to a
@@ -221,19 +205,19 @@ class ConverseResponse extends $pb.GeneratedMessage {
   factory ConverseResponse({
     $core.String? sentence,
   }) {
-    final $result = create();
-    if (sentence != null) {
-      $result.sentence = sentence;
-    }
-    return $result;
+    final result = create();
+    if (sentence != null) result.sentence = sentence;
+    return result;
   }
-  ConverseResponse._() : super();
-  factory ConverseResponse.fromBuffer($core.List<$core.int> i,
-          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
-  factory ConverseResponse.fromJson($core.String i,
-          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromJson(i, r);
+
+  ConverseResponse._();
+
+  factory ConverseResponse.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory ConverseResponse.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'ConverseResponse',
@@ -243,24 +227,20 @@ class ConverseResponse extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'sentence')
     ..hasRequiredFields = false;
 
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
-  ConverseResponse clone() => ConverseResponse()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ConverseResponse clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   ConverseResponse copyWith(void Function(ConverseResponse) updates) =>
       super.copyWith((message) => updates(message as ConverseResponse))
           as ConverseResponse;
 
+  @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
   static ConverseResponse create() => ConverseResponse._();
+  @$core.override
   ConverseResponse createEmptyInstance() => create();
-  static $pb.PbList<ConverseResponse> createRepeated() =>
-      $pb.PbList<ConverseResponse>();
   @$core.pragma('dart2js:noInline')
   static ConverseResponse getDefault() => _defaultInstance ??=
       $pb.GeneratedMessage.$_defaultFor<ConverseResponse>(create);
@@ -269,14 +249,11 @@ class ConverseResponse extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $core.String get sentence => $_getSZ(0);
   @$pb.TagNumber(1)
-  set sentence($core.String v) {
-    $_setString(0, v);
-  }
-
+  set sentence($core.String value) => $_setString(0, value);
   @$pb.TagNumber(1)
   $core.bool hasSentence() => $_has(0);
   @$pb.TagNumber(1)
-  void clearSentence() => clearField(1);
+  void clearSentence() => $_clearField(1);
 }
 
 /// IntroduceRequest asks Eliza to introduce itself to the named user.
@@ -284,19 +261,19 @@ class IntroduceRequest extends $pb.GeneratedMessage {
   factory IntroduceRequest({
     $core.String? name,
   }) {
-    final $result = create();
-    if (name != null) {
-      $result.name = name;
-    }
-    return $result;
+    final result = create();
+    if (name != null) result.name = name;
+    return result;
   }
-  IntroduceRequest._() : super();
-  factory IntroduceRequest.fromBuffer($core.List<$core.int> i,
-          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
-  factory IntroduceRequest.fromJson($core.String i,
-          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromJson(i, r);
+
+  IntroduceRequest._();
+
+  factory IntroduceRequest.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory IntroduceRequest.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'IntroduceRequest',
@@ -306,24 +283,20 @@ class IntroduceRequest extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'name')
     ..hasRequiredFields = false;
 
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
-  IntroduceRequest clone() => IntroduceRequest()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  IntroduceRequest clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   IntroduceRequest copyWith(void Function(IntroduceRequest) updates) =>
       super.copyWith((message) => updates(message as IntroduceRequest))
           as IntroduceRequest;
 
+  @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
   static IntroduceRequest create() => IntroduceRequest._();
+  @$core.override
   IntroduceRequest createEmptyInstance() => create();
-  static $pb.PbList<IntroduceRequest> createRepeated() =>
-      $pb.PbList<IntroduceRequest>();
   @$core.pragma('dart2js:noInline')
   static IntroduceRequest getDefault() => _defaultInstance ??=
       $pb.GeneratedMessage.$_defaultFor<IntroduceRequest>(create);
@@ -332,14 +305,11 @@ class IntroduceRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $core.String get name => $_getSZ(0);
   @$pb.TagNumber(1)
-  set name($core.String v) {
-    $_setString(0, v);
-  }
-
+  set name($core.String value) => $_setString(0, value);
   @$pb.TagNumber(1)
   $core.bool hasName() => $_has(0);
   @$pb.TagNumber(1)
-  void clearName() => clearField(1);
+  void clearName() => $_clearField(1);
 }
 
 /// IntroduceResponse is one sentence of Eliza's introductory monologue.
@@ -347,19 +317,19 @@ class IntroduceResponse extends $pb.GeneratedMessage {
   factory IntroduceResponse({
     $core.String? sentence,
   }) {
-    final $result = create();
-    if (sentence != null) {
-      $result.sentence = sentence;
-    }
-    return $result;
+    final result = create();
+    if (sentence != null) result.sentence = sentence;
+    return result;
   }
-  IntroduceResponse._() : super();
-  factory IntroduceResponse.fromBuffer($core.List<$core.int> i,
-          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
-  factory IntroduceResponse.fromJson($core.String i,
-          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromJson(i, r);
+
+  IntroduceResponse._();
+
+  factory IntroduceResponse.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory IntroduceResponse.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'IntroduceResponse',
@@ -369,24 +339,20 @@ class IntroduceResponse extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'sentence')
     ..hasRequiredFields = false;
 
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
-  IntroduceResponse clone() => IntroduceResponse()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  IntroduceResponse clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   IntroduceResponse copyWith(void Function(IntroduceResponse) updates) =>
       super.copyWith((message) => updates(message as IntroduceResponse))
           as IntroduceResponse;
 
+  @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
   static IntroduceResponse create() => IntroduceResponse._();
+  @$core.override
   IntroduceResponse createEmptyInstance() => create();
-  static $pb.PbList<IntroduceResponse> createRepeated() =>
-      $pb.PbList<IntroduceResponse>();
   @$core.pragma('dart2js:noInline')
   static IntroduceResponse getDefault() => _defaultInstance ??=
       $pb.GeneratedMessage.$_defaultFor<IntroduceResponse>(create);
@@ -395,33 +361,46 @@ class IntroduceResponse extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $core.String get sentence => $_getSZ(0);
   @$pb.TagNumber(1)
-  set sentence($core.String v) {
-    $_setString(0, v);
-  }
-
+  set sentence($core.String value) => $_setString(0, value);
   @$pb.TagNumber(1)
   $core.bool hasSentence() => $_has(0);
   @$pb.TagNumber(1)
-  void clearSentence() => clearField(1);
+  void clearSentence() => $_clearField(1);
 }
 
+/// ElizaService provides a way to talk to Eliza, a port of the DOCTOR script
+/// for Joseph Weizenbaum's original ELIZA program. Created in the mid-1960s at
+/// the MIT Artificial Intelligence Laboratory, ELIZA demonstrates the
+/// superficiality of human-computer communication. DOCTOR simulates a
+/// psychotherapist, and is commonly found as an Easter egg in emacs
+/// distributions.
 class ElizaServiceApi {
-  $pb.RpcClient _client;
+  final $pb.RpcClient _client;
+
   ElizaServiceApi(this._client);
 
+  /// Say is a unary RPC. Eliza responds to the prompt with a single sentence.
   $async.Future<SayResponse> say($pb.ClientContext? ctx, SayRequest request) =>
       _client.invoke<SayResponse>(
           ctx, 'ElizaService', 'Say', request, SayResponse());
+
+  /// Converse is a bidirectional RPC. The caller may exchange multiple
+  /// back-and-forth messages with Eliza over a long-lived connection. Eliza
+  /// responds to each ConverseRequest with a ConverseResponse.
   $async.Future<ConverseResponse> converse(
           $pb.ClientContext? ctx, ConverseRequest request) =>
       _client.invoke<ConverseResponse>(
           ctx, 'ElizaService', 'Converse', request, ConverseResponse());
+
+  /// Introduce is a server streaming RPC. Given the caller's name, Eliza
+  /// returns a stream of sentences to introduce itself.
   $async.Future<IntroduceResponse> introduce(
           $pb.ClientContext? ctx, IntroduceRequest request) =>
       _client.invoke<IntroduceResponse>(
           ctx, 'ElizaService', 'Introduce', request, IntroduceResponse());
 }
 
-const _omitFieldNames = $core.bool.fromEnvironment('protobuf.omit_field_names');
-const _omitMessageNames =
+const $core.bool _omitFieldNames =
+    $core.bool.fromEnvironment('protobuf.omit_field_names');
+const $core.bool _omitMessageNames =
     $core.bool.fromEnvironment('protobuf.omit_message_names');

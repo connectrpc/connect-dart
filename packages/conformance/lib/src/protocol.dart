@@ -13,11 +13,11 @@
 // limitations under the License.
 
 import 'package:connectrpc/connect.dart' as connect;
+import 'package:protobuf/well_known_types/google/protobuf/any.pb.dart';
 
 import 'gen/connectrpc/conformance/v1/client_compat.pb.dart';
 import 'gen/connectrpc/conformance/v1/config.pb.dart';
 import 'gen/connectrpc/conformance/v1/service.pb.dart';
-import 'gen/google/protobuf/any.pb.dart';
 
 void addProtoHeaders(
   connect.Headers headers,
