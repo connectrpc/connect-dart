@@ -3,7 +3,7 @@ description: >-
   Implementation of the Connect protocol for Dart. Simple, reliable, interoperable.
   Protobuf RPC that works
 
-version: 2.0.0
+version: 2.0.0-dev
 homepage: https://connectrpc.com
 documentation: https://connectrpc.com/docs
 repository: https://github.com/connectrpc/connect-dart
