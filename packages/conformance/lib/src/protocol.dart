@@ -75,16 +75,17 @@ class CancellationTiming {
   final int afterCloseSendMs;
   final int afterNumResponses;
 
-  factory CancellationTiming.forRequest(ClientCompatRequest req) =>
-      switch (req.cancel.whichCancelTiming()) {
-        ClientCompatRequest_Cancel_CancelTiming.beforeCloseSend =>
-          CancellationTiming._(beforeCloseSend: true),
-        ClientCompatRequest_Cancel_CancelTiming.afterCloseSendMs =>
-          CancellationTiming._(afterCloseSendMs: req.cancel.afterCloseSendMs),
-        ClientCompatRequest_Cancel_CancelTiming.afterNumResponses =>
-          CancellationTiming._(afterNumResponses: req.cancel.afterNumResponses),
-        _ => CancellationTiming._(),
-      };
+  factory CancellationTiming.forRequest(ClientCompatRequest req) => switch (req
+      .cancel
+      .whichCancelTiming()) {
+    ClientCompatRequest_Cancel_CancelTiming.beforeCloseSend =>
+      CancellationTiming._(beforeCloseSend: true),
+    ClientCompatRequest_Cancel_CancelTiming.afterCloseSendMs =>
+      CancellationTiming._(afterCloseSendMs: req.cancel.afterCloseSendMs),
+    ClientCompatRequest_Cancel_CancelTiming.afterNumResponses =>
+      CancellationTiming._(afterNumResponses: req.cancel.afterNumResponses),
+    _ => CancellationTiming._(),
+  };
 
   CancellationTiming._({
     this.beforeCloseSend = false,

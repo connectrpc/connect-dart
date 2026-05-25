@@ -135,12 +135,12 @@ class GeneratedFilesMatcher extends Matcher {
   final bool replace;
 
   GeneratedFilesMatcher(List<String> files, this.replace)
-      : files = Map.fromEntries(
-          files.map(
-            (path) => MapEntry(
-                "$path.dart", File(p.join("test/plugin/golden", path))),
-          ),
-        );
+    : files = Map.fromEntries(
+        files.map(
+          (path) =>
+              MapEntry("$path.dart", File(p.join("test/plugin/golden", path))),
+        ),
+      );
 
   @override
   // ignore: strict_raw_type

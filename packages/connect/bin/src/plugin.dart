@@ -122,9 +122,10 @@ extension on GeneratedFile {
       importMsg(method.outputType),
       ">",
     ];
-    final inputType = method.clientStreaming
-        ? ["Stream", "<", importMsg(method.inputType), ">"]
-        : [importMsg(method.inputType)];
+    final inputType =
+        method.clientStreaming
+            ? ["Stream", "<", importMsg(method.inputType), ">"]
+            : [importMsg(method.inputType)];
     p(["  ", ...returnType, " ", method.localName, "("]);
     p(["    ", ...inputType, " input, {"]);
     pMethodOptions();
@@ -198,9 +199,10 @@ extension on GeneratedFile {
       )) {
         continue;
       }
-      final libraryPath = _wellKnownTypeProtoPaths.contains(file.name)
-          ? "package:protobuf/well_known_types/${path.withoutExtension(file.name)}.pb.dart"
-          : "${path.withoutExtension(path.relative(file.name, from: path.dirname(proto.name)))}.pb.dart";
+      final libraryPath =
+          _wellKnownTypeProtoPaths.contains(file.name)
+              ? "package:protobuf/well_known_types/${path.withoutExtension(file.name)}.pb.dart"
+              : "${path.withoutExtension(path.relative(file.name, from: path.dirname(proto.name)))}.pb.dart";
       return DartLibrary(
         libraryPath,
         path.withoutExtension(file.name).replaceAll("/", ""),

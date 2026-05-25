@@ -149,12 +149,12 @@ final class Protocol implements base.Protocol {
             EndStreamResponse.fromJson,
           )
           .skipEndStream((endStream) {
-        if (endStream.error case ConnectException err) {
-          res.header.addAll(err.metadata);
-          throw err;
-        }
-        trailer.addAll(endStream.metadata);
-      }),
+            if (endStream.error case ConnectException err) {
+              res.header.addAll(err.metadata);
+              throw err;
+            }
+            trailer.addAll(endStream.metadata);
+          }),
       trailer,
     );
   }

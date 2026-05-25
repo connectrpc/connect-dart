@@ -45,28 +45,26 @@ final class EndStreamResponse {
     final metadata = switch (json["metadata"]) {
       null => Headers(),
       Map<String, dynamic> dict => dict.entries.fold(Headers(), (
-          headers,
-          entry,
-        ) {
-          final values = entry.value;
-          if (values is! List<dynamic>) {
+        headers,
+        entry,
+      ) {
+        final values = entry.value;
+        if (values is! List<dynamic>) {
+          throw parseErr;
+        }
+        for (final value in values) {
+          if (value is! String) {
             throw parseErr;
           }
-          for (final value in values) {
-            if (value is! String) {
-              throw parseErr;
-            }
-            headers.add(entry.key, value);
-          }
-          return headers;
-        }),
+          headers.add(entry.key, value);
+        }
+        return headers;
+      }),
       _ => throw parseErr,
     };
-    return EndStreamResponse(
-        metadata,
-        switch (json["error"]) {
-          null => null,
-          Object err => errorFromJson(err, metadata, parseErr),
-        });
+    return EndStreamResponse(metadata, switch (json["error"]) {
+      null => null,
+      Object err => errorFromJson(err, metadata, parseErr),
+    });
   }
 }

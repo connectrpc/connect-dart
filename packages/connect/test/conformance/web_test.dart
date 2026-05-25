@@ -40,31 +40,31 @@ void main() {
       final codec = switch (req.codec) {
         Codec.CODEC_PROTO => ProtoCodec(),
         Codec.CODEC_JSON => JsonCodec(
-            typeRegistry: TypeRegistry([
-              UnaryRequest(),
-              ServerStreamRequest(),
-              ClientStreamRequest(),
-              BidiStreamRequest(),
-              IdempotentUnaryRequest(),
-            ]),
-          ),
+          typeRegistry: TypeRegistry([
+            UnaryRequest(),
+            ServerStreamRequest(),
+            ClientStreamRequest(),
+            BidiStreamRequest(),
+            IdempotentUnaryRequest(),
+          ]),
+        ),
         _ => throw "Unknown codec",
       };
       final httpClient = createHttpClient();
       return switch (req.protocol) {
         Protocol.PROTOCOL_GRPC => throw "unimplemented protocol",
         Protocol.PROTOCOL_CONNECT => connect.Transport(
-            baseUrl: baseUrl,
-            codec: codec,
-            httpClient: httpClient,
-            useHttpGet: req.useGetHttpMethod,
-          ),
+          baseUrl: baseUrl,
+          codec: codec,
+          httpClient: httpClient,
+          useHttpGet: req.useGetHttpMethod,
+        ),
         Protocol.PROTOCOL_GRPC_WEB => grpc_web.Transport(
-            baseUrl: baseUrl,
-            codec: codec,
-            httpClient: httpClient,
-            statusParser: StatusParser(),
-          ),
+          baseUrl: baseUrl,
+          codec: codec,
+          httpClient: httpClient,
+          statusParser: StatusParser(),
+        ),
         _ => throw "Unknown protocol",
       };
     },

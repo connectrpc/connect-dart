@@ -69,7 +69,8 @@ Future<void> run(Stream<List<int>> input, Sink<List<int>> output) async {
   }
   final res = CodeGeneratorResponse();
   // Adding here instead of setting directly lets us avoid a direct dependency on fixnum package.
-  res.supportedFeatures = res.supportedFeatures +
+  res.supportedFeatures =
+      res.supportedFeatures +
       CodeGeneratorResponse_Feature.FEATURE_PROTO3_OPTIONAL.value;
   try {
     final files = generate(
