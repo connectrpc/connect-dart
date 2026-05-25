@@ -34,12 +34,12 @@ final class Transport extends ProtocolTransport {
     Compression? sendCompression,
     List<Compression>? acceptCompressions,
   }) : super(
-          baseUrl,
-          codec,
-          Protocol(statusParser, sendCompression),
-          httpClient,
-          interceptors ?? [],
-          sendCompression,
-          acceptCompressions ?? [],
-        );
+         baseUrl,
+         codec,
+         Protocol(statusParser, sendCompression),
+         httpClient,
+         interceptors ?? [],
+         sendCompression,
+         acceptCompressions ?? [],
+       );
 }

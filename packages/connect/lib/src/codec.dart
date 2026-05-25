@@ -35,8 +35,5 @@ abstract interface class Codec {
   //
   // Decode may expect a specific type of message, and will error if this
   // type is not given.
-  void decode(
-    Uint8List data,
-    Object message,
-  );
+  void decode(Uint8List data, Object message);
 }

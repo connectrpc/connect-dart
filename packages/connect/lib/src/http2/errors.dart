@@ -17,9 +17,7 @@ import 'package:http2/http2.dart' as http2;
 import '../code.dart';
 import '../exception.dart';
 
-ConnectException errFromRstCode(
-  int rstCode,
-) {
+ConnectException errFromRstCode(int rstCode) {
   switch (rstCode) {
     case http2.ErrorCode.NO_ERROR:
     case http2.ErrorCode.PROTOCOL_ERROR:

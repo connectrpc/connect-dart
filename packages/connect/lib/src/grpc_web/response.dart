@@ -31,14 +31,8 @@ extension ResponseValidation on HttpResponse {
   /// Returns an object that indicates whether a gRPC status was found
   /// in the response header. In this case, clients can not expect a
   /// trailer.
-  ({
-    bool foundStatus,
-    ConnectException? headerError,
-    Compression? compression,
-  }) validate(
-    StatusParser statusParser,
-    List<Compression> acceptCompression,
-  ) {
+  ({bool foundStatus, ConnectException? headerError, Compression? compression})
+  validate(StatusParser statusParser, List<Compression> acceptCompression) {
     // For compatibility with the `grpc-web` package, we treat all HTTP status
     // codes in the 200 range as valid, not just HTTP 200.
     if (status >= 200 && status < 300) {

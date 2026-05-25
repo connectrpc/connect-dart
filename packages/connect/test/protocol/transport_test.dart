@@ -57,18 +57,16 @@ void main() {
             onRequestHeaders: <I, O>(spec, codec, options) {
               return Headers()..add('foo', 'bar');
             },
-            onUnary: <I, O>(req) async => UnaryResponse(
-              req.spec,
-              Headers(),
-              req.message as O,
-              Headers(),
-            ),
+            onUnary:
+                <I, O>(req) async => UnaryResponse(
+                  req.spec,
+                  Headers(),
+                  req.message as O,
+                  Headers(),
+                ),
           ),
         );
-        await transport.unary(
-          TestService.unary,
-          StringValue(value: "foo"),
-        );
+        await transport.unary(TestService.unary, StringValue(value: "foo"));
       });
       test('must apply like an onion', () async {
         /// Returns an interceptor that sets a header on both request and response.
@@ -84,10 +82,7 @@ void main() {
         }
 
         final transport = TestTransport(
-          interceptors: [
-            setHeader("key", "1"),
-            setHeader("key", "2"),
-          ],
+          interceptors: [setHeader("key", "1"), setHeader("key", "2")],
           protocol: DelegatingProtocol(
             onUnary: <I, O>(req) async {
               // Must see the later value
@@ -111,21 +106,19 @@ void main() {
       test('should be able to cast to unary types', () async {
         final transport = TestTransport(
           protocol: DelegatingProtocol(
-            onUnary: <I, O>(req) async => UnaryResponse(
-              req.spec,
-              Headers(),
-              req.message as O,
-              Headers(),
-            ),
+            onUnary:
+                <I, O>(req) async => UnaryResponse(
+                  req.spec,
+                  Headers(),
+                  req.message as O,
+                  Headers(),
+                ),
           ),
           interceptors: [
             <I extends Object, O extends Object>(next) {
               return (req) async {
                 expect(req, isA<UnaryRequest<I, O>>());
-                expect(
-                  (req as UnaryRequest<I, O>).message,
-                  isA<StringValue>(),
-                );
+                expect((req as UnaryRequest<I, O>).message, isA<StringValue>());
                 final res = await next(req);
                 expect(res, isA<UnaryResponse<I, O>>());
                 expect(
@@ -134,23 +127,21 @@ void main() {
                 );
                 return res;
               };
-            }
+            },
           ],
         );
-        await transport.unary(
-          TestService.unary,
-          StringValue(value: "foo"),
-        );
+        await transport.unary(TestService.unary, StringValue(value: "foo"));
       });
       test('should be able to cast to stream types', () async {
         final transport = TestTransport(
           protocol: DelegatingProtocol(
-            onStream: <I, O>(req) async => StreamResponse(
-              req.spec,
-              Headers(),
-              req.message.cast<O>(),
-              Headers(),
-            ),
+            onStream:
+                <I, O>(req) async => StreamResponse(
+                  req.spec,
+                  Headers(),
+                  req.message.cast<O>(),
+                  Headers(),
+                ),
           ),
           interceptors: [
             <I extends Object, O extends Object>(next) {
@@ -168,7 +159,7 @@ void main() {
                 );
                 return res;
               };
-            }
+            },
           ],
         );
         await transport.stream(
@@ -182,15 +173,11 @@ void main() {
 
 class DelegatingProtocol implements Protocol {
   final Headers Function<I, O>(Spec<I, O>, Codec, CallOptions?)?
-      onRequestHeaders;
+  onRequestHeaders;
   final Future<StreamResponse<I, O>> Function<I, O>(StreamRequest<I, O>)?
-      onStream;
+  onStream;
   final Future<UnaryResponse<I, O>> Function<I, O>(UnaryRequest<I, O>)? onUnary;
-  DelegatingProtocol({
-    this.onUnary,
-    this.onStream,
-    this.onRequestHeaders,
-  });
+  DelegatingProtocol({this.onUnary, this.onStream, this.onRequestHeaders});
 
   @override
   Headers requestHeaders<I, O>(
@@ -202,11 +189,7 @@ class DelegatingProtocol implements Protocol {
   ) {
     final onRequestHeaders = this.onRequestHeaders;
     if (onRequestHeaders != null) {
-      return onRequestHeaders(
-        spec,
-        codec,
-        options,
-      );
+      return onRequestHeaders(spec, codec, options);
     }
     return options?.headers ?? Headers();
   }
@@ -222,12 +205,7 @@ class DelegatingProtocol implements Protocol {
     final onUnary = this.onUnary;
     if (onUnary != null) {
       final res = await onUnary(req);
-      return UnaryResponse(
-        req.spec,
-        res.headers,
-        res.message,
-        res.trailers,
-      );
+      return UnaryResponse(req.spec, res.headers, res.message, res.trailers);
     }
     throw UnimplementedError();
   }
@@ -255,18 +233,16 @@ class DelegatingProtocol implements Protocol {
 }
 
 final class TestTransport extends ProtocolTransport {
-  TestTransport({
-    required Protocol protocol,
-    List<Interceptor>? interceptors,
-  }) : super(
-          "https://test",
-          ProtoCodec(),
-          protocol,
-          (req) => throw UnimplementedError(),
-          interceptors ?? [],
-          null,
-          [],
-        );
+  TestTransport({required Protocol protocol, List<Interceptor>? interceptors})
+    : super(
+        "https://test",
+        ProtoCodec(),
+        protocol,
+        (req) => throw UnimplementedError(),
+        interceptors ?? [],
+        null,
+        [],
+      );
 }
 
 final class ClassInterceptor {

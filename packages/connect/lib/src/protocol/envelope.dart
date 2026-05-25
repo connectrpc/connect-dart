@@ -72,16 +72,10 @@ extension SplitEnvelope on Stream<Uint8List> {
             headerLen += chunk.length;
             break;
           }
-          header.setAll(
-            headerLen,
-            Uint8List.sublistView(chunk, 0, needLen),
-          );
+          header.setAll(headerLen, Uint8List.sublistView(chunk, 0, needLen));
           headerLen = 5;
           final (:flags, :length) = _readHeader(headerByteData);
-          env = EnvelopedMessage(
-            flags,
-            Uint8List(length),
-          );
+          env = EnvelopedMessage(flags, Uint8List(length));
           // Reset data length and update chunk to reflect remaining data.
           dataLen = 0;
           chunk = Uint8List.sublistView(chunk, needLen);
@@ -95,10 +89,7 @@ extension SplitEnvelope on Stream<Uint8List> {
           break;
         }
         // We can complete the envelope.
-        env.data.setAll(
-          dataLen,
-          Uint8List.sublistView(chunk, 0, needLen),
-        );
+        env.data.setAll(dataLen, Uint8List.sublistView(chunk, 0, needLen));
         yield env;
         // Reset the header and chunk and continue processing.
         env = null;
