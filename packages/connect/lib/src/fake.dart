@@ -130,14 +130,14 @@ final class _FakeTransport extends ProtocolTransport {
     Map<Spec<Object, Object>, Function> handlers,
     List<Interceptor>? interceptors,
   ) : super(
-        "test://test",
-        _FakeCodec(),
-        _FakeProtocol(handlers),
-        (req) => throw UnimplementedError(),
-        interceptors ?? [],
-        null,
-        [],
-      );
+          "test://test",
+          _FakeCodec(),
+          _FakeProtocol(handlers),
+          (req) => throw UnimplementedError(),
+          interceptors ?? [],
+          null,
+          [],
+        );
 }
 
 final class _FakeProtocol implements Protocol {
@@ -209,17 +209,16 @@ final class _FakeProtocol implements Protocol {
     );
     final trailers = Headers();
     final messages = await (handler as _StreamHandler<I, O>)(
-          req.message,
-          context,
-          // If we do not wait for the first value headers will not be visible
-        )
-        .untilFirst(
-          // Similarly we also wait for the last message to replicate the server
-          // behaviour of only sending trailers at the end.
-          () {
-            trailers.addAll(context.responseTrailers);
-          },
-        );
+      req.message,
+      context,
+      // If we do not wait for the first value headers will not be visible
+    ).untilFirst(
+      // Similarly we also wait for the last message to replicate the server
+      // behaviour of only sending trailers at the end.
+      () {
+        trailers.addAll(context.responseTrailers);
+      },
+    );
     return StreamResponse(
       req.spec,
       // Cloning will replicate actual server behaviour of only headers before the first response being visible.
@@ -230,17 +229,17 @@ final class _FakeProtocol implements Protocol {
   }
 }
 
-typedef _UnaryHandler<I, O> =
-    FutureOr<O> Function(I request, FakeHandlerContext context);
+typedef _UnaryHandler<I, O> = FutureOr<O> Function(
+    I request, FakeHandlerContext context);
 
-typedef _StreamHandler<I, O> =
-    Stream<O> Function(Stream<I> request, FakeHandlerContext context);
+typedef _StreamHandler<I, O> = Stream<O> Function(
+    Stream<I> request, FakeHandlerContext context);
 
-typedef _ClientHandler<I, O> =
-    FutureOr<O> Function(Stream<I> request, FakeHandlerContext context);
+typedef _ClientHandler<I, O> = FutureOr<O> Function(
+    Stream<I> request, FakeHandlerContext context);
 
-typedef _ServerHandler<I, O> =
-    Stream<O> Function(I request, FakeHandlerContext context);
+typedef _ServerHandler<I, O> = Stream<O> Function(
+    I request, FakeHandlerContext context);
 
 final class _FakeCodec implements Codec {
   @override

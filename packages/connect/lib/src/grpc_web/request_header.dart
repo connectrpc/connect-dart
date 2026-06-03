@@ -35,10 +35,9 @@ Headers requestHeader(
   Compression? sendCompression,
   List<Compression> acceptCompressions,
 ) {
-  final header =
-      userProvidedHeaders == null
-          ? Headers()
-          : Headers.from(userProvidedHeaders);
+  final header = userProvidedHeaders == null
+      ? Headers()
+      : Headers.from(userProvidedHeaders);
   header.add(headerXGrpcWeb, "1");
   // Note that we do not support the grpc-web-text format.
   // https://github.com/grpc/grpc/blob/master/doc/PROTOCOL-WEB.md#protocol-differences-vs-grpc-over-http2
@@ -54,9 +53,8 @@ Headers requestHeader(
     header[headerEncoding] = sendCompression.name;
   }
   if (acceptCompressions.isNotEmpty) {
-    header[headerAcceptEncoding] = acceptCompressions
-        .map((c) => c.name)
-        .join(",");
+    header[headerAcceptEncoding] =
+        acceptCompressions.map((c) => c.name).join(",");
   }
   return header;
 }

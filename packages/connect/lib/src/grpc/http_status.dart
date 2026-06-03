@@ -18,14 +18,15 @@ import '../../connect.dart';
 /// See https://github.com/grpc/grpc/blob/master/doc/http-grpc-status-mapping.md.
 Code codeFromHttpStatus(int httpStatus) {
   return switch (httpStatus) {
-    400 => Code.internal,           // Bad Request
-    401 => Code.unauthenticated,    // Unauthorized
-    403 => Code.permissionDenied,   // Forbidden
-    404 => Code.unimplemented,      // Not Found
-    429 => Code.unavailable,        // Too Many Requests
-    502 => Code.unavailable,        // Bad Gateway
-    503 => Code.unavailable,        // Service Unavailable
-    504 => Code.unavailable,        // Gateway Timeout
-    _ =>   Code.unknown,            // 200 is UNKNOWN because there should be a grpc-status in case of truly OK response.
+    400 => Code.internal, // Bad Request
+    401 => Code.unauthenticated, // Unauthorized
+    403 => Code.permissionDenied, // Forbidden
+    404 => Code.unimplemented, // Not Found
+    429 => Code.unavailable, // Too Many Requests
+    502 => Code.unavailable, // Bad Gateway
+    503 => Code.unavailable, // Service Unavailable
+    504 => Code.unavailable, // Gateway Timeout
+    _ => Code
+        .unknown, // 200 is UNKNOWN because there should be a grpc-status in case of truly OK response.
   };
 }

@@ -46,9 +46,9 @@ ConnectException errorFromJson(
   }
   final code = switch (json['code']) {
     String code => Code.values.firstWhere(
-      (c) => c.name == code,
-      orElse: () => fallback.code,
-    ),
+        (c) => c.name == code,
+        orElse: () => fallback.code,
+      ),
     _ => fallback.code,
   };
   final message = switch (json['message']) {

@@ -195,7 +195,7 @@ extension type ConformanceServiceClient(connect.Transport _transport) {
   /// Implementations should use an HTTP GET when invoking this endpoint and
   /// leverage query parameters to send data.
   Future<connectrpcconformancev1service.IdempotentUnaryResponse>
-  idempotentUnary(
+      idempotentUnary(
     connectrpcconformancev1service.IdempotentUnaryRequest input, {
     connect.Headers? headers,
     connect.AbortSignal? signal,

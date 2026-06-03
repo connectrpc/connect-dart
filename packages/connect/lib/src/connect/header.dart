@@ -38,34 +38,30 @@ Headers requestHeader(
   Compression? sendCompression,
   List<Compression> acceptCompressions,
 ) {
-  final header =
-      userProvidedHeaders == null
-          ? Headers()
-          : Headers.from(userProvidedHeaders);
+  final header = userProvidedHeaders == null
+      ? Headers()
+      : Headers.from(userProvidedHeaders);
   header[headerProtocolVersion] = protocolVersion;
   if (signal?.deadline case final deadline?) {
     header[headerTimeout] =
         deadline.difference(DateTime.now()).inMilliseconds.toString();
   }
-  header[headerContentType] =
-      streamType == StreamType.unary
-          ? 'application/${codec.name}'
-          : 'application/connect+${codec.name}';
+  header[headerContentType] = streamType == StreamType.unary
+      ? 'application/${codec.name}'
+      : 'application/connect+${codec.name}';
   if (!header.contains(headerUserAgent)) {
     header[headerUserAgent] = 'connect-dart/$version';
   }
   if (sendCompression != null) {
     header[streamType == StreamType.unary
-            ? headerUnaryEncoding
-            : headerStreamEncoding] =
-        sendCompression.name;
+        ? headerUnaryEncoding
+        : headerStreamEncoding] = sendCompression.name;
   }
   if (acceptCompressions.isNotEmpty) {
     header[streamType == StreamType.unary
-        ? headerUnaryAcceptEncoding
-        : headerStreamAcceptEncoding] = acceptCompressions
-        .map((c) => c.name)
-        .join(",");
+            ? headerUnaryAcceptEncoding
+            : headerStreamAcceptEncoding] =
+        acceptCompressions.map((c) => c.name).join(",");
   }
   return header;
 }
