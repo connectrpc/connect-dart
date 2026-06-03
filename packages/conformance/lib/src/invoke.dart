@@ -65,23 +65,24 @@ Future<ClientResponseResult> unary(
     if (cancelTiming.afterCloseSendMs >= 0) {
       wait(cancelTiming.afterCloseSendMs).then(signal.cancel).ignore();
     }
-    final uResFuture = !idempotent
-        ? client.unary(
-            uReq as UnaryRequest,
-            headers: reqHeader,
-            signal: signal,
-            onHeader: (header) => resHeaders = convertToProtoHeaders(header),
-            onTrailer: (trailer) =>
-                resTrailers = convertToProtoHeaders(trailer),
-          )
-        : client.idempotentUnary(
-            uReq as IdempotentUnaryRequest,
-            headers: reqHeader,
-            signal: signal,
-            onHeader: (header) => resHeaders = convertToProtoHeaders(header),
-            onTrailer: (trailer) =>
-                resTrailers = convertToProtoHeaders(trailer),
-          );
+    final uResFuture =
+        !idempotent
+            ? client.unary(
+              uReq as UnaryRequest,
+              headers: reqHeader,
+              signal: signal,
+              onHeader: (header) => resHeaders = convertToProtoHeaders(header),
+              onTrailer:
+                  (trailer) => resTrailers = convertToProtoHeaders(trailer),
+            )
+            : client.idempotentUnary(
+              uReq as IdempotentUnaryRequest,
+              headers: reqHeader,
+              signal: signal,
+              onHeader: (header) => resHeaders = convertToProtoHeaders(header),
+              onTrailer:
+                  (trailer) => resTrailers = convertToProtoHeaders(trailer),
+            );
     payloads.add(switch (await uResFuture) {
       UnaryResponse uRes => uRes.payload,
       IdempotentUnaryResponse uRes => uRes.payload,

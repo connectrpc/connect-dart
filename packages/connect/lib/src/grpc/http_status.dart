@@ -26,7 +26,7 @@ Code codeFromHttpStatus(int httpStatus) {
     502 => Code.unavailable, // Bad Gateway
     503 => Code.unavailable, // Service Unavailable
     504 => Code.unavailable, // Gateway Timeout
-    _ => Code
-        .unknown, // 200 is UNKNOWN because there should be a grpc-status in case of truly OK response.
+    _ =>
+      Code.unknown, // 200 is UNKNOWN because there should be a grpc-status in case of truly OK response.
   };
 }

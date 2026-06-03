@@ -29,8 +29,8 @@ import 'spec.dart';
 /// To implement that layering, Interceptors are functions that wrap a call
 /// invocation. In an array of interceptors, the interceptor at the end of
 /// the array is applied first.
-typedef Interceptor = AnyFn<I, O> Function<I extends Object, O extends Object>(
-    AnyFn<I, O> next);
+typedef Interceptor =
+    AnyFn<I, O> Function<I extends Object, O extends Object>(AnyFn<I, O> next);
 
 /// AnyFn represents the client-side invocation of an RPC. Interceptors can wrap
 /// this invocation, add request headers, and wrap parts of the request or

@@ -106,9 +106,10 @@ extension on GeneratedFile {
       importMsg(method.outputType),
       ">",
     ];
-    final inputType = method.clientStreaming
-        ? ["Stream", "<", importMsg(method.inputType), ">"]
-        : [importMsg(method.inputType)];
+    final inputType =
+        method.clientStreaming
+            ? ["Stream", "<", importMsg(method.inputType), ">"]
+            : [importMsg(method.inputType)];
     p(["  ", ...returnType, " ", method.localName, "("]);
     p(["    ", ...inputType, " input, {"]);
     pMethodOptions();
