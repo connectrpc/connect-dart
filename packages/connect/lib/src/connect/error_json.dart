@@ -46,9 +46,9 @@ ConnectException errorFromJson(
   }
   final code = switch (json['code']) {
     String code => Code.values.firstWhere(
-        (c) => c.name == code,
-        orElse: () => fallback.code,
-      ),
+      (c) => c.name == code,
+      orElse: () => fallback.code,
+    ),
     _ => fallback.code,
   };
   final message = switch (json['message']) {
@@ -65,11 +65,7 @@ ConnectException errorFromJson(
           value = codec.normalize(value);
         }
         error.details.add(
-          ErrorDetail(
-            type,
-            base64.decode(value),
-            detail['debug'],
-          ),
+          ErrorDetail(type, base64.decode(value), detail['debug']),
         );
       } else {
         throw fallback;

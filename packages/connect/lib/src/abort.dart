@@ -41,21 +41,16 @@ final class CancelableSignal with _AbortSignal {
   void cancel([Object? reason]) {
     if (_completer.isCompleted) return;
     _completer.complete(
-      super.errorFromReason(
-        reason,
-        Code.canceled,
-        'operation canceled',
-      ),
+      super.errorFromReason(reason, Code.canceled, 'operation canceled'),
     );
   }
 
   CancelableSignal({AbortSignal? parent}) {
     _deadline = parent?.deadline;
-    _future = parent == null
-        ? _completer.future
-        : Future.any(
-            [parent.future, _completer.future],
-          );
+    _future =
+        parent == null
+            ? _completer.future
+            : Future.any([parent.future, _completer.future]);
   }
 }
 
@@ -64,11 +59,7 @@ final class CancelableSignal with _AbortSignal {
 /// The signal will be trigerred before the deadline if the
 /// [parent] aborts.
 final class DeadlineSignal with _AbortSignal {
-  DeadlineSignal(
-    DateTime deadline, {
-    AbortSignal? parent,
-    Object? reason,
-  }) {
+  DeadlineSignal(DateTime deadline, {AbortSignal? parent, Object? reason}) {
     _deadline = switch (parent?.deadline) {
       final pDeadline? when pDeadline.isBefore(deadline) => pDeadline,
       _ => deadline,

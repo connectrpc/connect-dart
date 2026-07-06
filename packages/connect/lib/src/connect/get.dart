@@ -22,17 +22,14 @@ String connectGetUrl(String url, StableCodec codec, Object message) {
   final messageBytes = codec.stableEncode(message);
   final buf = StringBuffer(url);
   buf.write("?");
-  buf.writeAll(
-    [
-      'connect=v$protocolVersion',
-      'encoding=${codec.name}',
-      if (codec.isBinary) 'base64=1',
-      if (codec.isBinary)
-        'message=${base64Url.encode(messageBytes)}'
-      else
-        'message=${Uri.encodeQueryComponent(utf8.decode(messageBytes))}',
-    ],
-    "&",
-  );
+  buf.writeAll([
+    'connect=v$protocolVersion',
+    'encoding=${codec.name}',
+    if (codec.isBinary) 'base64=1',
+    if (codec.isBinary)
+      'message=${base64Url.encode(messageBytes)}'
+    else
+      'message=${Uri.encodeQueryComponent(utf8.decode(messageBytes))}',
+  ], "&");
   return buf.toString();
 }

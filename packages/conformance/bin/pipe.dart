@@ -22,7 +22,8 @@ void main(List<String> args) async {
   final flags = parser.parse(args);
   final port = int.parse(flags.option('port') ?? '');
   final socket = await Socket.connect(InternetAddress.loopbackIPv4, port);
-  await Future.wait(
-    [stdin.pipe(socket), socket.cast<List<int>>().pipe(stdout)],
-  );
+  await Future.wait([
+    stdin.pipe(socket),
+    socket.cast<List<int>>().pipe(stdout),
+  ]);
 }

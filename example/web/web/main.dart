@@ -51,12 +51,13 @@ Future<String> prompt() {
   web.document.querySelector("#root")?.append(input);
   input.focus();
   final completer = Completer<String>();
-  input.onkeyup = (web.KeyboardEvent ev) {
-    if (ev.key == "Enter" && input.value.isNotEmpty) {
-      input.remove();
-      input.onkeyup = null;
-      completer.complete(input.value);
-    }
-  }.toJS;
+  input.onkeyup =
+      (web.KeyboardEvent ev) {
+        if (ev.key == "Enter" && input.value.isNotEmpty) {
+          input.remove();
+          input.onkeyup = null;
+          completer.complete(input.value);
+        }
+      }.toJS;
   return completer.future;
 }

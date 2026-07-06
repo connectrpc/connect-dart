@@ -62,31 +62,28 @@ final class Schema {
 
 /// Runs the plugin by parsing the [input] into a [CodeGeneratorRequest]
 /// and writing the [CodeGeneratorResponse] to [output].
-Future<void> run(
-  Stream<List<int>> input,
-  Sink<List<int>> output,
-) async {
+Future<void> run(Stream<List<int>> input, Sink<List<int>> output) async {
   var reqBytes = Uint8List(0);
   await for (final chunk in input) {
     reqBytes = Uint8List.fromList(reqBytes + chunk);
   }
   final res = CodeGeneratorResponse();
   // Adding here instead of setting directly lets us avoid a direct dependency on fixnum package.
-  res.supportedFeatures = res.supportedFeatures +
+  res.supportedFeatures =
+      res.supportedFeatures +
       CodeGeneratorResponse_Feature.FEATURE_PROTO3_OPTIONAL.value +
       CodeGeneratorResponse_Feature.FEATURE_SUPPORTS_EDITIONS.value;
   res.minimumEdition = Edition.EDITION_PROTO2.value;
   res.maximumEdition = Edition.EDITION_2024.value;
   try {
-    final files = generate(Schema.fromProto(
-      CodeGeneratorRequest.fromBuffer(reqBytes),
-    ));
-    res.file.addAll(files.map(
-      (f) => CodeGeneratorResponse_File(
-        name: f.path,
-        content: f.content,
+    final files = generate(
+      Schema.fromProto(CodeGeneratorRequest.fromBuffer(reqBytes)),
+    );
+    res.file.addAll(
+      files.map(
+        (f) => CodeGeneratorResponse_File(name: f.path, content: f.content),
       ),
-    ));
+    );
   } catch (err) {
     res.error = err.toString();
   }

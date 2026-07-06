@@ -35,9 +35,7 @@ void main() {
     });
     test('cancels when parent cancels', () async {
       final parent = CancelableSignal();
-      final signal = CancelableSignal(
-        parent: CancelableSignal(parent: parent),
-      );
+      final signal = CancelableSignal(parent: CancelableSignal(parent: parent));
       parent.cancel();
       final ex = await signal.future;
       expect(ex.code, equals(Code.canceled));
@@ -95,10 +93,7 @@ void main() {
       final parent = CancelableSignal();
       final signal = TimeoutSignal(
         Duration(days: 1),
-        parent: TimeoutSignal(
-          Duration(days: 2),
-          parent: parent,
-        ),
+        parent: TimeoutSignal(Duration(days: 2), parent: parent),
       );
       parent.cancel();
       final ex = await signal.future;

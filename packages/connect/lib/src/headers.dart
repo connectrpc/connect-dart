@@ -129,10 +129,7 @@ class _Headers implements Headers {
   Iterable<String>? get(String name) {
     final values = table[name.toLowerCase()];
     if (values == null) return null;
-    return Iterable.generate(
-      values.length,
-      (i) => values[i],
-    );
+    return Iterable.generate(values.length, (i) => values[i]);
   }
 
   @override

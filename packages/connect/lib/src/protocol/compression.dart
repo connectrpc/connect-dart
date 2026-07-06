@@ -30,9 +30,7 @@ const compressedFlag = 1; // 0b00000001
 extension EnvelopeStreamCompression on Stream<EnvelopedMessage> {
   /// Decompresses the enveloped message if the [compression] is not null and
   /// the envelope is compressed.
-  Stream<EnvelopedMessage> decompress(
-    Compression? compression,
-  ) async* {
+  Stream<EnvelopedMessage> decompress(Compression? compression) async* {
     await for (final env in this) {
       if (env.flags & compressedFlag == compressedFlag) {
         if (compression == null) {
@@ -53,9 +51,7 @@ extension EnvelopeStreamCompression on Stream<EnvelopedMessage> {
 
   /// Compresses an uncompressed enveloped message using the given
   /// [compression].
-  Stream<EnvelopedMessage> compress(
-    Compression? compression,
-  ) {
+  Stream<EnvelopedMessage> compress(Compression? compression) {
     if (compression == null) {
       return this;
     }

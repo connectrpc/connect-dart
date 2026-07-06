@@ -31,17 +31,16 @@ void main() async {
   test('generating all rpc types with protos in the same file', () async {
     expect(
       await runPlugin(image, "foo/v1/foo.proto"),
-      matchGenerated(
-        ['foo/v1/foo.connect.client', 'foo/v1/foo.connect.spec'],
-      ),
+      matchGenerated(['foo/v1/foo.connect.client', 'foo/v1/foo.connect.spec']),
     );
   });
   test('generating with request in a different proto file', () async {
     expect(
       await runPlugin(image, "bar/bar_service.proto"),
-      matchGenerated(
-        ['bar/bar_service.connect.client', 'bar/bar_service.connect.spec'],
-      ),
+      matchGenerated([
+        'bar/bar_service.connect.client',
+        'bar/bar_service.connect.spec',
+      ]),
     );
   });
   test('skips empty file', () async {
@@ -51,50 +50,44 @@ void main() async {
   test('generate empty file with keep_empty_files', () async {
     expect(
       await runPlugin(image, "bar/bar.proto", paramter: "keep_empty_files"),
-      matchGenerated(
-        ['bar/bar.connect.client', 'bar/bar.connect.spec'],
-      ),
+      matchGenerated(['bar/bar.connect.client', 'bar/bar.connect.spec']),
     );
   });
   test('generates well-known-types as request/response', () async {
     expect(
       await runPlugin(image, "wkt.proto"),
-      matchGenerated(
-        ['wkt.connect.client', 'wkt.connect.spec'],
-      ),
+      matchGenerated(['wkt.connect.client', 'wkt.connect.spec']),
     );
   });
   test('generates for keywords', () async {
     expect(
       await runPlugin(image, "dart.proto"),
-      matchGenerated(
-        ['dart.connect.client', 'dart.connect.spec'],
-      ),
+      matchGenerated(['dart.connect.client', 'dart.connect.spec']),
     );
   });
   test('generates with conflicting imports', () async {
     expect(
       await runPlugin(image, "connect.proto"),
-      matchGenerated(
-        ['connect.connect.client', 'connect.connect.spec'],
-      ),
+      matchGenerated(['connect.connect.client', 'connect.connect.spec']),
     );
   });
   test('generates idempotency option', () async {
     expect(
       await runPlugin(image, "idempotency.proto"),
-      matchGenerated(
-        ['idempotency.connect.client', 'idempotency.connect.spec'],
-      ),
+      matchGenerated([
+        'idempotency.connect.client',
+        'idempotency.connect.spec',
+      ]),
     );
   });
   test('generates edition 2024 file', () async {
     final response = await runPlugin(image, "edition/edition.proto");
     expect(
       response,
-      matchGenerated(
-        ['edition/edition.connect.client', 'edition/edition.connect.spec'],
-      ),
+      matchGenerated([
+        'edition/edition.connect.client',
+        'edition/edition.connect.spec',
+      ]),
     );
     expect(
       response.supportedFeatures &
@@ -120,25 +113,20 @@ Future<CodeGeneratorResponse> runPlugin(
   final buffer = StreamController<List<int>>();
   await run(Stream.fromIterable([req.writeToBuffer()]), buffer);
   return CodeGeneratorResponse.fromBuffer(
-    (await buffer.stream.toList()).reduce(
-      ((v, e) => v + e),
-    ),
+    (await buffer.stream.toList()).reduce(((v, e) => v + e)),
   );
 }
 
 Future<FileDescriptorSet> buildTestImage() async {
-  final result = Process.runSync(
-    'dart',
-    [
-      'run',
-      'tools:buf',
-      'build',
-      '--as-file-descriptor-set',
-      'test/plugin/proto',
-      '-o',
-      '-#format=json'
-    ],
-  );
+  final result = Process.runSync('dart', [
+    'run',
+    'tools:buf',
+    'build',
+    '--as-file-descriptor-set',
+    'test/plugin/proto',
+    '-o',
+    '-#format=json',
+  ]);
   return FileDescriptorSet()
     ..mergeFromProto3Json(jsonDecode(result.stdout as String));
 }
@@ -154,10 +142,7 @@ GeneratedFilesMatcher matchGenerated(
   List<String> files, [
   bool replace = false,
 ]) {
-  return GeneratedFilesMatcher(
-    files,
-    replace,
-  );
+  return GeneratedFilesMatcher(files, replace);
 }
 
 class GeneratedFilesMatcher extends Matcher {
@@ -166,17 +151,13 @@ class GeneratedFilesMatcher extends Matcher {
   /// Whether to replace before checking. Usefule to populate first runs.
   final bool replace;
 
-  GeneratedFilesMatcher(
-    List<String> files,
-    this.replace,
-  ) : files = Map.fromEntries(
-          files.map(
-            (path) => MapEntry(
-              "$path.dart",
-              File(p.join("test/plugin/golden", path)),
-            ),
-          ),
-        );
+  GeneratedFilesMatcher(List<String> files, this.replace)
+    : files = Map.fromEntries(
+        files.map(
+          (path) =>
+              MapEntry("$path.dart", File(p.join("test/plugin/golden", path))),
+        ),
+      );
 
   @override
   // ignore: strict_raw_type
@@ -231,20 +212,15 @@ class GeneratedFilesMatcher extends Matcher {
     for (final file in item.file) {
       final golden = files[file.name];
       if (golden == null) {
-        description.add(
-          'Unexpected file ${file.name} generated',
-        );
+        description.add('Unexpected file ${file.name} generated');
         continue;
       }
       final goldenContent = golden.readAsStringSync();
       if (goldenContent != file.content) {
         // Reusing the equals matcher gives us a passable diff
-        equals(goldenContent).describeMismatch(
-          file.content,
-          description,
-          matchState,
-          verbose,
-        );
+        equals(
+          goldenContent,
+        ).describeMismatch(file.content, description, matchState, verbose);
       }
     }
     return description;

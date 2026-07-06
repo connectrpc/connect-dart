@@ -71,9 +71,9 @@ class _ChatPageState extends State<ChatPage> {
 
   void send(String sentence) async {
     addMessage(sentence, true);
-    final response = await ElizaServiceClient(widget.transport).say(
-      SayRequest(sentence: sentence),
-    );
+    final response = await ElizaServiceClient(
+      widget.transport,
+    ).say(SayRequest(sentence: sentence));
     addMessage(response.sentence, false);
   }
 
@@ -103,7 +103,7 @@ class _ChatPageState extends State<ChatPage> {
                                     color: Colors.grey,
                                     fontWeight: FontWeight.w600,
                                   ),
-                                )
+                                ),
                               ],
                             ),
                             Row(
@@ -114,7 +114,7 @@ class _ChatPageState extends State<ChatPage> {
                                   textAlign: TextAlign.left,
                                 ),
                               ],
-                            )
+                            ),
                           ] else ...[
                             const Row(
                               children: [
@@ -136,10 +136,10 @@ class _ChatPageState extends State<ChatPage> {
                                 ),
                                 const Spacer(),
                               ],
-                            )
-                          ]
+                            ),
+                          ],
                         ],
-                      )
+                      ),
                   ],
                 ),
               ),
@@ -167,9 +167,9 @@ class _ChatPageState extends State<ChatPage> {
                       'Send',
                       style: TextStyle(color: Colors.blue),
                     ),
-                  )
+                  ),
                 ],
-              )
+              ),
             ],
           ),
         ),

@@ -29,10 +29,7 @@ void main() {
   List<http2.ServerTransportStream> serverStreams = [];
   List<int> serverPings = [];
   setUp(() async {
-    serverSocket = await ServerSocket.bind(
-      InternetAddress.loopbackIPv4,
-      0,
-    );
+    serverSocket = await ServerSocket.bind(InternetAddress.loopbackIPv4, 0);
     serverSocket.listen(
       (socket) {
         final conn = http2.ServerTransportConnection.viaSocket(socket);
@@ -119,21 +116,15 @@ void main() {
         expect(serverPings.length, greaterThanOrEqualTo(1));
         await req.close();
       });
-      test(
-        'should destroy the connection if not answered in time',
-        () async {
-          final transport = Http2ClientTransport(
-            pingTimeout: Duration.zero,
-            pingInterval: Duration(milliseconds: 5),
-          );
-          final req = await transport.request(uri);
-          expect(
-            req.incomingMessages,
-            emitsError(anything),
-          );
-          req.terminate();
-        },
-      );
+      test('should destroy the connection if not answered in time', () async {
+        final transport = Http2ClientTransport(
+          pingTimeout: Duration.zero,
+          pingInterval: Duration(milliseconds: 5),
+        );
+        final req = await transport.request(uri);
+        expect(req.incomingMessages, emitsError(anything));
+        req.terminate();
+      });
     });
     group('for idle connections', () {
       test('should not be sent by default', () async {
