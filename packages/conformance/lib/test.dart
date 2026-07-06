@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-library test;
+library;
 
 export 'src/test.dart'
     if (dart.library.io) 'src/test_io.dart'

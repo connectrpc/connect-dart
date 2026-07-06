@@ -12,16 +12,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+// This is a generated file - do not edit.
 //
-//  Generated code. Do not modify.
-//  source: google/protobuf/cpp_features.proto
-//
-// @dart = 2.12
+// Generated from google/protobuf/cpp_features.proto.
+
+// @dart = 3.3
 
 // ignore_for_file: annotate_overrides, camel_case_types, comment_references
-// ignore_for_file: constant_identifier_names, library_prefixes
-// ignore_for_file: non_constant_identifier_names, prefer_final_fields
-// ignore_for_file: unnecessary_import, unnecessary_this, unused_import
+// ignore_for_file: constant_identifier_names
+// ignore_for_file: curly_braces_in_flow_control_structures
+// ignore_for_file: deprecated_member_use_from_same_package, library_prefixes
+// ignore_for_file: non_constant_identifier_names, prefer_relative_imports
 
 import 'dart:core' as $core;
 
@@ -29,59 +30,57 @@ import 'package:protobuf/protobuf.dart' as $pb;
 
 import 'cpp_features.pbenum.dart';
 
+export 'package:protobuf/protobuf.dart' show GeneratedMessageGenericExtensions;
+
 export 'cpp_features.pbenum.dart';
 
 class CppFeatures extends $pb.GeneratedMessage {
   factory CppFeatures({
     $core.bool? legacyClosedEnum,
     CppFeatures_StringType? stringType,
+    $core.bool? enumNameUsesStringView,
   }) {
-    final $result = create();
-    if (legacyClosedEnum != null) {
-      $result.legacyClosedEnum = legacyClosedEnum;
-    }
-    if (stringType != null) {
-      $result.stringType = stringType;
-    }
-    return $result;
+    final result = create();
+    if (legacyClosedEnum != null) result.legacyClosedEnum = legacyClosedEnum;
+    if (stringType != null) result.stringType = stringType;
+    if (enumNameUsesStringView != null)
+      result.enumNameUsesStringView = enumNameUsesStringView;
+    return result;
   }
-  CppFeatures._() : super();
-  factory CppFeatures.fromBuffer($core.List<$core.int> i,
-          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
-  factory CppFeatures.fromJson($core.String i,
-          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromJson(i, r);
+
+  CppFeatures._();
+
+  factory CppFeatures.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory CppFeatures.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'CppFeatures',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'),
       createEmptyInstance: create)
     ..aOB(1, _omitFieldNames ? '' : 'legacyClosedEnum')
-    ..e<CppFeatures_StringType>(
-        2, _omitFieldNames ? '' : 'stringType', $pb.PbFieldType.OE,
-        defaultOrMaker: CppFeatures_StringType.STRING_TYPE_UNKNOWN,
-        valueOf: CppFeatures_StringType.valueOf,
+    ..aE<CppFeatures_StringType>(2, _omitFieldNames ? '' : 'stringType',
         enumValues: CppFeatures_StringType.values)
+    ..aOB(3, _omitFieldNames ? '' : 'enumNameUsesStringView')
     ..hasRequiredFields = false;
 
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
-  CppFeatures clone() => CppFeatures()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  CppFeatures clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   CppFeatures copyWith(void Function(CppFeatures) updates) =>
       super.copyWith((message) => updates(message as CppFeatures))
           as CppFeatures;
 
+  @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
   static CppFeatures create() => CppFeatures._();
+  @$core.override
   CppFeatures createEmptyInstance() => create();
-  static $pb.PbList<CppFeatures> createRepeated() => $pb.PbList<CppFeatures>();
   @$core.pragma('dart2js:noInline')
   static CppFeatures getDefault() => _defaultInstance ??=
       $pb.GeneratedMessage.$_defaultFor<CppFeatures>(create);
@@ -94,26 +93,29 @@ class CppFeatures extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $core.bool get legacyClosedEnum => $_getBF(0);
   @$pb.TagNumber(1)
-  set legacyClosedEnum($core.bool v) {
-    $_setBool(0, v);
-  }
-
+  set legacyClosedEnum($core.bool value) => $_setBool(0, value);
   @$pb.TagNumber(1)
   $core.bool hasLegacyClosedEnum() => $_has(0);
   @$pb.TagNumber(1)
-  void clearLegacyClosedEnum() => clearField(1);
+  void clearLegacyClosedEnum() => $_clearField(1);
 
   @$pb.TagNumber(2)
   CppFeatures_StringType get stringType => $_getN(1);
   @$pb.TagNumber(2)
-  set stringType(CppFeatures_StringType v) {
-    setField(2, v);
-  }
-
+  set stringType(CppFeatures_StringType value) => $_setField(2, value);
   @$pb.TagNumber(2)
   $core.bool hasStringType() => $_has(1);
   @$pb.TagNumber(2)
-  void clearStringType() => clearField(2);
+  void clearStringType() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.bool get enumNameUsesStringView => $_getBF(2);
+  @$pb.TagNumber(3)
+  set enumNameUsesStringView($core.bool value) => $_setBool(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasEnumNameUsesStringView() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearEnumNameUsesStringView() => $_clearField(3);
 }
 
 class Cpp_features {
@@ -129,6 +131,7 @@ class Cpp_features {
   }
 }
 
-const _omitFieldNames = $core.bool.fromEnvironment('protobuf.omit_field_names');
-const _omitMessageNames =
+const $core.bool _omitFieldNames =
+    $core.bool.fromEnvironment('protobuf.omit_field_names');
+const $core.bool _omitMessageNames =
     $core.bool.fromEnvironment('protobuf.omit_message_names');

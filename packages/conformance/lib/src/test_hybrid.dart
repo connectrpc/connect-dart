@@ -27,7 +27,7 @@ void hybridMain(StreamChannel<dynamic> channel) async {
   final args = (await channel.stream.first as List<dynamic>).cast<String>();
   final runner = ConformanceRunner();
   final server = await io.serve(
-    webSocketHandler((WebSocketChannel ws) async {
+    webSocketHandler((WebSocketChannel ws, _) async {
       await ws.ready;
       final read = ws.stream.asBroadcastStream();
       final write = ws.sink;

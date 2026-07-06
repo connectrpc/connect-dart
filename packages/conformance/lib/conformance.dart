@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-library conformance;
+library;
 
 export 'src/args.dart';
 export 'src/gen/connectrpc/conformance/v1/client_compat.pb.dart';

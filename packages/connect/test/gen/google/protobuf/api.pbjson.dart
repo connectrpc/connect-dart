@@ -12,16 +12,18 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+// This is a generated file - do not edit.
 //
-//  Generated code. Do not modify.
-//  source: google/protobuf/api.proto
-//
-// @dart = 2.12
+// Generated from google/protobuf/api.proto.
+
+// @dart = 3.3
 
 // ignore_for_file: annotate_overrides, camel_case_types, comment_references
-// ignore_for_file: constant_identifier_names, library_prefixes
-// ignore_for_file: non_constant_identifier_names, prefer_final_fields
-// ignore_for_file: unnecessary_import, unnecessary_this, unused_import
+// ignore_for_file: constant_identifier_names
+// ignore_for_file: curly_braces_in_flow_control_structures
+// ignore_for_file: deprecated_member_use_from_same_package, library_prefixes
+// ignore_for_file: non_constant_identifier_names, prefer_relative_imports
+// ignore_for_file: unused_import
 
 import 'dart:convert' as $convert;
 import 'dart:core' as $core;
@@ -73,6 +75,7 @@ const Api$json = {
       '6': '.google.protobuf.Syntax',
       '10': 'syntax'
     },
+    {'1': 'edition', '3': 8, '4': 1, '5': 9, '10': 'edition'},
   ],
 };
 
@@ -83,7 +86,8 @@ final $typed_data.Uint8List apiDescriptor = $convert.base64Decode(
     'Lk9wdGlvblIHb3B0aW9ucxIYCgd2ZXJzaW9uGAQgASgJUgd2ZXJzaW9uEkUKDnNvdXJjZV9jb2'
     '50ZXh0GAUgASgLMh4uZ29vZ2xlLnByb3RvYnVmLlNvdXJjZUNvbnRleHRSDXNvdXJjZUNvbnRl'
     'eHQSLgoGbWl4aW5zGAYgAygLMhYuZ29vZ2xlLnByb3RvYnVmLk1peGluUgZtaXhpbnMSLwoGc3'
-    'ludGF4GAcgASgOMhcuZ29vZ2xlLnByb3RvYnVmLlN5bnRheFIGc3ludGF4');
+    'ludGF4GAcgASgOMhcuZ29vZ2xlLnByb3RvYnVmLlN5bnRheFIGc3ludGF4EhgKB2VkaXRpb24Y'
+    'CCABKAlSB2VkaXRpb24=');
 
 @$core.Deprecated('Use methodDescriptor instead')
 const Method$json = {
@@ -120,7 +124,16 @@ const Method$json = {
       '4': 1,
       '5': 14,
       '6': '.google.protobuf.Syntax',
-      '10': 'syntax'
+      '8': {'3': true},
+      '10': 'syntax',
+    },
+    {
+      '1': 'edition',
+      '3': 8,
+      '4': 1,
+      '5': 9,
+      '8': {'3': true},
+      '10': 'edition',
     },
   ],
 };
@@ -131,8 +144,9 @@ final $typed_data.Uint8List methodDescriptor = $convert.base64Decode(
     '5yZXF1ZXN0VHlwZVVybBIrChFyZXF1ZXN0X3N0cmVhbWluZxgDIAEoCFIQcmVxdWVzdFN0cmVh'
     'bWluZxIqChFyZXNwb25zZV90eXBlX3VybBgEIAEoCVIPcmVzcG9uc2VUeXBlVXJsEi0KEnJlc3'
     'BvbnNlX3N0cmVhbWluZxgFIAEoCFIRcmVzcG9uc2VTdHJlYW1pbmcSMQoHb3B0aW9ucxgGIAMo'
-    'CzIXLmdvb2dsZS5wcm90b2J1Zi5PcHRpb25SB29wdGlvbnMSLwoGc3ludGF4GAcgASgOMhcuZ2'
-    '9vZ2xlLnByb3RvYnVmLlN5bnRheFIGc3ludGF4');
+    'CzIXLmdvb2dsZS5wcm90b2J1Zi5PcHRpb25SB29wdGlvbnMSMwoGc3ludGF4GAcgASgOMhcuZ2'
+    '9vZ2xlLnByb3RvYnVmLlN5bnRheEICGAFSBnN5bnRheBIcCgdlZGl0aW9uGAggASgJQgIYAVIH'
+    'ZWRpdGlvbg==');
 
 @$core.Deprecated('Use mixinDescriptor instead')
 const Mixin$json = {

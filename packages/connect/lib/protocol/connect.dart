@@ -13,6 +13,6 @@
 // limitations under the License.
 
 /// Connect protocol.
-library protocol_connect;
+library;
 
 export '../src/connect/transport.dart' show Transport;

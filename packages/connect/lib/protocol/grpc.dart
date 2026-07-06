@@ -16,7 +16,7 @@
 ///
 /// {@canonicalFor status.Status}
 /// {@canonicalFor status.StatusParser}
-library protocol_grpc;
+library;
 
 export '../src/grpc/status.dart' show Status, StatusParser;
 export '../src/grpc/transport.dart' show Transport;

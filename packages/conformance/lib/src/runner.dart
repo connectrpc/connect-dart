@@ -21,7 +21,6 @@ import 'package:archive/archive_io.dart';
 import 'package:path/path.dart' as p;
 
 import 'gen/connectrpc/conformance/v1/client_compat.pb.dart';
-import 'gen/connectrpc/conformance/v1/client_compat.pbserver.dart';
 
 /// Version of the conformance runner.
 const defaultVersion = 'v1.0.3';
@@ -146,18 +145,35 @@ String _getArtifactNameForEnv(String version) {
 }
 
 Future<void> _extractBinary(String path, String to) async {
+  final isZip = path.endsWith(".zip");
+  final binName = isZip ? "connectconformance.exe" : "connectconformance";
+
+  late Archive archive;
   final archiveFile = InputFileStream(path);
-  final binName =
-      path.endsWith(".zip") ? "connectconformance.exe" : "connectconformance";
-  final archive = path.endsWith(".zip")
-      ? ZipDecoder().decodeBuffer(archiveFile)
-      : TarDecoder().decodeBytes(GZipDecoder().decodeBuffer(archiveFile));
-  final file = archive.files.singleWhere((f) => f.name == binName, orElse: () {
-    throw "Failed to extract connectconformance.exe";
-  });
-  final out = OutputFileStream(to);
-  file.writeContent(out);
-  await out.close();
+  try {
+    if (isZip) {
+      archive = ZipDecoder().decodeStream(archiveFile);
+    } else {
+      final archiveOut = OutputMemoryStream();
+      GZipDecoder().decodeStream(archiveFile, archiveOut);
+      final tarBytes = archiveOut.getBytes();
+      archive = TarDecoder().decodeBytes(tarBytes);
+    }
+
+    final file = archive.files.singleWhere(
+      (f) => p.basename(f.name) == binName,
+      orElse: () => throw "Failed to extract $binName",
+    );
+
+    final out = OutputFileStream(to);
+    try {
+      file.writeContent(out);
+    } finally {
+      await out.close();
+    }
+  } finally {
+    await archiveFile.close();
+  }
 }
 
 StreamTransformer<Uint8List, Uint8List> _splitEnvelope() {
