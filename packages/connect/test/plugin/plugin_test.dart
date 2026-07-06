@@ -97,9 +97,9 @@ void main() async {
       ),
     );
     expect(
-      response.supportedFeatures &
+      response.supportedFeatures.toInt() &
           CodeGeneratorResponse_Feature.FEATURE_SUPPORTS_EDITIONS.value,
-      isNot(0),
+      CodeGeneratorResponse_Feature.FEATURE_SUPPORTS_EDITIONS.value,
     );
     expect(response.minimumEdition, Edition.EDITION_PROTO2.value);
     expect(response.maximumEdition, Edition.EDITION_2024.value);
