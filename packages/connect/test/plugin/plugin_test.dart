@@ -84,9 +84,10 @@ void main() async {
     final response = await runPlugin(image, "edition/edition.proto");
     expect(
       response,
-      matchGenerated(
-        ['edition/edition.connect.client', 'edition/edition.connect.spec'],
-      ),
+      matchGenerated([
+        'edition/edition.connect.client',
+        'edition/edition.connect.spec',
+      ]),
     );
     expect(
       response.supportedFeatures.toInt() &
