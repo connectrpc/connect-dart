@@ -71,7 +71,10 @@ Future<void> run(Stream<List<int>> input, Sink<List<int>> output) async {
   // Adding here instead of setting directly lets us avoid a direct dependency on fixnum package.
   res.supportedFeatures =
       res.supportedFeatures +
-      CodeGeneratorResponse_Feature.FEATURE_PROTO3_OPTIONAL.value;
+      CodeGeneratorResponse_Feature.FEATURE_PROTO3_OPTIONAL.value +
+      CodeGeneratorResponse_Feature.FEATURE_SUPPORTS_EDITIONS.value;
+  res.minimumEdition = Edition.EDITION_PROTO2.value;
+  res.maximumEdition = Edition.EDITION_2024.value;
   try {
     final files = generate(
       Schema.fromProto(CodeGeneratorRequest.fromBuffer(reqBytes)),

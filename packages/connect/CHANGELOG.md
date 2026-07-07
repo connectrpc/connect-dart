@@ -1,3 +1,7 @@
+## Unreleased
+
+- Support generating code from `.proto` files using editions (proto2 through edition 2024).
+
 ## 1.0.0
 
 - First stable release of Connect for Dart!
