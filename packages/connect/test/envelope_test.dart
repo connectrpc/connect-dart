@@ -29,10 +29,7 @@ void main() {
         emitsDone,
       ]);
       test("One chunk", () {
-        expect(
-          Stream.fromIterable([envBytes]).splitEnvelope(),
-          expected,
-        );
+        expect(Stream.fromIterable([envBytes]).splitEnvelope(), expected);
       });
       test("split at header", () {
         expect(
@@ -89,10 +86,7 @@ void main() {
         );
       });
       test("Both together", () {
-        expect(
-          Stream.fromIterable([streamBytes]).splitEnvelope(),
-          expected,
-        );
+        expect(Stream.fromIterable([streamBytes]).splitEnvelope(), expected);
       });
       test("At first header", () {
         expect(
@@ -135,9 +129,8 @@ void main() {
 }
 
 class HasFlags extends CustomMatcher {
-  HasFlags(
-    EnvelopedMessage env,
-  ) : super("EnvelopeMessage with flags that is", "flags", equals(env.flags));
+  HasFlags(EnvelopedMessage env)
+    : super("EnvelopeMessage with flags that is", "flags", equals(env.flags));
 
   @override
   Object? featureValueOf(actual) {
@@ -146,9 +139,8 @@ class HasFlags extends CustomMatcher {
 }
 
 class HasData extends CustomMatcher {
-  HasData(
-    EnvelopedMessage env,
-  ) : super("EnvelopeMessage with data that is", "data", equals(env.data));
+  HasData(EnvelopedMessage env)
+    : super("EnvelopeMessage with data that is", "data", equals(env.data));
 
   @override
   Object? featureValueOf(actual) {

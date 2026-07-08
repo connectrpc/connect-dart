@@ -28,9 +28,10 @@ Headers requestHeader(
   Compression? sendCompression,
   List<Compression> acceptCompressions,
 ) {
-  final header = userProvidedHeaders == null
-      ? Headers()
-      : Headers.from(userProvidedHeaders);
+  final header =
+      userProvidedHeaders == null
+          ? Headers()
+          : Headers.from(userProvidedHeaders);
   header[headerContentType] = '$contentTypePrefix+${codec.name}';
   if (signal?.deadline case final deadline?) {
     header[headerTimeout] =
@@ -46,8 +47,9 @@ Headers requestHeader(
     header[headerEncoding] = sendCompression.name;
   }
   if (acceptCompressions.isNotEmpty) {
-    header[headerAcceptEncoding] =
-        acceptCompressions.map((c) => c.name).join(",");
+    header[headerAcceptEncoding] = acceptCompressions
+        .map((c) => c.name)
+        .join(",");
   }
   return header;
 }

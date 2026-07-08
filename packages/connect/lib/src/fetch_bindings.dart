@@ -46,8 +46,7 @@ extension type Headers._(JSObject _) implements JSObject {
   Iterable<({String key, String value})> entries() {
     // Instread of creating bindings for the iterable, we opaquely pass the
     // iterbale to Array.from and convert that to a dart list.
-    return _HeaderEntriesArray.from(_entries())
-        .toDart
+    return _HeaderEntriesArray.from(_entries()).toDart
         .map((e) => e.toDart)
         .map((e) => (key: e.first.toDart, value: e.last.toDart));
   }

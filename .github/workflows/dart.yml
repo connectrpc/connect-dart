@@ -42,23 +42,23 @@ jobs:
       - name: mono_repo self validate
         run: dart pub global run mono_repo generate --validate
   job_002:
-    name: "lint; Dart 3.6.0; PKGS: packages/conformance, packages/connect; `dart run tools:buf generate`, `dart run tools:license_header .`, `dart format .`, `dart analyze`, `[[ -z $(git status --porcelain | tee >(cat 1>&2)) ]]`"
+    name: "lint; Dart 3.7.0; PKGS: packages/conformance, packages/connect; `dart run tools:buf generate`, `dart run tools:license_header .`, `dart format .`, `dart analyze`, `[[ -z $(git status --porcelain | tee >(cat 1>&2)) ]]`"
     runs-on: ubuntu-latest
     steps:
       - name: Cache Pub hosted dependencies
         uses: actions/cache@d4323d4df104b026a6aa633fdb11d772146be0bf
         with:
           path: "~/.pub-cache/hosted"
-          key: "os:ubuntu-latest;pub-cache-hosted;sdk:3.6.0;packages:packages/conformance-packages/connect;commands:command_0-command_1-command_2-analyze-command_3"
+          key: "os:ubuntu-latest;pub-cache-hosted;sdk:3.7.0;packages:packages/conformance-packages/connect;commands:command_0-command_1-command_2-analyze-command_3"
           restore-keys: |
-            os:ubuntu-latest;pub-cache-hosted;sdk:3.6.0;packages:packages/conformance-packages/connect
-            os:ubuntu-latest;pub-cache-hosted;sdk:3.6.0
+            os:ubuntu-latest;pub-cache-hosted;sdk:3.7.0;packages:packages/conformance-packages/connect
+            os:ubuntu-latest;pub-cache-hosted;sdk:3.7.0
             os:ubuntu-latest;pub-cache-hosted
             os:ubuntu-latest
       - name: Setup Dart SDK
         uses: dart-lang/setup-dart@e51d8e571e22473a2ddebf0ef8a2123f0ab2c02c
         with:
-          sdk: "3.6.0"
+          sdk: "3.7.0"
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
@@ -113,23 +113,23 @@ jobs:
         if: "always() && steps.packages_connect_pub_upgrade.conclusion == 'success'"
         working-directory: packages/connect
   job_003:
-    name: "lint; Dart 3.6.0; PKG: packages/tools; `dart format .`, `dart run tools:license_header .`, `dart analyze`, `[[ -z $(git status --porcelain | tee >(cat 1>&2)) ]]`"
+    name: "lint; Dart 3.7.0; PKG: packages/tools; `dart format .`, `dart run tools:license_header .`, `dart analyze`, `[[ -z $(git status --porcelain | tee >(cat 1>&2)) ]]`"
     runs-on: ubuntu-latest
     steps:
       - name: Cache Pub hosted dependencies
         uses: actions/cache@d4323d4df104b026a6aa633fdb11d772146be0bf
         with:
           path: "~/.pub-cache/hosted"
-          key: "os:ubuntu-latest;pub-cache-hosted;sdk:3.6.0;packages:packages/tools;commands:command_2-command_1-analyze-command_3"
+          key: "os:ubuntu-latest;pub-cache-hosted;sdk:3.7.0;packages:packages/tools;commands:command_2-command_1-analyze-command_3"
           restore-keys: |
-            os:ubuntu-latest;pub-cache-hosted;sdk:3.6.0;packages:packages/tools
-            os:ubuntu-latest;pub-cache-hosted;sdk:3.6.0
+            os:ubuntu-latest;pub-cache-hosted;sdk:3.7.0;packages:packages/tools
+            os:ubuntu-latest;pub-cache-hosted;sdk:3.7.0
             os:ubuntu-latest;pub-cache-hosted
             os:ubuntu-latest
       - name: Setup Dart SDK
         uses: dart-lang/setup-dart@e51d8e571e22473a2ddebf0ef8a2123f0ab2c02c
         with:
-          sdk: "3.6.0"
+          sdk: "3.7.0"
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
@@ -268,23 +268,23 @@ jobs:
         if: "always() && steps.packages_tools_pub_upgrade.conclusion == 'success'"
         working-directory: packages/tools
   job_006:
-    name: "test; Dart 3.6.0; PKG: packages/conformance; `dart test`"
+    name: "test; Dart 3.7.0; PKG: packages/conformance; `dart test`"
     runs-on: ubuntu-latest
     steps:
       - name: Cache Pub hosted dependencies
         uses: actions/cache@d4323d4df104b026a6aa633fdb11d772146be0bf
         with:
           path: "~/.pub-cache/hosted"
-          key: "os:ubuntu-latest;pub-cache-hosted;sdk:3.6.0;packages:packages/conformance;commands:test_0"
+          key: "os:ubuntu-latest;pub-cache-hosted;sdk:3.7.0;packages:packages/conformance;commands:test_0"
           restore-keys: |
-            os:ubuntu-latest;pub-cache-hosted;sdk:3.6.0;packages:packages/conformance
-            os:ubuntu-latest;pub-cache-hosted;sdk:3.6.0
+            os:ubuntu-latest;pub-cache-hosted;sdk:3.7.0;packages:packages/conformance
+            os:ubuntu-latest;pub-cache-hosted;sdk:3.7.0
             os:ubuntu-latest;pub-cache-hosted
             os:ubuntu-latest
       - name: Setup Dart SDK
         uses: dart-lang/setup-dart@e51d8e571e22473a2ddebf0ef8a2123f0ab2c02c
         with:
-          sdk: "3.6.0"
+          sdk: "3.7.0"
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
@@ -304,23 +304,23 @@ jobs:
       - job_004
       - job_005
   job_007:
-    name: "test; Dart 3.6.0; PKG: packages/connect; `dart test -p chrome`"
+    name: "test; Dart 3.7.0; PKG: packages/connect; `dart test -p chrome`"
     runs-on: ubuntu-latest
     steps:
       - name: Cache Pub hosted dependencies
         uses: actions/cache@d4323d4df104b026a6aa633fdb11d772146be0bf
         with:
           path: "~/.pub-cache/hosted"
-          key: "os:ubuntu-latest;pub-cache-hosted;sdk:3.6.0;packages:packages/connect;commands:test_1"
+          key: "os:ubuntu-latest;pub-cache-hosted;sdk:3.7.0;packages:packages/connect;commands:test_1"
           restore-keys: |
-            os:ubuntu-latest;pub-cache-hosted;sdk:3.6.0;packages:packages/connect
-            os:ubuntu-latest;pub-cache-hosted;sdk:3.6.0
+            os:ubuntu-latest;pub-cache-hosted;sdk:3.7.0;packages:packages/connect
+            os:ubuntu-latest;pub-cache-hosted;sdk:3.7.0
             os:ubuntu-latest;pub-cache-hosted
             os:ubuntu-latest
       - name: Setup Dart SDK
         uses: dart-lang/setup-dart@e51d8e571e22473a2ddebf0ef8a2123f0ab2c02c
         with:
-          sdk: "3.6.0"
+          sdk: "3.7.0"
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
@@ -340,23 +340,23 @@ jobs:
       - job_004
       - job_005
   job_008:
-    name: "test; Dart 3.6.0; PKG: packages/connect; `dart test -p vm`"
+    name: "test; Dart 3.7.0; PKG: packages/connect; `dart test -p vm`"
     runs-on: ubuntu-latest
     steps:
       - name: Cache Pub hosted dependencies
         uses: actions/cache@d4323d4df104b026a6aa633fdb11d772146be0bf
         with:
           path: "~/.pub-cache/hosted"
-          key: "os:ubuntu-latest;pub-cache-hosted;sdk:3.6.0;packages:packages/connect;commands:test_2"
+          key: "os:ubuntu-latest;pub-cache-hosted;sdk:3.7.0;packages:packages/connect;commands:test_2"
           restore-keys: |
-            os:ubuntu-latest;pub-cache-hosted;sdk:3.6.0;packages:packages/connect
-            os:ubuntu-latest;pub-cache-hosted;sdk:3.6.0
+            os:ubuntu-latest;pub-cache-hosted;sdk:3.7.0;packages:packages/connect
+            os:ubuntu-latest;pub-cache-hosted;sdk:3.7.0
             os:ubuntu-latest;pub-cache-hosted
             os:ubuntu-latest
       - name: Setup Dart SDK
         uses: dart-lang/setup-dart@e51d8e571e22473a2ddebf0ef8a2123f0ab2c02c
         with:
-          sdk: "3.6.0"
+          sdk: "3.7.0"
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
@@ -484,23 +484,23 @@ jobs:
       - job_004
       - job_005
   job_012:
-    name: "license; Dart 3.6.0; PKG: packages/connect; `dart run tools:license_header ../..`, `[[ -z $(git status --porcelain | tee >(cat 1>&2)) ]]`"
+    name: "license; Dart 3.7.0; PKG: packages/connect; `dart run tools:license_header ../..`, `[[ -z $(git status --porcelain | tee >(cat 1>&2)) ]]`"
     runs-on: ubuntu-latest
     steps:
       - name: Cache Pub hosted dependencies
         uses: actions/cache@d4323d4df104b026a6aa633fdb11d772146be0bf
         with:
           path: "~/.pub-cache/hosted"
-          key: "os:ubuntu-latest;pub-cache-hosted;sdk:3.6.0;packages:packages/connect;commands:command_4-command_3"
+          key: "os:ubuntu-latest;pub-cache-hosted;sdk:3.7.0;packages:packages/connect;commands:command_4-command_3"
           restore-keys: |
-            os:ubuntu-latest;pub-cache-hosted;sdk:3.6.0;packages:packages/connect
-            os:ubuntu-latest;pub-cache-hosted;sdk:3.6.0
+            os:ubuntu-latest;pub-cache-hosted;sdk:3.7.0;packages:packages/connect
+            os:ubuntu-latest;pub-cache-hosted;sdk:3.7.0
             os:ubuntu-latest;pub-cache-hosted
             os:ubuntu-latest
       - name: Setup Dart SDK
         uses: dart-lang/setup-dart@e51d8e571e22473a2ddebf0ef8a2123f0ab2c02c
         with:
-          sdk: "3.6.0"
+          sdk: "3.7.0"
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683

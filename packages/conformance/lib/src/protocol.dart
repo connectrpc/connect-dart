@@ -19,10 +19,7 @@ import 'gen/connectrpc/conformance/v1/config.pb.dart';
 import 'gen/connectrpc/conformance/v1/service.pb.dart';
 import 'gen/google/protobuf/any.pb.dart';
 
-void addProtoHeaders(
-  connect.Headers headers,
-  List<Header> protoHeaders,
-) {
+void addProtoHeaders(connect.Headers headers, List<Header> protoHeaders) {
   for (final header in protoHeaders) {
     for (final value in header.value) {
       headers.add(header.name, value);
@@ -50,10 +47,7 @@ Error? convertToProtoError(connect.ConnectException? err) {
   final details = List<Any>.empty(growable: true);
   for (final detail in err.details) {
     details.add(
-      Any(
-        typeUrl: "type.googleapis.com/${detail.type}",
-        value: detail.value,
-      ),
+      Any(typeUrl: "type.googleapis.com/${detail.type}", value: detail.value),
     );
   }
   return Error(
@@ -81,22 +75,17 @@ class CancellationTiming {
   final int afterCloseSendMs;
   final int afterNumResponses;
 
-  factory CancellationTiming.forRequest(ClientCompatRequest req) =>
-      switch (req.cancel.whichCancelTiming()) {
-        ClientCompatRequest_Cancel_CancelTiming.beforeCloseSend =>
-          CancellationTiming._(
-            beforeCloseSend: true,
-          ),
-        ClientCompatRequest_Cancel_CancelTiming.afterCloseSendMs =>
-          CancellationTiming._(
-            afterCloseSendMs: req.cancel.afterCloseSendMs,
-          ),
-        ClientCompatRequest_Cancel_CancelTiming.afterNumResponses =>
-          CancellationTiming._(
-            afterNumResponses: req.cancel.afterNumResponses,
-          ),
-        _ => CancellationTiming._(),
-      };
+  factory CancellationTiming.forRequest(ClientCompatRequest req) => switch (req
+      .cancel
+      .whichCancelTiming()) {
+    ClientCompatRequest_Cancel_CancelTiming.beforeCloseSend =>
+      CancellationTiming._(beforeCloseSend: true),
+    ClientCompatRequest_Cancel_CancelTiming.afterCloseSendMs =>
+      CancellationTiming._(afterCloseSendMs: req.cancel.afterCloseSendMs),
+    ClientCompatRequest_Cancel_CancelTiming.afterNumResponses =>
+      CancellationTiming._(afterNumResponses: req.cancel.afterNumResponses),
+    _ => CancellationTiming._(),
+  };
 
   CancellationTiming._({
     this.beforeCloseSend = false,

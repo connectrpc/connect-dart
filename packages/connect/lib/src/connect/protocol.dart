@@ -103,11 +103,7 @@ final class Protocol implements base.Protocol {
       body = compression.decode(body);
     }
     if (unaryError != null) {
-      throw errorFromJsonBytes(
-        body,
-        headers..addAll(trailers),
-        unaryError,
-      );
+      throw errorFromJsonBytes(body, headers..addAll(trailers), unaryError);
     }
     return UnaryResponse(
       req.spec,
@@ -134,8 +130,11 @@ final class Protocol implements base.Protocol {
         req.signal,
       ),
     );
-    final (:compression, unaryError: _) =
-        res.validate(req.spec.streamType, codec, acceptCompressions);
+    final (:compression, unaryError: _) = res.validate(
+      req.spec.streamType,
+      codec,
+      acceptCompressions,
+    );
     final trailer = Headers();
     return StreamResponse(
       req.spec,
@@ -149,15 +148,13 @@ final class Protocol implements base.Protocol {
             endStreamFlag,
             EndStreamResponse.fromJson,
           )
-          .skipEndStream(
-        (endStream) {
-          if (endStream.error case ConnectException err) {
-            res.header.addAll(err.metadata);
-            throw err;
-          }
-          trailer.addAll(endStream.metadata);
-        },
-      ),
+          .skipEndStream((endStream) {
+            if (endStream.error case ConnectException err) {
+              res.header.addAll(err.metadata);
+              throw err;
+            }
+            trailer.addAll(endStream.metadata);
+          }),
       trailer,
     );
   }
@@ -166,9 +163,7 @@ final class Protocol implements base.Protocol {
 extension<O extends Object>
     on Stream<ParsedEnvelopedMessage<O, EndStreamResponse>> {
   /// Returns a stream of all the messages skipping the end stream message.
-  Stream<O> skipEndStream(
-    void Function(EndStreamResponse) onEndStream,
-  ) async* {
+  Stream<O> skipEndStream(void Function(EndStreamResponse) onEndStream) async* {
     var endStreamReceived = false;
     await for (final env in this) {
       if (endStreamReceived) {

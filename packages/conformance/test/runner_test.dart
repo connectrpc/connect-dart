@@ -19,23 +19,20 @@ import 'package:conformance/runner.dart';
 import 'package:test/test.dart';
 
 void main() {
-  test(
-    'runner should exit with non-zero code on failed cases',
-    () async {
-      final conformance = ConformanceRunner();
-      final result = await conformance.runClient(
-        StreamTransformer.fromBind(
-          (requests) => requests.map(
-            (req) => ClientCompatResponse(testName: req.testName),
-          ),
-        ),
-        args: ConformanceArgs(
-          run: [
-            "Basic/HTTPVersion:1/Protocol:PROTOCOL_CONNECT/Codec:CODEC_PROTO/Compression:COMPRESSION_IDENTITY/TLS:true/unary/empty-definition",
-          ],
-        ).toList(),
-      );
-      expect(result, isNot(0)); // We expect this to fail.
-    },
-  );
+  test('runner should exit with non-zero code on failed cases', () async {
+    final conformance = ConformanceRunner();
+    final result = await conformance.runClient(
+      StreamTransformer.fromBind(
+        (requests) =>
+            requests.map((req) => ClientCompatResponse(testName: req.testName)),
+      ),
+      args:
+          ConformanceArgs(
+            run: [
+              "Basic/HTTPVersion:1/Protocol:PROTOCOL_CONNECT/Codec:CODEC_PROTO/Compression:COMPRESSION_IDENTITY/TLS:true/unary/empty-definition",
+            ],
+          ).toList(),
+    );
+    expect(result, isNot(0)); // We expect this to fail.
+  });
 }

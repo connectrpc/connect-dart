@@ -29,9 +29,8 @@ import 'spec.dart';
 /// To implement that layering, Interceptors are functions that wrap a call
 /// invocation. In an array of interceptors, the interceptor at the end of
 /// the array is applied first.
-typedef Interceptor = AnyFn<I, O> Function<I extends Object, O extends Object>(
-  AnyFn<I, O> next,
-);
+typedef Interceptor =
+    AnyFn<I, O> Function<I extends Object, O extends Object>(AnyFn<I, O> next);
 
 /// AnyFn represents the client-side invocation of an RPC. Interceptors can wrap
 /// this invocation, add request headers, and wrap parts of the request or
@@ -95,12 +94,7 @@ final class UnaryResponse<I, O> extends Response<I, O> {
   /// The received output message.
   final O message;
 
-  const UnaryResponse(
-    super.spec,
-    super.headers,
-    this.message,
-    super.trailers,
-  );
+  const UnaryResponse(super.spec, super.headers, this.message, super.trailers);
 }
 
 /// StreamResponse is used in interceptors to represent an ongoing call that has
@@ -109,12 +103,7 @@ final class StreamResponse<I, O> extends Response<I, O> {
   /// The output messages.
   final Stream<O> message;
 
-  const StreamResponse(
-    super.spec,
-    super.headers,
-    this.message,
-    super.trailers,
-  );
+  const StreamResponse(super.spec, super.headers, this.message, super.trailers);
 }
 
 /// StreamRequest is used in interceptors to represent a request that has

@@ -40,11 +40,10 @@ final class ConformanceRunner {
   /// Defaults to the system's temporary directory..
   late final String cacheDir;
 
-  ConformanceRunner({
-    String? version,
-    String? cacheDir,
-  }) : version = version ?? defaultVersion {
-    this.cacheDir = cacheDir ??
+  ConformanceRunner({String? version, String? cacheDir})
+    : version = version ?? defaultVersion {
+    this.cacheDir =
+        cacheDir ??
         Platform.environment['CONFORMANCE_CACHE'] ??
         Directory.systemTemp.absolute.path;
   }
@@ -101,9 +100,10 @@ final class ConformanceRunner {
 
   /// Returns the path to the binary.
   Future<String> get _binary async {
-    final bin = Platform.operatingSystem == "windows"
-        ? "connectconformance.exe"
-        : "connectconformance";
+    final bin =
+        Platform.operatingSystem == "windows"
+            ? "connectconformance.exe"
+            : "connectconformance";
     final binPath = p.join(cacheDir, bin);
     // Check to see if the binary is already at path and matches the version.
     if (File(binPath).existsSync()) {
@@ -149,12 +149,16 @@ Future<void> _extractBinary(String path, String to) async {
   final archiveFile = InputFileStream(path);
   final binName =
       path.endsWith(".zip") ? "connectconformance.exe" : "connectconformance";
-  final archive = path.endsWith(".zip")
-      ? ZipDecoder().decodeBuffer(archiveFile)
-      : TarDecoder().decodeBytes(GZipDecoder().decodeBuffer(archiveFile));
-  final file = archive.files.singleWhere((f) => f.name == binName, orElse: () {
-    throw "Failed to extract connectconformance.exe";
-  });
+  final archive =
+      path.endsWith(".zip")
+          ? ZipDecoder().decodeBuffer(archiveFile)
+          : TarDecoder().decodeBytes(GZipDecoder().decodeBuffer(archiveFile));
+  final file = archive.files.singleWhere(
+    (f) => f.name == binName,
+    orElse: () {
+      throw "Failed to extract connectconformance.exe";
+    },
+  );
   final out = OutputFileStream(to);
   file.writeContent(out);
   await out.close();
@@ -186,10 +190,7 @@ StreamTransformer<Uint8List, Uint8List> _encodeEnvelope() {
   return StreamTransformer.fromHandlers(
     handleData: (data, sink) {
       final sizeBytes = Uint8List(4);
-      ByteData.sublistView(sizeBytes).setUint32(
-        0,
-        data.lengthInBytes,
-      );
+      ByteData.sublistView(sizeBytes).setUint32(0, data.lengthInBytes);
       sink.add(sizeBytes);
       sink.add(data);
     },

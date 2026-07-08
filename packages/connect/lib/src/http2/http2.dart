@@ -45,7 +45,7 @@ HttpClient createHttpClient({Http2ClientTransport? transport}) {
         [uri.path, if (uri.hasQuery) uri.query].join("?"),
       ),
       for (final header in req.header.entries)
-        http2.Header.ascii(header.name, header.value)
+        http2.Header.ascii(header.name, header.value),
     ]);
     req.signal?.future.then((err) {
       sentinel.reject(err);
@@ -56,9 +56,7 @@ HttpClient createHttpClient({Http2ClientTransport? transport}) {
         // Ignore RST_STREAM NO_ERROR codes.
         return;
       }
-      sentinel.reject(
-        errFromRstCode(code),
-      );
+      sentinel.reject(errFromRstCode(code));
     };
     if (req.body case Stream<Uint8List> body) {
       // Write request body in parallel to the response.

@@ -23,10 +23,7 @@ import 'trailer_error.dart';
 extension TrailerValidation on Headers {
   /// Validates a trailer for the gRPC and the gRPC-web protocol.
   /// Throws a [ConnectException] if the trailer contains an error status.
-  void validateTrailer(
-    Headers headers,
-    StatusParser statusParser,
-  ) {
+  void validateTrailer(Headers headers, StatusParser statusParser) {
     final err = findError(statusParser);
     if (err != null) {
       for (final header in headers.entries) {
@@ -38,10 +35,7 @@ extension TrailerValidation on Headers {
         !contains(headerStatusDetailsBin) &&
         !headers.contains(headerGrpcStatus) &&
         !headers.contains(headerStatusDetailsBin)) {
-      throw ConnectException(
-        Code.internal,
-        'protocol error: missing status',
-      );
+      throw ConnectException(Code.internal, 'protocol error: missing status');
     }
   }
 }
