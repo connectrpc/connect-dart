@@ -1,6 +1,7 @@
 ## Unreleased
 
 - Support generating code from `.proto` files using editions (proto2 through edition 2024).
+- Require Dart 3.7
 
 ## 1.0.0
 
