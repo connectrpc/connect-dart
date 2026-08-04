@@ -2,6 +2,8 @@
 
 - Support generating code from `.proto` files using editions (proto2 through edition 2024).
 - Require Dart 3.7
+- Require the V6 Protobuf runtime
+- Import well-known types from the runtime when needed
 
 ## 1.0.0
 
