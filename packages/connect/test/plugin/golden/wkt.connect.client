@@ -7,9 +7,22 @@ import "package:connectrpc/connect.dart" as connect;
 import "package:protobuf/well_known_types/google/protobuf/timestamp.pb.dart" as googleprotobuftimestamp;
 import "package:protobuf/well_known_types/google/protobuf/any.pb.dart" as googleprotobufany;
 import "wkt.connect.spec.dart" as specs;
+import "package:protobuf/well_known_types/google/protobuf/struct.pb.dart" as googleprotobufstruct;
+import "package:protobuf/well_known_types/google/protobuf/wrappers.pb.dart" as googleprotobufwrappers;
+import "package:protobuf/well_known_types/google/protobuf/duration.pb.dart" as googleprotobufduration;
+import "package:protobuf/well_known_types/google/protobuf/field_mask.pb.dart" as googleprotobuffield_mask;
+import "package:protobuf/well_known_types/google/protobuf/type.pb.dart" as googleprotobuftype;
+import "package:protobuf/well_known_types/google/protobuf/api.pb.dart" as googleprotobufapi;
+import "package:protobuf/well_known_types/google/protobuf/empty.pb.dart" as googleprotobufempty;
+import "package:protobuf/well_known_types/google/protobuf/source_context.pb.dart" as googleprotobufsource_context;
+import "google/protobuf/compiler/plugin.pb.dart" as googleprotobufcompilerplugin;
+import "google/protobuf/go_features.pb.dart" as googleprotobufgo_features;
+import "google/protobuf/descriptor.pb.dart" as googleprotobufdescriptor;
+import "google/protobuf/java_features.pb.dart" as googleprotobufjava_features;
+import "google/protobuf/cpp_features.pb.dart" as googleprotobufcpp_features;
 
 extension type WktServiceClient (connect.Transport _transport) {
-  Future<googleprotobuftimestamp.Timestamp> unaryWkt(
+  Future<googleprotobuftimestamp.Timestamp> anyTimestamp(
     googleprotobufany.Any input, {
     connect.Headers? headers,
     connect.AbortSignal? signal,
@@ -17,7 +30,126 @@ extension type WktServiceClient (connect.Transport _transport) {
     Function(connect.Headers)? onTrailer,
   }) {
     return connect.Client(_transport).unary(
-      specs.WktService.unaryWkt,
+      specs.WktService.anyTimestamp,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  Future<googleprotobufstruct.Struct> stringValueStruct(
+    googleprotobufwrappers.StringValue input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.WktService.stringValueStruct,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  Future<googleprotobufduration.Duration> fieldMaskDuration(
+    googleprotobuffield_mask.FieldMask input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.WktService.fieldMaskDuration,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  Future<googleprotobuftype.Type> apiType(
+    googleprotobufapi.Api input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.WktService.apiType,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  Future<googleprotobufempty.Empty> sourceContextEmpty(
+    googleprotobufsource_context.SourceContext input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.WktService.sourceContextEmpty,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  Future<googleprotobufcompilerplugin.CodeGeneratorResponse> codeGeneratorRequestCodeGeneratorResponse(
+    googleprotobufcompilerplugin.CodeGeneratorRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.WktService.codeGeneratorRequestCodeGeneratorResponse,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  Future<googleprotobufgo_features.GoFeatures> fileDescriptorProtoGoFeatures(
+    googleprotobufdescriptor.FileDescriptorProto input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.WktService.fileDescriptorProtoGoFeatures,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  Future<googleprotobufjava_features.JavaFeatures> cppFeaturesJavaFeatures(
+    googleprotobufcpp_features.CppFeatures input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.WktService.cppFeaturesJavaFeatures,
       input,
       signal: signal,
       headers: headers,
