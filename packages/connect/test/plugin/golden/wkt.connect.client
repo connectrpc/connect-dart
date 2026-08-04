@@ -4,8 +4,8 @@
 //
 
 import "package:connectrpc/connect.dart" as connect;
-import "google/protobuf/timestamp.pb.dart" as googleprotobuftimestamp;
-import "google/protobuf/any.pb.dart" as googleprotobufany;
+import "package:protobuf/well_known_types/google/protobuf/timestamp.pb.dart" as googleprotobuftimestamp;
+import "package:protobuf/well_known_types/google/protobuf/any.pb.dart" as googleprotobufany;
 import "wkt.connect.spec.dart" as specs;
 
 extension type WktServiceClient (connect.Transport _transport) {

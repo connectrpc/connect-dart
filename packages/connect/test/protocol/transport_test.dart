@@ -16,8 +16,8 @@ import 'package:connectrpc/connect.dart';
 import 'package:connectrpc/protobuf.dart';
 import 'package:connectrpc/src/protocol/protocol.dart';
 import 'package:connectrpc/src/protocol/transport.dart';
+import 'package:protobuf/well_known_types/google/protobuf/wrappers.pb.dart';
 import 'package:test/test.dart';
-import '../gen/google/protobuf/wrappers.pb.dart';
 
 final class TestService {
   static const unary = Spec(
