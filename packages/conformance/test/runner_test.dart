@@ -29,7 +29,7 @@ void main() {
       args:
           ConformanceArgs(
             run: [
-              "Basic/HTTPVersion:1/Protocol:PROTOCOL_CONNECT/Codec:CODEC_PROTO/Compression:COMPRESSION_IDENTITY/TLS:true/unary/empty-definition",
+              "Basic/HTTPVersion:1/Protocol:PROTOCOL_CONNECT/Codec:CODEC_PROTO/Compression:COMPRESSION_IDENTITY/TLS:true/unary/success",
             ],
           ).toList(),
     );
