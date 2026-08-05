@@ -113,7 +113,7 @@ void main() async {
           p.join('test/plugin/golden', golden),
         ).copySync(p.join(dir.path, '$golden.dart'));
       }
-      final deps = Directory('test/plugin/gen');
+      final deps = Directory('test/gen');
       for (final file in deps.listSync(recursive: true).whereType<File>()) {
         final target = File(
           p.join(dir.path, p.relative(file.path, from: deps.path)),
