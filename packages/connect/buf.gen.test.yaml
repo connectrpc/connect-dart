@@ -1,0 +1,14 @@
+# Protos required to compile the plugin goldens.
+version: v2
+clean: true
+plugins:
+  - remote: buf.build/protocolbuffers/dart:v25.0.0
+    out: test/plugin/gen
+inputs:
+  - module: buf.build/protocolbuffers/wellknowntypes:v34.1
+    paths:
+      - google/protobuf/compiler/plugin.proto
+      - google/protobuf/cpp_features.proto
+      - google/protobuf/descriptor.proto
+      - google/protobuf/go_features.proto
+      - google/protobuf/java_features.proto
