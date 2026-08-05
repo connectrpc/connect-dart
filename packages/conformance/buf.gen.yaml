@@ -7,4 +7,5 @@ plugins:
   - local: ["dart", "../connect/bin/protoc-gen-connect-dart.dart"]
     out: lib/src/gen
 inputs:
+  # Keep `defaultVersion` in packages/conformance/lib/src/runner.dart in sync with this.
   - module: buf.build/connectrpc/conformance:v1.0.4
