@@ -1,7 +1,14 @@
 # Protos required for the plugin.
 version: v2
+clean: true
 plugins:
-  - remote: buf.build/protocolbuffers/dart:v21.1.2
+  - remote: buf.build/protocolbuffers/dart:v25.0.0
     out: test/gen
 inputs:
-  - module: buf.build/protocolbuffers/wellknowntypes:v27.3
+  - module: buf.build/protocolbuffers/wellknowntypes:v34.1
+    paths:
+      - google/protobuf/compiler/plugin.proto
+      - google/protobuf/cpp_features.proto
+      - google/protobuf/descriptor.proto
+      - google/protobuf/go_features.proto
+      - google/protobuf/java_features.proto

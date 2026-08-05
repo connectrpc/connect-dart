@@ -17,8 +17,28 @@ syntax = "proto3";
 package wkt;
 
 import "google/protobuf/any.proto";
+import "google/protobuf/api.proto";
+import "google/protobuf/compiler/plugin.proto";
+import "google/protobuf/cpp_features.proto";
+import "google/protobuf/descriptor.proto";
+import "google/protobuf/duration.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/field_mask.proto";
+import "google/protobuf/go_features.proto";
+import "google/protobuf/java_features.proto";
+import "google/protobuf/source_context.proto";
+import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/type.proto";
+import "google/protobuf/wrappers.proto";
 
 service WktService {
-  rpc UnaryWkt(google.protobuf.Any) returns (google.protobuf.Timestamp);
+  rpc AnyTimestamp(google.protobuf.Any) returns (google.protobuf.Timestamp);
+  rpc StringValueStruct(google.protobuf.StringValue) returns (google.protobuf.Struct);
+  rpc FieldMaskDuration(google.protobuf.FieldMask) returns (google.protobuf.Duration);
+  rpc ApiType(google.protobuf.Api) returns (google.protobuf.Type);
+  rpc SourceContextEmpty(google.protobuf.SourceContext) returns (google.protobuf.Empty);
+  rpc CodeGeneratorRequestCodeGeneratorResponse(google.protobuf.compiler.CodeGeneratorRequest) returns (google.protobuf.compiler.CodeGeneratorResponse);
+  rpc FileDescriptorProtoGoFeatures(google.protobuf.FileDescriptorProto) returns (pb.GoFeatures);
+  rpc CppFeaturesJavaFeatures(pb.CppFeatures) returns (pb.JavaFeatures);
 }

@@ -21,10 +21,9 @@ import 'package:archive/archive_io.dart';
 import 'package:path/path.dart' as p;
 
 import 'gen/connectrpc/conformance/v1/client_compat.pb.dart';
-import 'gen/connectrpc/conformance/v1/client_compat.pbserver.dart';
 
-/// Version of the conformance runner.
-const defaultVersion = 'v1.0.3';
+/// Version of the conformance runner. Keep it in sync with packages/conformance/buf.gen.yaml.
+const defaultVersion = 'v1.0.4';
 
 /// Conformance runner exposes programmatic access to the connectconformance
 /// binary.

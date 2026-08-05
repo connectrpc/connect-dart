@@ -97,6 +97,36 @@ void main() async {
     expect(response.minimumEdition, Edition.EDITION_PROTO2.value);
     expect(response.maximumEdition, Edition.EDITION_2024.value);
   });
+  test('wkt goldens compile', () async {
+    // Staged inside the package so package: imports resolve.
+    final dir = Directory('.tmp/golden_compile');
+    if (dir.existsSync()) {
+      dir.deleteSync(recursive: true);
+    }
+    dir.createSync(recursive: true);
+    try {
+      // Shadows the package's analysis_options: goldens must compile, but
+      // they are not expected to pass the repo's lints.
+      File(p.join(dir.path, 'analysis_options.yaml')).createSync();
+      for (final golden in ['wkt.connect.client', 'wkt.connect.spec']) {
+        File(
+          p.join('test/plugin/golden', golden),
+        ).copySync(p.join(dir.path, '$golden.dart'));
+      }
+      final deps = Directory('test/gen');
+      for (final file in deps.listSync(recursive: true).whereType<File>()) {
+        final target = File(
+          p.join(dir.path, p.relative(file.path, from: deps.path)),
+        );
+        target.parent.createSync(recursive: true);
+        file.copySync(target.path);
+      }
+      final result = Process.runSync('dart', ['analyze', dir.path]);
+      expect(result.exitCode, 0, reason: '${result.stdout}${result.stderr}');
+    } finally {
+      dir.deleteSync(recursive: true);
+    }
+  });
 }
 
 Future<CodeGeneratorResponse> runPlugin(
