@@ -65,6 +65,12 @@ void main() async {
       matchGenerated(['dart.connect.client', 'dart.connect.spec']),
     );
   });
+  test('escapes method colliding with the service name constant', () async {
+    expect(
+      await runPlugin(image, "name.proto"),
+      matchGenerated(['name.connect.client', 'name.connect.spec']),
+    );
+  });
   test('generates with conflicting imports', () async {
     expect(
       await runPlugin(image, "connect.proto"),
@@ -97,7 +103,7 @@ void main() async {
     expect(response.minimumEdition, Edition.EDITION_PROTO2.value);
     expect(response.maximumEdition, Edition.EDITION_2024.value);
   });
-  test('wkt goldens compile', () async {
+  test('self-contained goldens compile', () async {
     // Staged inside the package so package: imports resolve.
     final dir = Directory('.tmp/golden_compile');
     if (dir.existsSync()) {
@@ -108,7 +114,12 @@ void main() async {
       // Shadows the package's analysis_options: goldens must compile, but
       // they are not expected to pass the repo's lints.
       File(p.join(dir.path, 'analysis_options.yaml')).createSync();
-      for (final golden in ['wkt.connect.client', 'wkt.connect.spec']) {
+      for (final golden in [
+        'wkt.connect.client',
+        'wkt.connect.spec',
+        'name.connect.client',
+        'name.connect.spec',
+      ]) {
         File(
           p.join('test/plugin/golden', golden),
         ).copySync(p.join(dir.path, '$golden.dart'));

@@ -1,0 +1,44 @@
+//
+//  Generated code. Do not modify.
+//  source: name.proto
+//
+
+import "package:connectrpc/connect.dart" as connect;
+import "package:protobuf/well_known_types/google/protobuf/empty.pb.dart" as googleprotobufempty;
+import "name.connect.spec.dart" as specs;
+
+extension type NameServiceClient (connect.Transport _transport) {
+  Future<googleprotobufempty.Empty> name(
+    googleprotobufempty.Empty input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.NameService.name$,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  Future<googleprotobufempty.Empty> getName(
+    googleprotobufempty.Empty input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.NameService.getName,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+}
