@@ -137,7 +137,7 @@ extension on GeneratedFile {
       method.streamType,
       "(",
     ]);
-    p(["      ", specsLib.import(service.name), ".", method.localName, ","]);
+    p(["      ", specsLib.import(service.name), ".", method.specName, ","]);
     p(["      input,"]);
     p(["      signal: signal,"]);
     p(["      headers: headers,"]);
@@ -167,13 +167,7 @@ extension on GeneratedFile {
   }
 
   void pMethodSpec(MethodDescriptorProto method) {
-    p([
-      "  static const ",
-      method.localName,
-      " = ",
-      connect.import("Spec"),
-      "(",
-    ]);
+    p(["  static const ", method.specName, " = ", connect.import("Spec"), "("]);
     p(["    '/\$name/", method.name, "',"]);
     p(["    ", connect.import("StreamType"), ".", method.streamType, ","]);
     p(["    ", importMsg(method.inputType), ".new,"]);
@@ -277,6 +271,10 @@ extension on MethodDescriptorProto {
   String get localName =>
       (name.substring(0, 1).toLowerCase() + name.substring(1))
           .sanitizeIdentifier;
+
+  /// Name of the Spec constant in the generated spec class, where `name` is
+  /// taken by the service-name constant.
+  String get specName => localName == 'name' ? r'name$' : localName;
 
   /// Runtime function name on the Client.
   String get streamType {
