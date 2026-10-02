@@ -188,9 +188,8 @@ extension on GeneratedFile {
       if (!typeName.startsWith(".${file.package}")) {
         continue;
       }
-      if (!file.messageType.hasMessage(
-        typeName.substring(file.package.length + 1),
-      )) {
+      final localName = typeName.substring(file.package.length + 1);
+      if (!file.messageType.hasMessage(localName)) {
         continue;
       }
       final libraryPath =
@@ -200,7 +199,7 @@ extension on GeneratedFile {
       return DartLibrary(
         libraryPath,
         path.withoutExtension(file.name).replaceAll("/", ""),
-      ).import(typeName.split(".").last);
+      ).import(localName.withoutLeadingDot.replaceAll(".", "_"));
     }
     throw "Message: $typeName not found";
   }
@@ -289,6 +288,8 @@ extension on MethodDescriptorProto {
 
 extension on String {
   String get withoutLn => endsWith("\n") ? substring(0, length - 1) : this;
+
+  String get withoutLeadingDot => startsWith(".") ? substring(1) : this;
 
   // Ref: https://dart.dev/language/keywords
   static const _disallowedIdentifiers = {
