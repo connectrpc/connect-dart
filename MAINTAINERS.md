@@ -6,3 +6,4 @@
 - [Steve Ayers](https://github.com/smaye81)
 - [Sri Krishna Paritala](https://github.com/srikrsna-buf)
 - [Timo Stamm](https://github.com/timostamm), [Buf](https://buf.build)
+- [Oliver Sun](https://github.com/oliversun9), [Buf](https://buf.build)
