@@ -103,6 +103,12 @@ void main() async {
     expect(response.minimumEdition, Edition.EDITION_PROTO2.value);
     expect(response.maximumEdition, Edition.EDITION_2024.value);
   });
+  test('generates nested request and response types', () async {
+    expect(
+      await runPlugin(image, "nested.proto"),
+      matchGenerated(['nested.connect.client', 'nested.connect.spec']),
+    );
+  });
   test('self-contained goldens compile', () async {
     // Staged inside the package so package: imports resolve.
     final dir = Directory('.tmp/golden_compile');
@@ -119,6 +125,8 @@ void main() async {
         'wkt.connect.spec',
         'name.connect.client',
         'name.connect.spec',
+        'nested.connect.client',
+        'nested.connect.spec',
       ]) {
         File(
           p.join('test/plugin/golden', golden),

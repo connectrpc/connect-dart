@@ -12,3 +12,6 @@ inputs:
       - google/protobuf/descriptor.proto
       - google/protobuf/go_features.proto
       - google/protobuf/java_features.proto
+  - directory: test/plugin/proto
+    paths:
+      - test/plugin/proto/nested.proto
