@@ -1,3 +1,7 @@
+## Unreleased
+
+- Preserve malformed gRPC metadata as INTERNAL errors with a typed `MetadataParseFailure` cause, without changing valid server status errors.
+
 ## 2.0.0
 
 - Escape a generated `Spec` constant that collides with the service-name constant `name`.
