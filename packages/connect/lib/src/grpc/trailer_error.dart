@@ -22,47 +22,60 @@ import 'status.dart';
 
 extension TrailerError on Headers {
   ConnectException? findError(StatusParser statusParser) {
-    var statusBytes = this[headerStatusDetailsBin];
-    if (statusBytes != null) {
-      if (statusBytes.length % 4 != 0) {
-        // Non padded, this could be done in a more efficient way.
-        statusBytes = base64.normalize(statusBytes);
-      }
-      final status = statusParser.parse(base64.decode(statusBytes));
-      var code = Code.unknown;
-      String? cause;
-      if (status.code > 0 && status.code < 17) {
-        code = Code.values[status.code - 1];
-      } else {
-        cause = "invalid grpc-status: ${status.code}";
-      }
-      return ConnectException(
-        code,
-        status.message,
-        cause: cause,
-        details: status.details,
-        metadata: this,
-      );
-    }
-    final grpcStatus = this[headerGrpcStatus];
-    if (grpcStatus != null) {
-      if (grpcStatus == "0") {
-        return null;
-      }
-      final code = int.parse(grpcStatus);
-      if (code > 0 && code < 17) {
+    try {
+      var statusBytes = this[headerStatusDetailsBin];
+      if (statusBytes != null) {
+        if (statusBytes.length % 4 != 0) {
+          // Non padded, this could be done in a more efficient way.
+          statusBytes = base64.normalize(statusBytes);
+        }
+        final status = statusParser.parse(base64.decode(statusBytes));
+        var code = Code.unknown;
+        String? cause;
+        if (status.code > 0 && status.code < 17) {
+          code = Code.values[status.code - 1];
+        } else {
+          cause = "invalid grpc-status: ${status.code}";
+        }
         return ConnectException(
-          Code.values[code - 1],
-          Uri.decodeComponent(this[headerGrpcMessage] ?? ""),
+          code,
+          status.message,
+          cause: cause,
+          details: status.details,
           metadata: this,
         );
       }
-      return ConnectException(
+      final grpcStatus = this[headerGrpcStatus];
+      if (grpcStatus != null) {
+        if (grpcStatus == "0") {
+          return null;
+        }
+        final code = int.parse(grpcStatus);
+        if (code > 0 && code < 17) {
+          return ConnectException(
+            Code.values[code - 1],
+            Uri.decodeComponent(this[headerGrpcMessage] ?? ""),
+            metadata: this,
+          );
+        }
+        return ConnectException(
+          Code.internal,
+          'invalid grpc-status: $grpcStatus',
+          metadata: this,
+        );
+      }
+      return null;
+    } on Object catch (error) {
+      if (error is ConnectException ||
+          (error is! Exception && error is! ArgumentError)) {
+        rethrow;
+      }
+      throw ConnectException(
         Code.internal,
-        'invalid grpc-status: $grpcStatus',
+        'invalid gRPC status metadata',
+        cause: MetadataParseFailure(error),
         metadata: this,
       );
     }
-    return null;
   }
 }

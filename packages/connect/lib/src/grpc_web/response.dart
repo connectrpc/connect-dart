@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import '../code.dart';
 import '../compression.dart';
 import '../exception.dart';
 import '../grpc/headers.dart';
@@ -42,10 +43,20 @@ extension ResponseValidation on HttpResponse {
         compression: findCompression(acceptCompression, headerEncoding),
       );
     }
-    throw ConnectException(
-      codeFromHttpStatus(status),
-      Uri.decodeComponent(header[headerGrpcMessage] ?? 'HTTP $status'),
-      metadata: header,
-    );
+    try {
+      throw ConnectException(
+        codeFromHttpStatus(status),
+        Uri.decodeComponent(header[headerGrpcMessage] ?? 'HTTP $status'),
+        metadata: header,
+      );
+    } on Object catch (error) {
+      if (error is! FormatException && error is! ArgumentError) rethrow;
+      throw ConnectException(
+        Code.internal,
+        'invalid gRPC message metadata',
+        cause: MetadataParseFailure(error),
+        metadata: header,
+      );
+    }
   }
 }

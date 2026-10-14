@@ -17,6 +17,13 @@ import 'dart:typed_data';
 import 'code.dart';
 import 'headers.dart';
 
+/// A parse failure confined to gRPC response metadata, not message or I/O data.
+final class MetadataParseFailure implements Exception {
+  final Object cause;
+
+  const MetadataParseFailure(this.cause);
+}
+
 /// ConnectException captures four pieces of information: a Code, an error
 /// message, an optional cause of the error, and an optional collection of
 /// arbitrary Protobuf messages called  "details".

@@ -15,6 +15,8 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
+import '../code.dart';
+import '../exception.dart';
 import '../headers.dart';
 
 /// Indicates that the data in a EnvelopedMessage
@@ -22,16 +24,24 @@ import '../headers.dart';
 const trailerFlag = 128; // 0b10000000
 
 Headers parseTrailer(Uint8List data) {
-  final headers = Headers();
-  final lines = Utf8Decoder().convert(data).split("\r\n");
-  for (final line in lines) {
-    if (line.isEmpty) continue;
-    final i = line.indexOf(":");
-    if (i > 0) {
-      final name = line.substring(0, i).trim();
-      final value = line.substring(i + 1).trim();
-      headers.add(name, value);
+  try {
+    final headers = Headers();
+    final lines = Utf8Decoder().convert(data).split("\r\n");
+    for (final line in lines) {
+      if (line.isEmpty) continue;
+      final i = line.indexOf(":");
+      if (i > 0) {
+        final name = line.substring(0, i).trim();
+        final value = line.substring(i + 1).trim();
+        headers.add(name, value);
+      }
     }
+    return headers;
+  } on FormatException catch (error) {
+    throw ConnectException(
+      Code.internal,
+      'invalid gRPC-Web trailer metadata',
+      cause: MetadataParseFailure(error),
+    );
   }
-  return headers;
 }
