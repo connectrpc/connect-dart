@@ -1,3 +1,7 @@
+## 2.0.1
+
+- Fix generated names for nested messages.
+
 ## 2.0.0
 
 - Escape a generated `Spec` constant that collides with the service-name constant `name`.
