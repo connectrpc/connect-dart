@@ -182,7 +182,7 @@ extension<O extends Object>
     }
     if (!endStreamReceived) {
       throw ConnectException(
-        Code.invalidArgument,
+        Code.internal,
         "protocol error: missing end-stream-response",
       );
     }
