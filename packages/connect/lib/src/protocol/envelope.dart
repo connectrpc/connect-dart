@@ -104,7 +104,7 @@ extension SplitEnvelope on Stream<Uint8List> {
         message =
             'protocol error: promised $length bytes in enveloped message, got $dataLen bytes';
       }
-      throw ConnectException(Code.invalidArgument, message);
+      throw ConnectException(Code.internal, message);
     }
   }
 
